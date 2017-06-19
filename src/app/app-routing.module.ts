@@ -9,7 +9,20 @@ const appRoutes: Routes = [
       loadChildren: './layout/layout.module#LayoutModule',
       canActivate: [AuthGuard]
   },
-  { path: 'login', loadChildren: './login/login.module#LoginModule' },
+  {
+      path: 'login',
+      loadChildren: './login/login.module#LoginModule',
+      data: {
+        title: 'Login - DigIT'
+      }
+  },
+  {
+      path: 'passwordreset',
+      loadChildren: './password-reset/password-reset.module#PasswordResetModule',
+      data: {
+        title: 'Forgot Password - DigIT'
+      }
+    }
 ];
 
 @NgModule({
