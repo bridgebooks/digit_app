@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "pm2 restart config.yml",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,10 +22,13 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@webcomponents/custom-elements": "1.0.0-rc.3",
+    "body-parser": "^1.17.2",
     "clarity-angular": "^0.9.4-patch",
     "clarity-icons": "^0.9.4-patch",
     "clarity-ui": "^0.9.4-patch",
     "core-js": "^2.4.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
     "mutationobserver-shim": "0.3.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
