@@ -1,0 +1,24 @@
+<div class="signup-success-wrapper">
+    <div class="row flex-items-xs-center flex-xs-middle">
+        <div class="col-lg-5 col-md-6 col-xs-12">
+            <span class="clr-example-col-value">
+                <div class="logo">
+                    <img src="assets/img/logo-blue.png" alt="DigIT">
+                </div>
+
+                <div class="message__block">
+                    <div class="icon">
+                        <clr-icon shape="email" size="72" class="has-badge--success"></clr-icon>
+                    </div>
+                    <div class="message__block_message">
+                        <h1>Hey {{user.first_name}}, an email is on its way to you</h1>
+                        <p>We sent it to {{user.email}} and need to make sure it reached you</p>
+                    </div>
+                    <div class="message__block_actions">
+                        <a class="btn btn-primary btn-success" (click)="onInboxBtnClick()">Go to inbox</a>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="login-wrapper">
+<div class="login-wrapper account-wrapper">
     <form class="login" autocomplete="off" novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="logo">
             <img src="assets/img/logo-blue.png" alt="DigIT">
@@ -15,7 +15,7 @@
             <input class="password" type="password" id="password" name="password" placeholder="Password" 
             [(ngModel)]="model.password" #password="ngModel" required>
  
-            <button type="submit" class="btn btn-primary" [disabled]="loginForm.form.invalid || loginBtnDisabled">{{loginBtnStatus}}</button>
+            <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="loginForm.form.invalid || loginBtnDisabled">{{loginBtnStatus}}</button>
             <a routerLink="/passwordreset" class="signup">Forgot your password?</a>
         </div>
     </form>

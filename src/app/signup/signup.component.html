@@ -1,0 +1,45 @@
+<div class="login-wrapper account-wrapper signup-wrapper">
+    <form class="login" novalidate #signupForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="logo">
+            <img src="assets/img/logo-blue.png" alt="DigIT">
+        </div>
+
+        <label class="title">
+            <h3 class="welcome">Sign Up</h3>
+            <h5 class="hint">Start your 15 day free trial</h5>
+        </label>
+        <div class="login-group">
+            <input class="username" type="text" id="first_name" name="first_name" placeholder="First Name"
+            [class.invalid]="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)" 
+            [(ngModel)]="model.first_name" #firstNameInput="ngModel" required>
+            <div class="input__errors" [hidden]="firstNameInput.valid || firstNameInput.pristine">
+                <span class="input__errors_error" *ngIf="firstNameInput.hasError('required')">Please enter your first name</span>
+            </div>
+
+            <input class="username" type="text" id="last_name" name="last_name" placeholder="Last Name" 
+            [(ngModel)]="model.last_name" #lastNameInput="ngModel" required>
+            <div class="input__errors" [hidden]="lastNameInput.valid || lastNameInput.pristine">
+                <span class="input__errors_error" *ngIf="lastNameInput.hasError('required')">Please enter your last name</span>
+            </div>
+
+            <input class="username" type="email" id="email" name="email" placeholder="Email Address" 
+            [(ngModel)]="model.email" #emailInput="ngModel" email>
+            <div class="input__errors" [hidden]="emailInput.valid || emailInput.pristine">
+                <span class="input__errors_error" *ngIf="emailInput.hasError('required')">Please enter your email address</span>
+                <span class="input__errors_error" *ngIf="emailInput.hasError('email')">Please enter a valid email address</span>
+            </div>
+
+            <input class="username" type="tel" id="phone" name="phone" placeholder="Phone" 
+            [(ngModel)]="model.phone" #phoneInput="ngModel" required numeric phone>
+            <div class="input__errors" [hidden]="phoneInput.valid || phoneInput.pristine">
+                <span class="input__errors_error" *ngIf="phoneInput.hasError('required')">Please enter your phone number</span>
+                <span class="input__errors_error" *ngIf="phoneInput.hasError('phone')">Please enter a valid phone number</span>
+            </div>
+ 
+            <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="signupForm.form.invalid || signupBtnDisabled">{{signupBtnStatus}}</button>
+            <p>By clicking the signup button you hereby agree to our <a>terms and conditions</a></p>
+
+            <a routerLink="/login" class="signup">Already have a DigIT account? Login</a>
+        </div>
+    </form>
+</div>

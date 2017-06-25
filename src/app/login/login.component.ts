@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   loginBtnStatus: any = LoginBtnStatus.DEFAULT;
   loginBtnDisabled: Boolean = false;
 
+  processing: Boolean = false;
+
   constructor(public router: Router) { }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.loginBtnDisabled = true;
 
     setTimeout(() => {
+      this.processing = true;
       this.loginBtnStatus = LoginBtnStatus.DEFAULT;
       this.loginBtnDisabled = false;
       this.router.navigate(['/dashboard']);

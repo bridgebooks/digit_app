@@ -17,12 +17,19 @@ const appRoutes: Routes = [
       }
   },
   {
-      path: 'passwordreset',
-      loadChildren: './password-reset/password-reset.module#PasswordResetModule',
-      data: {
-        title: 'Forgot Password - DigIT'
-      }
+    path: 'signup',
+    loadChildren: './signup/signup.module#SignupModule',
+    data: {
+      title: 'Sign Up - DigIT'
     }
+  },
+  {
+    path: 'passwordreset',
+    loadChildren: './password-reset/password-reset.module#PasswordResetModule',
+    data: {
+      title: 'Forgot Password - DigIT'
+    }
+  }
 ];
 
 @NgModule({
