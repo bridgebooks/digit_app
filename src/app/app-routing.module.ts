@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared';
 
-
 const appRoutes: Routes = [
   {
       path: '',
-      loadChildren: './layout/layout.module#LayoutModule',
+      loadChildren: './main/main.module#MainModule',
       canActivate: [AuthGuard]
   },
   {
@@ -28,6 +27,13 @@ const appRoutes: Routes = [
     loadChildren: './password-reset/password-reset.module#PasswordResetModule',
     data: {
       title: 'Forgot Password - DigIT'
+    }
+  },
+  {
+    path: 'setup',
+    loadChildren: './org-setup/org-setup.module#OrgSetupModule',
+    data: {
+      title: 'Setup your organisation - DigIT'
     }
   }
 ];

@@ -9,16 +9,27 @@
         height: 80px;
         padding: 15px 0px;
     }
+}
+.input__errors
+{
+    margin-top: -20px;
 
-    .input__errors
-    {
-        margin-top: -20px;
+    .input__errors_error {
+        display: block;
+        font-size: .9em;
+        padding: 5px 7px;
+        color: map-get($colors, 'error');
+    }
+}
 
-        .input__errors_error {
-            display: block;
-            font-size: .9em;
-            padding: 5px 7px;
-            color: map-get($colors, 'error');
+.block__form
+{   
+    .block__form_group {
+        margin-bottom: 20px;
+        margin-top: 10px;
+
+        input {
+            min-width: 100%;
         }
     }
 }
