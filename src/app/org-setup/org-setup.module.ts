@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
-import { LoginValidateComponent } from './validate/validate.component';
+import { OrgSetupRoutingModule } from './org-setup-routing.module';
+import { OrgSetupComponent } from './org-setup.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ClarityModule.forRoot(),
-    LoginRoutingModule,
+    OrgSetupRoutingModule,
   ],
-  declarations: [LoginComponent, LoginValidateComponent]
+  declarations: [OrgSetupComponent]
 })
-export class LoginModule { }
+
+export class OrgSetupModule { }

@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/google-libphonenumber": "^7.4.11",
     "@webcomponents/custom-elements": "1.0.0-rc.3",
     "body-parser": "^1.17.2",
     "clarity-angular": "^0.9.4-patch",
@@ -29,6 +30,7 @@
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "google-libphonenumber": "^2.0.19",
     "mutationobserver-shim": "0.3.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
