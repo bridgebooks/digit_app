@@ -11,7 +11,8 @@ const routes: Routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
                 data: {
                     title: 'Dashboard - DigIT',
-                    showSideNav: false
+                    showSideNav: false,
+                    sidenavComponent: null
                 }
             },
             {
@@ -19,7 +20,8 @@ const routes: Routes = [
                 loadChildren: './sales/sales.module#SalesModule',
                 data: {
                     title: 'Sales - DigIT',
-                    showSideNav: true
+                    showSideNav: true,
+                    sidenavComponent: 'sales'
                 }
             },
             {
@@ -27,7 +29,8 @@ const routes: Routes = [
                 loadChildren: './purchases/purchases.module#PurchasesModule',
                 data: {
                     title: 'Purchases - DigIT',
-                    showSideNav: true
+                    showSideNav: true,
+                    sidenavComponent: 'purchases'
                 }
             }
         ]
