@@ -12,6 +12,7 @@ import 'clarity-icons/shapes/core-shapes';
 export class MainComponent implements OnInit {
 
     showSideNav: Boolean = false;
+    sidenavMenu: String;
 
     constructor(public router: Router, public activatedRoute: ActivatedRoute) { }
 
@@ -30,11 +31,12 @@ export class MainComponent implements OnInit {
             .mergeMap(route => route.data)
             .subscribe((event) => { 
                 this.showSideNav = event['showSideNav'];
-                console.log(this.showSideNav);
+                this.sidenavMenu = event['sidenavMenu'];
             });
     }
     ngOnInit() {
         this.setSidenavState();
+
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);
         }

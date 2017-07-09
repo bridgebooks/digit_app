@@ -12,7 +12,7 @@ const routes: Routes = [
                 data: {
                     title: 'Dashboard - DigIT',
                     showSideNav: false,
-                    sidenavComponent: null
+                    sidenavMenu: null
                 }
             },
             {
@@ -21,7 +21,7 @@ const routes: Routes = [
                 data: {
                     title: 'Sales - DigIT',
                     showSideNav: true,
-                    sidenavComponent: 'sales'
+                    sidenavMenu: 'sales'
                 }
             },
             {
@@ -30,7 +30,16 @@ const routes: Routes = [
                 data: {
                     title: 'Purchases - DigIT',
                     showSideNav: true,
-                    sidenavComponent: 'purchases'
+                    sidenavMenu: 'purchases'
+                }
+            },
+            {
+                path: 'contacts',
+                loadChildren: './contacts/contacts.module#ContactsModule',
+                data: {
+                    title: 'Contacts - DigIT',
+                    showSideNav: true,
+                    sidenavMenu: 'contacts'
                 }
             }
         ]
