@@ -1,2 +1,5 @@
 <section class="sidenav-content">
+    <a [routerLink]="item.link" *ngFor="let item of activeNav" class="nav-link">
+        {{ item.label }}
+    </a>
 </section>

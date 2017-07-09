@@ -10,7 +10,7 @@
             <a routerLink="/dashboard" routerLinkActive="active" class="nav-link nav-text">Dashboard</a>
             <a routerLink="/sales" routerLinkActive="active" class="nav-link nav-text">Sales</a>
             <a routerLink="/purchases" routerLinkActive="active" class="nav-link nav-text">Purchases</a>
-            <a href="" class="nav-link nav-text">Contacts</a>
+            <a routerLink="/contacts" routerLinkActive="active" class="nav-link nav-text">Contacts</a>
             <a href="" class="nav-link nav-text">Reports</a>
         </div>
 
@@ -32,7 +32,7 @@
             <router-outlet></router-outlet>
         </div>
         <nav class="sidenav" *ngIf="showSideNav">
-            <app-sidenav></app-sidenav>
+            <app-sidenav [menu]="sidenavMenu"></app-sidenav>
         </nav>
     </div>
 </clr-main-container>
