@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'passwordreset',
+    path: 'password/reset',
     loadChildren: './password-reset/password-reset.module#PasswordResetModule',
     data: {
       title: 'Forgot Password - DigIT'
@@ -32,6 +32,7 @@ const appRoutes: Routes = [
   {
     path: 'setup',
     loadChildren: './org-setup/org-setup.module#OrgSetupModule',
+    canActivate: [AuthGuard],
     data: {
       title: 'Setup your organisation - DigIT'
     }
