@@ -26,6 +26,10 @@ export class JwtService {
     }
   }
 
+  clearToken() {
+    return this.localStorageService.remove('user.token');
+  }
+
   checkToken(): boolean {
     let token = this.localStorageService.get('user.token');
     let isExpired = this.isExpired();

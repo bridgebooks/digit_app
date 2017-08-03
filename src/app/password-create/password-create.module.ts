@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AuthService } from '../services';
+import { MatchValidator } from '../shared';
 
-import { PasswordResetRoutingModule } from './password-reset-routing.module';
-import { PasswordResetComponent } from './password-reset.component';
+import { PasswordCreateRoutingModule } from './password-create-routing.module';
+import { PasswordCreateComponent } from './password-create.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    PasswordResetRoutingModule,
+    PasswordCreateRoutingModule,
   ],
-  declarations: [PasswordResetComponent],
+  declarations: [MatchValidator, PasswordCreateComponent],
   providers: [AuthService]
 })
-export class PasswordResetModule { }
+export class PasswordCreateModule { }

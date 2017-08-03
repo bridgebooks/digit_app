@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { JwtHelper } from 'angular2-jwt';
@@ -22,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     LocalStorageModule.withConfig({
       prefix: 'zb',
       storageType: 'localStorage'

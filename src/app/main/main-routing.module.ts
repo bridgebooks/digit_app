@@ -12,7 +12,7 @@ const routes: Routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Dashboard - DigIT',
+                    title: 'Dashboard - ZenBooks',
                     showSideNav: false,
                     sidenavMenu: null
                 }
@@ -22,7 +22,7 @@ const routes: Routes = [
                 loadChildren: './sales/sales.module#SalesModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Sales - DigIT',
+                    title: 'Sales - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'sales'
                 }
@@ -32,7 +32,7 @@ const routes: Routes = [
                 loadChildren: './purchases/purchases.module#PurchasesModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Purchases - DigIT',
+                    title: 'Purchases - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'purchases'
                 }
@@ -42,7 +42,7 @@ const routes: Routes = [
                 loadChildren: './contacts/contacts.module#ContactsModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Contacts - DigIT',
+                    title: 'Contacts - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'contacts'
                 }

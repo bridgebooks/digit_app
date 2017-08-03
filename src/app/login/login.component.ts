@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { LoginResponse } from '../models/responses/login';
 import { LoginFormModel } from '../models/forms/login';
-import { AuthService, JwtService } from '../services';
+import { AuthService, SessionService, JwtService } from '../services';
 
 enum LoginBtnStatus {
   DEFAULT = <any>'LOGIN',
@@ -25,28 +25,30 @@ export class LoginComponent implements OnInit {
 
   loginBtnStatus: any = LoginBtnStatus.DEFAULT;
   loginBtnDisabled: Boolean = false;
+  showError: Boolean = false;
+  errorMessage: string;
 
   processing: Boolean = false;
 
-  constructor(public router: Router, private authService: AuthService, private jwtService: JwtService) { }
+  constructor(
+    public router: Router, 
+    private authService: AuthService, 
+    private jwtService: JwtService, 
+    private sessionService: SessionService) { }
 
   ngOnInit() {
   }
 
   onRequestDone() {
-    this.processing = true;
+    this.processing = false;
     this.loginBtnStatus = LoginBtnStatus.DEFAULT;
     this.loginBtnDisabled = false;
-  }
-
-  onLoginError(err) {
-     this.onRequestDone()
-     console.log(err);
   }
 
   onSubmit() {
     this.loginBtnStatus = LoginBtnStatus.PROCESSING;
     this.loginBtnDisabled = true;
+    if (this.showError) this.showError = false;
 
     this.authService
       .login(this.model)
@@ -54,7 +56,8 @@ export class LoginComponent implements OnInit {
         this.onRequestDone()
 
         this.jwtService.saveToken(response.data.token);
-        this.authService.addUser(response.data.user);
+        this.sessionService.addUser(response.data.user);
+        this.showError = false;
 
         const token = this.jwtService.getToken();
 
@@ -63,6 +66,11 @@ export class LoginComponent implements OnInit {
         else
           this.router.navigate(['/dashboard'])
         
-      }, this.onLoginError);
+      },
+      errorResponse => {
+        this.onRequestDone();
+        this.showError = true;
+        this.errorMessage = errorResponse.error.message;
+      });
   }
 }
