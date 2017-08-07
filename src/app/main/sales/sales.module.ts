@@ -4,13 +4,12 @@ import { RouterModule } from '@angular/router';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SalesRoutingModule
   ],
-  declarations: [SalesComponent, SidenavComponent]
+  declarations: [SalesComponent]
 })
 export class SalesModule { }

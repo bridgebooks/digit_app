@@ -18,7 +18,7 @@ import { HeaderComponent } from './header/header.component';
     declarations: [
         MainComponent,
         HeaderComponent,
-        SidenavComponent
+        SidenavComponent,
     ],
     providers: [
         JwtService,

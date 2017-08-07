@@ -46,6 +46,16 @@ const routes: Routes = [
                     showSideNav: true,
                     sidenavMenu: 'contacts'
                 }
+            },
+            {
+                path: 'settings',
+                loadChildren: './settings/settings.module.ts#SettingsModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Settings',
+                    showSideNav: true,
+                    sidenavMenu: 'settings'
+                }
             }
         ]
     }

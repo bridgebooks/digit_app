@@ -13,6 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  get(id: string) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let options = { headers: headers };
+    let url = `${this.baseUrl}/${id}`;
+
+    return this.http.get(url, options).catch((error: any) => Observable.throw(error.json().error) || 'An error occured');
+  }
+
   create(body: Object): Observable<User> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let options = { headers: headers };
@@ -21,7 +29,22 @@ export class UserService {
                     .catch((error: any) => Observable.throw(error.json().error) || 'An error occured');
   }
 
-  update() {
+  updateEmail(body: Object) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let options = { headers: headers };
+    let url = `${this.baseUrl}/email`;
+
+    return this.http.post(url, body, options)
+                    .catch((error: any) => Observable.throw(error.json().error) || 'An error occured');
+  }
+
+  update(id: string, body: Object) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let options = { headers: headers };
+    let url = `${this.baseUrl}/${id}`;
+
+    return this.http.put(url, body, options)
+                    .catch((error: any) => Observable.throw(error.json().error) || 'An error occured');
   }
 
   validate(id: String, token: String, password: String) {

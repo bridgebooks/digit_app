@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private jwtService: JwtService, 
     private session: SessionService, 
-    private authService: AuthService) { 
+    private authService: AuthService) {
+
     this.user = this.session.getUser();
   }
 

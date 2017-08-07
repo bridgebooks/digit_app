@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/core-shapes';
@@ -9,22 +9,21 @@ import 'clarity-icons/shapes/core-shapes';
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterContentInit {
 
     showSideNav: Boolean = false;
     sidenavMenu: String;
 
-    constructor(public router: Router, public activatedRoute: ActivatedRoute) { }
+    constructor(public router: Router, public activatedRoute: ActivatedRoute) {
+        this.setSidenavState();
+     }
 
     setSidenavState() {
         this.router.events
             .filter(event => event instanceof NavigationEnd)
-            .map(() => this.activatedRoute)
+            .map(_ => this.router.routerState.root)
             .map(route => {
-                while (route.firstChild) {
-                    route = route.firstChild;
-                }
-
+                while (route.firstChild) route = route.firstChild;
                 return route;
             })
             .filter(route => route.outlet === 'primary')
@@ -32,14 +31,16 @@ export class MainComponent implements OnInit {
             .subscribe((event) => { 
                 this.showSideNav = event['showSideNav'];
                 this.sidenavMenu = event['sidenavMenu'];
+                console.log(this.sidenavMenu);
             });
     }
     ngOnInit() {
-        this.setSidenavState();
-
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);
         }
+    }
+
+    ngAfterContentInit() {
     }
 
 }
