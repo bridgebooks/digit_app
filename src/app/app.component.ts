@@ -14,6 +14,12 @@ import { Title } from '@angular/platform-browser';
 
 export class AppComponent implements OnInit {
 
+  toastOptions: any = {
+      position: ["top","right"],
+      preventDuplicates: true,
+      lastOnBottom: false
+  }
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private titleService: Title) {
   }
 
