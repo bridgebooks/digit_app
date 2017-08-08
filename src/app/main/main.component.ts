@@ -13,7 +13,7 @@ export class MainComponent implements OnInit, AfterContentInit {
 
     showSideNav: Boolean = false;
     sidenavMenu: String;
-
+    
     constructor(public router: Router, public activatedRoute: ActivatedRoute) {
         this.setSidenavState();
      }

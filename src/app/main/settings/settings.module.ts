@@ -12,6 +12,7 @@ import { SettingsComponent } from './settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { EmailChangeComponent } from './email-change/email-change.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { EmailChangeComponent } from './email-change/email-change.component';
     SettingsComponent,
     EmailChangeComponent,
     ProfileComponent, 
-    AccountComponent
+    AccountComponent, PasswordChangeComponent
   ],
   providers: [ IntlPhoneNumberPipe, UserService, SessionService ]
 })
