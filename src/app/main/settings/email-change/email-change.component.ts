@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UserService, SessionService } from '../../../services';
+import { AlertService, UserService, SessionService } from '../../../services';
 
 enum btnStatus {
   DEFAULT = <any>'Change Email',
@@ -28,7 +28,10 @@ export class EmailChangeComponent implements OnInit {
 
   processing: boolean = false;
 
-  constructor(private userService: UserService, private sessionService: SessionService) { }
+  constructor(
+    private alertService: AlertService,
+    private userService: UserService, 
+    private sessionService: SessionService) { }
 
   ngOnInit() {
   }
@@ -59,6 +62,9 @@ export class EmailChangeComponent implements OnInit {
         this.sessionService.addUser(response.data);
         this.password = null;
         this.toggleEditing();
+        this.alertService.success('Email', 'Your email has successfully been updated', {
+          timeOut: 4000
+        })
       },
       errorResponse => {
         this.onRequestDone()
