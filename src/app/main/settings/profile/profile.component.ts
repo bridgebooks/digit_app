@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { UserService, SessionService } from '../../../services';
+import { AlertService, UserService, SessionService } from '../../../services';
 
 enum btnStatus {
   DEFAULT = <any>'Save',
@@ -20,7 +20,10 @@ export class ProfileComponent implements OnInit {
   btnDisabled: boolean = false;
   processing: boolean = false;
 
-  constructor(private userService: UserService, private sessionService: SessionService) { }
+  constructor(
+    private alertService: AlertService,
+    private userService: UserService, 
+    private sessionService: SessionService) { }
 
   ngOnInit() {
     this.user = this.sessionService.getUser()
@@ -42,6 +45,9 @@ export class ProfileComponent implements OnInit {
         this.onRequestDone()
         this.user = response.data;
         this.sessionService.addUser(this.user);
+        this.alertService.success('Profile', 'Your profile has been updated', {
+          timeOut: 4000
+        })
       },
       errorResponse => {
         this.onRequestDone()
