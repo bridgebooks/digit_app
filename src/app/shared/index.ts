@@ -1,3 +1,4 @@
+export * from './utils/object';
 export * from './guard/auth.guard';
 export * from './interceptors/jwt.interceptor';
 export * from './interceptors/http-error.interceptor';

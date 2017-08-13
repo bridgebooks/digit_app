@@ -17,7 +17,7 @@
             <input type="password" name="password" placeholder="Your password" [(ngModel)]="password" required>
           </div>
         </section>
-        <button type="submit" class="btn btn-primary" [disabled]="btnDisabled" [clrLoading]="processing">{{ btnText }}</button>
+        <button type="submit" class="btn btn-primary" [disabled]="emailChangeForm.invalid || btnDisabled" [clrLoading]="processing">{{ btnText }}</button>
       </form>
     </div>
   </div>
