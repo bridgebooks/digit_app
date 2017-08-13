@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.3.0",
     "@angular/router": "^4.3.0",
     "@types/google-libphonenumber": "^7.4.11",
+    "@types/lodash": "^4.14.72",
     "@webcomponents/custom-elements": "1.0.0",
     "angular-2-local-storage": "^1.0.1",
     "angular2-jwt": "^0.2.3",
@@ -34,7 +35,9 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "google-libphonenumber": "^3.0.0",
+    "lodash": "^4.17.4",
     "mutationobserver-shim": "0.3.2",
+    "ng2-file-upload": "^1.2.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.16"
   },
