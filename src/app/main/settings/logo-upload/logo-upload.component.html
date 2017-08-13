@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="logo-thumbnail" [ngClass]="{'no-logo': !logoUrl }" (click)="showImageSelectModal = true">
+      <img class="logo" [src]="logoUrl" alt="" *ngIf="logoUrl">
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="actions">
+      <div class="action" *ngIf="logoUrl">
+          <button class="btn btn-primary" type="button" (click)="showImageSelectModal = true">Change Logo</button>
+      </div>
+
+      <div class="action" [hidden]="!showRemoveBtn">
+        <button class="btn" type="button" (click)="removeLogo()">Remove Logo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="showImageSelectModal" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Upload Logo</h3>
+    <div class="modal-body">
+        <div class="progress progress-fade top loop" *ngIf="uploading"><progress></progress></div>        
+        <p>The maximum file size is 1MB. For best results, upload the largest logo you have, at least 140 pixels on its shortest side.</p>
+        <h4>Choose a file to upload</h4>
+        <input type="file" ng2FileSelect [uploader]="uploader">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="uploadBtnDisabled" (click)="startUpload()">Upload</button>
+        <button type="button" class="btn btn-outline" (click)="closeImageSelectModal()">Cancel</button>
+    </div>
+</clr-modal>
