@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SharedModule } from '../../shared/shared.module';
 
-import { IntlPhoneNumberPipe, NumericDirective, PhoneNumberDirective, MatchValidator } from '../../shared';
 import { UserService, SessionService, OrgService } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
@@ -22,14 +22,11 @@ import { LogoUploadComponent } from './logo-upload/logo-upload.component';
     CommonModule,
     FormsModule,
     ClarityModule.forRoot(),
+    SharedModule,
     FileUploadModule,
     SettingsRoutingModule
   ],
   declarations: [
-    IntlPhoneNumberPipe,
-    NumericDirective, 
-    MatchValidator,
-    PhoneNumberDirective,
     SettingsComponent,
     EmailChangeComponent,
     ProfileComponent, 
@@ -38,6 +35,6 @@ import { LogoUploadComponent } from './logo-upload/logo-upload.component';
     OrgProfileComponent,
     LogoUploadComponent
   ],
-  providers: [ IntlPhoneNumberPipe, UserService, OrgService, SessionService ]
+  providers: [ UserService, OrgService, SessionService ]
 })
 export class SettingsModule { }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { AuthService } from '../services';
 import { MatchValidator } from '../shared';
@@ -13,9 +14,10 @@ import { PasswordCreateComponent } from './password-create.component';
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     PasswordCreateRoutingModule,
   ],
-  declarations: [MatchValidator, PasswordCreateComponent],
+  declarations: [PasswordCreateComponent],
   providers: [AuthService]
 })
 export class PasswordCreateModule { }
