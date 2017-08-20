@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { AuthService } from '../services';
+
 import { PasswordResetRoutingModule } from './password-reset-routing.module';
 import { PasswordResetComponent } from './password-reset.component';
 
@@ -12,6 +14,7 @@ import { PasswordResetComponent } from './password-reset.component';
     FormsModule,
     PasswordResetRoutingModule,
   ],
-  declarations: [PasswordResetComponent]
+  declarations: [PasswordResetComponent],
+  providers: [AuthService]
 })
 export class PasswordResetModule { }

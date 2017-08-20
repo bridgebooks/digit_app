@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Email</h3>
+    <p *ngIf="editing === false">Your current email address is <span style="font-weight: bold">{{ currentEmail }}</span></p>
+  </div>
+  <div class="card-block" *ngIf="editing">
+    <div class="card-text">
+      Your email address is also your login username. To authorise this change you need to verify your password even though you are already logged in.
+      <form autocomplete="off" novalidate #emailChangeForm="ngForm" (ngSubmit)="onSubmit()">
+        <section class="form-block">
+          <div class="form-group">
+            <label for="">Email Address</label>
+            <input type="email" name="email" placeholder="Email address" [(ngModel)]="currentEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" name="password" placeholder="Your password" [(ngModel)]="password" required>
+          </div>
+        </section>
+        <button type="submit" class="btn btn-primary" [disabled]="emailChangeForm.invalid || btnDisabled" [clrLoading]="processing">{{ btnText }}</button>
+      </form>
+    </div>
+  </div>
+  <div class="card-footer">
+      <button class="btn btn-sm btn-link" (click)="toggleEditing()">{{ actionBtnText }}</button>
+  </div>
+</div>

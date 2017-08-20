@@ -1,22 +1,28 @@
 <div class="login-wrapper account-wrapper">
     <form class="login" autocomplete="off" novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="logo">
-            <img src="assets/img/logo-blue.png" alt="DigIT">
+            <img src="assets/img/logo-blue.png" alt="ZenBooks">
         </div>
 
         <label class="title">
             <h3 class="welcome">Login</h3>
-            <h5 class="hint">Sign in into your DigIT account</h5>
+            <h5 class="hint">Sign in into your ZenBooks account</h5>
         </label>
+
         <div class="login-group">
+
             <input class="username" type="email" id="email" name="email" placeholder="Email Address" 
             [(ngModel)]="model.email" #email="ngModel" required>
 
             <input class="password" type="password" id="password" name="password" placeholder="Password" 
             [(ngModel)]="model.password" #password="ngModel" required>
+
+            <div class="error active" *ngIf="showError">
+                {{ errorMessage }}
+            </div>
  
             <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="loginForm.form.invalid || loginBtnDisabled">{{loginBtnStatus}}</button>
-            <a routerLink="/passwordreset" class="signup">Forgot your password?</a>
+            <a routerLink="/password/reset" class="signup">Forgot your password?</a>
         </div>
     </form>
 </div>

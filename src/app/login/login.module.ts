@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 
+import { JwtService, SessionService, AuthService, UserService } from '../services';
+
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { LoginValidateComponent } from './validate/validate.component';
@@ -15,6 +17,7 @@ import { LoginValidateComponent } from './validate/validate.component';
     ClarityModule.forRoot(),
     LoginRoutingModule,
   ],
-  declarations: [LoginComponent, LoginValidateComponent]
+  providers: [ JwtService, SessionService, AuthService, UserService ],
+  declarations: [ LoginComponent, LoginValidateComponent ]
 })
 export class LoginModule { }

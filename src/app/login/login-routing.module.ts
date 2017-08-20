@@ -9,7 +9,7 @@ const routes: Routes = [
       path: 'validate/:user_id',
       component: LoginValidateComponent,
       data: {
-        title: 'Activate your account - DigIT'
+        title: 'Activate your account - ZenBooks'
       }
     }
 ];

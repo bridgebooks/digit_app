@@ -1,7 +1,7 @@
 <div class="login-wrapper account-wrapper signup-wrapper">
     <form class="login" novalidate #signupForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="logo">
-            <img src="assets/img/logo-blue.png" alt="DigIT">
+            <img src="assets/img/logo-blue.png" alt="ZenBooks">
         </div>
 
         <label class="title">
@@ -39,7 +39,7 @@
             <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="signupForm.form.invalid || signupBtnDisabled">{{signupBtnStatus}}</button>
             <p>By clicking the signup button you hereby agree to our <a>terms and conditions</a></p>
 
-            <a routerLink="/login" class="signup">Already have a DigIT account? Login</a>
+            <a routerLink="/login" class="signup">Already have a ZenBooks account? Login</a>
         </div>
     </form>
 </div>

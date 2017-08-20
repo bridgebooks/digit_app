@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main.component';
+import { AuthGuard } from '../shared';
 
 const routes: Routes = [
     {
@@ -9,8 +10,9 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
+                canActivate: [AuthGuard],
                 data: {
-                    title: 'Dashboard - DigIT',
+                    title: 'Dashboard - ZenBooks',
                     showSideNav: false,
                     sidenavMenu: null
                 }
@@ -18,8 +20,9 @@ const routes: Routes = [
             {
                 path: 'sales',
                 loadChildren: './sales/sales.module#SalesModule',
+                canActivate: [AuthGuard],
                 data: {
-                    title: 'Sales - DigIT',
+                    title: 'Sales - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'sales'
                 }
@@ -27,8 +30,9 @@ const routes: Routes = [
             {
                 path: 'purchases',
                 loadChildren: './purchases/purchases.module#PurchasesModule',
+                canActivate: [AuthGuard],
                 data: {
-                    title: 'Purchases - DigIT',
+                    title: 'Purchases - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'purchases'
                 }
@@ -36,10 +40,21 @@ const routes: Routes = [
             {
                 path: 'contacts',
                 loadChildren: './contacts/contacts.module#ContactsModule',
+                canActivate: [AuthGuard],
                 data: {
-                    title: 'Contacts - DigIT',
+                    title: 'Contacts - ZenBooks',
                     showSideNav: true,
                     sidenavMenu: 'contacts'
+                }
+            },
+            {
+                path: 'settings',
+                loadChildren: './settings/settings.module.ts#SettingsModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Settings',
+                    showSideNav: true,
+                    sidenavMenu: 'settings'
                 }
             }
         ]

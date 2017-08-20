@@ -12,28 +12,36 @@ const appRoutes: Routes = [
       path: 'login',
       loadChildren: './login/login.module#LoginModule',
       data: {
-        title: 'Login - DigIT'
+        title: 'Login - ZenBooks'
       }
   },
   {
     path: 'signup',
     loadChildren: './signup/signup.module#SignupModule',
     data: {
-      title: 'Sign Up - DigIT'
+      title: 'Sign Up - ZenBooks'
     }
   },
   {
-    path: 'passwordreset',
+    path: 'password/reset',
     loadChildren: './password-reset/password-reset.module#PasswordResetModule',
     data: {
-      title: 'Forgot Password - DigIT'
+      title: 'Forgot Password - ZenBooks'
+    }
+  },
+  {
+    path: 'password/create',
+    loadChildren: './password-create/password-create.module#PasswordCreateModule',
+    data: {
+      title: 'Change Password - ZenBooks'
     }
   },
   {
     path: 'setup',
     loadChildren: './org-setup/org-setup.module#OrgSetupModule',
+    canActivate: [AuthGuard],
     data: {
-      title: 'Setup your organisation - DigIT'
+      title: 'Setup your organisation - ZenBooks'
     }
   }
 ];

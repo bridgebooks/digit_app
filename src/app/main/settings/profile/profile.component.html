@@ -1,0 +1,29 @@
+<section>
+  <h1>Profile Settings</h1>
+
+  <form autocomplete="off" novalidate #profileForm="ngForm" (ngSubmit)="onSubmit()">
+    <section class="form-block">
+      <label>Basic Information</label>
+      <div class="form-group">
+        <label class="required" for="first_name">First Name</label>
+        <label for="first_name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [ngClass]="{ 'invalid': firstNameInput.hasError('required') }">
+            <input type="text" id="first_name" name="first_name" placeholder="First Name" [(ngModel)]="user.first_name" required #firstNameInput="ngModel">
+            <span class="tooltip-content">This field is required</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="required" for="last_name">Last Name</label>
+        <label for="first_name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" [ngClass]="{ 'invalid': lastNameInput.hasError('required') }">
+            <input type="text" id="last_name" name="last_name" placeholder="Last Name" [(ngModel)]="user.last_name" required #lastNameInput="ngModel">
+            <span class="tooltip-content">This field is required</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="required" for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="Phone Number" [(ngModel)]="user.phone" required numeric phone>
+      </div>
+    </section>
+    <button type="submit" class="btn btn-primary" [disabled]="btnDisabled" [clrLoading]="processing">{{ btnText }}</button>
+    <button type="button" class="btn btn-secondary">Cancel</button>
+  </form>
+</section>

@@ -1,5 +1,6 @@
 export interface OrgSetupModel {
     name: String;
+    industry_id?: Number;
     address_line_1?: String | null;
     address_line_2?: String;
     city_town?: String;

@@ -34,6 +34,17 @@ export class SidenavComponent implements OnInit, OnChanges {
         {
           label: 'Employees', link: '/contacts/employees'
         }
+      ],
+      settings: [
+        {
+          label: 'Profile', link: '/settings/profile'
+        },
+        {
+          label: 'Account', link: '/settings/account'
+        },
+        {
+          label: 'Organization', link: '/settings/org'
+        }
       ]
   }
 

@@ -1,0 +1,23 @@
+@import '../../../../scss/mixins.scss';
+
+.logo-thumbnail {
+    display: block;
+    height: 150px;
+    width: 150px;
+
+    &.no-logo {
+        background: url('logo-upload.png') no-repeat;
+        border: 1px solid #CCC;
+        @include border-radius(4px);
+    }
+
+    .logo {
+        display: block;
+        max-width: 100%;
+        height: 100%;
+    }
+}
+
+.actions .action {
+    margin-bottom: 10px;
+}

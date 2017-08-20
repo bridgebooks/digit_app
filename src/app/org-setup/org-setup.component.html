@@ -2,7 +2,7 @@
     <header class="header header-6">
         <div class="branding">
             <a href="..." class="brand nav-link">
-                <img src="assets/img/logo-white.png" alt="DigIT">
+                <img src="assets/img/logo-white.png" alt="ZenBooks">
             </a>
         </div>
     </header>
@@ -12,61 +12,59 @@
                 <div class="row flex-items-xs-center flex-xs-middle">
                     <div class="col-lg-7 col-md-7 col-xs-12">
                         <div class="card">
-                            <div class="card-block">
-                                <div class="card-title">
-                                    Setup your organization
-                                </div>
-                                <form #orgForm="ngForm" novalidate>
-                                    <section class="form-block">
-                                        <div class="form-group">
-                                            <label class="required" for="name">Organization's name</label>
-                                            <input type="text" id="name" name="name" size="45" [(ngModel)]="model.name">
+                            <form novalidate #orgForm="ngForm" (ngSubmit)="onSubmit()">
+                                <div class="card-block">
+                                        <div class="card-title">
+                                            Setup your organization
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="name">Industry</label>
-                                            <div class="select">
-                                                <select id="industry_id" name="industry_id">
-                                                    <option>Option 1</option>
-                                                    <option>Option 2</option>
-                                                    <option>Option 3</option>
-                                                    <option>Option 4</option>
-                                                </select>
+                                        <section class="form-block">
+                                            <div class="form-group">
+                                                <label class="required" for="name">Organization's name</label>
+                                                <input type="text" id="name" name="name" size="45" [(ngModel)]="model.name" required>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="name">Address Line 1</label>
-                                            <input type="text" id="address_line" name="address_line_1" size="45" [(ngModel)]="model.address_line_1">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="name">Industry</label>
+                                                <div class="select">
+                                                    <select id="industry_id" name="industry_id" [(ngModel)]="model.industry_id">
+                                                        <option>Select an industry</option>
+                                                        <option *ngFor="let industry of industries" [value]="industry.id">{{ industry.name }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="name">Address Line 2</label>
-                                            <input type="text" id="address_line2" name="address_line_2" size="45" [(ngModel)]="model.address_line_2">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="name">Address Line 1</label>
+                                                <input type="text" id="address_line" name="address_line_1" size="45" [(ngModel)]="model.address_line_1" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="name">City/Town</label>
-                                            <input type="text" id="city_town" name="city_town" size="45" [(ngModel)]="model.city_town">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="name">Address Line 2</label>
+                                                <input type="text" id="address_line2" name="address_line_2" size="45" [(ngModel)]="model.address_line_2">
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="name">Postal Code/Zip</label>
-                                            <input type="text" id="postal_zip" name="postal_zip" size="45" [(ngModel)]="model.postal_zip">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="name">City/Town</label>
+                                                <input type="text" id="city_town" name="city_town" size="45" [(ngModel)]="model.city_town" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="name">Country</label>
-                                            <input type="text" id="country" name="country" size="45" [(ngModel)]="model.country">
-                                        </div>
-                                    </section>
-                                </form>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary" [clrLoading]="processing" 
-                                [disabled]="orgForm.form.invalid || btnDisabled" type="button" (click)="gotoDashboard()">{{btnStatus}} <clr-icon shape="caret right"></clr-icon>
-                                </button>
-                            </div>
+                                            <div class="form-group">
+                                                <label for="name">Postal Code/Zip</label>
+                                                <input type="text" id="postal_zip" name="postal_zip" size="45" [(ngModel)]="model.postal_zip">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name">Country</label>
+                                                <input type="text" id="country" name="country" size="45" [(ngModel)]="model.country" required>
+                                            </div>
+                                        </section>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary" type="submit" [clrLoading]="processing" 
+                                    [disabled]="orgForm.form.invalid" >{{btnStatus}} <clr-icon shape="caret right"></clr-icon>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

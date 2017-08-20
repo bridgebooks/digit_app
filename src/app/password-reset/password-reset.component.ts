@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services';
 
 enum BtnStatus {
   DEFAULT = <any>'SEND LINK',
@@ -19,19 +20,31 @@ export class PasswordResetComponent implements OnInit {
 
   showSuccess: Boolean = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  requestDone() {
+    this.btnStatus = BtnStatus.DEFAULT;
+    this.btnDisabled = false;
   }
 
   onSubmit() {
     this.btnStatus = BtnStatus.PROCESSING;
     this.btnDisabled = true;
 
-    setTimeout(() => {
-      this.btnStatus = BtnStatus.DEFAULT;
-      this.btnDisabled = false;
-      this.showSuccess = true;
-    }, 5000);
+    this.authService
+      .requestPasswordReset(this.model)
+      .subscribe(response => {
+        this.requestDone()
+        if (response.status === 'success') {
+            this.showSuccess = true;
+            this.model.email = null;
+        }
+      },
+      err => {
+        this.requestDone();
+      })
   }
 }

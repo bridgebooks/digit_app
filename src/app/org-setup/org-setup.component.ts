@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtService, IndustryService, OrgService,  } from '../services';
 import { OrgSetupModel } from '../models/forms/org-setup';
 
 import 'clarity-icons';
@@ -22,27 +23,57 @@ export class OrgSetupComponent implements OnInit, OnChanges{
   btnStatus: any = BtnStatus.DEFAULT;
   btnDisabled: Boolean = false;
   processing: Boolean = false;
+  industries: Array<any> = [];
 
   model: OrgSetupModel = {
     name: null
-  };
+  }
 
-  constructor(public router: Router) { }
+  constructor(
+    public router: Router, 
+    private jwtService: JwtService,
+    private industryService: IndustryService, 
+    private orgService: OrgService) { }
 
   ngOnInit() {
+    this.fetchIndustries()
   }
 
   ngOnChanges(changes: SimpleChanges) {
   }
 
-  gotoDashboard() {
+  onRequestDone() {
+    this.processing = false;
+    this.btnStatus = BtnStatus.DEFAULT
+    this.btnDisabled = false;
+  }
+
+  fetchIndustries() {
+    this.industryService
+      .all()
+      .subscribe(response => {
+        this.industries = response.data;
+      }, error => {
+        console.log(error)
+      })
+  }
+
+  onSubmit() {
     this.processing = true;
     this.btnStatus = BtnStatus.PROCESSING;
 
-    setTimeout(() => {
-      this.processing = false;
-      this.btnStatus = BtnStatus.DEFAULT;
-      this.router.navigate(['/dashboard']);
-    }, 3000);
+    this.orgService
+      .create(this.model)
+      .subscribe(response => {
+        this.onRequestDone();
+        // save new token
+        this.jwtService.saveToken(response.data.token);
+        // redirect to dashboard
+        this.router.navigate(['/dashboard'])
+      },
+      error => {
+        this.onRequestDone();
+        console.log(error);
+      })
   }
 }

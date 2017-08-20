@@ -3,7 +3,7 @@
         <div class="col-lg-5 col-md-6 col-xs-12">
             <span class="clr-example-col-value">
                 <div class="logo">
-                    <img src="assets/img/logo-blue.png" alt="DigIT">
+                    <img src="assets/img/logo-blue.png" alt="ZenBooks">
                 </div>
 
                 <div class="message__block">
@@ -15,7 +15,7 @@
                         <p>We sent it to {{user.email}} and need to make sure it reached you</p>
                     </div>
                     <div class="message__block_actions">
-                        <a class="btn btn-primary btn-success" (click)="onInboxBtnClick()">Go to inbox</a>
+                        <a class="btn btn-primary btn-success" [href]="emailLink" target="_blank">Go to inbox</a>
                     </div>
                 </div>
             </span>
