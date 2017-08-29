@@ -1,0 +1,40 @@
+<section>
+  <h1>Contacts</h1>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="row flex-items-lg-between">
+        <div class="col-lg-4">
+            <app-contact-bulk-action-dropdown [enabled]="enableBulkOptions" 
+            (onDeleteOptionSelected)="onDeleteSelected($event)"
+            (onAddtoGroupOptionSelected)="onAddtoGroup($event)"
+            ></app-contact-bulk-action-dropdown>
+        </div>
+        <div class="col-lg-4">
+            <app-contact-search-box></app-contact-search-box>
+        </div>
+      </div>
+
+      <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
+        <clr-dg-column>Contact</clr-dg-column>
+        <clr-dg-column>Phone</clr-dg-column>
+        <clr-dg-column>Email</clr-dg-column>
+
+        <clr-dg-row *ngFor="let contact of contacts" [clrDgItem]="contact">
+          <clr-dg-cell>
+            <a [routerLink]="['/contacts/view', contact.id]">{{ contact.name }}</a>
+            <p *ngIf="contact.address_line_1 && contact.address_line_2">{{ contact.address_line_1 }}, {{ contact.address_line_2 }}
+          </clr-dg-cell>
+          <clr-dg-cell>{{ contact.phone }}</clr-dg-cell>
+          <clr-dg-cell>{{ contact.email }}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{total}} Contacts
+            <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+</section>

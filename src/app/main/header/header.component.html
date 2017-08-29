@@ -1,30 +1,8 @@
-<header class="header header-6">
-    <div class="branding">
-        <a routerLink="/dashboard" class="brand nav-link">
-            <img src="assets/img/logo-white.png" alt="ZenBooks">
-        </a>
-    </div>
-    
-    <div class="header-nav">
-        <a routerLink="/dashboard" routerLinkActive="active" class="nav-link nav-text">Dashboard</a>
-        <a routerLink="/sales" routerLinkActive="active" class="nav-link nav-text">Sales</a>
-        <a routerLink="/purchases" routerLinkActive="active" class="nav-link nav-text">Purchases</a>
-        <a routerLink="/contacts" routerLinkActive="active" class="nav-link nav-text">Contacts</a>
-        <a href="" class="nav-link nav-text">Reports</a>
-    </div>
-
-    <div class="header-actions">
-        <clr-dropdown [clrMenuPosition]="'bottom-right'" [clrCloseMenuOnItemClick]="false">
-            <button type="button" clrDropdownToggle>
-                <clr-icon shape="cog"></clr-icon>
-            </button>
-            <clr-dropdown-menu>
-                <h4 class="dropdown-header">{{ user.first_name }} {{ user.last_name }}</h4>>
-                <button type="button" clrDropdownItem routerLink="/settings/profile">Profile</button>
-                <button type="button" clrDropdownItem routerLink="/settings/account">Account</button>
-                <button type="button" clrDropdownItem (click)="showLogoutModal()">Logout</button>
-            </clr-dropdown-menu>
-        </clr-dropdown>
+<clr-header class="header header-6">    
+    <div class="header-nav" [clr-nav-level]="2">
+        <a routerLink="/settings/profile" routerLinkActive="active" class="nav-link nav-text">Profile</a>
+        <a routerLink="/settings/account" routerLinkActive="active" class="nav-link nav-text">Account</a>
+        <a (click)="showLogoutModal()" class="nav-link nav-text">Logout</a>
     </div>
 
     <clr-modal [(clrModalOpen)]="logoutModalVisible" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
@@ -37,4 +15,4 @@
             <button type="button" class="btn btn-primary" [clrLoading]="logoutProcessing" [disabled]="logoutBtnDisabled" (click)="logout()">Ok</button>
         </div>
     </clr-modal>
-</header>
+</clr-header>
