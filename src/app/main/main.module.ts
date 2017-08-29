@@ -6,7 +6,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { JwtService, AuthService, SessionService } from '../services';
 
 import { MainComponent } from './main.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { HeaderComponent } from './header/header.component';
     declarations: [
         MainComponent,
         HeaderComponent,
-        SidenavComponent,
     ],
     providers: [
         JwtService,

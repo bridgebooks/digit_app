@@ -1,8 +1,13 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { MainNavigation } from './main.navigation';
+import { JwtService, AuthService, SessionService } from '../services';
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/core-shapes';
+import 'clarity-icons/shapes/commerce-shapes';
+import 'clarity-icons/shapes/essential-shapes';
+import 'clarity-icons/shapes/technology-shapes';
 
 @Component({
     selector: 'app-main',
@@ -11,29 +16,25 @@ import 'clarity-icons/shapes/core-shapes';
 })
 export class MainComponent implements OnInit, AfterContentInit {
 
-    showSideNav: Boolean = false;
-    sidenavMenu: String;
-    
-    constructor(public router: Router, public activatedRoute: ActivatedRoute) {
-        this.setSidenavState();
-     }
+    nav = MainNavigation.NavItems
+    navCollasped: boolean = false;
 
-    setSidenavState() {
-        this.router.events
-            .filter(event => event instanceof NavigationEnd)
-            .map(_ => this.router.routerState.root)
-            .map(route => {
-                while (route.firstChild) route = route.firstChild;
-                return route;
-            })
-            .filter(route => route.outlet === 'primary')
-            .mergeMap(route => route.data)
-            .subscribe((event) => { 
-                this.showSideNav = event['showSideNav'];
-                this.sidenavMenu = event['sidenavMenu'];
-                console.log(this.sidenavMenu);
-            });
+    user: any;
+    
+    logoutModalVisible: boolean = false;
+
+    logoutProcessing: boolean = false;
+
+    logoutBtnDisabled: boolean = false;
+
+    constructor(
+        public router: Router, 
+        public activatedRoute: ActivatedRoute,
+        private jwtService: JwtService, 
+        private session: SessionService, 
+        private authService: AuthService) {
     }
+
     ngOnInit() {
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);
@@ -43,4 +44,32 @@ export class MainComponent implements OnInit, AfterContentInit {
     ngAfterContentInit() {
     }
 
+    showLogoutModal() {
+        this.logoutModalVisible = true;
+    }
+
+    hideLogoutModal() {
+        this.logoutModalVisible = false;
+    }
+
+    logout() {
+        this.logoutProcessing = true;
+        this.logoutBtnDisabled = true;
+
+        this.authService
+            .logout()
+            .subscribe(response => {
+                if (response.status === 'success') {
+                    this.logoutProcessing = false;
+                    this.session.end();
+                    this.hideLogoutModal();
+                    this.router.navigate(['/login'])
+                }
+            },
+            err => {
+                this.logoutProcessing = false;
+                this.logoutBtnDisabled = false;
+                this.hideLogoutModal();
+            })
+    }
 }

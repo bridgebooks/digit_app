@@ -2,6 +2,23 @@
 @import 'variables.scss';
 @import 'mixins.scss';
 
+app-header {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    app-header {
+        display: none !important;
+    }
+}
+
+
+.clr-vertical-nav {
+    .nav-group-content:hover, .nav-group-content.active {
+        background-color: map-get($colors, 'secondary') !important;
+    }
+}
+
 .account-wrapper {
     .logo img {
         display: block;

@@ -1,11 +1,62 @@
 <clr-main-container>
     <app-header></app-header>
     <div class="content-container">
-        <div class="content-area">
+        <main class="content-area">
             <router-outlet></router-outlet>
-        </div>
-        <nav class="sidenav" *ngIf="showSideNav">
-            <app-sidenav [menu]="sidenavMenu"></app-sidenav>
-        </nav>
+        </main>
+        
+        <clr-vertical-nav [clrVerticalNavCollapsible]="navCollasped" [clr-nav-level]="1">
+            <div class="branding">
+                <img src="assets/img/logo-white.png" alt="ZenBooks">
+            </div>
+            <nav>
+                <clr-vertical-nav-group>
+                    <a clrVerticalNavLink>
+                        <clr-icon shape="user" clrVerticalNavIcon></clr-icon>
+                        Chronotech Labs
+                    </a>
+                    <clr-vertical-nav-group-children>
+                        <a clrVerticalNavLink routerLinkActive="active" routerLink="/settings/profile">
+                            Profile
+                        </a>
+                        <a clrVerticalNavLink routerLinkActive="active" routerLink="/settings/account">
+                            Account
+                        </a>
+                        <a clrVerticalNavLink (click)="showLogoutModal()">Logout</a>
+                    </clr-vertical-nav-group-children>
+                </clr-vertical-nav-group>
+            </nav>
+            <nav *ngFor="let item of nav">
+                <a clrVerticalNavLink [routerLink]="item.path" routerLinkActive="active" *ngIf="!item.children"
+                [routerLinkActiveOptions]="{exact:true}">
+                    <clr-icon [attr.shape]="item.icon" clrVerticalNavIcon></clr-icon>
+                    {{ item.label }}
+                </a>
+                <div *ngIf="item.children">
+                    <clr-vertical-nav-group routerLinkActive="active">
+                        <a clrVerticalNavLink>
+                            <clr-icon [attr.shape]="item.icon" clrVerticalNavIcon></clr-icon>
+                            {{ item.label }}
+                        </a>
+                        <clr-vertical-nav-group-children *clrIfExpanded="false">
+                            <a *ngFor="let child of item.children" clrVerticalNavLink routerLinkActive="active" [routerLink]="child.path">
+                                {{ child.label }}
+                            </a>
+                        </clr-vertical-nav-group-children>
+                    </clr-vertical-nav-group>
+                </div>
+            </nav>
+        </clr-vertical-nav>
+
+        <clr-modal [(clrModalOpen)]="logoutModalVisible" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+            <h3 class="modal-title">Logout</h3>
+            <div class="modal-body">
+                <p style="color: #333;">Are sure you want to logout</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" (click)="hideLogoutModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" [clrLoading]="logoutProcessing" [disabled]="logoutBtnDisabled" (click)="logout()">Ok</button>
+            </div>
+        </clr-modal>
     </div>
 </clr-main-container>

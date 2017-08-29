@@ -1,0 +1,35 @@
+$hoverColor: rgba(255,255,255,0.15);
+
+.main-container .content-container .clr-vertical-nav {
+    background: #002538;
+    padding-top: 0;
+
+    .branding {
+        background-color: $hoverColor;
+        img {
+            display: block;
+            max-width: 100%;
+            height: 60px;
+            padding-left: 10px;
+        }
+    }
+}
+
+.clr-vertical-nav .nav-link {
+    color: #FFF;
+   
+    &.active, 
+    &:hover {
+        background-color: $hoverColor;
+    }
+}
+
+.clr-vertical-nav .nav-group-text, .clr-vertical-nav .nav-link {
+    height: 45px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.clr-vertical-nav .nav-link:hover .nav-icon {
+    fill: #FFF;
+}
