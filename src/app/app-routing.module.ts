@@ -12,28 +12,28 @@ const appRoutes: Routes = [
       path: 'login',
       loadChildren: './login/login.module#LoginModule',
       data: {
-        title: 'Login - ZenBooks'
+        title: 'Login - Bridge Books'
       }
   },
   {
     path: 'signup',
     loadChildren: './signup/signup.module#SignupModule',
     data: {
-      title: 'Sign Up - ZenBooks'
+      title: 'Sign Up - Bridge Books'
     }
   },
   {
     path: 'password/reset',
     loadChildren: './password-reset/password-reset.module#PasswordResetModule',
     data: {
-      title: 'Forgot Password - ZenBooks'
+      title: 'Forgot Password - Bridge Books'
     }
   },
   {
     path: 'password/create',
     loadChildren: './password-create/password-create.module#PasswordCreateModule',
     data: {
-      title: 'Change Password - ZenBooks'
+      title: 'Change Password - Bridge Books'
     }
   },
   {
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
     loadChildren: './org-setup/org-setup.module#OrgSetupModule',
     canActivate: [AuthGuard],
     data: {
-      title: 'Setup your organisation - ZenBooks'
+      title: 'Setup your organisation - Bridge Books'
     }
   }
 ];

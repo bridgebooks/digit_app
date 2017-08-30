@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 import { AuthService } from '../services';
-import { MatchValidator } from '../shared';
 
 import { PasswordCreateRoutingModule } from './password-create-routing.module';
 import { PasswordCreateComponent } from './password-create.component';

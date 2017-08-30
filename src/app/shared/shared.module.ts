@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IntlPhoneNumberPipe, NumericDirective, PhoneNumberDirective, MatchValidator } from './index';
+import { BankSelectComponent } from './components/bank-select/bank-select.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,9 @@ import { IntlPhoneNumberPipe, NumericDirective, PhoneNumberDirective, MatchValid
     IntlPhoneNumberPipe,
     NumericDirective, 
     MatchValidator,
-    PhoneNumberDirective
-  ]
+    PhoneNumberDirective,
+    BankSelectComponent
+  ],
+  exports: [BankSelectComponent]
 })
 export class SharedModule { }

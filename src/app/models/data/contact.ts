@@ -1,5 +1,5 @@
 export interface Contact {
-    id: string;
+    id?: string;
     name: string;
     phone?: string;
     email?: string;
@@ -11,7 +11,7 @@ export interface Contact {
     state_region?: string;
     country?: string;
     type: string;
-    user_id: string;
-    org_id: string;
+    user_id?: string;
+    org_id?: string;
     created_at?: object;
 }
