@@ -1,5 +1,5 @@
 <div class="select">
-  <select (change)="filterChanged($event.target.value)">
+  <select (change)="filterChanged($event.target.value)" [(ngModel)]="selected">
     <option>Select a bank</option>
     <option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</option>
   </select>

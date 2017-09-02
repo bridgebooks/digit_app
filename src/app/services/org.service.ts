@@ -19,6 +19,10 @@ interface OrgCreateResponse {
   data: OrgCreateResponseData
 }
 
+interface ContactGroupsResponse {
+  data: any[]
+}
+
 @Injectable()
 export class OrgService {
 
@@ -73,9 +77,7 @@ export class OrgService {
     //const params = new HttpParams().set('include', 'industry')
     const url = `${this.baseUrl}/${id}/contact_groups`;
 
-    return this.http.get(url, {
-      headers: headers
-    })
+    return this.http.get<ContactGroupsResponse>(url, { headers })
   }
 
   update(id: string, body: object) {

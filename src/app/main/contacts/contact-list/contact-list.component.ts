@@ -1,8 +1,9 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { Contact } from '../../../models/data/contact';
-import { JwtService, OrgService } from '../../../services';
+import { JwtService, AlertService, OrgService, ContactService } from '../../../services';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-contact-list',
@@ -22,12 +23,24 @@ export class ContactListComponent implements OnInit, OnDestroy {
   sortedBy: string = 'asc';
   loading: boolean;
   selected: Contact[] = [];
+
   enableBulkOptions: boolean = false;
+  deleteConfirmModalVisible: boolean = false;
+  contactDeleteProcessing: boolean = false;
+  deleteBtnDisabled: boolean = false;
+  toDelete: Contact[] | Contact | null;
+
+  contactGroupModalVisible: boolean = false;
+  contactGroupProcessing: boolean = false;
+  contactGroupBtnDisabled: boolean = true;
+  selectedContactGroup: string;
 
   constructor(
     private route: ActivatedRoute,
+    private alertService: AlertService,
     private jwtService: JwtService, 
     private orgService: OrgService, 
+    private contactService: ContactService,
     private cdRef: ChangeDetectorRef) { 
   }
 
@@ -40,6 +53,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
       sortedBy: this.sortedBy
     }
     this.loading = true;
+    this.selected = [];
 
     this.orgService
       .getContacts(this.orgID, options)
@@ -58,11 +72,97 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSelected() {
-    console.log(this.selected);
+    this.delete(this.selected);
   }
 
   onAddtoGroup() {
-    console.log(this.selected);
+    this.contactGroupModalVisible = true;
+  }
+
+  delete(selection: Contact | Contact[]) {
+    this.deleteConfirmModalVisible = true;
+    this.toDelete = selection;
+  }
+
+  onSelectedChange(selected: Contact[]) {
+    this.enableBulkOptions = selected.length > 0 ? true : false;
+  }
+
+  onContactGroupSelect($event) {
+    if ($event) {
+      this.contactGroupBtnDisabled = false;
+      this.selectedContactGroup = $event;
+    }
+  }
+
+  addToContactGroup() {
+    this.contactGroupProcessing = true;
+    this.contactGroupBtnDisabled = true;
+
+    const contacts = [];
+    this.selected.forEach(contact => contacts.push(contact.id));
+
+    this.contactService
+      .addToGroup(this.selectedContactGroup, contacts)
+      .subscribe(response => {
+        this.alertService.success('Group', 'Contact(s) successfully added to group', { timeOut: 5000 })
+        this.contactGroupProcessing = false;
+        this.contactGroupBtnDisabled = true;
+        this.selectedContactGroup = '';
+        this.selected = []
+
+        this.refresh({});
+        this.cdRef.detectChanges();
+      }, err => {
+        this.contactGroupProcessing = false;
+        this.contactGroupBtnDisabled = true;
+        this.cdRef.detectChanges();
+      })
+  }
+
+  deleteSelection() {
+    this.contactDeleteProcessing = true;
+    this.deleteBtnDisabled = true;
+
+    if (Array.isArray(this.toDelete)) {
+      const ids = []
+      this.toDelete.forEach(contact => ids.push(contact.id)) 
+      this.contactService
+        .deleteMany(ids)
+        .subscribe(response => {
+          this.alertService.success('Delete', 'Contact(s) successfully deleted', { timeOut: 5000 })
+          this.deleteConfirmModalVisible = false;
+          this.deleteBtnDisabled = false;
+          this.contactDeleteProcessing = false;
+          this.toDelete = []
+
+          this.refresh({})
+          this.cdRef.detectChanges();
+        }, err => {
+          this.deleteConfirmModalVisible = false;
+          this.deleteBtnDisabled = false;
+          this.contactDeleteProcessing = false;
+          this.cdRef.detectChanges();
+        })
+    } else {
+      this.contactService
+        .delete(this.toDelete.id)
+        .subscribe(response => {
+          this.alertService.success('Delete', 'Contact successfully deleted', { timeOut: 5000 })
+          this.deleteConfirmModalVisible = false;
+          this.deleteBtnDisabled = false;
+          this.contactDeleteProcessing = false;
+          this.toDelete = []
+
+          this.refresh({})
+          this.cdRef.detectChanges();
+        }, err => {
+          this.deleteConfirmModalVisible = false;
+          this.deleteBtnDisabled = false;
+          this.contactDeleteProcessing = false;
+          this.cdRef.detectChanges();
+        })
+    }
   }
 
   ngOnInit() { 
@@ -75,10 +175,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
         this.type = params.type;
         this.refresh({});
       })
-  }
-
-  onSelectedChange(selected: Contact[]) {
-    this.enableBulkOptions = selected.length > 0 ? true : false;
   }
 
   ngOnDestroy() {

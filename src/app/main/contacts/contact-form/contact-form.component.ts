@@ -1,8 +1,9 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
 import { Contact } from '../../../models/data/contact';
 import { ObjectUtils } from '../../../shared';
-import { JwtService, ContactService } from '../../../services';
+import { JwtService, AlertService, ContactService } from '../../../services';
 
 import { Subject } from 'rxjs';
 
@@ -20,15 +21,21 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   processing: boolean = false;
   loading: boolean = false;
   model: any = {};
+  types: object[] = [
+    { label: 'Vendor', value: 'vendor' },
+    { label: 'Customer', value: 'customer' }
+  ];
 
   constructor(
     private route: ActivatedRoute,
+    private alertService: AlertService,
     private jwtService: JwtService,
     private contactService: ContactService,
   ) { }
 
   onBankChange($event) {
     this.model.bank_id = $event;
+    (this.form.controls['bank_id'] as FormControl).markAsDirty()    
   }
 
   getContact(id: string) {
@@ -54,16 +61,18 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         .subscribe(response => {
           this.model = response.data;
           this.processing = false;
+          this.alertService.success('Contact', 'Contact sucessfully updated', { timeOut: 5000 })
         }, err => {
           this.processing = false;
         })
     } else {
-      
+      this.model.org_id = this.orgID;
       this.contactService
-        .add(model)
+        .add(this.model)
         .subscribe(response => {
           this.model = response.data;
           this.processing = false;
+          this.alertService.success('Contact', 'Contact sucessfully created', { timeOut: 5000 })
         }, err => {
           this.processing = false;
         })

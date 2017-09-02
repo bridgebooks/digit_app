@@ -19,19 +19,43 @@
           </div>
 
           <div class="card-block">
+            <div class="progress progress-fade top loop" *ngIf="loading || processing"><progress></progress></div>              
             <div class="card-title">Contact Information</div>
 
             <div class="card-text">
               <section class="form-block">
                   <div class="form-group">
-                    <label for="">Contact Name</label>
-                    <input type="text" name="name" placeholder="Company / Business name" size="60" [(ngModel)]="model.name" required>
+                      <label class="required" for="">Contact Type</label>
+                      <div class="select">
+                        <select name="type" id="type" #typeInput="ngModel" [(ngModel)]="model.type" required>
+                          <option>Select type</option>
+                          <option *ngFor="let type of types" [value]="type.value">{{ type.label }}</option>
+                        </select>
+                        <div class="input__errors" [hidden]="typeInput.valid || typeInput.pristine">
+                            <span class="input__errors_error" *ngIf="typeInput.hasError('required')">Select a contact type</span>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="form-group">
+                    <label class="required" for="">Contact Name</label>
+                    <input type="text" name="name" placeholder="Company / Business name" size="60" #nameInput="ngModel" [(ngModel)]="model.name" required>
+                    <div class="input__errors" [hidden]="nameInput.valid || nameInput.pristine">
+                        <span class="input__errors_error" *ngIf="nameInput.hasError('required')">Please enter name for your contact</span>
+                    </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="">Email</label>
-                    <input type="email" name="email" placeholder="Email address" size="60" [(ngModel)]="model.email">
+                    <input type="email" name="email" placeholder="Email address" size="60" #emailInput="ngModel" [(ngModel)]="model.email">
+                    <div class="input__errors" [hidden]="emailInput.valid || emailInput.pristine">
+                        <span class="input__errors_error" *ngIf="emailInput.hasError('email')">Please enter a valid email address</span>
+                    </div>
                   </div>
+
+                  <div class="form-group">
+                      <label for="">Phone</label>
+                      <input type="tel" name="phone" placeholder="Phone number" size="60" [(ngModel)]="model.phone" phone>
+                    </div>
 
                   <div class="form-group">
                     <label for="">Website</label>
@@ -77,22 +101,24 @@
                   <div class="form-group">
                     <label for="">Bank</label>
                     <bank-select [selected]="model.bank_id" (onBankSelected)="onBankChange($event)"></bank-select>
+                    <input type="hidden" name="bank_id" [(ngModel)]="model.bank_id">
                   </div>
 
                 <div class="form-group">
                   <label for="">Account Name</label>
-                  <input type="text" name="account_name" placeholder="Bank Account Name" size="60" [(ngModel)]="model.bank_account_name">
+                  <input type="text" name="bank_account_name" placeholder="Bank Account Name" size="60" [(ngModel)]="model.bank_account_name">
                 </div>
                 
                 <div class="form-group">
                   <label for="">Account Number</label>
-                  <input type="text" name="account_no" placeholder="Bank Account No" size="60" #accountNoInput="ngModel" numeric [(ngModel)]="model.bank_account_no">
+                  <input type="text" name="bank_account_no" placeholder="Bank Account No" size="60" #accountNoInput="ngModel" numeric [(ngModel)]="model.bank_account_no">
                 </div>
               </section>
             </div>
           </div>
 
           <div class="card-footer">
+              <div class="progress progress-fade loop" *ngIf="processing"><progress></progress></div>                            
               <button class="btn btn-primary" [clrLoading]="processing" [disabled]="contactForm.invalid || processing || loading">Save</button>                        
           </div>
 

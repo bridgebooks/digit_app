@@ -1,0 +1,11 @@
+<div class="contact-group-list">
+  <span class="spinner spinner-inline" *ngIf="loading">
+      Loading...
+  </span>
+
+  <form #f="ngForm">
+      <div *ngFor="let group of groups" >
+          <input type="radio" name="group" [value]="group.id" [(ngModel)]="selected" (change)="onGroupSelected($event)">  {{ group.name }}           
+      </div>
+  </form>
+</div>

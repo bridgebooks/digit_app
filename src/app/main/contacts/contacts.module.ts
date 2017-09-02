@@ -15,6 +15,7 @@ import { ContactBulkActionDropdownComponent } from './contact-bulk-action-dropdo
 import { ContactSearchBoxComponent } from './contact-search-box/contact-search-box.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ContactGroupSelectComponent } from './contact-group-select/contact-group-select.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     ContactDetailComponent, 
     ContactBulkActionDropdownComponent, 
     ContactSearchBoxComponent, 
-    EmployeeListComponent
+    EmployeeListComponent, ContactGroupSelectComponent
   ],
   providers: [
     SearchService, 

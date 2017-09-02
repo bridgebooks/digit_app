@@ -60,6 +60,9 @@ export class LoginComponent implements OnInit {
         this.showError = false;
 
         const token = this.jwtService.getToken();
+        console.log(token.orgs[0]);
+        // TODO: allow org select
+        this.sessionService.addDefaultOrg(token.orgs[0]);
 
         if (token.orgs.length < 1)
           this.router.navigate(['/setup'])

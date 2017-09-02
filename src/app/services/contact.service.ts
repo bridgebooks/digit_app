@@ -24,7 +24,14 @@ export class ContactService {
     return this.http.post<ContactResponse>(this.baseUrl, body, { headers })
   }
 
-  appPerson(id: string, body: object) {
+  addPerson(id: string, body: object) {
+  }
+
+  addToGroup(id: string, contacts: string[]) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/groups/${id}/bulk`;
+    
+    return this.http.post(url, { contacts }, { headers })
   }
 
   get(id: string) {
@@ -48,6 +55,17 @@ export class ContactService {
   }
 
   delete(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.http.delete(url, { headers });
+  }
+
+  deleteMany(contacts: string[]) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/delete/bulk`;
+
+    return this.http.post(url, { contacts }, { headers });
   }
 
   deletePerson(id: string) { 
