@@ -3,7 +3,14 @@
       Loading...
   </span>
 
-  <form #f="ngForm">
+  <form class="compact" #f="ngForm">
+      <a class="btn btn-primary" type="button" (click)="showGroupForm = true" [hidden]="showGroupForm">Create new contact group</a>
+      <div class="namefield" *ngIf="showGroupForm">
+            <input type="text" name="name" placeholder="Group name" #nameInput="" [(ngModel)]="group.name" size="60" required>
+            <button class="btn btn-primary" type="button" [clrLoading]="processing" 
+            [disabled]="f.invalid || addBtnDisable" (click)="addGroup()">Add</button>
+            <button class="btn btn-outline" type="button" (click)="showGroupForm = false">Cancel</button>
+      </div>
       <div *ngFor="let group of groups" >
           <input type="radio" name="group" [value]="group.id" [(ngModel)]="selected" (change)="onGroupSelected($event)">  {{ group.name }}           
       </div>
