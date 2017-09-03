@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { SessionService, OrgService, ContactService } from '../../../services';
+import { AlertService, SessionService, OrgService, ContactService } from '../../../services';
 
 @Component({
   selector: 'app-contact-group-select',
@@ -14,11 +14,35 @@ export class ContactGroupSelectComponent implements OnInit {
   org: any;
   groups: any[];
   selected: any;
+  group = {
+    name: null
+  }
+  showGroupForm: boolean = false;
+  processing: boolean = false;
+  addBtnDisable: boolean = false;
 
   constructor(
+    private alertService: AlertService,
     private sessionService: SessionService, 
     private orgService: OrgService,
     private contactService: ContactService) { }
+
+  addGroup() {
+    this.processing = true;
+    this.addBtnDisable = true;
+
+    this.orgService.addContactGroup(this.org.id, this.group)
+      .subscribe(response => {
+        this.groups.unshift(response.data)
+        this.processing = false;
+        this.addBtnDisable = false;
+        this.showGroupForm = false;
+        this.group.name = null;
+      }, err => {
+        this.processing = false;
+        this.addBtnDisable = false;
+      })
+  }
 
   onGroupSelected($event) {
     this.groupSelected.emit(this.selected);
