@@ -105,17 +105,18 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.contactService
       .addToGroup(this.selectedContactGroup, contacts)
       .subscribe(response => {
-        this.alertService.success('Group', 'Contact(s) successfully added to group', { timeOut: 5000 })
+        this.contactGroupModalVisible = false;
         this.contactGroupProcessing = false;
         this.contactGroupBtnDisabled = true;
         this.selectedContactGroup = '';
         this.selected = []
+        this.alertService.success('Group', 'Contact(s) successfully added to group', { timeOut: 5000 })        
 
         this.refresh({});
         this.cdRef.detectChanges();
       }, err => {
         this.contactGroupProcessing = false;
-        this.contactGroupBtnDisabled = true;
+        this.contactGroupBtnDisabled = false;
         this.cdRef.detectChanges();
       })
   }

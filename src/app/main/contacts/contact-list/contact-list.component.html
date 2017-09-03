@@ -31,7 +31,10 @@
         <clr-dg-row *ngFor="let contact of contacts" [clrDgItem]="contact">
           <clr-dg-cell>
             <a [routerLink]="['/contacts/view', contact.id]">{{ contact.name }}</a>
-            <p *ngIf="contact.address_line_1 && contact.address_line_2">{{ contact.address_line_1 }}, {{ contact.address_line_2 }}
+            <p *ngIf="contact.address_line_1 && contact.address_line_2">{{ contact.address_line_1 }}, {{ contact.address_line_2 }}, {{ contact.city_town }}</p>
+            <div>
+                <span *ngIf="contact.group" class="label">{{ contact.group.name }}</span> 
+            </div>           
           </clr-dg-cell>
           <clr-dg-cell>{{ contact.phone }}</clr-dg-cell>
           <clr-dg-cell>{{ contact.email }}</clr-dg-cell>

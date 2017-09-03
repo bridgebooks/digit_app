@@ -11,6 +11,7 @@ import { Org } from '../models/data/org';
 
 interface OrgCreateResponseData {
   org: any;
+  user: any;
   token: string;
 }
 
@@ -43,9 +44,7 @@ export class OrgService {
     //const params = new HttpParams().set('include', 'industry')
     const url = `${this.baseUrl}/${id}/contact_groups`;
 
-    return this.http.post(url, body, {
-      headers: headers
-    })
+    return this.http.post<any>(url, body, { headers })
   }
 
   get(id: string) {

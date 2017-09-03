@@ -1,3 +1,5 @@
+import { ContactGroup } from './contact-group';
+
 export interface Contact {
     id?: string;
     name: string;
@@ -11,6 +13,7 @@ export interface Contact {
     state_region?: string;
     country?: string;
     type: string;
+    group: ContactGroup | null;
     user_id?: string;
     org_id?: string;
     created_at?: object;
