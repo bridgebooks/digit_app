@@ -41,7 +41,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   getContact(id: string) {
     this.loading = true;
     this.contactService
-      .get(id)
+      .get(id, {})
       .subscribe(response => {
         this.model = response.data;
         this.loading = false;

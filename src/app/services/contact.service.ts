@@ -20,7 +20,6 @@ export class ContactService {
 
   add(body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
     return this.http.post<ContactResponse>(this.baseUrl, body, { headers })
   }
 
@@ -34,11 +33,16 @@ export class ContactService {
     return this.http.post(url, { contacts }, { headers })
   }
 
-  get(id: string) {
+  get(id: string, options: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+
+    Object.keys(options).forEach(key => {
+      params = params.append(key, options[key]);
+    })
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.get<ContactResponse>(url, { headers })
+    return this.http.get<ContactResponse>(url, { headers, params })
   }
 
   people(id: string) {

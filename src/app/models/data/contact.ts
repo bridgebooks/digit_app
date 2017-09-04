@@ -1,4 +1,9 @@
 import { ContactGroup } from './contact-group';
+import { Bank } from './bank';
+
+interface BankData {
+    data: Bank;
+}
 
 export interface Contact {
     id?: string;
@@ -14,6 +19,9 @@ export interface Contact {
     country?: string;
     type: string;
     group: ContactGroup | null;
+    bank_account_name: string;
+    bank_account_no: string;
+    bank?: BankData | null;
     user_id?: string;
     org_id?: string;
     created_at?: object;

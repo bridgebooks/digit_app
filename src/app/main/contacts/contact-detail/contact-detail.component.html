@@ -1,3 +1,141 @@
-<p>
-  contact-detail works!
-</p>
+<div class="spinner-container" *ngIf="loading">
+    <span class="spinner">
+        Loading...
+      </span>
+</div>
+
+<section class="contact-detail" *ngIf="!loading">
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-4">
+        <h2>{{ contact.name }}</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row flex-items-lg-between toolbar">
+      <div class="col-md-4">
+        <clr-dropdown>
+            <button type="button" class="btn btn-primary" clrDropdownTrigger>
+                New
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu clrPosition="right-buttom" *clrIfOpen>
+                <button type="button" clrDropdownItem>Sales Invoice</button>
+                <button type="button" clrDropdownItem>Bill</button>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+        <a class="btn btn-outline" [routerLink]="['/contacts/edit', contact.id]">Edit</a>
+        <clr-dropdown>
+            <button type="button" class="btn btn-outline" clrDropdownTrigger>
+                Optons
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu clrPosition="right-buttom" *clrIfOpen>
+                <button type="button" clrDropdownItem>Contact statement</button>
+                <button type="button" clrDropdownItem (click)="deleteContact()">Delete</button>
+            </clr-dropdown-menu>
+        </clr-dropdown>                           
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card contact-detail-card">
+
+        <div class="card-block">
+          <section></section>
+          <div class="card-title">Contact Details</div>
+          <hr>
+
+          <div class="card-text">
+            <ul class="list-unstyled">
+              <li class="contact-item">
+                <clr-icon shape="phone-handset"></clr-icon> Phone
+                <div class="item-content">
+                    <a *ngIf="contact.phone" href="tel:{{contact.phone}}">{{ contact.phone }}</a>
+                    <a *ngIf="!contact.phone">N/A</a>  
+                </div>           
+              </li>
+
+              <li class="contact-item">
+                <clr-icon shape="envelope"></clr-icon> Email
+                <div class="item-content">
+                  <a *ngIf="contact.email" href="mailto:{{contact.email}}">{{ contact.phone }}</a>
+                  <a *ngIf="!contact.email">N/A</a>    
+                </div>           
+              </li>
+
+              <li class="contact-item">
+                <clr-icon shape="network-globe"></clr-icon> Website
+                <div class="item-content">
+                    <a *ngIf="contact.website" href="{{ contact.website }}" target="_blank">{{ contact.website }}</a>
+                    <a *ngIf="!contact.website">N/A</a>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                  <clr-icon shape="map-marker" class="is-solid"></clr-icon> Address
+                  <address *ngIf="contact.address_line_1 || contact.address_line_2">
+                    {{ contact.address_line_1 }} <br>
+                    {{ contact.address_line_2 }} <br>
+                    {{ contact.city_town }} <br>
+                    {{ contact.state_region }} <br>
+                    {{ contact.country }}
+                  </address>                 
+              </li>
+            </ul>
+
+            <section *ngIf="contact.group" style="padding: 10px 0px;">
+              <hr>
+              <div class="card-title">Group</div>
+              <div class="card-text">
+                  <span class="group-label">{{ contact.group.name }}</span> 
+                  <a (click)="showGroupDeleteModal = true">Remove Group</a>                 
+              </div>
+            </section>
+
+            <hr>
+            <div class="card-title">Banking Information</div>
+            <div class="card-text">
+              <ul class="list-unstyled">
+                <li class="contact-field">
+                  <label for="">Bank</label>
+                  <span *ngIf="contact.bank">{{ contact.bank.data.name }}</span>
+                  <span *ngIf="!contact.bank">{{ "N/A" }}</span>
+                </li>
+
+                <li class="contact-field">
+                    <label for="">Bank Account Number</label>
+                    <span>{{ contact.bank_account_no || "N/A" }}</span>
+                  </li>
+
+                <li class="contact-field">
+                    <label for="">Bank Account Name</label>
+                    <span>{{ contact.bank_account_name || "N/A"}}</span>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <app-contact-invoices></app-contact-invoices>
+      <app-contact-bills></app-contact-bills>
+    </div>
+  </div>
+</section>
+<clr-modal [(clrModalOpen)]="showGroupDeleteModal" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Remove Group</h3>
+    <div class="modal-body">
+        <p style="color: #333;">Are sure you want to remove this contact from this group</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="showGroupDeleteModal = false">Cancel</button>
+        <button type="button" class="btn btn-primary" [clrLoading]="modalProcessing" [disabled]="modalActionBtnDisabled" (click)="removeGroup()">Ok</button>
+    </div>
+</clr-modal>

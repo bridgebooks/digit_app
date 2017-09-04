@@ -16,6 +16,8 @@ import { ContactSearchBoxComponent } from './contact-search-box/contact-search-b
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactGroupSelectComponent } from './contact-group-select/contact-group-select.component';
+import { ContactInvoicesComponent } from './contact-invoices/contact-invoices.component';
+import { ContactBillsComponent } from './contact-bills/contact-bills.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,7 @@ import { ContactGroupSelectComponent } from './contact-group-select/contact-grou
     ContactDetailComponent, 
     ContactBulkActionDropdownComponent, 
     ContactSearchBoxComponent, 
-    EmployeeListComponent, ContactGroupSelectComponent
+    EmployeeListComponent, ContactGroupSelectComponent, ContactInvoicesComponent, ContactBillsComponent
   ],
   providers: [
     SearchService, 

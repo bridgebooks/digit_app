@@ -20,6 +20,8 @@ export class MainComponent implements OnInit, AfterContentInit {
     navCollasped: boolean = false;
 
     user: any;
+
+    org: any;
     
     logoutModalVisible: boolean = false;
 
@@ -36,6 +38,8 @@ export class MainComponent implements OnInit, AfterContentInit {
     }
 
     ngOnInit() {
+        this.org = this.session.getDefaultOrg()
+        
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);
         }

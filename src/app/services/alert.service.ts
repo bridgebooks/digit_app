@@ -6,6 +6,10 @@ export class AlertService {
 
   constructor(private _notificationService: NotificationsService) { }
 
+  info(title: string, content: string, options: any) {
+    this._notificationService.info(title, content, options);
+  }
+
   success(title: string, content: string, options: any) {
     this._notificationService.success(title, content, options);
   }
