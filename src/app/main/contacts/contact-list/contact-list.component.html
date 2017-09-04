@@ -23,6 +23,8 @@
       </div>
 
       <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
+        <clr-dg-placeholder>Seems like you don't have any contacts!</clr-dg-placeholder>
+        
         <clr-dg-column>Contact</clr-dg-column>
         <clr-dg-column>Phone</clr-dg-column>
         <clr-dg-column>Email</clr-dg-column>

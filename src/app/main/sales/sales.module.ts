@@ -4,12 +4,29 @@ import { RouterModule } from '@angular/router';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
+import { InvoiceEditorComponent } from './invoice-editor/invoice-editor.component';
+import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { ContactSelectComponent } from './contact-select/contact-select.component';
+
+import { AlertService, SearchService, ContactService } from '../../services'
 
 @NgModule({
   imports: [
     CommonModule,
     SalesRoutingModule
   ],
-  declarations: [SalesComponent]
+  declarations: [
+    SalesComponent, 
+    InvoiceEditorComponent, 
+    InvoiceEditComponent, 
+    InvoiceListComponent, 
+    ContactSelectComponent
+  ],
+  providers: [
+    AlertService,
+    SearchService,
+    ContactService
+  ]
 })
 export class SalesModule { }

@@ -8,7 +8,7 @@
                 <a (click)="viewContact(result.id)">{{ result.name }}</a>
             </li>
         </ul>
-        <div class="result-count">
+        <div class="result-count" *ngIf="data">
             {{ total }} matches found.
         </div>
     </div>    
