@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 
-import { JwtService, IndustryService, OrgService } from '../services';
+import { JwtService, SessionService, IndustryService, OrgService } from '../services';
 import { OrgSetupRoutingModule } from './org-setup-routing.module';
 import { OrgSetupComponent } from './org-setup.component';
 
@@ -16,7 +16,7 @@ import { OrgSetupComponent } from './org-setup.component';
     OrgSetupRoutingModule,
   ],
   declarations: [OrgSetupComponent],
-  providers: [JwtService, IndustryService, OrgService]
+  providers: [SessionService, JwtService, IndustryService, OrgService]
 })
 
 export class OrgSetupModule { }
