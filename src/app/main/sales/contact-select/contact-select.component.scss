@@ -1,19 +1,29 @@
-.contact-select-box
-{
-    position: relative;
-    
-    .contact-name-input input
-    {
-        border: 0;
-        padding: 5px 10px;
-        width: 100%;
-        background: transparent;
-        border-bottom: 1px solid lighten(#333, 10%);
-        font-size: .9em !important; 
+.fetching {
+    margin: 100px auto;
+    display: block;
+}
 
-        &:focus {
-            border-bottom: 1px solid #333;
-            outline: none;
-        }
+.contact {
+    border-bottom: 1px solid #CCC;
+    &:last-child {
+        border-bottom: none;
     }
+
+    &:hover {
+        background-color: lighten(#CCC, 10%);
+        cursor: pointer;
+    }
+}
+
+.contact-name, .contact-email {
+    margin: 0;
+}
+
+.contact-name {
+    font-weight: 500;
+    padding: 5px 7px 0px 7px;
+}
+
+.contact-email {
+    padding: 0px 7px 5px 7px;
 }
