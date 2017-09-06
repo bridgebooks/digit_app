@@ -1,10 +1,20 @@
-<div class="contact-select-box">
-    <div class="contact-name-input">
-      <input type="text" placeholder="Enter a contact name" (keyup)="searchTerm$.next($event.target.value)">
-    </div>
-    <div class="search-results-box">
-      <span class="spinner spinner-inline" *ngIf="processing">
-        Loading...
+To: <button class="btn btn-primary" (click)="openSelectModal()">{{ btnText }}</button>
+
+<clr-modal [(clrModalOpen)]="selectModalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Select a contact</h3>
+  <div class="modal-body">
+      <span class="fetching spinner" *ngIf="fetching">
+          Loading...
       </span>
-    </div>
-</div>
+      
+      <ul class="list-unstyled" *ngIf="!fetching && results">
+        <li *ngFor="let item of results" class="contact" (click)="selectContact(item)">
+          <p class="contact-name">{{ item.name }}</p>
+          <p class="contact-email">{{ item.email }}</p>
+        </li>
+      </ul>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="selectModalVisible = false">Cancel</button>
+  </div>
+</clr-modal>
