@@ -71,11 +71,11 @@ export class ContactListComponent implements OnInit, OnDestroy {
       })
   }
 
-  onDeleteSelected() {
+  onDeleteSelected($event) {
     this.delete(this.selected);
   }
 
-  onAddtoGroup() {
+  onAddtoGroup($event) {
     this.contactGroupModalVisible = true;
   }
 
