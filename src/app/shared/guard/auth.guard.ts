@@ -9,12 +9,12 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router, private jwtService: JwtService) { }
 
     canActivate() {
-        /*if (!this.jwtService.checkToken()) {
+        if (!this.jwtService.checkToken()) {
             this.router.navigate(['/login']);
         }
         else {
             return true;
-        }*/
+        }
         
         return true
     }
