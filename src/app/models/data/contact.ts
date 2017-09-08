@@ -1,5 +1,12 @@
+import { ContactGroup } from './contact-group';
+import { Bank } from './bank';
+
+interface BankData {
+    data: Bank;
+}
+
 export interface Contact {
-    id: string;
+    id?: string;
     name: string;
     phone?: string;
     email?: string;
@@ -11,7 +18,11 @@ export interface Contact {
     state_region?: string;
     country?: string;
     type: string;
-    user_id: string;
-    org_id: string;
+    group: ContactGroup | null;
+    bank_account_name: string;
+    bank_account_no: string;
+    bank?: BankData | null;
+    user_id?: string;
+    org_id?: string;
     created_at?: object;
 }

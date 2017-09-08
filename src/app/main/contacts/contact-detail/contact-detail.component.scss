@@ -1,0 +1,50 @@
+.spinner-container
+{
+    width: 200px;
+    margin: 20% auto;
+    text-align: center;
+}
+
+.group-label {
+    display: inline-block;
+    background-color: #333;
+    color: #FFF;
+    padding: 4px 15px;
+    font-size: .9em;
+    border-radius: 10px;
+}
+
+.contact-detail
+{
+    .contact-detail-card
+    {
+        .contact-item
+        {
+            padding: 10px 0px;
+            color: #8296aa;
+            
+            .item-content {
+                padding: 4px 15px;
+            }
+
+            address {
+                font-style: normal;
+                padding: 5px 15px;
+                color: #333;
+            }
+        }
+
+        .contact-field
+        {
+            padding: 10px 0px;
+
+            label {
+                display: inline-block;
+                width: 115px;
+                margin-right: 5px;
+                vertical-align: top;
+                color: #8296aa;
+            }
+        }
+    }
+}

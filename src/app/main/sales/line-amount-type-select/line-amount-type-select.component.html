@@ -1,0 +1,9 @@
+<clr-dropdown class="line-amount-type-select">
+    <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+        {{ selectedOption }}
+        <clr-icon shape="caret down"></clr-icon>
+    </button>
+    <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <button type="button" *ngFor="let option of lineAmountTypeOptions" clrDropdownItem (click)="select(option)">{{ option.label }}</button>
+    </clr-dropdown-menu>
+</clr-dropdown>

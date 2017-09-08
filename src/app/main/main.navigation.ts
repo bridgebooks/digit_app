@@ -12,12 +12,16 @@ export module MainNavigation {
             path: '/sales',
             children: [
                 {
-                    label: 'Estimates',
-                    path: '/sales/estimates'
-                },
-                {
                     label: 'Invoices',
                     path: '/sales/invoices'
+                },
+                {
+                    label: 'New Invoice',
+                    path: '/sales/edit'
+                },
+                {
+                    label: 'Estimates',
+                    path: '/sales/estimates'
                 }
             ] 
         },

@@ -14,12 +14,21 @@ export class SessionService {
     return this.localStorageService.set('user.data', user);
   }
 
+  addDefaultOrg(org: any) {
+    return this.localStorageService.set('user.org', org);
+  }
+
   getUser() {
     return this.localStorageService.get('user.data');
+  }
+
+  getDefaultOrg() {
+    return this.localStorageService.get('user.org');
   }
 
   end() {
     this.localStorageService.remove('user.data');
     this.localStorageService.remove('user.token');
+    this.localStorageService.remove('user.org');
   }
 }

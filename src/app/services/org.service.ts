@@ -11,12 +11,17 @@ import { Org } from '../models/data/org';
 
 interface OrgCreateResponseData {
   org: any;
+  user: any;
   token: string;
 }
 
 interface OrgCreateResponse {
   status: string;
   data: OrgCreateResponseData
+}
+
+interface ContactGroupsResponse {
+  data: any[]
 }
 
 @Injectable()
@@ -39,9 +44,7 @@ export class OrgService {
     //const params = new HttpParams().set('include', 'industry')
     const url = `${this.baseUrl}/${id}/contact_groups`;
 
-    return this.http.post(url, body, {
-      headers: headers
-    })
+    return this.http.post<any>(url, body, { headers })
   }
 
   get(id: string) {
@@ -73,9 +76,7 @@ export class OrgService {
     //const params = new HttpParams().set('include', 'industry')
     const url = `${this.baseUrl}/${id}/contact_groups`;
 
-    return this.http.get(url, {
-      headers: headers
-    })
+    return this.http.get<ContactGroupsResponse>(url, { headers })
   }
 
   update(id: string, body: object) {

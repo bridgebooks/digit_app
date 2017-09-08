@@ -3042,6 +3042,10 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
+mydatepicker@^2.0.29:
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/mydatepicker/-/mydatepicker-2.0.29.tgz#ee428177f2550a8bd845431bdbbd1df33e54e877"
+
 nan@^2.3.0, nan@^2.3.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"

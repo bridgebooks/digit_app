@@ -12,7 +12,6 @@ app-header {
     }
 }
 
-
 .clr-vertical-nav {
     .nav-group-content:hover, .nav-group-content.active {
         background-color: map-get($colors, 'secondary') !important;
@@ -27,6 +26,7 @@ app-header {
         padding: 15px 0px;
     }
 }
+
 .input__errors
 {
     margin-top: -20px;
@@ -49,4 +49,8 @@ app-header {
             min-width: 100%;
         }
     }
+}
+
+.mydp {
+    margin-top: 6px;
 }

@@ -1,5 +1,15 @@
 <div class="contact-search-box">
     <div class="search-box-input">
-        <input type="search" name="search" placeholder="Search contacts...">
+        <input type="text" placeholder="Search contacts..." (keyup)="searchTerm$.next($event.target.value)">
+    </div>
+    <div class="search-results-box" *ngIf="!hideResults && data" (mouseleave)="onMouseleaveResultsBox($event)">
+        <ul class="result-list">
+            <li *ngFor="let result of data">
+                <a (click)="viewContact(result.id)">{{ result.name }}</a>
+            </li>
+        </ul>
+        <div class="result-count" *ngIf="data">
+            {{ total }} matches found.
+        </div>
     </div>    
 </div>

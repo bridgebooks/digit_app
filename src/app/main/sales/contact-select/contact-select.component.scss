@@ -1,0 +1,29 @@
+.fetching {
+    margin: 100px auto;
+    display: block;
+}
+
+.contact {
+    border-bottom: 1px solid #CCC;
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background-color: lighten(#CCC, 10%);
+        cursor: pointer;
+    }
+}
+
+.contact-name, .contact-email {
+    margin: 0;
+}
+
+.contact-name {
+    font-weight: 500;
+    padding: 5px 7px 0px 7px;
+}
+
+.contact-email {
+    padding: 0px 7px 5px 7px;
+}

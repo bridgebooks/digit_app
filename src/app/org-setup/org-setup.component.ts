@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtService, IndustryService, OrgService,  } from '../services';
+import { JwtService, SessionService,IndustryService, OrgService,  } from '../services';
 import { OrgSetupModel } from '../models/forms/org-setup';
 
 import 'clarity-icons';
@@ -31,6 +31,7 @@ export class OrgSetupComponent implements OnInit, OnChanges{
 
   constructor(
     public router: Router, 
+    private sessionService: SessionService,
     private jwtService: JwtService,
     private industryService: IndustryService, 
     private orgService: OrgService) { }
@@ -66,8 +67,14 @@ export class OrgSetupComponent implements OnInit, OnChanges{
       .create(this.model)
       .subscribe(response => {
         this.onRequestDone();
+        //save user
+        this.sessionService.addUser(response.data.user);
         // save new token
         this.jwtService.saveToken(response.data.token);
+        // read token
+        const token = this.jwtService.getToken();
+        // add org
+        this.sessionService.addDefaultOrg(token.orgs[0]);
         // redirect to dashboard
         this.router.navigate(['/dashboard'])
       },
