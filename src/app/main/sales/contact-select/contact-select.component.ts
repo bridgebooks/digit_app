@@ -16,7 +16,7 @@ enum BtnStatus {
 export class ContactSelectComponent implements OnInit {
   btnText;
   selectModalVisible: boolean = false;
-  results: any[];
+  results: any[] = [];
   fetching: boolean;
   org: any;
   @Output() onContactSelected = new EventEmitter();
