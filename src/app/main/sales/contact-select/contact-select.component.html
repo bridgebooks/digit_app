@@ -7,7 +7,7 @@
           Loading...
       </span>
       
-      <ul class="list-unstyled" *ngIf="!fetching && results">
+      <ul class="list-unstyled" *ngIf="!fetching && results.length > 0">
         <li *ngFor="let item of results" class="contact" (click)="selectContact(item)">
           <p class="contact-name">{{ item.name }}</p>
           <p class="contact-email">{{ item.email }}</p>
