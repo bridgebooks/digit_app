@@ -7,4 +7,5 @@ export * from './session.service';
 export * from './industry.service';
 export * from './org.service';
 export * from './contact.service';
+export * from './item.service';
 export * from './bank.service';

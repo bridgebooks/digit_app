@@ -12,8 +12,17 @@ import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { ContactSelectComponent } from './contact-select/contact-select.component';
 
-import { AlertService, SearchService, ContactService, OrgService } from '../../services';
-import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component'
+import { 
+  AlertService, 
+  SearchService, 
+  ContactService, 
+  OrgService,
+  ItemService 
+} from '../../services';
+import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
+import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component';
 
 @NgModule({
   imports: [
@@ -29,13 +38,16 @@ import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-am
     InvoiceEditComponent, 
     InvoiceListComponent, 
     ContactSelectComponent, 
-    LineAmountTypeSelectComponent
+    LineAmountTypeSelectComponent, 
+    InvoiceItemTableComponent, 
+    InventoryComponent, ItemModalBtnComponent
   ],
   providers: [
     AlertService,
     SearchService,
     ContactService,
-    OrgService
+    OrgService,
+    ItemService
   ]
 })
 export class SalesModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchService } from '../../../services';
+import { SessionService, SearchService } from '../../../services';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class ContactSearchBoxComponent implements OnInit {
   total: number
   hideResults: boolean = true;
 
-  constructor(private router: Router, private searchService: SearchService) { }
+  constructor(private router: Router, private session: SessionService, private searchService: SearchService) { }
 
   reset() {
     this.data = null;
@@ -31,8 +31,10 @@ export class ContactSearchBoxComponent implements OnInit {
   }
 
   ngOnInit() {
+    const org: any = this.session.getDefaultOrg();
+
     this.searchService
-      .search(this.searchTerm$, { index: 'contacts' })
+      .search(this.searchTerm$, { index: 'contacts', org_id: org.id })
       .subscribe(result => {
         this.data = result.data;
         this.total = result.total;

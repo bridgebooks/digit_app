@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { ClarityModule } from 'clarity-angular';
 
-import { SearchService, OrgService, ContactService } from '../../services';
+import { SessionService, SearchService, OrgService, ContactService } from '../../services';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { ContactsComponent } from './contacts.component';
@@ -37,6 +37,7 @@ import { ContactBillsComponent } from './contact-bills/contact-bills.component';
     EmployeeListComponent, ContactGroupSelectComponent, ContactInvoicesComponent, ContactBillsComponent
   ],
   providers: [
+    SessionService,
     SearchService, 
     OrgService,
     ContactService
