@@ -27,22 +27,50 @@
         </div>
 
         <div class="form-group">
-            <label for="">Reference</label>
-            <input type="text" name="reference">
-          </div>
+          <label for="">Reference</label>
+          <input type="text" name="reference">
+        </div>
       </div>
 
-      <div class="line-items">
-        <table class="table">
-          <thead>
-            <tr>
-              <th *ngFor="let col of lineItemsTableColumns">{{ col.label }}</th>
-            </tr>
-          </thead>
-        </table>
+      <app-invoice-item-table></app-invoice-item-table>
+
+      <div class="row flex-items-md-between">
+          <div class="col-md-4">
+            <div class="line-controls">
+              <clr-dropdown>
+                  <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+                      Add a new line
+                      <clr-icon shape="caret down"></clr-icon>
+                  </button>
+                  <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                      <button type="button" clrDropdownItem>Add 10</button>
+                      <button type="button" clrDropdownItem>Add 15</button>
+                  </clr-dropdown-menu>
+              </clr-dropdown>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="invoice-totals">
+              <div class="clearfix">
+                <label for="">Subtotal</label>
+                <span>0.00</span>
+              </div>
+              <div class="clearfix">
+                <label for="">Tax</label>
+                <span>0.00</span>
+              </div>
+              <div class="clearfix total">
+                <label for=""><strong>Total</strong></label>
+                <span><strong>0.00</strong></span>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
 
   </div>
-  <div class="card-footer"></div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline-primary">Cancel</button>
+  </div>
 </div>

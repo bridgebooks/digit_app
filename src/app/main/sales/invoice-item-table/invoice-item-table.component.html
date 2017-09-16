@@ -1,0 +1,24 @@
+<div class="line-item-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="left" *ngFor="let col of columns" [style.width.px]="col.width">{{ col.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lineItems">
+        <td class="line-item-cell">
+          <clr-icon shape="view-list" class="line-item-reorder"></clr-icon>
+        </td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+        <td class="line-item-cell"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

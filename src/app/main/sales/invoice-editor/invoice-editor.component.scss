@@ -13,3 +13,44 @@
 .form-group {
     padding: 15px 0px;
 }
+
+.form-block {
+    padding: 0px 18px;
+}
+
+.card-block {
+    padding: 12px 0px;
+}
+
+.line-controls {
+    padding: 10px 0px 0px 18px;
+}
+.invoice-totals {
+    padding: 10px 18px;
+}
+
+.invoice-totals div 
+{
+    label, span {
+        text-align: right;        
+    }
+
+    label {
+        float: left;
+        width: 20%;
+    }
+
+    span {
+        float: right;
+        width: 80%;
+    }
+}
+
+.total {
+    border-top: 1px solid #333;
+    padding: 10px 0px;
+}
+.total label, .total span {
+    font-size: 2em;
+    text-transform: uppercase;
+}

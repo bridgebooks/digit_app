@@ -12,17 +12,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     dateFormat: 'yyyy-mm-dd'
   }
 
-  lineItemsTableColumns: any[] = [
-    { label: 'Item' },
-    { label: 'Description' },
-    { label: 'Qty' },
-    { label: 'Unit Price' },
-    { label: 'Disc %'},
-    { label: 'Account' },
-    { label: 'Tax Rate' },
-    { label: 'Amount' }
-  ]
-
   raisedAtDate: IMyDate = { year: 0, month: 0, day: 0 };
 
   model =  {

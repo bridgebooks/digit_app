@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AlertService, ContactService } from '../../../services';
 
 import { Contact } from '../../../models/data/contact';
@@ -14,8 +15,9 @@ import 'clarity-icons/shapes/travel-shapes';
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss']
 })
-export class ContactDetailComponent implements OnInit {
+export class ContactDetailComponent implements OnInit, OnDestroy {
 
+  route$: Subscription
   contact: Contact;
   loading: boolean = true;
   showGroupDeleteModal: boolean = false;
@@ -69,11 +71,12 @@ export class ContactDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params
-    .filter(params => params.id)
-    .subscribe(params => {
+    this.route$ = this.route.params.filter(params => params.id).subscribe(params => {
       this.fetchContact(params.id);
-    })
+    });
   }
 
+  ngOnDestroy() {
+    this.route$.unsubscribe();
+  }
 }

@@ -63,7 +63,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
         this.currentPage = response.current_page;
 
         this.loading = false;
-        this.cdRef.detectChanges();
+        //this.cdRef.detectChanges();
       },
       err => {
         this.loading = false;

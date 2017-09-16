@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { OrgResponse } from '../models/responses/org';
 import { ContactsResponse } from '../models/responses/contacts';
+import { ItemsResponse } from '../models/responses/items';
 import { Org } from '../models/data/org';
 
 interface OrgCreateResponseData {
@@ -77,6 +78,18 @@ export class OrgService {
     const url = `${this.baseUrl}/${id}/contact_groups`;
 
     return this.http.get<ContactGroupsResponse>(url, { headers })
+  }
+
+  getItems(id: string, options: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/items`;
+
+    Object.keys(options).forEach(key => {
+      params = params.append(key, options[key]);
+    })
+
+    return this.http.get<ItemsResponse>(url, { headers, params })
   }
 
   update(id: string, body: object) {

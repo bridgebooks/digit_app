@@ -20,6 +20,10 @@ export module MainNavigation {
                     path: '/sales/edit'
                 },
                 {
+                    label: 'Inventory',
+                    path: '/sales/items'
+                },
+                {
                     label: 'Estimates',
                     path: '/sales/estimates'
                 }
