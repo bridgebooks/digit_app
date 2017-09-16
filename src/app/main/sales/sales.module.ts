@@ -23,6 +23,7 @@ import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-am
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component';
+import { InventoryDetailComponent } from './inventory-detail/inventory-detail.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,9 @@ import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component
     ContactSelectComponent, 
     LineAmountTypeSelectComponent, 
     InvoiceItemTableComponent, 
-    InventoryComponent, ItemModalBtnComponent
+    InventoryComponent, 
+    ItemModalBtnComponent, 
+    InventoryDetailComponent
   ],
   providers: [
     AlertService,

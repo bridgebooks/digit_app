@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { ItemResponse } from '../models/responses/item';
 
 @Injectable()
 export class ItemService {
@@ -18,19 +19,22 @@ export class ItemService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
 
-    Object.keys(options).forEach(key => {
-      params = params.append(key, options[key]);
-    })
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.get(url, { headers, params })
+    return this.http.get<ItemResponse>(url, { headers, params })
   }
 
   update(id: string, body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.put(url, body, { headers })
+    return this.http.put<ItemResponse>(url, body, { headers })
   }
 
   delete(id: string) {

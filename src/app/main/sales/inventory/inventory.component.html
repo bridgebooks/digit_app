@@ -27,7 +27,6 @@
           <clr-dg-cell>{{ item.sale_unit_price | number:'1.2' }}</clr-dg-cell>
           <clr-dg-cell>{{ item.purchase_unit_price | number:'1.2' }}</clr-dg-cell>
           <clr-dg-cell>
-            <a [routerLink]="['/sales/items/edit', item.id]">Edit</a>
             <a (click)="delete(item)">Delete</a>
           </clr-dg-cell>
         </clr-dg-row>

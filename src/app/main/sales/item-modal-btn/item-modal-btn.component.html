@@ -1,7 +1,7 @@
-<a class="btn btn-primary" (click)="modalVisible = true">Add Item</a>
+<a class="btn btn-primary" (click)="modalVisible = true">{{ btnText }}</a>
 
 <clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
-  <h3 class="modal-title">Add Item</h3>
+  <h3 class="modal-title">{{ modalTitle }}</h3>
   <div class="modal-body">
     <form #itemForm="ngForm">
       <section class="form-block">
@@ -47,7 +47,7 @@
               </select>
             </div>
 
-            <textarea name="purchase_description" placeholder="Description for suppliers" [(ngModel)]="model.purhcase_descripiton" rows="3">
+            <textarea name="purchase_description" placeholder="Description for suppliers" [(ngModel)]="model.purchase_description" rows="3">
             </textarea>
           </div>
         </div>
@@ -79,7 +79,7 @@
                   </select>
                 </div>
     
-                <textarea name="purchase_description" placeholder="Description for customers" [(ngModel)]="model.sale_descripiton" rows="3">
+                <textarea name="sale_description" placeholder="Description for customers" [(ngModel)]="model.sale_description" rows="3">
                 </textarea>
               </div>
           </div>

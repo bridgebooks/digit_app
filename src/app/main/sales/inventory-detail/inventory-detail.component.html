@@ -1,0 +1,77 @@
+<div class="spinner-container" *ngIf="loading">
+  <span class="spinner">
+      Loading...
+    </span>
+</div>
+
+<section class="inventory-detail" *ngIf="!loading">
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-4">
+        <a routerLink="/sales/items"><clr-icon shape="caret" dir="left"></clr-icon> Inventory</a>
+        <h2>{{ item.name }}</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="card inventory-detail-card">
+      <div class="card-header">
+        <app-item-modal-btn [item]="item"></app-item-modal-btn>          
+        <button class="btn btn-danger" type="button">Delete</button>
+      </div>
+      <div class="card-block">
+          <div class="card-title">
+              {{ item.name }}
+          </div>
+          <div class="card-text">
+            <p>{{ item.code }}</p>
+            <h3>Purchases</h3>
+            <hr>
+            <table class="table table-vertical">
+              <tbody>
+                <tr>
+                  <th>Unit Price</th>
+                  <td>{{ item.purchase_unit_price | number:'1.2' }}</td>
+                </tr>
+                <tr>
+                    <th>Account</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Tax Rate</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ item.purchase_description }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Sales</h3>
+            <hr>
+            <table class="table table-vertical">
+              <tbody>
+                <tr>
+                  <th>Unit Price</th>
+                  <td>{{ item.sale_unit_price | number:'1.2' }}</td>
+                </tr>
+                <tr>
+                    <th>Account</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Tax Rate</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ item.sale_description }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>

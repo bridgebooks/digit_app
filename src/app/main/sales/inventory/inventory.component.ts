@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { AlertService, SessionService, OrgService } from '../../../services';
+import { AlertService, SessionService, OrgService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
 
 @Component({
@@ -23,10 +23,21 @@ export class InventoryComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private session: SessionService,
     private alert: AlertService,
-    private orgService: OrgService
+    private orgService: OrgService,
+    private itemService: ItemService
   ) { }
 
   delete(item) {
+    if (window.confirm('Are sure you want to delete this item?')) {
+      this.alert.info('Item', 'Deleting item', { timeOut: 3000 })
+      
+      this.itemService
+        .delete(item.id)
+        .subscribe(response => {
+          this.alert.success('Item', 'Item successfully deleted', { timeOut: 5000 });
+          this.refresh({});
+        })
+    }
   }
 
   refresh(state: any) {  
