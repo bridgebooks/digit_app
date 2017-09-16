@@ -12,7 +12,7 @@ const routes: Routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Dashboard - ZenBooks',
+                    title: 'Dashboard - Bridge Books',
                     showSideNav: false,
                     sidenavMenu: null
                 }
@@ -22,7 +22,7 @@ const routes: Routes = [
                 loadChildren: './sales/sales.module#SalesModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Sales - ZenBooks',
+                    title: 'Sales - Brigde Books',
                     showSideNav: true,
                     sidenavMenu: 'sales'
                 }
@@ -32,7 +32,7 @@ const routes: Routes = [
                 loadChildren: './purchases/purchases.module#PurchasesModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Purchases - ZenBooks',
+                    title: 'Purchases - Bridge Books',
                     showSideNav: true,
                     sidenavMenu: 'purchases'
                 }
@@ -42,7 +42,7 @@ const routes: Routes = [
                 loadChildren: './contacts/contacts.module#ContactsModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Contacts - ZenBooks',
+                    title: 'Contacts - Bridge Books',
                     showSideNav: true,
                     sidenavMenu: 'contacts'
                 }
@@ -52,7 +52,7 @@ const routes: Routes = [
                 loadChildren: './settings/settings.module.ts#SettingsModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Settings',
+                    title: 'General Settings - Bridge Books',
                     showSideNav: true,
                     sidenavMenu: 'settings'
                 }
