@@ -6,7 +6,7 @@ import { ClarityModule } from 'clarity-angular';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 
-import { UserService, SessionService, OrgService } from '../../services';
+import { AlertService, UserService, SessionService, OrgService, AccountsService } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -16,6 +16,9 @@ import { EmailChangeComponent } from './email-change/email-change.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
 import { LogoUploadComponent } from './logo-upload/logo-upload.component';
+import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
+import { AccountBulkActionDropdownComponent } from './account-bulk-action-dropdown/account-bulk-action-dropdown.component';
+import { AccountModalButtonComponent } from './account-modal-button/account-modal-button.component';
 
 @NgModule({
   imports: [
@@ -33,8 +36,11 @@ import { LogoUploadComponent } from './logo-upload/logo-upload.component';
     AccountComponent, 
     PasswordChangeComponent, 
     OrgProfileComponent,
-    LogoUploadComponent
+    LogoUploadComponent,
+    ChartAccountsComponent,
+    AccountBulkActionDropdownComponent,
+    AccountModalButtonComponent
   ],
-  providers: [ UserService, OrgService, SessionService ]
+  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService ]
 })
 export class SettingsModule { }

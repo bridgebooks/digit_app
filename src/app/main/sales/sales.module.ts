@@ -17,7 +17,7 @@ import {
   SearchService, 
   ContactService, 
   OrgService,
-  ItemService 
+  ItemService,
 } from '../../services';
 import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';

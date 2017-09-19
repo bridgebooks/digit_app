@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { Contact } from '../../../models/data/contact';
-import { JwtService, AlertService, OrgService, ContactService } from '../../../services';
+import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
 import { Subscription } from 'rxjs';
 
 
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent implements OnInit, OnDestroy {
 
   route$: Subscription;
-  orgID: string;
+  org: any;
   type: string;
   contacts: Contact[];
   perPage: number = 30;
@@ -38,7 +38,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
-    private jwtService: JwtService, 
+    private session: SessionService, 
     private orgService: OrgService, 
     private contactService: ContactService,
     private cdRef: ChangeDetectorRef) { 
@@ -56,7 +56,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.selected = [];
 
     this.orgService
-      .getContacts(this.orgID, options)
+      .getContacts(this.org.id, options)
       .subscribe(response => {
         this.total = response.total
         this.contacts = response.data;
@@ -167,7 +167,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() { 
-    this.orgID = this.jwtService.getToken().orgs[0].id;
+    this.org = this.session.getDefaultOrg()
     this.loading = true;
 
     this.route$ = this.route.params

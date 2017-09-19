@@ -4,13 +4,21 @@ import { SettingsComponent } from './settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
+import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
 
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'account', component: AccountComponent },
-    { path: 'org', component: OrgProfileComponent }
+    { path: 'org', component: OrgProfileComponent },
+    { 
+      path: 'accounts',
+      component: ChartAccountsComponent,
+      data: {
+        title: 'Chart Of Accounts - Bridge Books'
+      }
+    }
 ];
 
 @NgModule({
