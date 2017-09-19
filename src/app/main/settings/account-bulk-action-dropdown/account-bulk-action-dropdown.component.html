@@ -1,0 +1,9 @@
+<clr-dropdown>
+    <button type="button" class="btn btn btn-link" clrDropdownTrigger [disabled]="enableBtn">
+        Options
+        <clr-icon shape="caret down"></clr-icon>
+    </button>
+    <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
+        <button type="button" clrDropdownItem (click)="deleteSelected()">Delete selected</button>
+    </clr-dropdown-menu>
+</clr-dropdown>
