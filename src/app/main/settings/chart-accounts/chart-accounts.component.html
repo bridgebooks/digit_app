@@ -5,6 +5,7 @@
       </div>
       <div class="col-lg-4">
         <app-account-modal-button [org]="org"
+        [types]="types" [rates]="rates"
         (onAccountSaved)="refresh({})">
         </app-account-modal-button>
       </div>
@@ -30,15 +31,13 @@
         
         <clr-dg-column [clrDgField]="'code'">Code</clr-dg-column>
         <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
-        <clr-dg-column>Type</clr-dg-column>
+        <clr-dg-column [clrDgField]="'account_types|name'">Type</clr-dg-column>
         <clr-dg-column>Tax Rate</clr-dg-column>
 
         <clr-dg-row *ngFor="let account of accounts" [clrDgItem]="account">
           <clr-dg-cell>{{ account.code }}</clr-dg-cell>
           <clr-dg-cell>
-            <a *ngIf="account.is_system" class="acc-name"><clr-icon shape="lock"></clr-icon> {{ account.name }}</a>
-            <a *ngIf="!account.is_system" class="acc-name"><clr-icon shape="organization"></clr-icon> {{ account.name }}</a>
-            <span class="acc-description">{{ account.description }}</span>
+            <app-account-edit-modal [account]="account" [types]="types" [rates]="rates" (accountUpdated)="refresh({})"></app-account-edit-modal>
           </clr-dg-cell>
           <clr-dg-cell>{{ account.type.data.name }}</clr-dg-cell>
           <clr-dg-cell *ngIf="account.tax_rate">{{ account.tax_rate.data.name }} ({{ account.tax_rate.data.value }}%)</clr-dg-cell>
