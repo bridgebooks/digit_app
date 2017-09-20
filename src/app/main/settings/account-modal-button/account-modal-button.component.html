@@ -6,6 +6,16 @@
       <form #accountForm="ngForm">
         <section class="form-block">
           <div class="form-group">
+              <label for="">Account Type</label>
+              <div class="select">
+                  <select name="account_type_id" id="account_type_id" [(ngModel)]="model.account_type_id">
+                      <optgroup *ngFor="let type of types" label="{{ type.name }}">
+                          <option *ngFor="let child of type.children" [value]="child.id">{{ child.name }}</option>
+                      </optgroup>
+                  </select>
+              </div>
+          </div>
+          <div class="form-group">
               <label class="required" for="">Name</label>
               <input type="text" name="name" size="60" #nameInput="ngModel" [(ngModel)]="model.name" required [maxlength]="150">
               <span class="help-text">A short name for this account (150 characters)</span>              
@@ -29,6 +39,16 @@
             <label for="description">Description (optional)</label>
             <textarea name="description" id="description" rows="3" [(ngModel)]="model.description"></textarea>
             <span class="help-text">A description of how this account should be used</span>
+          </div>
+
+          <div class="form-group">
+              <label for="">Tax</label>
+              <div class="select">
+                  <select name="tax_rate_id" id="tax_rate_id" [(ngModel)]="model.tax_rate_id">
+                      <option *ngFor="let rate of rates" [value]="rate.id">{{ rate.name }} ({{ rate.value }}%)</option>
+                  </select>
+              </div>       
+              <span class="help-text">The default tax setting for this account</span>              
           </div>
         </section>
       </form>
