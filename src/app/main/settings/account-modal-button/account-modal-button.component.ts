@@ -8,7 +8,8 @@ import {
   OnInit, 
   OnChanges 
 } from '@angular/core';
-import { AccountsService } from '../../../services';
+import { AlertService, OrgService, AccountsService } from '../../../services';
+import { TaxRate } from '../../../models/data/tax-rate';
 
 @Component({
   selector: 'app-account-modal-button',
@@ -21,6 +22,8 @@ export class AccountModalButtonComponent implements OnInit, OnChanges {
 
   @Output() onAccountSaved = new EventEmitter();
 
+  rates: TaxRate[] = [];
+  types: any[] = [];
   modalVisible: boolean = false;
   processing: boolean = false;
 
@@ -33,12 +36,37 @@ export class AccountModalButtonComponent implements OnInit, OnChanges {
     org_id: null
   }
 
-  constructor(private accountsService: AccountsService) { }
+  constructor(private alertService: AlertService, private orgService: OrgService, private accountsService: AccountsService) { }
 
   save() {
+    this.processing = true;
+
+    this.accountsService.create(this.model)
+      .subscribe(response => {
+        this.processing = false;
+        this.modalVisible = false;
+        this.onAccountSaved.emit(true);
+        this.alertService.success('Account', 'Account created successfully', { timeOut: 3000 });
+      }, err => {
+        this.processing = false;
+      })
+  }
+
+  fetchOrgTaxRates() {
+    this.orgService.getTaxRates(this.org.id).subscribe(response => {
+      this.rates = response.data
+    })
+  }
+
+  fetchAccountTypes() {
+    this.accountsService.types().subscribe(response => {
+      this.types = response.data;
+    });
   }
 
   ngOnInit() {
+    this.fetchOrgTaxRates();
+    this.fetchAccountTypes();
   }
 
   ngOnChanges(changes: SimpleChanges) {
