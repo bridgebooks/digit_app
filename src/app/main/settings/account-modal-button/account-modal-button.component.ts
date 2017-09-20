@@ -19,11 +19,11 @@ import { TaxRate } from '../../../models/data/tax-rate';
 export class AccountModalButtonComponent implements OnInit, OnChanges {
 
   @Input('org') org;
+  @Input('types') types: any[];
+  @Input('rates') rates: TaxRate[];
 
   @Output() onAccountSaved = new EventEmitter();
 
-  rates: TaxRate[] = [];
-  types: any[] = [];
   modalVisible: boolean = false;
   processing: boolean = false;
 
@@ -52,24 +52,12 @@ export class AccountModalButtonComponent implements OnInit, OnChanges {
       })
   }
 
-  fetchOrgTaxRates() {
-    this.orgService.getTaxRates(this.org.id).subscribe(response => {
-      this.rates = response.data
-    })
-  }
-
-  fetchAccountTypes() {
-    this.accountsService.types().subscribe(response => {
-      this.types = response.data;
-    });
-  }
-
   ngOnInit() {
-    this.fetchOrgTaxRates();
-    this.fetchAccountTypes();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.model.org_id = changes.org.currentValue.id;
+    if (changes.org) this.model.org_id = changes.org.currentValue.id;
+    if (changes.rates) this.rates = changes.rates.currentValue;
+    if (changes.types) this.types = changes.types.currentValue;
   }
 }
