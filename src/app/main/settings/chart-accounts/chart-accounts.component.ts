@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, AccountsService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid'
 import { Account } from '../../../models/data/account';
+import { TaxRate } from '../../../models/data/tax-rate';
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
@@ -16,6 +17,8 @@ export class ChartAccountsComponent implements OnInit {
 
   accounts: Account[] = [];
   selected: Account[] = [];
+  rates: TaxRate[] = [];
+  types: any[] = [];
 
   org: any;
   perPage: number = 30;
@@ -123,9 +126,24 @@ export class ChartAccountsComponent implements OnInit {
       })
   }
 
+  fetchOrgTaxRates() {
+    this.orgService.getTaxRates(this.org.id).subscribe(response => {
+      this.rates = response.data
+    })
+  }
+
+  fetchAccountTypes() {
+    this.accountService.types().subscribe(response => {
+      this.types = response.data;
+    });
+  }
+
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
     this.currentPage = 1;
+
+    this.fetchAccountTypes();
+    this.fetchOrgTaxRates();
   }
 
 }
