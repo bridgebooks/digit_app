@@ -9,6 +9,7 @@ import { OrgResponse } from '../models/responses/org';
 import { ContactsResponse } from '../models/responses/contacts';
 import { ItemsResponse } from '../models/responses/items';
 import { AccountsResponse } from '../models/responses/accounts';
+import { TaxRatesResponse } from '../models/responses/tax-rates';
 import { Org } from '../models/data/org';
 
 interface OrgCreateResponseData {
@@ -88,7 +89,7 @@ export class OrgService {
       })
     }
 
-    return this.http.get(url, { 
+    return this.http.get<TaxRatesResponse>(url, { 
       headers: headers,
       params: params
     })

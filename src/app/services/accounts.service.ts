@@ -12,7 +12,7 @@ export class AccountsService {
 
   create(body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl, body, { headers })
+    return this.http.post<AccountResponse>(this.baseUrl, body, { headers })
   }
 
   get(id: string, options?: object) {
@@ -28,6 +28,14 @@ export class AccountsService {
     const url = `${this.baseUrl}/${id}`;
 
     return this.http.get<AccountResponse>(url, { headers, params })
+  }
+
+  types() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+  
+    const url = `${this.baseUrl}/account_types`;
+
+    return this.http.get<any>(url, { headers })
   }
 
   update(id: string, body: object) {
