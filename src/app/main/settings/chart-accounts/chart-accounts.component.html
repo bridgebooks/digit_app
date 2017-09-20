@@ -41,7 +41,7 @@
             <span class="acc-description">{{ account.description }}</span>
           </clr-dg-cell>
           <clr-dg-cell>{{ account.type.data.name }}</clr-dg-cell>
-          <clr-dg-cell *ngIf="account.tax_rate">{{ account.tax_rate.data.name }}</clr-dg-cell>
+          <clr-dg-cell *ngIf="account.tax_rate">{{ account.tax_rate.data.name }} ({{ account.tax_rate.data.value }}%)</clr-dg-cell>
           <clr-dg-cell *ngIf="!account.tax_rate">-</clr-dg-cell>
         </clr-dg-row>
 
@@ -59,7 +59,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-outline" (click)="deleteConfirmModalVisible = false">Cancel</button>
-              <button type="button" class="btn btn-primary" [clrLoading]="contactDeleteProcessing" [disabled]="deleteBtnDisabled" (click)="deleteSelection()">Delete</button>
+              <button type="button" class="btn btn-primary" [clrLoading]="accountDeleteProcessing" [disabled]="deleteBtnDisabled" (click)="deleteSelection()">Delete</button>
           </div>
       </clr-modal>
     </div>
