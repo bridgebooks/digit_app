@@ -19,6 +19,7 @@ import { LogoUploadComponent } from './logo-upload/logo-upload.component';
 import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
 import { AccountBulkActionDropdownComponent } from './account-bulk-action-dropdown/account-bulk-action-dropdown.component';
 import { AccountModalButtonComponent } from './account-modal-button/account-modal-button.component';
+import { AccountEditModalComponent } from './account-edit-modal/account-edit-modal.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { AccountModalButtonComponent } from './account-modal-button/account-moda
     LogoUploadComponent,
     ChartAccountsComponent,
     AccountBulkActionDropdownComponent,
-    AccountModalButtonComponent
+    AccountModalButtonComponent,
+    AccountEditModalComponent
   ],
   providers: [ AlertService, UserService, OrgService, SessionService, AccountsService ]
 })
