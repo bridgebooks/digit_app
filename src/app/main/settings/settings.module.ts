@@ -20,6 +20,8 @@ import { ChartAccountsComponent } from './chart-accounts/chart-accounts.componen
 import { AccountBulkActionDropdownComponent } from './account-bulk-action-dropdown/account-bulk-action-dropdown.component';
 import { AccountModalButtonComponent } from './account-modal-button/account-modal-button.component';
 import { AccountEditModalComponent } from './account-edit-modal/account-edit-modal.component';
+import { TaxRatesComponent } from './tax-rates/tax-rates.component';
+import { TaxRateModalComponent } from './tax-rate-modal/tax-rate-modal.component';
 
 @NgModule({
   imports: [
@@ -41,7 +43,9 @@ import { AccountEditModalComponent } from './account-edit-modal/account-edit-mod
     ChartAccountsComponent,
     AccountBulkActionDropdownComponent,
     AccountModalButtonComponent,
-    AccountEditModalComponent
+    AccountEditModalComponent,
+    TaxRatesComponent,
+    TaxRateModalComponent
   ],
   providers: [ AlertService, UserService, OrgService, SessionService, AccountsService ]
 })

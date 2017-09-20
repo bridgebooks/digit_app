@@ -5,7 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
 import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
-
+import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
@@ -17,6 +17,13 @@ const routes: Routes = [
       component: ChartAccountsComponent,
       data: {
         title: 'Chart Of Accounts - Bridge Books'
+      }
+    },
+    {
+      path: 'taxes',
+      component: TaxRatesComponent,
+      data: {
+        title: 'Tax Rates - Bridge Books'
       }
     }
 ];
