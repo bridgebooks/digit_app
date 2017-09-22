@@ -12,7 +12,11 @@
   <div class="row">
     <div class="col-md-12 col-lg-12">
       <div class="row flex-items-lg-between">
-        <div class="col-lg-4">          
+        <div class="col-lg-4">
+            <app-tax-bulk-action-dropdown 
+            [enabled]="enableBulkOptions"
+            (onDeleteOptionSelected)="onDeleteSelected($event)">
+          </app-tax-bulk-action-dropdown>           
         </div>
         <div class="col-lg-4">
         </div>
@@ -41,4 +45,15 @@
         </clr-datagrid>
     </div>
   </div>
+
+  <clr-modal [(clrModalOpen)]="deleteConfirmModalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+      <h3 class="modal-title">Delete Tax Rates</h3>
+      <div class="modal-body">
+          <p style="color: #333;">Are sure you want to delete these tax rate(s)? System tax rates will not be deleted.</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" (click)="deleteConfirmModalVisible = false">Cancel</button>
+          <button type="button" class="btn btn-primary" [clrLoading]="deleteProcessing" [disabled]="deleteBtnDisabled" (click)="deleteSelection()">Delete</button>
+      </div>
+  </clr-modal>
 </section>
