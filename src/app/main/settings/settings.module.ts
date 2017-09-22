@@ -23,6 +23,7 @@ import { AccountEditModalComponent } from './account-edit-modal/account-edit-mod
 import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 import { TaxRateModalComponent } from './tax-rate-modal/tax-rate-modal.component';
 import { TaxComponentFormComponent } from './tax-component-form/tax-component-form.component';
+import { TaxBulkActionDropdownComponent } from './tax-bulk-action-dropdown/tax-bulk-action-dropdown.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { TaxComponentFormComponent } from './tax-component-form/tax-component-fo
     AccountEditModalComponent,
     TaxRatesComponent,
     TaxRateModalComponent,
-    TaxComponentFormComponent
+    TaxComponentFormComponent,
+    TaxBulkActionDropdownComponent
   ],
   providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService ]
 })
