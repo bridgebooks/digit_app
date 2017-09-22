@@ -6,7 +6,7 @@ import { ClarityModule } from 'clarity-angular';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 
-import { AlertService, UserService, SessionService, OrgService, AccountsService } from '../../services';
+import { AlertService, UserService, SessionService, OrgService, AccountsService, TaxRateService } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -22,6 +22,7 @@ import { AccountModalButtonComponent } from './account-modal-button/account-moda
 import { AccountEditModalComponent } from './account-edit-modal/account-edit-modal.component';
 import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 import { TaxRateModalComponent } from './tax-rate-modal/tax-rate-modal.component';
+import { TaxComponentFormComponent } from './tax-component-form/tax-component-form.component';
 
 @NgModule({
   imports: [
@@ -45,8 +46,9 @@ import { TaxRateModalComponent } from './tax-rate-modal/tax-rate-modal.component
     AccountModalButtonComponent,
     AccountEditModalComponent,
     TaxRatesComponent,
-    TaxRateModalComponent
+    TaxRateModalComponent,
+    TaxComponentFormComponent
   ],
-  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService ]
+  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService ]
 })
 export class SettingsModule { }

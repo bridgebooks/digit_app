@@ -2,6 +2,7 @@ import { TaxRateComponent } from './tax-rate-component';
 
 export interface TaxRate {
     id?: string;
+    org_id?: string;
     name?: string;
     is_system?: boolean;
     value?: number;

@@ -1,6 +1,6 @@
 <button class="btn btn-primary" (click)="modalVisible = true">Add Tax Rate</button>
 
-<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true" (clrModalOpenChange)="onModalClosed($event)">
     <h3 class="modal-title">Add New Tax Rate</h3>
     <div class="modal-body">
       <form class="compact" #taxForm="ngForm">
@@ -15,7 +15,29 @@
             </div>
           </div>
           <hr>
+
           <p>Tax Components</p>
+          <ul class="component-list list-unstyled">
+            <li *ngFor="let component of model.components" class="clearfix">
+              <div class="component-name">
+                {{ component.name }}
+              </div>
+              <div class="component-value">
+                {{ component.value }}%
+              </div>
+            </li>
+          </ul>
+          <app-tax-component-form [showCompound]="false" (onComponentAdded)="addComponent($event)"></app-tax-component-form>
+          <hr>
+
+          <div class="row flex-items-lg-between page-header">
+            <div class="col-md-4">
+                <p style="margin: 0;"><strong>Total Tax Rate</strong></p>
+            </div>
+            <div class="col-md-4">
+              <strong>{{ total_rate | number:"1.2" }} %</strong>
+            </div>
+          </div>
         </section>
       </form>
     </div>
@@ -25,6 +47,6 @@
         [disabled]="taxForm.invalid || processing" 
         (click)="save()">Save</button>
 
-        <button type="button" class="btn btn-outline" (click)="modalVisible = false">Cancel</button>
+        <button type="button" class="btn btn-outline" (click)="hideModal()">Cancel</button>
     </div>
   </clr-modal>
