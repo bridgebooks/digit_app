@@ -1,0 +1,67 @@
+<section>
+  <div class="row flex-items-lg-between page-header">
+      <div class="col-lg-4">
+          <a routerLink="/settings"><clr-icon shape="caret" dir="left"></clr-icon> General Settings</a>                    
+          <h2>Chart Of Accounts</h2>
+      </div>
+      <div class="col-lg-4">
+        <app-account-modal-button [org]="org"
+        [types]="types" [rates]="rates"
+        (onAccountSaved)="refresh({})">
+        </app-account-modal-button>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="row flex-items-lg-between">
+        <div class="col-lg-4">
+            <app-account-bulk-action-dropdown 
+            [enabled]="enableBulkOptions"
+            (onDeleteOptionSelected)="onDeleteSelected($event)">
+          </app-account-bulk-action-dropdown>            
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12">
+      <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
+        <clr-dg-placeholder>Seems like you don't have any accounts!</clr-dg-placeholder>
+        
+        <clr-dg-column [clrDgField]="'code'">Code</clr-dg-column>
+        <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+        <clr-dg-column [clrDgField]="'account_types|name'">Type</clr-dg-column>
+        <clr-dg-column>Tax Rate</clr-dg-column>
+
+        <clr-dg-row *ngFor="let account of accounts" [clrDgItem]="account">
+          <clr-dg-cell>{{ account.code }}</clr-dg-cell>
+          <clr-dg-cell>
+            <app-account-edit-modal [account]="account" [types]="types" [rates]="rates" (accountUpdated)="refresh({})"></app-account-edit-modal>
+          </clr-dg-cell>
+          <clr-dg-cell>{{ account.type.data.name }}</clr-dg-cell>
+          <clr-dg-cell *ngIf="account.tax_rate">{{ account.tax_rate.data.name }} ({{ account.tax_rate.data.value }}%)</clr-dg-cell>
+          <clr-dg-cell *ngIf="!account.tax_rate">-</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{total}} Accounts
+            <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+
+      <clr-modal [(clrModalOpen)]="deleteConfirmModalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+          <h3 class="modal-title">Delete Accounts</h3>
+          <div class="modal-body">
+              <p style="color: #333;">Are sure you want to delete this accounts(s)? System accounts will not be deleted.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline" (click)="deleteConfirmModalVisible = false">Cancel</button>
+              <button type="button" class="btn btn-primary" [clrLoading]="accountDeleteProcessing" [disabled]="deleteBtnDisabled" (click)="deleteSelection()">Delete</button>
+          </div>
+      </clr-modal>
+    </div>
+  </div>      
+</section>

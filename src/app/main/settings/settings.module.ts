@@ -6,7 +6,7 @@ import { ClarityModule } from 'clarity-angular';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 
-import { UserService, SessionService, OrgService } from '../../services';
+import { AlertService, UserService, SessionService, OrgService, AccountsService, TaxRateService } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -16,6 +16,16 @@ import { EmailChangeComponent } from './email-change/email-change.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
 import { LogoUploadComponent } from './logo-upload/logo-upload.component';
+import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
+import { AccountBulkActionDropdownComponent } from './account-bulk-action-dropdown/account-bulk-action-dropdown.component';
+import { AccountModalButtonComponent } from './account-modal-button/account-modal-button.component';
+import { AccountEditModalComponent } from './account-edit-modal/account-edit-modal.component';
+import { TaxRatesComponent } from './tax-rates/tax-rates.component';
+import { TaxRateModalComponent } from './tax-rate-modal/tax-rate-modal.component';
+import { TaxComponentFormComponent } from './tax-component-form/tax-component-form.component';
+import { TaxBulkActionDropdownComponent } from './tax-bulk-action-dropdown/tax-bulk-action-dropdown.component';
+import { TaxrateEditModalComponent } from './taxrate-edit-modal/taxrate-edit-modal.component';
+import { TaxComponentEditComponent } from './tax-component-edit/tax-component-edit.component';
 
 @NgModule({
   imports: [
@@ -33,8 +43,18 @@ import { LogoUploadComponent } from './logo-upload/logo-upload.component';
     AccountComponent, 
     PasswordChangeComponent, 
     OrgProfileComponent,
-    LogoUploadComponent
+    LogoUploadComponent,
+    ChartAccountsComponent,
+    AccountBulkActionDropdownComponent,
+    AccountModalButtonComponent,
+    AccountEditModalComponent,
+    TaxRatesComponent,
+    TaxRateModalComponent,
+    TaxComponentFormComponent,
+    TaxBulkActionDropdownComponent,
+    TaxrateEditModalComponent,
+    TaxComponentEditComponent
   ],
-  providers: [ UserService, OrgService, SessionService ]
+  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService ]
 })
 export class SettingsModule { }

@@ -1,0 +1,13 @@
+.component-list
+{
+    .component-name, .component-value {
+        float: left;
+        padding: 5px 10px;
+        width: 50%;
+    }
+
+    li {
+        border-bottom: 1px solid #cccccc;
+        position: relative;
+    }
+}

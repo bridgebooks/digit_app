@@ -1,0 +1,47 @@
+<a *ngIf="rate.is_system" class="rate-name" (click)="modalVisible = true"><clr-icon shape="lock"></clr-icon> {{ rate.name }}</a>
+<a *ngIf="!rate.is_system" class="rate-name" (click)="modalVisible = true"><clr-icon shape="organization"></clr-icon> {{ rate.name }}</a>
+
+<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Edit Tax Rate</h3>
+  <div class="modal-body">
+      <form #taxRateForm="ngForm">
+          <section class="form-block">
+              <div class="form-group">
+                <label for="name">Tax Rate Display Name</label>
+                <input type="text" size="60" name="name" #nameInput="ngModel" [(ngModel)]="rate.name" required [maxlength]="50">
+                <span class="help-text">The name as you would like it to appear in Bridge Books</span>
+                <div class="input__errors" [hidden]="nameInput.valid || nameInput.pristine">
+                    <span class="input__errors_error" *ngIf="nameInput.hasError('required')">Please enter a name</span>
+                    <span class="input__errors_error" *ngIf="nameInput.hasError('maxlength')">Enter a shorter name</span>
+                </div>
+              </div>
+              <hr>
+    
+              <p style="margin: 0;">Tax Components</p>
+              <ul class="component-list list-unstyled">
+                <app-tax-component-edit *ngFor="let component of rate.components.data" 
+                [component]="component" (componentUpdated)="updateTotalRate()">
+                </app-tax-component-edit>
+              </ul>
+              <hr>
+    
+              <div class="row flex-items-lg-between page-header">
+                <div class="col-md-4">
+                    <p style="margin: 0;"><strong>Total Tax Rate</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <strong>{{ total_rate | number:"1.2" }} %</strong>
+                </div>
+              </div>
+            </section>
+      </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" 
+      [clrLoading]="processing" 
+      [disabled]="taxRateForm.invalid || processing" 
+      (click)="save()">Save</button>
+  
+      <button type="button" class="btn btn-outline" (click)="hideModal()">Cancel</button>
+  </div>
+</clr-modal>
