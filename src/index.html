@@ -9,6 +9,34 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <style>
+      app-root .boot-screen
+      {
+          position: absolute;
+          background-color: #002538;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+      }
+
+      app-root .logo {
+        width: 250px;
+        margin: 17% auto;
+      }
+
+      app-root .logo img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+    </style>
+    <div class="boot-screen">
+      <div class="logo"><img src="assets/img/logo-white.png" alt="Bridge Books"></div>
+    </div>
+  </app-root>
 </body>
 </html>
