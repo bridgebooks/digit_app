@@ -39,7 +39,7 @@ export class AccountEditModalComponent implements OnInit, OnChanges {
       .update(this.account.id, model)
       .subscribe(response => {
         this.processing = false;
-        this.alert.success('Account', 'Account successfully update', { timeOut: 3000 })
+        this.alert.success('Account', 'Account successfully updated', { timeOut: 3000 })
         this.modalVisible = false;
         this.account = response.data;
         this.accountUpdated.emit(true);

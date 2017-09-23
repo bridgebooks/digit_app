@@ -1,0 +1,16 @@
+<form #componentForm="ngForm" novalidate (submit)="save()">
+  <div class="row taxrate-component-form">
+    <div class="col-md-4">
+      <input type="text" class="form-control" name="name" [(ngModel)]="component.name" [disabled]="processing" (change)="save({ name: component.name })">
+    </div>
+    <div class="col-md-6">
+      <div class="radio-inline">
+        <input type="radio" name="compound" [(ngModel)]="component.compound" [disabled]="processing">
+        <label for="" style="font-size: .9em;">Compound (apply to taxed subtotal)</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+        <input type="number" class="form-control" name="value" [(ngModel)]="component.value" [disabled]="processing" (change)="save({ value: component.value })">
+    </div>
+  </div>
+</form>

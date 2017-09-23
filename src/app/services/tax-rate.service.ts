@@ -37,6 +37,13 @@ export class TaxRateService {
     return this.http.put<TaxRateResponse>(url, body, { headers })
   }
 
+  updateComponent(id: string, body: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/components/${id}`;
+
+    return this.http.put<any>(url, body, { headers })
+  }
+
   delete(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}`;

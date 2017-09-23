@@ -1,0 +1,8 @@
+.taxrate-component-form {
+    border-bottom: 1px solid #cccccc;
+    padding: 5px 0px;
+    
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
