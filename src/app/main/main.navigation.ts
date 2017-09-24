@@ -16,16 +16,8 @@ export module MainNavigation {
                     path: '/sales/invoices'
                 },
                 {
-                    label: 'New Invoice',
-                    path: '/sales/edit'
-                },
-                {
                     label: 'Inventory',
                     path: '/sales/items'
-                },
-                {
-                    label: 'Estimates',
-                    path: '/sales/estimates'
                 }
             ] 
         },
@@ -53,10 +45,6 @@ export module MainNavigation {
                     label: 'Vendors',
                     path: '/contacts/vendor'
                 },
-                {
-                    label: 'Employees',
-                    path: '/contacts/employees'
-                }
             ] 
         },
         {
@@ -64,6 +52,10 @@ export module MainNavigation {
             icon: 'dollar-bill',
             path: '/payroll',
             children: [
+                {
+                    label: 'Employees',
+                    path: '/payroll/employees'
+                },
                 {
                     label: 'Pay runs',
                     paths: '/payroll/runs'
