@@ -6,7 +6,15 @@ import { ClarityModule } from 'clarity-angular';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 
-import { AlertService, UserService, SessionService, OrgService, AccountsService, TaxRateService } from '../../services';
+import { 
+  AlertService, 
+  UserService, 
+  SessionService, 
+  OrgService, 
+  AccountsService, 
+  TaxRateService,
+  BankAccountService
+} from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
@@ -26,6 +34,9 @@ import { TaxComponentFormComponent } from './tax-component-form/tax-component-fo
 import { TaxBulkActionDropdownComponent } from './tax-bulk-action-dropdown/tax-bulk-action-dropdown.component';
 import { TaxrateEditModalComponent } from './taxrate-edit-modal/taxrate-edit-modal.component';
 import { TaxComponentEditComponent } from './tax-component-edit/tax-component-edit.component';
+import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
+import { BankAccountModalComponent } from './bank-account-modal/bank-account-modal.component';
+import { BankAccountEditModalComponent } from './bank-account-edit-modal/bank-account-edit-modal.component';
 
 @NgModule({
   imports: [
@@ -53,8 +64,11 @@ import { TaxComponentEditComponent } from './tax-component-edit/tax-component-ed
     TaxComponentFormComponent,
     TaxBulkActionDropdownComponent,
     TaxrateEditModalComponent,
-    TaxComponentEditComponent
+    TaxComponentEditComponent,
+    BankAccountsComponent,
+    BankAccountModalComponent,
+    BankAccountEditModalComponent
   ],
-  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService ]
+  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService ]
 })
 export class SettingsModule { }

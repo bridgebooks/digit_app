@@ -1,0 +1,59 @@
+<a (click)="modalVisible = true">{{ account.name }}</a>
+
+<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'lg'" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Edit Bank Account</h3>
+    <div class="modal-body">
+      <form class="compact" #accountForm="ngForm" novalidate>
+        <section class="form-block">
+          <div class="form-group">
+              <label class="required" for="">Name</label>
+              <input type="text" name="name" size="60" #nameInput="ngModel" [(ngModel)]="account.name" required [maxlength]="150">
+              <span class="help-text">A short name for this account (150 characters)</span>              
+              <div class="input__errors" [hidden]="nameInput.valid || nameInput.pristine">
+                  <span class="input__errors_error" *ngIf="nameInput.hasError('required')">Please enter a name</span>
+                  <span class="input__errors_error" *ngIf="nameInput.hasError('maxlength')">Enter a shorter name</span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label class="required" for="">Account Name</label>
+              <input type="text" name="account_name" size="60" #accountNameInput="ngModel" [(ngModel)]="account.account_name" required [maxlength]="150">
+              <span class="help-text">Name on bank account</span>              
+              <div class="input__errors" [hidden]="accountNameInput.valid || accountNameInput.pristine">
+                  <span class="input__errors_error" *ngIf="accountNameInput.hasError('required')">Please enter an account name</span>
+                  <span class="input__errors_error" *ngIf="accountNameInput.hasError('maxlength')">Enter a shorter name</span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label class="required" for="">Account Number</label>
+              <input type="text" name="account_number" size="60" #accountNumberInput="ngModel" [(ngModel)]="account.account_number" required [minlength]="10" numeric>
+              <span class="help-text">Bank account number for this account</span>              
+              <div class="input__errors" [hidden]="accountNumberInput.valid || accountNumberInput.pristine">
+                  <span class="input__errors_error" *ngIf="accountNumberInput.hasError('required')">Please enter an account name</span>
+                  <span class="input__errors_error" *ngIf="accountNumberInput.hasError('minlength')">Invalid account number</span>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bank_id" class="required">Bank</label>
+            <bank-select [selected]="account.bank_id" (onBankSelected)="bankSelected($event)"></bank-select>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <span class="help-text">Additional notes for the account</span> 
+            <textarea name="notes" rows="5" [(ngModel)]="account.notes"></textarea>
+          </div>
+        </section>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" 
+        [clrLoading]="processing" 
+        [disabled]="accountForm.invalid || processing" 
+        (click)="save()">Save</button>
+
+        <button type="button" class="btn btn-outline" (click)="modalVisible = false">Cancel</button>
+    </div>
+  </clr-modal>
