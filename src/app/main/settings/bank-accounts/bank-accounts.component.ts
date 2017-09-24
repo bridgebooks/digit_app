@@ -23,6 +23,10 @@ export class BankAccountsComponent implements OnInit {
 
   constructor(private alertService: AlertService, private session: SessionService, private bankAccountService: BankAccountService) { }
 
+  delete(account: BankAccount) {
+    
+  }
+
   refresh(state: State) {
     this.loading = true;
 
