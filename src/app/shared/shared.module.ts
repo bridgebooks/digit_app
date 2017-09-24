@@ -16,7 +16,7 @@ import { BankSelectComponent } from './components/bank-select/bank-select.compon
     PhoneNumberDirective,
     BankSelectComponent
   ],
-  exports: [BankSelectComponent, NumericDirective, PhoneNumberDirective],
+  exports: [BankSelectComponent, NumericDirective, PhoneNumberDirective, IntlPhoneNumberPipe],
   providers: [IntlPhoneNumberPipe]
 })
 export class SharedModule { }

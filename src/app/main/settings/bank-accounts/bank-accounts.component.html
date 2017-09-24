@@ -1,0 +1,54 @@
+<section>
+    <div class="row flex-items-lg-between page-header">
+        <div class="col-lg-4">
+            <a routerLink="/settings"><clr-icon shape="caret" dir="left"></clr-icon> General Settings</a>                    
+            <h2>Bank Accounts</h2>
+        </div>
+        <div class="col-lg-4">
+          <app-bank-account-modal [org]="org" (onAccountAdded)="refresh({})"></app-bank-account-modal>
+        </div>
+    </div>
+  
+    <div class="row">
+
+      <div class="col-md-12 col-lg-12">
+        <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading">
+          <clr-dg-placeholder>Seems like you don't have any bank accounts setup!</clr-dg-placeholder>
+          
+          <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+          <clr-dg-column [clrDgField]="'account_name'">Account Name</clr-dg-column>
+          <clr-dg-column [clrDgField]="'banks|name'">Bank</clr-dg-column>
+          <clr-dg-column>Actions</clr-dg-column>
+  
+          <clr-dg-row *ngFor="let account of accounts">
+            <clr-dg-cell>
+                <app-bank-account-edit-modal [account]="account"></app-bank-account-edit-modal>
+            </clr-dg-cell>
+            <clr-dg-cell>
+                <p style="margin:0;">{{ account.account_name }}</p>
+                <span>{{ account.account_number }}</span>
+            </clr-dg-cell>
+            <clr-dg-cell>{{ account.bank.name }}</clr-dg-cell>
+            <clr-dg-cell><a (click)="delete(account)">Delete</a></clr-dg-cell>
+          </clr-dg-row>
+  
+          <clr-dg-footer>
+              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+              of {{total}} Accounts
+              <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+  
+        <clr-modal [(clrModalOpen)]="deleteConfirmModalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+            <h3 class="modal-title">Delete Bank Account</h3>
+            <div class="modal-body">
+                <p style="color: #333;">Are sure you want to delete this account?.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" (click)="deleteConfirmModalVisible = false">Cancel</button>
+                <button type="button" class="btn btn-primary" [clrLoading]="deleteProcessing" [disabled]="deleteBtnDisabled" (click)="deleteSelection()">Delete</button>
+            </div>
+        </clr-modal>
+      </div>
+    </div>      
+  </section>
