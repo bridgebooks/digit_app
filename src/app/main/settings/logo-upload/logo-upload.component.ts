@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload';
 import { AlertService, JwtService } from '../../../services';
 
@@ -23,8 +24,10 @@ export class LogoUploadComponent implements OnInit, OnChanges {
   uploadBtnDisabled: boolean = true;
 
   constructor(private alertService: AlertService, private jwtService: JwtService) { 
+    const uploadUrl = `${environment.apiUrl}/v1/orgs/logo`;
+
     this.uploader = new FileUploader({
-      url: 'http://localhost:8080/v1/orgs/logo',
+      url: uploadUrl,
       autoUpload: false,
       allowedMimeType: [ 'image/png', 'image/jpg', 'image/jpeg' ],      
       method: 'POST',

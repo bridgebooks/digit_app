@@ -13,7 +13,6 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { ContactBulkActionDropdownComponent } from './contact-bulk-action-dropdown/contact-bulk-action-dropdown.component';
 import { ContactSearchBoxComponent } from './contact-search-box/contact-search-box.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactGroupSelectComponent } from './contact-group-select/contact-group-select.component';
 import { ContactInvoicesComponent } from './contact-invoices/contact-invoices.component';
@@ -34,7 +33,9 @@ import { ContactBillsComponent } from './contact-bills/contact-bills.component';
     ContactDetailComponent, 
     ContactBulkActionDropdownComponent, 
     ContactSearchBoxComponent, 
-    EmployeeListComponent, ContactGroupSelectComponent, ContactInvoicesComponent, ContactBillsComponent
+    ContactGroupSelectComponent, 
+    ContactInvoicesComponent, 
+    ContactBillsComponent
   ],
   providers: [
     SessionService,

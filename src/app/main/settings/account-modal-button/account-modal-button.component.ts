@@ -33,7 +33,8 @@ export class AccountModalButtonComponent implements OnInit, OnChanges {
     description: null,
     account_type_id: null,
     tax_rate_id: null,
-    org_id: null
+    org_id: null,
+    active: true
   }
 
   constructor(private alertService: AlertService, private orgService: OrgService, private accountsService: AccountsService) { }

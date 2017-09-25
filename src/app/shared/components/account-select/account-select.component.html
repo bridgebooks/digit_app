@@ -1,0 +1,8 @@
+<div class="select">
+  <select (change)="filterChanged($event.target.value)" [(ngModel)]="selected">
+    <option value="-1">Select an account</option>
+    <optgroup *ngFor="let item of data" label="{{ item.name }}">
+      <option *ngFor="let child of item.children" [value]="child.id">{{ child.code }} - {{ child.name }}</option>
+    </optgroup>
+  </select>
+</div>

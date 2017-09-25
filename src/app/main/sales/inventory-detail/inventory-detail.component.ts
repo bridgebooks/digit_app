@@ -25,10 +25,14 @@ export class InventoryDetailComponent implements OnInit {
     private itemService: ItemService
   ) { }
 
+  itemUpdated($event: Item) {
+    this.item = $event;
+  }
+
   fetchItem(id: string) {
     this.loading = true
     this.itemService
-      .get(id)
+      .get(id, { include: 'sale_account,purchase_account,sale_tax,purchase_tax' })
       .subscribe(response => {
         this.loading = false;
         this.item = response.data;

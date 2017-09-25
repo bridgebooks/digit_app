@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IntlPhoneNumberPipe, NumericDirective, PhoneNumberDirective, MatchValidator } from './index';
 import { BankSelectComponent } from './components/bank-select/bank-select.component';
+import { AccountSelectComponent } from './components/account-select/account-select.component';
+import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
 
 @NgModule({
   imports: [
@@ -14,9 +16,18 @@ import { BankSelectComponent } from './components/bank-select/bank-select.compon
     NumericDirective, 
     MatchValidator,
     PhoneNumberDirective,
-    BankSelectComponent
+    BankSelectComponent,
+    AccountSelectComponent,
+    TaxrateSelectComponent
   ],
-  exports: [BankSelectComponent, NumericDirective, PhoneNumberDirective, IntlPhoneNumberPipe],
+  exports: [
+    BankSelectComponent, 
+    AccountSelectComponent, 
+    TaxrateSelectComponent,
+    NumericDirective, 
+    PhoneNumberDirective, 
+    IntlPhoneNumberPipe
+  ],
   providers: [IntlPhoneNumberPipe]
 })
 export class SharedModule { }
