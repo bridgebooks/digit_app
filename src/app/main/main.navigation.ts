@@ -8,7 +8,7 @@ export module MainNavigation {
         },
         {
             label: 'Sales',
-            icon: 'dollar',
+            icon: 'credit-card',
             path: '/sales',
             children: [
                 {

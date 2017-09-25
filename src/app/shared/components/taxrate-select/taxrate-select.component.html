@@ -1,0 +1,6 @@
+<div class="select">
+    <select (change)="filterChanged($event.target.value)" [(ngModel)]="selected">
+        <option value="-1">Select a tax rate</option>>
+        <option *ngFor="let rate of data" [value]="rate.id">({{ rate.value }}%) {{ rate.name }}</option>    
+    </select>
+</div>

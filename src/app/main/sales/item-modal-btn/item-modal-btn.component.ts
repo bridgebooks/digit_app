@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { AlertService, SessionService, ItemService } from '../../../services';
 import { ObjectUtils } from '../../../shared';
 import { Item } from '../../../models/data/item';
@@ -13,7 +14,7 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
   @ViewChild('itemForm') form;
   @Input('item') item: Item;  
   @Output() onItemCreated = new EventEmitter();
-  @Output() onItemSaved = new EventEmitter();
+  @Output() onItemSaved = new EventEmitter<Item>();
 
   org: any;
   mode: string;
@@ -33,6 +34,26 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
     private session: SessionService,
     private itemService: ItemService) { }
 
+  saleAccountSelected($event) {
+    this.model.sale_account_id = $event;
+    (this.form.controls['sale_account_id'] as FormControl).markAsDirty()        
+  }
+
+  purchaseTaxRateSelected($event) {
+    this.model.purchase_tax_id = $event;
+    (this.form.controls['purchase_tax_id'] as FormControl).markAsDirty()        
+  }
+
+  saleTaxRateSelected($event) {
+    this.model.sale_tax_id = $event;
+    (this.form.controls['sale_tax_id'] as FormControl).markAsDirty();
+  }
+
+  purchaseAccountSelected($event) {
+    this.model.purchase_account_id = $event;
+    (this.form.controls['purchase_account_id'] as FormControl).markAsDirty()        
+  }
+
   save() {
     this.processing = true;
 
@@ -51,8 +72,9 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
     } else {
       const model = ObjectUtils.getDirtyValues(this.form) 
       this.itemService
-        .update(this.item.id, model)
+        .update(this.item.id, model, { include: 'sale_account,purchase_account,sale_tax,purchase_tax' })
         .subscribe(response => {
+          this.onItemSaved.emit(response.data)          
           this.item = response.data;
           this.processing = false;
           this.modalVisible = false;

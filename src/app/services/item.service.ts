@@ -30,11 +30,18 @@ export class ItemService {
     return this.http.get<ItemResponse>(url, { headers, params })
   }
 
-  update(id: string, body: object) {
+  update(id: string, body: object, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.put<ItemResponse>(url, body, { headers })
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.put<ItemResponse>(url, body, { headers, params })
   }
 
   delete(id: string) {

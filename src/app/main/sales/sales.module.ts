@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
+import { SharedModule } from '../../shared/shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 
 import { SalesRoutingModule } from './sales-routing.module';
@@ -30,6 +31,7 @@ import { InventoryDetailComponent } from './inventory-detail/inventory-detail.co
     CommonModule,
     FormsModule,
     ClarityModule.forRoot(),
+    SharedModule,
     MyDatePickerModule,
     SalesRoutingModule
   ],

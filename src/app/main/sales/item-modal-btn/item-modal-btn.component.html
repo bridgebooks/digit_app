@@ -36,16 +36,17 @@
             <input type="number" name="purchase_unit_price" placeholder="Purchase price" size="60" #purchaseUnitPriceInput="ngModel" 
             [(ngModel)]="model.purchase_unit_price">
             
-            <div class="select">
-              <select name="purchase_account_id" id="purchase_account_id" [(ngModel)]="model.purchase_account_id" placeholder="Purchase account">
-              </select>
-            </div>
+            <account-select [org]="org" 
+            [selected]="model.purchase_account_id"
+            (onAccountSelected)="purchaseAccountSelected($event)">
+            </account-select>
+            <input type="hidden" name="purchase_account_id" [(ngModel)]="model.purchase_account_id">            
 
-            <div class="select">
-              <select name="purchase_tax_id" id="purchase_tax_id" [(ngModel)]="model.purchase_tax_id" placeholder="Tax Rate">
-                <option value="">Select a tax rate</option>
-              </select>
-            </div>
+            <taxrate-select [org]="org"
+            [selected]="model.purchase_tax_id"
+            (onRateSelected)="purchaseTaxRateSelected($event)">
+            </taxrate-select>
+            <input type="hidden" name="purchase_tax_id" [(ngModel)]="model.purchase_tax_id">
 
             <textarea name="purchase_description" placeholder="Description for suppliers" [(ngModel)]="model.purchase_description" rows="3">
             </textarea>
@@ -66,18 +67,18 @@
             <div class="col-lg-8 col-md-8 col-sm-12" *ngIf="model.is_sold">
                 <input type="number" name="sale_unit_price" placeholder="Sale price" size="60" #saleUnitPriceInput="ngModel" 
                 [(ngModel)]="model.sale_unit_price">
-    
-                <div class="select">
-                  <select name="sale_account_id" id="sale_account_id" [(ngModel)]="model.sale_account_id" placeholder="Sales account">
-                    <option value="">Select a sales account</option>
-                  </select>
-                </div>
-    
-                <div class="select">
-                  <select name="sale_tax_id" id="sale_tax_id" [(ngModel)]="model.sale_tax_id" placeholder="Tax Rate">
-                    <option value="">Select a tax rate</option>
-                  </select>
-                </div>
+                
+                <account-select [org]="org" 
+                [selected]="model.sale_account_id"
+                (onAccountSelected)="saleAccountSelected($event)">
+                </account-select>
+                <input type="hidden" name="sale_account_id" [(ngModel)]="model.sale_account_id">
+
+                <taxrate-select [org]="org"
+                [selected]="model.sale_tax_id"
+                (onRateSelected)="saleTaxRateSelected($event)">
+                </taxrate-select>
+                <input type="hidden" name="sale_tax_id" [(ngModel)]="model.sale_tax_id">
     
                 <textarea name="sale_description" placeholder="Description for customers" [(ngModel)]="model.sale_description" rows="3">
                 </textarea>

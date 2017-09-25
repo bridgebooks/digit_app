@@ -5,7 +5,6 @@ import { ContactsComponent } from './contacts.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactListComponent } from "./contact-list/contact-list.component";
 import { ContactDetailComponent } from "./contact-detail/contact-detail.component";
-import { EmployeeListComponent } from "./employee-list/employee-list.component";
 
 const routes: Routes = [
     { path: '', component: ContactsComponent },
@@ -24,7 +23,6 @@ const routes: Routes = [
       }
     },
     { path: 'view/:id', component: ContactDetailComponent },
-    { path: 'employees', component: EmployeeListComponent },
     { 
       path: ':type', 
       component: ContactListComponent,

@@ -16,7 +16,7 @@
   <div class="row">
     <div class="card inventory-detail-card">
       <div class="card-header">
-        <app-item-modal-btn [item]="item"></app-item-modal-btn>          
+        <app-item-modal-btn [item]="item" (onItemSaved)="itemUpdated($event)"></app-item-modal-btn>          
         <button class="btn btn-danger" type="button">Delete</button>
       </div>
       <div class="card-block">
@@ -27,7 +27,7 @@
             <p>{{ item.code }}</p>
             <h3>Purchases</h3>
             <hr>
-            <table class="table table-vertical">
+            <table class="table table-vertical item-data">
               <tbody>
                 <tr>
                   <th>Unit Price</th>
@@ -35,11 +35,13 @@
                 </tr>
                 <tr>
                     <th>Account</th>
-                    <td></td>
+                    <td *ngIf="item.purchase_account">{{ item.purchase_account.data.code }} - {{ item.purchase_account.data.name }}</td>
+                    <td *ngIf="!item.purchase_account">-</td>
                 </tr>
                 <tr>
                     <th>Tax Rate</th>
-                    <td></td>
+                    <td *ngIf="item.purchase_tax">{{ item.purchase_tax.data.name }} ({{ item.purchase_tax.data.value}}%)</td>
+                    <td *ngIf="!item.purchase_tax">-</td>
                 </tr>
                 <tr>
                     <th>Description</th>
@@ -50,7 +52,7 @@
 
             <h3>Sales</h3>
             <hr>
-            <table class="table table-vertical">
+            <table class="table table-vertical item-data">
               <tbody>
                 <tr>
                   <th>Unit Price</th>
@@ -58,11 +60,13 @@
                 </tr>
                 <tr>
                     <th>Account</th>
-                    <td></td>
+                    <td *ngIf="item.sale_account">{{ item.sale_account.data.code }} - {{ item.sale_account.data.name }}</td>
+                    <td *ngIf="!item.sale_account">-</td>
                 </tr>
                 <tr>
                     <th>Tax Rate</th>
-                    <td></td>
+                    <td *ngIf="item.sale_tax">{{ item.sale_tax.data.name }} ({{ item.sale_tax.data.value}}%)</td>
+                    <td *ngIf="!item.sale_tax">-</td>
                 </tr>
                 <tr>
                     <th>Description</th>
