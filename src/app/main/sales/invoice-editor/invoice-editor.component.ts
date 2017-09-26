@@ -8,6 +8,8 @@ import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
 })
 
 export class InvoiceEditorComponent implements OnInit, OnChanges {
+  @Input('type') type;
+    
   datePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd'
   }

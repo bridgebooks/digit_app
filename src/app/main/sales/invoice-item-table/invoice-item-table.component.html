@@ -11,14 +11,13 @@
           <clr-icon shape="view-list" class="line-item-reorder"></clr-icon>
         </td>
         <td class="line-item-cell">
-          <div class="select">
-            <select name="item" id="">
-              <option value="">Select an item</option>
-            </select>
-          </div>
+          <cell-item-select [selected]="item.item_id" [row]="item" (itemSelected)="rowItemSelected($event)"></cell-item-select>
+        <td class="line-item-cell">
+          <cell-item-description [description]="item.description"></cell-item-description>
         </td>
-        <td class="line-item-cell"></td>
-        <td class="line-item-cell"></td>
+        <td class="line-item-cell">
+          <input type="number" name="quantity" [(ngModel)]="item.quantity">
+        </td>
         <td class="line-item-cell"></td>
         <td class="line-item-cell"></td>
         <td class="line-item-cell"></td>
