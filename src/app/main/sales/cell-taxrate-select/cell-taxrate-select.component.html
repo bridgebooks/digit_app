@@ -1,7 +1,7 @@
-<p *ngIf="selected" class="text" (click)="showSelector()">{{ row.item.code }}: {{ row.item.name }}</p>
+<p *ngIf="selected" class="text" (click)="showSelector()">{{ row.tax_rate.name }} ({{ row.tax_rate.value }}%)</p>
 <p *ngIf="!selected" class="text" (click)="showSelector()">Select an item</p>
 
-<div class="item-selector-wrapper" [hidden]="hideItemSelector">
+<div class="item-selector-wrapper" [hidden]="hideRateSelector">
     <button class="btn btn-block btn-sm btn-link" (click)="hideSelector()">Close</button>
         
     <div class="loading" *ngIf="fetching">
@@ -9,8 +9,8 @@
     </div>
     
     <ul class="list-unstyled item-list">
-        <li class="item" *ngFor="let item of items" [ngClass]="{'selected': isSelected(item.id) }" (click)="selectItem(item)">
-            {{ item.code }}: {{ item.name }}
+        <li class="item" *ngFor="let item of rates" [ngClass]="{'selected': isSelected(item.id) }" (click)="selectItem(item)">
+            {{ item.name }} ({{ item.value }}%)
         </li>
     </ul>
 </div>

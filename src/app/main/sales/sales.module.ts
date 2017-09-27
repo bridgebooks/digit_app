@@ -27,6 +27,8 @@ import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component
 import { InventoryDetailComponent } from './inventory-detail/inventory-detail.component';
 import { CellItemSelectComponent } from './cell-item-select/cell-item-select.component';
 import { CellItemDescriptionComponent } from './cell-item-description/cell-item-description.component';
+import { CellAccountSelectComponent } from './cell-account-select/cell-account-select.component';
+import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-select.component';
 
 @NgModule({
   imports: [
@@ -47,7 +49,11 @@ import { CellItemDescriptionComponent } from './cell-item-description/cell-item-
     InvoiceItemTableComponent, 
     InventoryComponent, 
     ItemModalBtnComponent, 
-    InventoryDetailComponent, CellItemSelectComponent, CellItemDescriptionComponent
+    InventoryDetailComponent, 
+    CellItemSelectComponent, 
+    CellItemDescriptionComponent, 
+    CellAccountSelectComponent, 
+    CellTaxrateSelectComponent
   ],
   providers: [
     AlertService,

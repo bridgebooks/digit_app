@@ -1,72 +1,71 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
-import { SessionService, OrgService } from '../../../services';
+import { SessionService, OrgService } from '../../../services'
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'cell-item-select',
-  templateUrl: './cell-item-select.component.html',
-  styleUrls: ['./cell-item-select.component.scss']
+  selector: 'cell-account-select',
+  templateUrl: './cell-account-select.component.html',
+  styleUrls: ['./cell-account-select.component.scss']
 })
-export class CellItemSelectComponent implements OnInit, OnChanges {
+export class CellAccountSelectComponent implements OnInit, OnChanges, OnDestroy {
   @Input('selected') selected: any;
-
+  
   @Input('row') row: any;
 
-  @Output() itemSelected = new EventEmitter<any>();
+  @Output() accountSelected = new EventEmitter<any>();
 
   org: any;
-  items: any[] = [];
-  hideItemSelector: boolean = true;
+  accounts: any[] = [];
+  hideAccountSelector: boolean = true;
   fetching: boolean = false;
   fetching$: Subject<any> = new Subject();
 
   constructor(private session: SessionService, private orgService: OrgService) { }
-
+  
   isSelected(id) {
     return this.selected === id;
   }
 
   showSelector() {
-    this.hideItemSelector = false;
-    if (this.items.length < 1) this.refresh(); 
+    this.hideAccountSelector = false;
+    if (this.accounts.length < 1) this.refresh(); 
   }
 
   hideSelector() {
-    this.hideItemSelector = true;
+    this.hideAccountSelector = true;
     this.fetching$.next();
   }
 
-  selectItem(item) {
-    this.selected = item.id;
-    this.row.item_id = item.id;
-    this.row.item = item;
+  selectItem(account) {
+    this.selected = account.id;
+    this.row.account = account;    
+    this.accountSelected.emit(this.row)
 
-    this.itemSelected.emit(this.row)
-
-    this.hideItemSelector = true;
+    this.hideAccountSelector = true;
   }
-
+  
   refresh() {
     this.fetching = true;
 
     this.orgService
-      .getItems(this.org.id, { include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
+      .getAccounts(this.org.id, { include: '', perPage: 100 })
       .takeUntil(this.fetching$)
       .subscribe(response => {
-        this.items = response.data;
+        this.accounts = response.data;
         this.fetching = false;
       },
       err => {
         this.fetching = false;
       })
   }
-
+  
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.selected = changes.selected ? changes.selected.currentValue : this.selected;
+    console.log(changes.selected);
   }
 
   ngOnDestroy() {

@@ -3,20 +3,21 @@ import { SessionService, OrgService } from '../../../services';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'cell-item-select',
-  templateUrl: './cell-item-select.component.html',
-  styleUrls: ['./cell-item-select.component.scss']
+  selector: 'cell-taxrate-select',
+  templateUrl: './cell-taxrate-select.component.html',
+  styleUrls: ['./cell-taxrate-select.component.scss']
 })
-export class CellItemSelectComponent implements OnInit, OnChanges {
-  @Input('selected') selected: any;
+export class CellTaxrateSelectComponent implements OnInit {
 
+  @Input('selected') selected: any;
+  
   @Input('row') row: any;
 
-  @Output() itemSelected = new EventEmitter<any>();
+  @Output() rateSelected = new EventEmitter<any>();
 
   org: any;
-  items: any[] = [];
-  hideItemSelector: boolean = true;
+  rates: any[] = [];
+  hideRateSelector: boolean = true;
   fetching: boolean = false;
   fetching$: Subject<any> = new Subject();
 
@@ -27,33 +28,33 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
   }
 
   showSelector() {
-    this.hideItemSelector = false;
-    if (this.items.length < 1) this.refresh(); 
+    this.hideRateSelector = false;
+    if (this.rates.length < 1) this.refresh(); 
   }
 
   hideSelector() {
-    this.hideItemSelector = true;
+    this.hideRateSelector = true;
     this.fetching$.next();
   }
 
-  selectItem(item) {
-    this.selected = item.id;
-    this.row.item_id = item.id;
-    this.row.item = item;
+  selectItem(rate) {
+    this.selected = rate.id;
+    this.row.tax_rate_id = rate.id;
+    this.row.tax_rate = rate;
 
-    this.itemSelected.emit(this.row)
+    this.rateSelected.emit(this.row)
 
-    this.hideItemSelector = true;
+    this.hideRateSelector = true;
   }
 
   refresh() {
     this.fetching = true;
 
     this.orgService
-      .getItems(this.org.id, { include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
+      .getTaxRates(this.org.id, { perPage: 100 })
       .takeUntil(this.fetching$)
       .subscribe(response => {
-        this.items = response.data;
+        this.rates = response.data;
         this.fetching = false;
       },
       err => {
@@ -66,11 +67,14 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.selected = changes.selected ? changes.selected.currentValue : this.selected;
+    console.log(changes.selected);
+    this.selected = changes.selected.currentValue;
+    this.row = changes.row ? changes.row.currentValue : this.row;
   }
 
   ngOnDestroy() {
     this.fetching$.next();
     this.fetching$.complete();
   }
+
 }

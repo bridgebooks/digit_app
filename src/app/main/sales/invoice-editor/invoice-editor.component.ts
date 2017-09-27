@@ -22,6 +22,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     line_amount_type: null
   }
 
+  subtotal: number = 0;
+  tax: number = 0;
+  total: number = 0;
+
   constructor() { 
     let d: Date = new Date();
     this.raisedAtDate = {
@@ -39,8 +43,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     console.log($event);
   }
   
-  onRaisedAtDateChanged(event: IMyDateModel) {
-    this.raisedAtDate = event.date;
+  onRaisedAtDateChanged($event: IMyDateModel) {
+    this.raisedAtDate = $event.date;
+  }
+
+  onRowChanged($event) {
   }
 
   ngOnInit() {

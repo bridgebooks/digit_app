@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <app-invoice-item-table [type]="type" [startItems]="3"></app-invoice-item-table>
+      <app-invoice-item-table [type]="type" [startItems]="3" (rowChanged)="onRowChanged($event)"></app-invoice-item-table>
 
       <div class="row flex-items-md-between">
           <div class="col-md-4">
@@ -53,15 +53,15 @@
             <div class="invoice-totals">
               <div class="clearfix">
                 <label for="">Subtotal</label>
-                <span>0.00</span>
+                <span>{{ subtotal | number:'1.2' }}</span>
               </div>
               <div class="clearfix">
                 <label for="">Tax</label>
-                <span>0.00</span>
+                <span>{{ tax | number:'1.2' }}</span>
               </div>
               <div class="clearfix total">
                 <label for=""><strong>Total</strong></label>
-                <span><strong>0.00</strong></span>
+                <span><strong>{{ total | number:'1.2' }}</strong></span>
               </div>
             </div>
           </div>

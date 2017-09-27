@@ -16,13 +16,21 @@
           <cell-item-description [description]="item.description"></cell-item-description>
         </td>
         <td class="line-item-cell">
-          <input type="number" name="quantity" [(ngModel)]="item.quantity">
+          <input class="transparent" type="number" name="quantity" [(ngModel)]="item.quantity" (change)="calculateAmount(item)">
         </td>
-        <td class="line-item-cell"></td>
-        <td class="line-item-cell"></td>
-        <td class="line-item-cell"></td>
-        <td class="line-item-cell"></td>
-        <td class="line-item-cell"></td>
+        <td class="line-item-cell">
+          <input class="transparent" type="number" name="unit_price" [(ngModel)]="item.unit_price" (change)="calculateAmount(item)">
+        </td>
+        <td class="line-item-cell">
+          <input class="transparent" type="number" name="discount" [(ngModel)]="item.discount" (change)="calculateAmount(item)">
+        </td>
+        <td class="line-item-cell">
+          <cell-account-select [selected]="item.account_id" [row]="item" (accountSelected)="rowItemSelected($event)"></cell-account-select>
+        </td>
+        <td class="line-item-cell">
+          <cell-taxrate-select [selected]="item.tax_rate_id" [row]="item" (rateelected)="rowItemSelected($event)"></cell-taxrate-select>
+        </td>
+        <td class="line-item-cell">{{ item.amount }}</td>
       </tr>
     </tbody>
   </table>
