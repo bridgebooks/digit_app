@@ -1,6 +1,7 @@
-import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { Contact } from '../../../models/data/contact';
+import { State } from 'clarity-angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnInit, OnDestroy {
+export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy {
 
   route$: Subscription;
   org: any;
@@ -19,8 +20,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
   perPage: number = 30;
   currentPage: number = 1;
   total: number;
-  orderBy: string = 'name';
-  sortedBy: string = 'asc';
   loading: boolean;
   selected: Contact[] = [];
 
@@ -44,16 +43,21 @@ export class ContactListComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef) { 
   }
 
-  refresh(state: any) {
+  refresh(state: State) {
+        
+    state.sort = state.sort || {
+      by: 'name',
+      reverse: false
+    }
+
     const options = {
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
-      orderBy: this.orderBy,
-      sortedBy: this.sortedBy
     }
-    this.loading = true;
-    this.selected = [];
+
+    options['orderBy'] = state.sort.by;
+    options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
       .getContacts(this.org.id, options)
@@ -61,13 +65,12 @@ export class ContactListComponent implements OnInit, OnDestroy {
         this.total = response.total
         this.contacts = response.data;
         this.currentPage = response.current_page;
-
-        this.loading = false;
-        //this.cdRef.detectChanges();
       },
-      err => {
+      err => {},
+      () => {
         this.loading = false;
-        this.cdRef.detectChanges();
+        this.selected = [];
+        //this.cdRef.detectChanges();
       })
   }
 
@@ -168,13 +171,14 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   ngOnInit() { 
     this.org = this.session.getDefaultOrg()
-    this.loading = true;
+  }
 
+  ngAfterContentInit() {
     this.route$ = this.route.params
       .filter(params => params.type)
       .subscribe(params => {
         this.type = params.type;
-        this.refresh({});
+        this.loading = true;
       })
   }
 

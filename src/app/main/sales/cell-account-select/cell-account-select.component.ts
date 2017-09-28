@@ -65,7 +65,6 @@ export class CellAccountSelectComponent implements OnInit, OnChanges, OnDestroy 
 
   ngOnChanges(changes: SimpleChanges) {
     this.selected = changes.selected ? changes.selected.currentValue : this.selected;
-    console.log(changes.selected);
   }
 
   ngOnDestroy() {

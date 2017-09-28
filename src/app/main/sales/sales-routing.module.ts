@@ -23,6 +23,13 @@ const routes: Routes = [
         title: 'Edit Invoice - Bridge Books'
       }
     },
+    { 
+      path: 'edit/:id',
+      component: InvoiceEditComponent,
+      data: {
+        title: 'Edit Invoice - Bridge Books'
+      }
+    },
     {
       path: 'items',
       component: InventoryComponent,

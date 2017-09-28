@@ -12,7 +12,7 @@
     <div class="row">
 
       <div class="col-md-12 col-lg-12">
-        <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading">
+        <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
           <clr-dg-placeholder>Seems like you don't have any bank accounts setup!</clr-dg-placeholder>
           
           <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>

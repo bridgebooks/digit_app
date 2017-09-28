@@ -72,7 +72,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         .subscribe(response => {
           this.model = response.data;
           this.processing = false;
-          this.alertService.success('Contact', 'Contact sucessfully created', { timeOut: 5000 })
+          this.alertService.success('Contact', 'Contact sucessfully created', { timeOut: 3000 })
+          this.form.resetForm();
         }, err => {
           this.processing = false;
         })

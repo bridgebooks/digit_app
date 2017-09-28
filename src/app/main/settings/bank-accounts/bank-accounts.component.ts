@@ -15,7 +15,7 @@ export class BankAccountsComponent implements OnInit {
   perPage: number = 30;
   currentPage: number;
   total: number;
-  loading: boolean = false;
+  loading: boolean = true;
 
   deleteConfirmModalVisible: boolean = false;
   deleteProcessing: boolean = false;
@@ -28,8 +28,6 @@ export class BankAccountsComponent implements OnInit {
   }
 
   refresh(state: State) {
-    this.loading = true;
-
     state.sort = state.sort || {
       by: 'name',
       reverse: false

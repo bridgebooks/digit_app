@@ -9,44 +9,28 @@ export class InvoiceItemTableComponent implements OnInit {
   
   @Input('items') items;
   @Input('type') type: string;
-  @Input('startItems') startItems: number;
-  @Output() rowChanged = new EventEmitter<any>();
+  @Output() lineItemChanged = new EventEmitter<any>();
 
   columns: any[] = [
     { label: null, width: 35, },
     { label: 'Item', width: 114 },
     { label: 'Description', width: 204 },
     { label: 'Qty', width: 50 },
-    { label: 'Unit Price', width: 78 },
+    { label: 'Unit Price', width: 73 },
     { label: 'Disc %', width: 50 },
     { label: 'Account', width: 147 },
     { label: 'Tax Rate', width: 117 },
-    { label: 'Amount', width: 98 }
+    { label: 'Amount', width: 68 },
+    { label: null, width: 35 }
   ]
 
-  lineItems: any[] = []
-
   constructor() { }
-
-  addInitialItems() {
-    for (let i = 0; i < this.startItems; i++) {
-      this.lineItems.push({
-        item_id: null,
-        description: null,
-        quantity: null,
-        unit_price: null,
-        discount: null,
-        account_id: null,
-        tax_rate_id: null,
-        amount: null
-      });
-    }
-  }
 
   rowItemSelected(row) {
     row.quantity = 1;
 
     if (this.type === 'acc_rec' && row.item.sale_account) {
+
       row.account_id = row.item.sale_account.data.id;
       row.description = row.item.sale_description;
       row.unit_price = row.item.sale_unit_price;
@@ -54,6 +38,7 @@ export class InvoiceItemTableComponent implements OnInit {
       row.tax_rate = row.item.sale_tax ?  row.item.sale_tax.data : row.tax_rate;
       row.tax_rate_id = row.item.sale_tax ? row.item.sale_tax.data.id : row.tax_rate.id
     } else if (this.type === 'acc_pay' && row.item.purhcase_account) {
+      
       row.account_id = row.item.purhcase_account.data.id;
       row.description = row.item.purchase_description;
       row.unit_price = row.item.purchase_unit_price;
@@ -61,19 +46,18 @@ export class InvoiceItemTableComponent implements OnInit {
       row.tax_rate = row.item.purchase_tax ?  row.item.purchase_tax.data : row.tax_rate;
     }
 
-    this.calculateAmount(row)
+    this.calculateLineAmount(row)
   }
 
-  calculateAmount(row) {
+  calculateLineAmount(row) {
     let discount = 0;
     if (row.discount && row.unit_price) discount = (row.discount/100) * row.unit_price;
 
     row.amount = (row.unit_price * row.quantity) - (discount * row.unit_price);
-    this.rowChanged.emit(row);
+    this.lineItemChanged.emit(row);
   }
 
   ngOnInit() {
-    if (this.startItems && this.startItems > 0) this.addInitialItems()
   }
 
 }

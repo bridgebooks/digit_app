@@ -6,7 +6,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of lineItems">
+      <tr *ngFor="let item of items">
         <td class="line-item-cell">
           <clr-icon shape="view-list" class="line-item-reorder"></clr-icon>
         </td>
@@ -16,13 +16,13 @@
           <cell-item-description [description]="item.description"></cell-item-description>
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="quantity" [(ngModel)]="item.quantity" (change)="calculateAmount(item)">
+          <input class="transparent" type="number" name="quantity" [(ngModel)]="item.quantity" (change)="calculateLineAmount(item)">
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="unit_price" [(ngModel)]="item.unit_price" (change)="calculateAmount(item)">
+          <input class="transparent" type="number" name="unit_price" [(ngModel)]="item.unit_price" (change)="calculateLineAmount(item)">
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="discount" [(ngModel)]="item.discount" (change)="calculateAmount(item)">
+          <input class="transparent" type="number" name="discount" [(ngModel)]="item.discount" (change)="calculateLineAmount(item)">
         </td>
         <td class="line-item-cell">
           <cell-account-select [selected]="item.account_id" [row]="item" (accountSelected)="rowItemSelected($event)"></cell-account-select>
@@ -30,7 +30,10 @@
         <td class="line-item-cell">
           <cell-taxrate-select [selected]="item.tax_rate_id" [row]="item" (rateelected)="rowItemSelected($event)"></cell-taxrate-select>
         </td>
-        <td class="line-item-cell">{{ item.amount }}</td>
+        <td class="line-item-cell">{{ item.amount | number:'1.2-2' }}</td>
+        <td class="line-item-cell">
+            <clr-icon shape="times"></clr-icon>            
+        </td>
       </tr>
     </tbody>
   </table>

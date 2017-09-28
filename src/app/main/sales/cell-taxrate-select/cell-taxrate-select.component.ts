@@ -67,7 +67,6 @@ export class CellTaxrateSelectComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes.selected);
     this.selected = changes.selected.currentValue;
     this.row = changes.row ? changes.row.currentValue : this.row;
   }

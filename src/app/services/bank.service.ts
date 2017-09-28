@@ -17,14 +17,22 @@ interface BanksResponse {
 @Injectable()
 export class BankService {
 
+  banks: BanksResponse = null;
+
   private baseUrl: string = environment.apiUrl + 'banks';
 
   constructor(private http: HttpClient) { }
 
   all(): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const options = { headers: headers };
-
-    return this.http.get<BanksResponse>(this.baseUrl, options);
+    if (this.banks != null) {
+      return Observable.of(this.banks)
+    } else {
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      const options = { headers: headers };
+  
+      return this.http
+        .get<BanksResponse>(this.baseUrl, options)
+        .do(banks => this.banks = banks)
+    }
   }
 }
