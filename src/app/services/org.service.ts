@@ -88,7 +88,6 @@ export class OrgService {
         params = params.append(key, options[key]);
       })
     }
-
     return this.http.get<TaxRatesResponse>(url, { 
       headers: headers,
       params: params

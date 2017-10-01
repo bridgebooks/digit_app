@@ -19,6 +19,7 @@ import {
   ContactService, 
   OrgService,
   ItemService,
+  InvoiceService
 } from '../../services';
 import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
@@ -60,7 +61,8 @@ import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-s
     SearchService,
     ContactService,
     OrgService,
-    ItemService
+    ItemService,
+    InvoiceService
   ]
 })
 export class SalesModule { }

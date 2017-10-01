@@ -29,7 +29,7 @@
                 <span>{{ account.account_number }}</span>
             </clr-dg-cell>
             <clr-dg-cell>{{ account.bank.name }}</clr-dg-cell>
-            <clr-dg-cell><a (click)="delete(account)">Delete</a></clr-dg-cell>
+            <clr-dg-cell><a (click)="onDelete(account)">Delete</a></clr-dg-cell>
           </clr-dg-row>
   
           <clr-dg-footer>
@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline" (click)="deleteConfirmModalVisible = false">Cancel</button>
-                <button type="button" class="btn btn-primary" [clrLoading]="deleteProcessing" [disabled]="deleteBtnDisabled">Delete</button>
+                <button type="button" class="btn btn-primary" [clrLoading]="deleteProcessing" [disabled]="deleteBtnDisabled" (click)="delete()">Delete</button>
             </div>
         </clr-modal>
       </div>

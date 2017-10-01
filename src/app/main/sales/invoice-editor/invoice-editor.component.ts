@@ -9,8 +9,10 @@ import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
 
 export class InvoiceEditorComponent implements OnInit, OnChanges {
   @Input('type') type;
+  @Input('org') org;
   @Input('editing') editing: boolean;
   @Input('model') model;
+  @Output() onSaveInvoice = new EventEmitter<any>();
 
   datePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd'
@@ -19,6 +21,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   raisedAtDate: IMyDate = { year: 0, month: 0, day: 0 };
 
   private modelDefaults =  {
+    org_id: null,
     contact_id: null,
     type: this.type,
     invoice_no: null,
@@ -54,6 +57,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   }
   
   onRaisedAtDateChanged($event: IMyDateModel) {
+    this.model.raised_at = $event.formatted;
     this.raisedAtDate = $event.date;
   }
 
@@ -117,9 +121,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     }
   }
 
-  addLineItems(count: number = 3) {
+  addLineItems(count: number = 1) {
     for (let i = 0; i < count; i++) {
       this.model.items.push({
+        row_order: i,
         item_id: null,
         description: null,
         quantity: null,
@@ -132,8 +137,16 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     }
   }
 
+  save() {
+    this.model.type = this.type;
+    this.model.due_at = this.model.due_at.formatted ? this.model.due_at.formatted : null;
+    this.onSaveInvoice.emit(this.model);
+  }
+
   ngOnInit() {
     if (!this.editing) {
+      this.modelDefaults.org_id = this.org.id;
+      this.modelDefaults.raised_at = `${this.raisedAtDate.year}-${this.raisedAtDate.month}-${this.raisedAtDate.day}`;
       this.addLineItems();
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, AccountsService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid'
 import { Account } from '../../../models/data/account';
@@ -24,7 +24,7 @@ export class ChartAccountsComponent implements OnInit {
   perPage: number = 30;
   currentPage: number;
   total: number;
-  loading: boolean = false;
+  loading: boolean = true;
 
   enableBulkOptions: boolean = false;
   deleteConfirmModalVisible: boolean = false;
@@ -32,7 +32,11 @@ export class ChartAccountsComponent implements OnInit {
   deleteBtnDisabled: boolean = false;
   toDelete: Account[] | Account | null;
 
-  constructor(private alertService: AlertService, private session: SessionService, private orgService: OrgService, private accountService: AccountsService) { }
+  constructor(private alertService: AlertService, 
+    private session: SessionService, 
+    private orgService: OrgService, 
+    private accountService: AccountsService,
+    private cdRef: ChangeDetectorRef) { }
   
   onDeleteSelected($event) {
     this.delete(this.selected);
@@ -96,8 +100,6 @@ export class ChartAccountsComponent implements OnInit {
   }
   
   refresh(state: State) {
-    this.loading = true;
-
     state.sort = state.sort || {
       by: 'code',
       reverse: false
@@ -117,12 +119,13 @@ export class ChartAccountsComponent implements OnInit {
       .subscribe(response => {
         this.accounts = response.data;
         this.total = response.total;
-        this.currentPage = response.current_page;
-        
-        this.loading = false;
+        this.currentPage = response.current_page;        
       },
       err => {
+      },
+      () => {
         this.loading = false;
+        this.cdRef.detectChanges();
       })
   }
 

@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-md-12 col-lg-12">
-      <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
+      <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
         <clr-dg-placeholder>Seems like you don't have any accounts!</clr-dg-placeholder>
         
         <clr-dg-column [clrDgField]="'code'">Code</clr-dg-column>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, BankAccountService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid'
 import { BankAccount } from '../../../models/data/bank-account';
@@ -20,11 +20,32 @@ export class BankAccountsComponent implements OnInit {
   deleteConfirmModalVisible: boolean = false;
   deleteProcessing: boolean = false;
   deleteBtnDisabled: boolean = false;
+  toDelete: BankAccount;
 
-  constructor(private alertService: AlertService, private session: SessionService, private bankAccountService: BankAccountService) { }
+  constructor(private alertService: AlertService, 
+    private session: SessionService, 
+    private bankAccountService: BankAccountService,
+    private cdRef: ChangeDetectorRef) { }
 
-  delete(account: BankAccount) {
-    
+  onDelete(account: BankAccount) {
+     this.deleteConfirmModalVisible = true;
+     this.toDelete = account;
+  }
+
+  delete() {
+    this.deleteProcessing = true;
+    this.deleteBtnDisabled = true;
+    this.bankAccountService.delete(this.org.id, this.toDelete.id)
+      .subscribe(response => {
+        this.deleteConfirmModalVisible = false;
+        this.deleteProcessing = false;
+        this.deleteBtnDisabled = false;
+        this.refresh({});
+      },
+      err => {
+        this.deleteProcessing = false;
+        this.deleteBtnDisabled = false;
+      })
   }
 
   refresh(state: State) {
@@ -46,12 +67,13 @@ export class BankAccountsComponent implements OnInit {
       .subscribe(response => {
         this.accounts = response.data;
         this.total = response.total;
-        this.currentPage = response.current_page;
-        
-        this.loading = false;
+        this.currentPage = response.current_page;        
       },
       err => {
+      },
+      () => {
         this.loading = false;
+        this.cdRef.detectChanges();
       })
   }
 
