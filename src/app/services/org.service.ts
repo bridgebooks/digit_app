@@ -88,7 +88,6 @@ export class OrgService {
         params = params.append(key, options[key]);
       })
     }
-
     return this.http.get<TaxRatesResponse>(url, { 
       headers: headers,
       params: params
@@ -124,6 +123,20 @@ export class OrgService {
     })
 
     return this.http.get<ItemsResponse>(url, { headers, params })
+  }
+
+  getInvoices(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/invoices`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<any>(url, { headers, params })
   }
 
   update(id: string, body: object) {

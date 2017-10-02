@@ -1,7 +1,20 @@
+.table {
+    table-layout: fixed;
+}
 .line-item-cell {
     border-right: 1px solid #eee;
+    position: relative;
 }
 
 .line-item-reorder {
     cursor: move;
+}
+
+.transparent {
+    border-bottom: none;
+    width: 100%;
+    &:focus {
+        border-bottom: none !important;
+        background-size: 0% 0% !important;
+    }
 }

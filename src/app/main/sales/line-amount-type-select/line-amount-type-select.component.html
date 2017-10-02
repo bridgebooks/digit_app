@@ -7,3 +7,11 @@
         <button type="button" *ngFor="let option of lineAmountTypeOptions" clrDropdownItem (click)="select(option)">{{ option.label }}</button>
     </clr-dropdown-menu>
 </clr-dropdown>
+
+<clr-signpost>
+    <clr-signpost-content [clrPosition]="'bottom-middle'" *clrIfOpen>
+        <p><strong>Tax Exclusive: </strong> The tax is not included in the line item amount</p>
+        <p><strong>Tax Inclusive: </strong> The tax is included in the line item amount</p>
+        <p><strong>No Tax: </strong> No tax is applied</p>
+    </clr-signpost-content>
+</clr-signpost>

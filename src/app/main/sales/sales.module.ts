@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 import { SharedModule } from '../../shared/shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
+import { MomentModule, DateFormatPipe } from 'angular2-moment';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
@@ -19,12 +20,19 @@ import {
   ContactService, 
   OrgService,
   ItemService,
+  InvoiceService
 } from '../../services';
 import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component';
 import { InventoryDetailComponent } from './inventory-detail/inventory-detail.component';
+import { CellItemSelectComponent } from './cell-item-select/cell-item-select.component';
+import { CellItemDescriptionComponent } from './cell-item-description/cell-item-description.component';
+import { CellAccountSelectComponent } from './cell-account-select/cell-account-select.component';
+import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-select.component';
+import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
+import { InvoiceEmailButtonComponent } from './invoice-email-button/invoice-email-button.component';
 
 @NgModule({
   imports: [
@@ -32,6 +40,7 @@ import { InventoryDetailComponent } from './inventory-detail/inventory-detail.co
     FormsModule,
     ClarityModule.forRoot(),
     SharedModule,
+    MomentModule,
     MyDatePickerModule,
     SalesRoutingModule
   ],
@@ -45,14 +54,20 @@ import { InventoryDetailComponent } from './inventory-detail/inventory-detail.co
     InvoiceItemTableComponent, 
     InventoryComponent, 
     ItemModalBtnComponent, 
-    InventoryDetailComponent
+    InventoryDetailComponent, 
+    CellItemSelectComponent, 
+    CellItemDescriptionComponent, 
+    CellAccountSelectComponent, 
+    CellTaxrateSelectComponent, InvoiceDetailComponent, InvoiceEmailButtonComponent
   ],
   providers: [
     AlertService,
     SearchService,
     ContactService,
     OrgService,
-    ItemService
+    ItemService,
+    InvoiceService,
+    DateFormatPipe
   ]
 })
 export class SalesModule { }

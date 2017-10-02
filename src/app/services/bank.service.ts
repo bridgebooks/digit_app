@@ -22,9 +22,9 @@ export class BankService {
   constructor(private http: HttpClient) { }
 
   all(): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const options = { headers: headers };
-
-    return this.http.get<BanksResponse>(this.baseUrl, options);
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      const options = { headers: headers };
+  
+      return this.http.get<BanksResponse>(this.baseUrl, options)
   }
 }

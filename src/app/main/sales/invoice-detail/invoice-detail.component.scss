@@ -1,0 +1,49 @@
+.spinner-container
+{
+    width: 200px;
+    margin: 20% auto;
+    text-align: center;
+}
+
+.invoice-meta p {
+    margin: 0;
+}
+
+.invoice-actions {
+}
+
+.line-item-cell {
+    border-right: 1px solid #eee;
+    text-align: left;
+    position: relative;
+}
+
+.invoice-totals {
+    padding: 10px 18px;
+}
+
+.invoice-totals div 
+{
+    label, span {
+        text-align: right;        
+    }
+
+    label {
+        float: left;
+        width: 20%;
+    }
+
+    span {
+        float: right;
+        width: 80%;
+    }
+}
+
+.total {
+    border-top: 1px solid #333;
+    padding: 10px 0px;
+}
+.total label, .total span {
+    font-size: 2em;
+    text-transform: uppercase;
+}

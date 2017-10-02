@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, AfterContentInit, SimpleChanges } from '@angular/core';
 import { BankService } from '../../../services';
 
 @Component({
@@ -7,7 +7,7 @@ import { BankService } from '../../../services';
   styleUrls: ['./bank-select.component.scss'],
   providers: [BankService]
 })
-export class BankSelectComponent implements OnInit, OnChanges {
+export class BankSelectComponent implements OnInit, OnChanges, AfterContentInit {
   @Input('selected') selected: string;
 
   banks: any[];
@@ -21,15 +21,17 @@ export class BankSelectComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) { 
+  }
+
+  ngAfterContentInit() {
     this.bankService.all().subscribe(response => {
       this.banks = response.data;
       this.banks.sort((a, b) => {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
       })
     })
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    
   }
 }

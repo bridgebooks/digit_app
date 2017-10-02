@@ -1,0 +1,16 @@
+<p *ngIf="selected" class="text" (click)="showSelector()">{{ row.account.code }}: {{ row.account.name }}</p>
+<p *ngIf="!selected" class="text" (click)="showSelector()">Select an account</p>
+
+<div class="item-selector-wrapper" [hidden]="hideAccountSelector">
+    <button class="btn btn-block btn-sm btn-link" (click)="hideSelector()">Close</button>
+        
+    <div class="loading" *ngIf="fetching">
+        <span class="spinner">Loading...</span>
+    </div>
+    
+    <ul class="list-unstyled item-list">
+        <li class="item" *ngFor="let item of accounts" [ngClass]="{'selected': isSelected(item.id) }" (click)="selectItem(item)">
+            {{ item.code }}: {{ item.name }}
+        </li>
+    </ul>
+</div>

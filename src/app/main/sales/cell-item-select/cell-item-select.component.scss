@@ -1,0 +1,32 @@
+.text {
+    margin: 0;
+}
+
+.item-selector-wrapper {
+    position: absolute;
+    background: #FFF;
+    border: 1px solid #CCC;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 250px;
+    overflow-y: auto;
+
+    .loading {
+        width: 200px;
+        margin: 10% auto;
+    }
+
+    .item {
+        text-align: left;
+        padding: 10px 15px;
+        transition: all 0.25s ease-in-out;
+
+        &:hover, &.selected {
+            background-color: #e6f5fa;
+            cursor: pointer;
+            border: 1px dotted;
+        }
+    }
+}

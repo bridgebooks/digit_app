@@ -27,7 +27,7 @@
         <a class="btn btn-outline" [routerLink]="['/contacts/edit', contact.id]">Edit</a>
         <clr-dropdown>
             <button type="button" class="btn btn-outline" clrDropdownTrigger>
-                Optons
+                Options
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu clrPosition="right-buttom" *clrIfOpen>
@@ -62,7 +62,7 @@
               <li class="contact-item">
                 <clr-icon shape="envelope"></clr-icon> Email
                 <div class="item-content">
-                  <a *ngIf="contact.email" href="mailto:{{contact.email}}">{{ contact.phone }}</a>
+                  <a *ngIf="contact.email" href="mailto:{{contact.email}}">{{ contact.email }}</a>
                   <a *ngIf="!contact.email">N/A</a>    
                 </div>           
               </li>

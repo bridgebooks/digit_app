@@ -27,7 +27,9 @@
     "@webcomponents/custom-elements": "1.0.0",
     "angular-2-local-storage": "^1.0.1",
     "angular2-jwt": "^0.2.3",
+    "angular2-moment": "^1.7.0",
     "angular2-notifications": "^0.7.7",
+    "angular2-pubsub": "next",
     "body-parser": "^1.17.2",
     "clarity-angular": "^0.10.5",
     "clarity-icons": "^0.10.5",
@@ -42,6 +44,7 @@
     "mydatepicker": "^2.0.29",
     "ng2-file-upload": "^1.2.1",
     "rxjs": "^5.4.2",
+    "ts-md5": "^1.2.2",
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
@@ -62,5 +65,9 @@
     "ts-node": "~3.3.0",
     "tslint": "~5.5.0",
     "typescript": "~2.4.2"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }

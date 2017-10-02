@@ -13,6 +13,11 @@
           <p class="contact-email">{{ item.email }}</p>
         </li>
       </ul>
+
+      <div *ngIf="!fetching && results.length < 1" style="text-align: center;">
+          <p>Seems like you don't have any contacts!</p>
+          <a class="btn btn-outline-primary" routerLink="/contacts/edit">Add Contact</a>
+      </div>
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-outline" (click)="selectModalVisible = false">Cancel</button>
