@@ -11,6 +11,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   @Input('type') type;
   @Input('org') org;
   @Input('editing') editing: boolean;
+  @Input('saving') saving: boolean;
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
 
@@ -30,12 +31,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     raised_at: null,
     line_amount_type: 'exclusive',
     items: [],
-    status: 'draft'
+    status: 'draft',
+    sub_total: 0.00,
+    tax_total: 0.00,
+    total: 0.00
   }
-
-  subtotal: number = 0;
-  tax: number = 0;
-  total: number = 0;
 
   constructor() { 
     let d: Date = new Date();
@@ -74,7 +74,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       total = total + item.amount;
     })
 
-    this.subtotal = total;
+    this.model.sub_total = total;
   }
 
   computeTax() {
@@ -100,23 +100,23 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       }
     })
 
-    this.tax = total;
+    this.model.tax_total = total;
   }
 
   computeTotal() {
     switch (this.model.line_amount_type) {
       case 'inclusive':
-        this.total = this.subtotal;
+        this.model.total = this.model.sub_total;
         break;
       case 'exclusive':
-        this.total = this.subtotal + this.tax;
+        this.model.total = this.model.sub_total + this.model.tax_total;
         break;
       case 'no_tax':
-        this.total = this.subtotal;
+        this.model.total = this.model.sub_total;
         break;
       
       default:
-        this.total = this.subtotal + this.tax;
+        this.model.total = this.model.sub_total + this.model.tax_total;
         break;
     }
   }
@@ -137,15 +137,15 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     }
   }
 
-  save() {
-    this.model.type = this.type;
-    this.model.due_at = this.model.due_at.formatted ? this.model.due_at.formatted : null;
+  save(status: string = 'draft') {
+    this.model.status = status;
     this.onSaveInvoice.emit(this.model);
   }
 
   ngOnInit() {
     if (!this.editing) {
       this.modelDefaults.org_id = this.org.id;
+      this.modelDefaults.type = this.type;
       this.modelDefaults.raised_at = `${this.raisedAtDate.year}-${this.raisedAtDate.month}-${this.raisedAtDate.day}`;
       this.addLineItems();
     }
@@ -155,5 +155,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.editing = changes.editing ? changes.editing.currentValue : this.editing;
     this.type = changes.type ? changes.type.currentValue : this.type;
     this.model = changes.model ? changes.model.currentValue : this.modelDefaults;
+    this.saving = changes.saving ? changes.saving.currentValue : this.saving;
   }
 }

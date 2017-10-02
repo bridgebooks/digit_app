@@ -53,7 +53,7 @@ export class InvoiceItemTableComponent implements OnInit {
     let discount = 0;
     if (row.discount && row.unit_price) discount = (row.discount/100) * row.unit_price;
 
-    row.amount = (row.unit_price * row.quantity) - (discount * row.unit_price);
+    row.amount = (row.unit_price * row.quantity) - discount;
     this.lineItemChanged.emit(row);
   }
 

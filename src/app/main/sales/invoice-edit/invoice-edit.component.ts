@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SessionService, InvoiceService } from '../../../services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService, SessionService, InvoiceService } from '../../../services';
 import { InvoiceUtils } from './invoice-utils';
 
 @Component({
@@ -11,8 +11,15 @@ import { InvoiceUtils } from './invoice-utils';
 export class InvoiceEditComponent implements OnInit, OnDestroy {
   org: any;
   editing: boolean;
+  saving: boolean = false;
 
-  constructor(private route: ActivatedRoute, private session: SessionService, private invoiceService: InvoiceService) { }
+  constructor(
+    private alert: AlertService,
+    private router: Router,
+    private route: ActivatedRoute, 
+    private session: SessionService, 
+    private invoiceService: InvoiceService
+  ) { }
 
   buildInvoice(model) {
     let builder = new InvoiceUtils.Builder();
@@ -27,13 +34,27 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       .setInvoiceNo(model.invoice_no)
       .setInvoiceReference(model.reference)
       .setItems(model.items)
-      .setStatus(model.status);
+      .setStatus(model.status)
+      .setSubTotal(model.sub_total)
+      .setTaxTotal(model.tax_total)
+      .setTotal(model.total);
     
     return builder.get()
   }
   saveInvoice($event) {
-    let model = this.buildInvoice($event);
-    this.invoiceService.create(model).subscribe(response => console.log(response));
+    if (!this.editing) {
+      let model = this.buildInvoice($event);
+      this.saving = true;
+      this.invoiceService.create(model)
+        .subscribe(response => { 
+          this.saving = false;
+          this.alert.success('Invoice', 'Invoice successfully created', { timeOut: 3000 })
+          this.router.navigate(['/sales/invoices']);
+        }, 
+        err => {
+          this.saving = false;
+        });
+    }
   }
 
   ngOnInit() {

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 import { SharedModule } from '../../shared/shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
+import { MomentModule, DateFormatPipe } from 'angular2-moment';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesComponent } from './sales.component';
@@ -30,6 +31,8 @@ import { CellItemSelectComponent } from './cell-item-select/cell-item-select.com
 import { CellItemDescriptionComponent } from './cell-item-description/cell-item-description.component';
 import { CellAccountSelectComponent } from './cell-account-select/cell-account-select.component';
 import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-select.component';
+import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
+import { InvoiceEmailButtonComponent } from './invoice-email-button/invoice-email-button.component';
 
 @NgModule({
   imports: [
@@ -37,6 +40,7 @@ import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-s
     FormsModule,
     ClarityModule.forRoot(),
     SharedModule,
+    MomentModule,
     MyDatePickerModule,
     SalesRoutingModule
   ],
@@ -54,7 +58,7 @@ import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-s
     CellItemSelectComponent, 
     CellItemDescriptionComponent, 
     CellAccountSelectComponent, 
-    CellTaxrateSelectComponent
+    CellTaxrateSelectComponent, InvoiceDetailComponent, InvoiceEmailButtonComponent
   ],
   providers: [
     AlertService,
@@ -62,7 +66,8 @@ import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-s
     ContactService,
     OrgService,
     ItemService,
-    InvoiceService
+    InvoiceService,
+    DateFormatPipe
   ]
 })
 export class SalesModule { }

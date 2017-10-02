@@ -17,8 +17,8 @@ export module InvoiceUtils {
             return this;
         }
 
-        setDueDate(value: string): Builder {
-            this.model.due_at = value;
+        setDueDate(value: any): Builder {
+            this.model.due_at = value.formatted ? value.formatted : null;
             return this;
         }
 
@@ -72,6 +72,21 @@ export module InvoiceUtils {
             this.model.status = value;
             return this;
         }
+
+        setSubTotal(value: number): Builder {
+           this.model.sub_total = value;
+           return this; 
+        }
+
+        setTaxTotal(value: number): Builder {
+            this.model.tax_total = value;
+            return this; 
+        }
+
+        setTotal(value: number): Builder {
+            this.model.total = value;
+            return this; 
+         }
 
         get() {
             return this.model;

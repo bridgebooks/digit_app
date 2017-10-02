@@ -1,0 +1,48 @@
+<button class="btn btn-default" (click)="modalVisible = true"><clr-icon shape="envelope"></clr-icon> Email</button>
+
+<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Send Invoice</h3>
+  <div class="modal-body">
+    <form class="compact" #invoiceEmailForm="ngForm" novalidate>
+      <section class="form-block">
+        <div class="form-group">
+          <label for="to" class="required">To</label>
+          <input type="text" size="70" name="to" [(ngModel)]="model.to">
+          <span class="help-text">Separate multiple email addresses with a comma (,)</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">Email Template</label>
+          <div class="select">
+            <select name="template" name="template" (change)="onTemplateChange($event.target.value)">
+                <option *ngFor="let template of templates" [value]="template.value">{{ template.label }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="subject" class="required">Subject</label>
+            <input type="text" size="70" name="subject" [(ngModel)]="model.subject">
+        </div>
+
+        <div class="form-group">
+            <label for="subject" class="required">Message</label>
+            <textarea name="message" id="message" rows="10" [(ngModel)]="model.message"></textarea>
+        </div>
+
+        <div class="form-group">
+            <clr-checkbox
+                name="send_copy"
+                id="send_copy"
+                [(ngModel)]="model.send_copy">
+                Send me a copy
+            </clr-checkbox>
+        </div>  
+      </section>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="invoiceEmailForm.invalid || sending" [clrLoading]="sending" (click)="send()">Send</button>
+      <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
+  </div>
+</clr-modal>

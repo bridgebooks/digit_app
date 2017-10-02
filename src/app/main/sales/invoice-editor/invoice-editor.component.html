@@ -54,15 +54,15 @@
             <div class="invoice-totals">
               <div class="clearfix">
                 <label for="">Subtotal</label>
-                <span>{{ subtotal | number:'1.2-2' }}</span>
+                <span>{{ model.sub_total | number:'1.2-2' }}</span>
               </div>
               <div class="clearfix">
                 <label for="">Tax</label>
-                <span>{{ tax | number:'1.2-2' }}</span>
+                <span>{{ model.tax_total | number:'1.2-2' }}</span>
               </div>
               <div class="clearfix total">
                 <label for=""><strong>Total</strong></label>
-                <span><strong>{{ total | number:'1.2-2' }}</strong></span>
+                <span><strong>{{ model.total | number:'1.2-2' }}</strong></span>
               </div>
             </div>
           </div>
@@ -71,7 +71,16 @@
 
   </div>
   <div class="card-footer">
-    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    <clr-dropdown>
+      <button type="button" class="btn btn-primary" clrDropdownTrigger [clrLoading]="saving" [disabled]="saving">
+          Save
+          <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
+          <button type="button" clrDropdownItem (click)="save('draft')">Save as draft</button>
+          <button type="button" clrDropdownItem (click)="save('submitted')">Save &amp; submit for approval</button>
+      </clr-dropdown-menu>
+  </clr-dropdown>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>
 </div>
