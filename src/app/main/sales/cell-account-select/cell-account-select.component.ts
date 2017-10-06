@@ -48,7 +48,7 @@ export class CellAccountSelectComponent implements OnInit, OnChanges, OnDestroy 
     this.fetching = true;
 
     this.orgService
-      .getAccounts(this.org.id, { include: '', perPage: 100 })
+      .getAccounts(this.org.id, { ref: '', include: 'type', perPage: 100 })
       .takeUntil(this.fetching$)
       .subscribe(response => {
         this.accounts = response.data;

@@ -62,6 +62,7 @@ export class AccountSelectComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.selected = this.selected ? this.selected : -1;
     const options = {
+      ref: '',
       include: 'type',
       perPage: 150,
     }

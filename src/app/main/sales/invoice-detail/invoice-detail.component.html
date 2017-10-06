@@ -22,6 +22,7 @@
             </div>
             <div class="col-lg-6 col-md-5 invoice-actions">
               <invoice-email-button [invoice]="invoice"></invoice-email-button>
+              <invoice-status-button [id]="invoice.id" [current]="invoice.status" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
             </div>
           </div>
       </div>

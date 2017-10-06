@@ -50,7 +50,7 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
     this.fetching = true;
 
     this.orgService
-      .getItems(this.org.id, { include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
+      .getItems(this.org.id, { ref: 'invoices', include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
       .takeUntil(this.fetching$)
       .subscribe(response => {
         this.items = response.data;

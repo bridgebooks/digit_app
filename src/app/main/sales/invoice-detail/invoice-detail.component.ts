@@ -31,12 +31,15 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
     private invoices: InvoiceService
   ) { }
 
+  onStatusChanged($event) {
+    this.invoice.status = $event;
+  }
+
   fetchInvoice(id: string) {
-    this.invoices.get(id, { include: 'contact,items' })
+    this.invoices.get(id, { ref: 'invoices', include: 'contact,items' })
       .subscribe(response => {
         this.loading = false;
         this.invoice = response.data;
-        console.log(this.invoice);
       },
       err => {
         this.loading = false;

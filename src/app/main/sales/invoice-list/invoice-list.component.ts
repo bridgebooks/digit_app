@@ -31,14 +31,14 @@ export class InvoiceListComponent implements OnInit {
   refresh(state: State) {
     state.sort = state.sort || {
       by: 'created_at',
-      reverse: false
+      reverse: true
     }
 
     const options = {
-      include: 'contact',
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
+      include: 'contact'      
     }
 
     options['orderBy'] = state.sort.by;
