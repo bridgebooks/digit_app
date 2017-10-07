@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
-import { SessionService, OrgService } from '../../../services';
+import { SessionService, OrgService, InvoiceService } from '../../../services';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -20,7 +20,7 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
   fetching: boolean = false;
   fetching$: Subject<any> = new Subject();
 
-  constructor(private session: SessionService, private orgService: OrgService) { }
+  constructor(private session: SessionService, private orgService: OrgService, private invoices: InvoiceService) { }
 
   isSelected(id) {
     return this.selected === id;
@@ -50,7 +50,7 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
     this.fetching = true;
 
     this.orgService
-      .getItems(this.org.id, { include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
+      .getItems(this.org.id, { ref: 'invoices', include: 'sale_account,purchase_account,sale_tax,purchase_tax', perPage: 100 })
       .takeUntil(this.fetching$)
       .subscribe(response => {
         this.items = response.data;

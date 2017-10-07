@@ -24,7 +24,7 @@ export class LogoUploadComponent implements OnInit, OnChanges {
   uploadBtnDisabled: boolean = true;
 
   constructor(private alertService: AlertService, private jwtService: JwtService) { 
-    const uploadUrl = `${environment.apiUrl}/v1/orgs/logo`;
+    const uploadUrl = `${environment.apiUrl}orgs/logo`;
 
     this.uploader = new FileUploader({
       url: uploadUrl,

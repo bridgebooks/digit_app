@@ -32,8 +32,14 @@ export class LineAmountTypeSelectComponent implements OnInit, OnChanges {
     this.onTypeSelect.emit(option.value);
   }
 
+  getType(value) {
+    return this.lineAmountTypeOptions.filter(t => {
+      return t.value === value;
+    })[0]
+  }
+
   ngOnInit() {
-    this.selectedOption = this.selected ? this.selected : this.lineAmountTypeOptions[0].label;
+    this.selectedOption = this.selected ? this.getType(this.selected).label : this.lineAmountTypeOptions[0].label;
   }
 
   ngOnChanges(changes: SimpleChanges) {

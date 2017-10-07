@@ -125,10 +125,38 @@ export class OrgService {
     return this.http.get<ItemsResponse>(url, { headers, params })
   }
 
-  getInvoices(id: string, options?: object) {
+  getInvoiceEvents(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
-    const url = `${this.baseUrl}/${id}/invoices`;
+    const url = `${this.baseUrl}/${id}/invoice_events`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<any>(url, { headers, params })
+  }
+
+  getSaleInvoices(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/sales`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<any>(url, { headers, params })
+  }
+
+  getBills(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/bills`;
 
     if (options) {
       Object.keys(options).forEach(key => {

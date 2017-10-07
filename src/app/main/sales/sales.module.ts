@@ -33,6 +33,9 @@ import { CellAccountSelectComponent } from './cell-account-select/cell-account-s
 import { CellTaxrateSelectComponent } from './cell-taxrate-select/cell-taxrate-select.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { InvoiceEmailButtonComponent } from './invoice-email-button/invoice-email-button.component';
+import { InvoiceStatusButtonComponent } from './invoice-status-button/invoice-status-button.component';
+import { InvoicePrintButtonComponent } from './invoice-print-button/invoice-print-button.component';
+import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-button.component';
 
 @NgModule({
   imports: [
@@ -58,7 +61,7 @@ import { InvoiceEmailButtonComponent } from './invoice-email-button/invoice-emai
     CellItemSelectComponent, 
     CellItemDescriptionComponent, 
     CellAccountSelectComponent, 
-    CellTaxrateSelectComponent, InvoiceDetailComponent, InvoiceEmailButtonComponent
+    CellTaxrateSelectComponent, InvoiceDetailComponent, InvoiceEmailButtonComponent, InvoiceStatusButtonComponent, InvoicePrintButtonComponent, InvoiceEditButtonComponent
   ],
   providers: [
     AlertService,

@@ -31,21 +31,21 @@ export class InvoiceListComponent implements OnInit {
   refresh(state: State) {
     state.sort = state.sort || {
       by: 'created_at',
-      reverse: false
+      reverse: true
     }
 
     const options = {
-      include: 'contact',
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
+      include: 'contact'      
     }
 
     options['orderBy'] = state.sort.by;
     options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
-      .getInvoices(this.org.id, options)
+      .getSaleInvoices(this.org.id, options)
       .subscribe(response => {
         this.total = response.total
         this.invoices = response.data;

@@ -9,7 +9,7 @@ const routes: Routes = [
         path: 'success',
         component: SignupSuccessComponent,
         data: {
-            title: 'Sign up successfull - ZenBooks'
+            title: 'Sign up successfull - Bridge Books'
         }
     }
 ];

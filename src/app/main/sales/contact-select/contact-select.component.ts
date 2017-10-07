@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { SessionService, SearchService, OrgService } from '../../../services';
 import { Contact } from '../../../models/data/contact';
@@ -19,6 +19,8 @@ export class ContactSelectComponent implements OnInit {
   results: any[] = [];
   fetching: boolean;
   org: any;
+
+  @Input('selected') selected;
   @Output() onContactSelected = new EventEmitter();
 
   constructor(
@@ -51,7 +53,7 @@ export class ContactSelectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.btnText = BtnStatus.DEFAULT;
+    this.btnText = (this.selected && this.selected.data) ? this.selected.data.name : BtnStatus.DEFAULT;
     this.org = this.session.getDefaultOrg();    
   }
 }

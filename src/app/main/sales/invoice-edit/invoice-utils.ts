@@ -1,11 +1,67 @@
 import * as _ from 'lodash';
+import { isNumeric } from 'rxjs/util/isNumeric';
 
 export module InvoiceUtils {
+
+    export class ItemBuilder {
+        private model: any = {}
+
+        constructor() {}
+        
+        setItem(value: string) {
+            this.model.item_id = value;
+            return this;
+        }
+
+        setDescription(value: string) {
+            this.model.description = value;
+            return this;
+        }
+
+        setAccount(value: string) {
+            this.model.account_id = value;
+            return this;
+        }
+
+        setTaxRate(value: string) {
+            this.model.tax_rate_id = value;
+            return this;
+        }
+
+        setPrice(value: number) {
+            this.model.price = value;
+            return this;
+        }
+
+        setQuantity(value: number) {
+            this.model.quantity = value;
+            return this;
+        }
+
+        setDiscountRate(value: number) {
+            this.model.discount_rate = value;
+            return this;
+        }
+
+        setAmount(value: number) {
+            this.model.amount = value;
+            return this;
+        }
+
+        get() {
+            return this.model;
+        }
+    }
     
     export class Builder {
         private model: any = {};
 
         constructor() {}
+
+        private toDate(timestamp: number) {
+            let d = new Date(timestamp);
+            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDay()}`
+        }
 
         setTo(value: string): Builder {
             this.model.contact_id = value;
@@ -18,12 +74,12 @@ export module InvoiceUtils {
         }
 
         setDueDate(value: any): Builder {
-            this.model.due_at = value.formatted ? value.formatted : null;
+            this.model.due_at = isNumeric(value) ? this.toDate(value) : value;
             return this;
         }
 
         setRaisedAtDate(value: string): Builder {
-            this.model.raised_at = value;
+            this.model.raised_at = isNumeric(value) ? this.toDate(value) : value;
             return this;
         }
 
@@ -51,6 +107,7 @@ export module InvoiceUtils {
             const clean = [];
             value.forEach(item => {
                 clean.push({
+                    id: item.id || null,
                     row_order: item.row_order,
                     item_id: item.item_id,
                     description: item.description,

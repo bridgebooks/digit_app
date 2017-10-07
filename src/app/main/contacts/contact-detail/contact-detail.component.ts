@@ -61,7 +61,7 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
 
   fetchContact(id: string) {
     this.contactService
-      .get(id, { include: 'bank' })
+      .get(id, { ref: 'contacts', include: 'bank' })
       .subscribe(response => {
         this.contact = response.data;
         this.loading = false;

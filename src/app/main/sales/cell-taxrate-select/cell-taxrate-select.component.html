@@ -1,5 +1,5 @@
 <p *ngIf="selected" class="text" (click)="showSelector()">{{ row.tax_rate.name }} ({{ row.tax_rate.value }}%)</p>
-<p *ngIf="!selected" class="text" (click)="showSelector()">Select an item</p>
+<p *ngIf="!selected" class="text" (click)="showSelector()">Select a tax rate</p>
 
 <div class="item-selector-wrapper" [hidden]="hideRateSelector">
     <button class="btn btn-block btn-sm btn-link" (click)="hideSelector()">Close</button>

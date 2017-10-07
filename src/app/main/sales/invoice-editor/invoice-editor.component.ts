@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
+import { InvoiceService } from '../../../services';
+import { InvoiceUtils } from '../invoice-edit/invoice-utils'
 
 @Component({
   selector: 'app-invoice-editor',
@@ -15,11 +17,14 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
 
+  itemUpdating: boolean = false;
+
   datePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd'
   }
 
   raisedAtDate: IMyDate = { year: 0, month: 0, day: 0 };
+  dueAtDate: IMyDate;
 
   private modelDefaults =  {
     org_id: null,
@@ -37,17 +42,12 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     total: 0.00
   }
 
-  constructor() { 
-    let d: Date = new Date();
-    this.raisedAtDate = {
-      year: d.getFullYear(),
-      month: d.getMonth() + 1,
-      day: d.getDate()
-    };
+  constructor(private invoices: InvoiceService) { 
   }
 
   onLineAmountTypeSelected($event) {
     this.model.line_amount_type = $event;
+    this.computeSubTotal();
     this.computeTax()
     this.computeTotal()
   }
@@ -61,6 +61,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.raisedAtDate = $event.date;
   }
 
+  onDueAtDateChanged($event: IMyDateModel) {
+    this.model.due_at = $event.formatted;
+    this.dueAtDate = $event.date;
+  }
+
   onItemChanged($event) {
     this.computeSubTotal();
     this.computeTax();
@@ -69,8 +74,8 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
 
   computeSubTotal() {
     let total = 0;
-
-    this.model.items.map(item => {
+    const items = this.model.items.data || this.model.items;
+    items.map(item => {
       total = total + item.amount;
     })
 
@@ -78,9 +83,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   }
 
   computeTax() {
-    let total = 0;
-
-    this.model.items.map(item => {
+    let total: number = 0;
+    const items = this.model.items.data || this.model.items;
+    items.map(item => {
       if (item.tax_rate) {
         switch (this.model.line_amount_type) {
           case 'inclusive':
@@ -123,17 +128,19 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
 
   addLineItems(count: number = 1) {
     for (let i = 0; i < count; i++) {
-      this.model.items.push({
+      let item = {
         row_order: i,
         item_id: null,
         description: null,
         quantity: null,
         unit_price: null,
-        discount: null,
+        discount_rate: null,
         account_id: null,
         tax_rate_id: null,
         amount: null
-      })
+      }
+
+      !this.editing ? this.model.items.push(item) : this.model.items.data.push(item);      
     }
   }
 
@@ -144,17 +151,40 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (!this.editing) {
+      this.model = this.modelDefaults;
+      let d: Date = new Date();
+      
+      this.raisedAtDate = {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate()
+      };
+
       this.modelDefaults.org_id = this.org.id;
       this.modelDefaults.type = this.type;
       this.modelDefaults.raised_at = `${this.raisedAtDate.year}-${this.raisedAtDate.month}-${this.raisedAtDate.day}`;
       this.addLineItems();
+    } else {
+      let r: Date = new Date(this.model.raised_at);
+      let d: Date = new Date(this.model.due_at);
+
+      this.raisedAtDate = {
+        year: r.getFullYear(),
+        month: r.getMonth() + 1,
+        day: r.getDate()
+      }
+
+      this.dueAtDate = {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate()
+      }
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.editing = changes.editing ? changes.editing.currentValue : this.editing;
     this.type = changes.type ? changes.type.currentValue : this.type;
-    this.model = changes.model ? changes.model.currentValue : this.modelDefaults;
     this.saving = changes.saving ? changes.saving.currentValue : this.saving;
   }
 }

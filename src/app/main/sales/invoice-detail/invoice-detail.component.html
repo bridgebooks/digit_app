@@ -21,7 +21,10 @@
               <button class="btn btn-sm btn-link">{{ invoice.status }}</button>
             </div>
             <div class="col-lg-6 col-md-5 invoice-actions">
+              <invoice-edit-button [invoice]="invoice"></invoice-edit-button>  
               <invoice-email-button [invoice]="invoice"></invoice-email-button>
+              <invoice-print-button [invoice]="invoice"></invoice-print-button>
+              <invoice-status-button [id]="invoice.id" [current]="invoice.status" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
             </div>
           </div>
       </div>

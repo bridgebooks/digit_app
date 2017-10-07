@@ -35,6 +35,13 @@ export class InvoiceService {
     return this.http.get<any>(url, { headers, params })
   }
 
+  download(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+    const url = `${this.baseUrl}/${id}/download`;
+
+    return this.http.post<any>(url, {});
+  }
+
   update(id: string, body: object, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
@@ -49,10 +56,31 @@ export class InvoiceService {
     return this.http.put<any>(url, body, { headers, params })
   }
 
+  updateItem(id: string, body: object, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/items/${id}`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.put<any>(url, body, { headers, params })
+  }
+
   delete(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.delete(url, { headers });
+    return this.http.delete<any>(url, { headers });
+  }
+
+  deleteItem(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/items/${id}`;
+
+    return this.http.delete<any>(url, { headers });
   }
 }
