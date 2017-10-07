@@ -45,7 +45,7 @@ export class InvoiceListComponent implements OnInit {
     options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
-      .getInvoices(this.org.id, options)
+      .getSaleInvoices(this.org.id, options)
       .subscribe(response => {
         this.total = response.total
         this.invoices = response.data;

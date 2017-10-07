@@ -10,8 +10,10 @@ import { InvoiceUtils } from './invoice-utils';
 })
 export class InvoiceEditComponent implements OnInit, OnDestroy {
   org: any;
+  loading: boolean;
   editing: boolean;
   saving: boolean = false;
+  model: any;
 
   constructor(
     private alert: AlertService,
@@ -33,7 +35,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       .setLineAmountType(model.line_amount_type)
       .setInvoiceNo(model.invoice_no)
       .setInvoiceReference(model.reference)
-      .setItems(model.items)
+      .setItems(model.items.data || model.items)
       .setStatus(model.status)
       .setSubTotal(model.sub_total)
       .setTaxTotal(model.tax_total)
@@ -42,8 +44,9 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     return builder.get()
   }
   saveInvoice($event) {
+    let model = this.buildInvoice($event);
+    
     if (!this.editing) {
-      let model = this.buildInvoice($event);
       this.saving = true;
       this.invoiceService.create(model)
         .subscribe(response => { 
@@ -54,7 +57,29 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
         err => {
           this.saving = false;
         });
+    } else {
+      this.saving = true;
+      this.invoiceService.update(this.model.id, model)
+        .subscribe(response => {
+          this.saving = false;
+          this.alert.success('Invoice', 'Invoice successfully updated', { timeOut: 3000 })
+        },
+        err => {
+          this.saving = false;
+        })
     }
+  }
+  
+  fetchInvoice(id: string) {
+    this.loading = true
+    
+    this.invoiceService.get(id, { ref: 'invoice', include: 'contact,items' })
+      .subscribe(response => {
+        this.model = response.data;
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+      })
   }
 
   ngOnInit() {
@@ -62,6 +87,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
     this.route.params.subscribe(param => {
       this.editing = param.id ? true : false;
+      if (this.editing) this.fetchInvoice(param.id)
     })
   }
 

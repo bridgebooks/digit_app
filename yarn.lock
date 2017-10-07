@@ -260,6 +260,24 @@ angular-2-local-storage@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/angular-2-local-storage/-/angular-2-local-storage-1.0.1.tgz#3b846c90b2fffc9124f7bacc347f22d043a1e3a4"
 
+angular-calendar@^0.21.2:
+  version "0.21.2"
+  resolved "https://registry.yarnpkg.com/angular-calendar/-/angular-calendar-0.21.2.tgz#c2d5cdac1d97f6221f6b3bc0e7a595c7b09e46bf"
+  dependencies:
+    angular-draggable-droppable "^1.0.1"
+    angular-resizable-element "^1.2.2"
+    calendar-utils "0.0.57"
+    date-fns "^1.28.5"
+    positioning "^1.3.1"
+
+angular-draggable-droppable@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/angular-draggable-droppable/-/angular-draggable-droppable-1.1.0.tgz#0443f51534d4368373ed4b6c8140745a7f1ee789"
+
+angular-resizable-element@^1.2.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-1.2.3.tgz#a6170cee4ccf2a95fd9c528587745a541b762abc"
+
 angular2-jwt@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.3.tgz#54efdda3ceedba85f6a37b165f22ac22b8adf021"
@@ -749,6 +767,10 @@ bytes@2.3.0:
 bytes@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339"
+
+calendar-utils@0.0.57:
+  version "0.0.57"
+  resolved "https://registry.yarnpkg.com/calendar-utils/-/calendar-utils-0.0.57.tgz#f1fd02a05094dabe73382e992c7f5357edeb228b"
 
 callsite@1.0.0:
   version "1.0.0"
@@ -1499,6 +1521,10 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
+
+date-fns@^1.28.5:
+  version "1.28.5"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -3699,6 +3725,10 @@ portfinder@^1.0.9, portfinder@~1.0.12:
     async "^1.5.2"
     debug "^2.2.0"
     mkdirp "0.5.x"
+
+positioning@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/positioning/-/positioning-1.3.1.tgz#6ff15e9bf8d8fe341ba1b3900d587e977b5554ec"
 
 postcss-calc@^5.2.0:
   version "5.3.1"

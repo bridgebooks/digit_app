@@ -1,5 +1,5 @@
 <div class="line-item-table">
-  <table class="table">
+  <table class="table" [ngClass]="{'disabled': itemUpdating }">
     <thead>
       <tr>
         <th class="left" *ngFor="let col of columns" [style.width.px]="col.width">{{ col.label }}</th>
@@ -16,13 +16,13 @@
           <cell-item-description [description]="item.description"></cell-item-description>
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="quantity" [(ngModel)]="item.quantity" (change)="calculateLineAmount(item)">
+          <input class="transparent" type="text" name="quantity" [(ngModel)]="item.quantity" (change)="calculateLineAmount(item)" numeric>
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="unit_price" [(ngModel)]="item.unit_price" (change)="calculateLineAmount(item)">
+          <input class="transparent" type="text" name="unit_price" [(ngModel)]="item.unit_price" (change)="calculateLineAmount(item)" numeric>
         </td>
         <td class="line-item-cell">
-          <input class="transparent" type="number" name="discount" [(ngModel)]="item.discount" (change)="calculateLineAmount(item)">
+          <input class="transparent" type="number" name="discount" [(ngModel)]="item.discount_rate" (change)="calculateLineAmount(item)">
         </td>
         <td class="line-item-cell">
           <cell-account-select [selected]="item.account_id" [row]="item" (accountSelected)="rowItemSelected($event)"></cell-account-select>

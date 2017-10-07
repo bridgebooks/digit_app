@@ -1,5 +1,8 @@
 .table {
     table-layout: fixed;
+    .disabled {
+        pointer-events: none;
+    }
 }
 .line-item-cell {
     border-right: 1px solid #eee;

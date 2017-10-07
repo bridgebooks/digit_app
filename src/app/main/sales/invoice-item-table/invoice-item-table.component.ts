@@ -51,7 +51,7 @@ export class InvoiceItemTableComponent implements OnInit {
 
   calculateLineAmount(row) {
     let discount = 0;
-    if (row.discount && row.unit_price) discount = (row.discount/100) * row.unit_price;
+    if (row.discount_rate && row.unit_price) discount = (row.discount_rate / 100) * row.unit_price;
 
     row.amount = (row.unit_price * row.quantity) - discount;
     this.lineItemChanged.emit(row);
