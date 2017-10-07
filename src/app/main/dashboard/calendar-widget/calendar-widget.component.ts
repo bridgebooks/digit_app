@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -21,7 +22,6 @@ import { SessionService, OrgService } from '../../../services';
 
 @Component({
   selector: 'app-calendar-widget',
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar-widget.component.html',
   styleUrls: ['./calendar-widget.component.scss']
 })
@@ -34,7 +34,7 @@ export class CalendarWidgetComponent implements OnInit {
   events: any[]; 
   activeDayIsOpen: boolean = false;  
 
-  constructor(private session: SessionService, private $org: OrgService) { }
+  constructor(private router: Router, private session: SessionService, private $org: OrgService) { }
 
   fetch() {
     this.$org
@@ -48,6 +48,7 @@ export class CalendarWidgetComponent implements OnInit {
             start: new Date(invoice.due_at),
             meta: {
               id: invoice.id,
+              type: invoice.type,
               amount: invoice.total,
               status: invoice.status,
               overdue: invoice.overdue,
@@ -66,13 +67,7 @@ export class CalendarWidgetComponent implements OnInit {
       })
   }
 
-  dayClicked({
-    date,
-    events
-  }: {
-    date: Date;
-    events: Array<CalendarEvent<any>>;
-  }): void {
+  dayClicked({ date, events }: { date: Date; events: Array<CalendarEvent<any>>; }) {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
