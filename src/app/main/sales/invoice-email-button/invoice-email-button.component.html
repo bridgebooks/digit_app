@@ -1,4 +1,4 @@
-<button class="btn btn-default" (click)="modalVisible = true"><clr-icon shape="envelope"></clr-icon> Email</button>
+<button class="btn btn-default" (click)="modalVisible = true" *ngIf="show"><clr-icon shape="envelope"></clr-icon> Email</button>
 
 <clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
   <h3 class="modal-title">Send Invoice</h3>
@@ -37,6 +37,24 @@
                 [(ngModel)]="model.send_copy">
                 Send me a copy
             </clr-checkbox>
+        </div>  
+
+        <div class="form-group">
+          <clr-checkbox
+              name="attach_pdf"
+              id="attach_pdf"
+              [(ngModel)]="model.attach_pdf">
+              Include PDF attachment
+          </clr-checkbox>
+        </div>
+
+        <div class="form-group">
+          <clr-checkbox
+              name="mark_sent"
+              id="mark_sent"
+              [(ngModel)]="model.mark_sent">
+              Mark as sent
+          </clr-checkbox>
         </div>  
       </section>
     </form>

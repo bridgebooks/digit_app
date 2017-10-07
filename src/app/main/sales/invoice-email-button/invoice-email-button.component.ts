@@ -16,6 +16,7 @@ export class InvoiceEmailButtonComponent implements OnInit {
   org: any;
 
   modalVisible: boolean = false;
+  show: boolean;
 
   sending: boolean = false;
   sending$: Subject<any> = new Subject();
@@ -99,11 +100,14 @@ export class InvoiceEmailButtonComponent implements OnInit {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
+    this.show = this.invoice.status === 'voided' ? false : true;    
     this.model = {
       to: this.invoice.contact.data.email || null,
       subject: this.generateSubject(),
       message: this.generateMessage(),
-      send_copy: false
+      send_copy: false,
+      attach_pdf: false,
+      mark_sent: true
     }
   }
 
