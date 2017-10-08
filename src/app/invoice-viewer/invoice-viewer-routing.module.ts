@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { ViewerComponent } from './viewer/viewer.component'
+
+const routes: Routes = [
+  { path: ':id', component: ViewerComponent },
+];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
+
 export class InvoiceViewerRoutingModule { }
