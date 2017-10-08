@@ -5,6 +5,7 @@ import { IntlPhoneNumberPipe, NumericDirective, PhoneNumberDirective, MatchValid
 import { BankSelectComponent } from './components/bank-select/bank-select.component';
 import { AccountSelectComponent } from './components/account-select/account-select.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
+import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
 
 @NgModule({
   imports: [
@@ -18,12 +19,14 @@ import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-sele
     PhoneNumberDirective,
     BankSelectComponent,
     AccountSelectComponent,
-    TaxrateSelectComponent
+    TaxrateSelectComponent,
+    OrgbankaccountSelectComponent
   ],
   exports: [
     BankSelectComponent, 
     AccountSelectComponent, 
     TaxrateSelectComponent,
+    OrgbankaccountSelectComponent,
     NumericDirective, 
     PhoneNumberDirective, 
     IntlPhoneNumberPipe
