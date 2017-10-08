@@ -167,6 +167,22 @@ export class OrgService {
     return this.http.get<any>(url, { headers, params })
   }
 
+  getInvoiceSettings(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/invoice_settings`;
+
+    return this.http.get<any>(url, { headers })
+  }
+
+  updateInvoiceSettings(id: string, data: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/invoice_settings`;
+
+    return this.http.put<any>(url, data, { headers })
+  }
+
   update(id: string, body: object) {
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

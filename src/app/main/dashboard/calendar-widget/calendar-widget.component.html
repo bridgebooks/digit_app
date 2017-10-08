@@ -5,7 +5,7 @@
     <div class="card-block">
       <ng-template #eventTitleTemplate let-event="event">
         <a class="cal-event-title" href="javascript:;">
-          <span style="display: block;">{{ event.title }}</span>
+          <span style="display: inline-block;">{{ event.title }}</span>
           <span style="display: block;">{{ event.meta.amount | number:"1.2-2" }}</span>
           <span class="label label-danger" *ngIf="event.meta.is_overdue">Overdue</span>
         </a>

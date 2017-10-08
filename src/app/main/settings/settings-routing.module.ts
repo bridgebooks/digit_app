@@ -7,6 +7,7 @@ import { OrgProfileComponent } from './org-profile/org-profile.component';
 import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
 import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
@@ -32,6 +33,13 @@ const routes: Routes = [
       component: BankAccountsComponent,
       data: {
         title: 'Banking - Bridge Books'
+      }
+    },
+    {
+      path: 'invoices',
+      component: InvoicesComponent,
+      data: {
+        title: 'Invoice Settings - Bridge Books'
       }
     }
 ];

@@ -37,6 +37,7 @@ import { TaxComponentEditComponent } from './tax-component-edit/tax-component-ed
 import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
 import { BankAccountModalComponent } from './bank-account-modal/bank-account-modal.component';
 import { BankAccountEditModalComponent } from './bank-account-edit-modal/bank-account-edit-modal.component';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { BankAccountEditModalComponent } from './bank-account-edit-modal/bank-ac
     TaxComponentEditComponent,
     BankAccountsComponent,
     BankAccountModalComponent,
-    BankAccountEditModalComponent
+    BankAccountEditModalComponent,
+    InvoicesComponent
   ],
   providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService ]
 })

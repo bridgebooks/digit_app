@@ -9,6 +9,10 @@ const appRoutes: Routes = [
       canActivate: [AuthGuard]
   },
   {
+    path: 'invoice-viewer',
+    loadChildren: './invoice-viewer/invoice-viewer.module#InvoiceViewerModule'
+  },
+  {
       path: 'login',
       loadChildren: './login/login.module#LoginModule',
       data: {

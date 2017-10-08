@@ -1,0 +1,7 @@
+<div class="select">
+    <select (change)="filterChanged($event.target.value)" [(ngModel)]="selected">
+      <option>Select an account</option>
+      <option *ngFor="let account of accounts" [value]="account.id">{{ account.bank.name }} - {{ account.account_number }}</option>
+    </select>
+    <span class="help-block">Select a default payment account for your invoices</span>
+  </div>
