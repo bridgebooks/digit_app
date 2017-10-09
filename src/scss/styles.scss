@@ -71,7 +71,36 @@ app-header {
     text-align: center;
 }
 
-.cal-month-view .cal-open-day-events {
-    background-color: #676767 !important;
-    box-shadow: none !important;
+.cal-month-view
+{
+    .cal-day-cell {
+        min-height: 50px;
+        max-height: 50px;
+    }
+
+    .cal-open-day-events {
+        background-color: #676767 !important;
+        box-shadow: none !important;
+    }
+
+    .cal-cell-top {
+        min-height: 50px;
+    }
+
+    .cal-day-cell.cal-today {
+        background-color: #002538;
+        color: #FFF;
+        .cal-day-number {
+            font-size: 1.5em;
+        }
+    }
+
+    .cal-cell-row .cal-cell:hover {
+        background-color: lighten($color: #002538, $amount: 10%);
+        color: #FFF;
+    }
+
+    .cal-day-number {
+        opacity: 1;
+    }
 }
