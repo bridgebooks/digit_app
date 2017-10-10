@@ -2,7 +2,7 @@
     <div class="card-header">
         Calendar
     </div>
-    <div class="card-block" style="max-height: 400px;">
+    <div class="card-block">
       <ng-template #eventTitleTemplate let-event="event">
         <a class="cal-event-title" href="javascript:;">
           <span style="display: inline-block;">{{ event.title }}</span>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn" (click)="view = 'month'" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
-      <button class="btn" (click)="view = 'week'" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>
+      <button class="btn" (click)="switchView('month')" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
+      <button class="btn" (click)="switchView('week')" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>
     </div>
 </div>
