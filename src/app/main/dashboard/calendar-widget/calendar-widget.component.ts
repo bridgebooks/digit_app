@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   CalendarEvent,
@@ -25,20 +25,22 @@ import { SessionService, OrgService } from '../../../services';
   templateUrl: './calendar-widget.component.html',
   styleUrls: ['./calendar-widget.component.scss']
 })
-export class CalendarWidgetComponent implements OnInit {
+export class CalendarWidgetComponent implements OnInit, OnDestroy {
 
   org: any;
-  loading: boolean = true;
   view: string = 'month';
   viewDate: Date = new Date();
-  events: any[]; 
+  events$: Observable<any>;
+  events: any[];
+  loading: boolean;
   activeDayIsOpen: boolean = false;  
 
   constructor(private router: Router, private session: SessionService, private $org: OrgService) { }
 
   fetch() {
-    this.$org
-      .getInvoiceEvents(this.org.id, { period: this.view, include: 'contact' })
+    this.loading = true;
+
+    this.events$
       .map(response => { return response.data })
       .map(invoices => {
         return invoices.map(invoice => {
@@ -60,11 +62,13 @@ export class CalendarWidgetComponent implements OnInit {
       .subscribe(events => {
         this.events = events;
         this.loading = false;
-      }, err => {
-        this.loading = false;
-      }, () => {
-        this.loading = false;
       })
+  }
+
+  switchView(view: string) {
+    this.view = view;
+    this.events$ = this.$org.getInvoiceEvents(this.org.id, { period: this.view, include: 'contact' })
+    this.fetch() 
   }
 
   dayClicked({ date, events }: { date: Date; events: Array<CalendarEvent<any>>; }) {
@@ -82,11 +86,23 @@ export class CalendarWidgetComponent implements OnInit {
   }
 
   eventClicked($event) {
-    console.log($event);
+    const event = $event.event;
+    switch (event.meta.type) {
+      case 'acc_rec':
+        this.router.navigate(['/sales/invoices/view', event.meta.id])
+        break;
+      case 'acc_pay':
+        this.router.navigate(['/purchases/bills/view', event.meta.id])
+        break;
+    }
   }
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
+    this.events$ = this.$org.getInvoiceEvents(this.org.id, { period: this.view, include: 'contact' })    
     this.fetch()
+  }
+
+  ngOnDestroy() {
   }
 }

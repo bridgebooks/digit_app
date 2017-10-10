@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn" (click)="view = 'month'" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
-      <button class="btn" (click)="view = 'week'" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>
+      <button class="btn" (click)="switchView('month')" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
+      <button class="btn" (click)="switchView('week')" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>
     </div>
 </div>
