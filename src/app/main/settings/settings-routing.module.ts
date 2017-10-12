@@ -8,6 +8,7 @@ import { ChartAccountsComponent } from './chart-accounts/chart-accounts.componen
 import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
@@ -40,6 +41,13 @@ const routes: Routes = [
       component: InvoicesComponent,
       data: {
         title: 'Invoice Settings - Bridge Books'
+      }
+    },
+    {
+      path: 'users',
+      component: UsersComponent,
+      data: {
+        title: 'Org users - Bridge Books'
       }
     }
 ];
