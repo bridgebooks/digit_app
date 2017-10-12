@@ -38,6 +38,7 @@ import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
 import { BankAccountModalComponent } from './bank-account-modal/bank-account-modal.component';
 import { BankAccountEditModalComponent } from './bank-account-edit-modal/bank-account-edit-modal.component';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { InvoicesComponent } from './invoices/invoices.component';
     BankAccountsComponent,
     BankAccountModalComponent,
     BankAccountEditModalComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    UsersComponent
   ],
   providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService ]
 })
