@@ -9,6 +9,7 @@ import { TaxRatesComponent } from './tax-rates/tax-rates.component';
 import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { UsersComponent } from './users/users.component';
+import { UserinviteFormComponent } from './userinvite-form/userinvite-form.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
@@ -47,7 +48,14 @@ const routes: Routes = [
       path: 'users',
       component: UsersComponent,
       data: {
-        title: 'Org users - Bridge Books'
+        title: 'Users - Bridge Books'
+      }
+    },
+    {
+      path: 'users/add',
+      component: UserinviteFormComponent,
+      data: {
+        title: 'Invite User - Bridge Books'
       }
     }
 ];

@@ -13,7 +13,8 @@ import {
   OrgService, 
   AccountsService, 
   TaxRateService,
-  BankAccountService
+  BankAccountService,
+  RoleService
 } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
@@ -39,6 +40,8 @@ import { BankAccountModalComponent } from './bank-account-modal/bank-account-mod
 import { BankAccountEditModalComponent } from './bank-account-edit-modal/bank-account-edit-modal.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { UsersComponent } from './users/users.component';
+import { UserinviteFormComponent } from './userinvite-form/userinvite-form.component';
+import { UserrolePickerComponent } from './userrole-picker/userrole-picker.component';
 
 @NgModule({
   imports: [
@@ -71,8 +74,10 @@ import { UsersComponent } from './users/users.component';
     BankAccountModalComponent,
     BankAccountEditModalComponent,
     InvoicesComponent,
-    UsersComponent
+    UsersComponent,
+    UserinviteFormComponent,
+    UserrolePickerComponent
   ],
-  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService ]
+  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService, RoleService ]
 })
 export class SettingsModule { }

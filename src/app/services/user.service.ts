@@ -60,7 +60,8 @@ export class UserService {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let options = { headers: headers };
     const body = {
-      password: password
+      password: password,
+      token: token
     }
     const url = `${this.baseUrl}/${id}/validate?token=${token}`;
 

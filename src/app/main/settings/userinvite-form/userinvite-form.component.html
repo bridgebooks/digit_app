@@ -1,0 +1,54 @@
+<section>
+    <div class="row flex-items-lg-between page-header">
+        <div class="col-lg-4">
+            <a routerLink="/settings/users"><clr-icon shape="caret" dir="left"></clr-icon> Users</a>          
+            <h2>Invite a User</h2>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <form #inviteForm="ngForm" novalidate>
+                <div class="card">
+                    <div class="card-header">Enter their details</div>
+                    <div class="card-block">
+                        <section class="form-block">
+                            <div class="form-group">
+                                <label class="required" for="first_name">First Name</label>
+                                <input type="text" id="first_name" name="first_name" size="60" [(ngModel)]="model.first_name" #firstNameInput="ngModel" required>
+                                <div class="input__errors" [hidden]="firstNameInput.valid || firstNameInput.pristine">
+                                    <span class="input__errors_error" *ngIf="firstNameInput.hasError('required')">Please enter a first name</span>
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label class="required" for="last_name">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" size="60" [(ngModel)]="model.last_name" #lastNameInput="ngModel" required>
+                                <div class="input__errors" [hidden]="lastNameInput.valid || lastNameInput.pristine">
+                                    <span class="input__errors_error" *ngIf="lastNameInput.hasError('required')">Please enter a last name</span>
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label class="required" for="email">Email address</label>
+                                <input type="email" name="email" id="email" size="60" [(ngModel)]="model.email" #emailInput="ngModel" required email>
+                                <div class="input__errors" [hidden]="emailInput.valid || emailInput.pristine">
+                                    <span class="input__errors_error" *ngIf="emailInput.hasError('required')">Please enter an email address</span>
+                                    <span class="input__errors_error" *ngIf="emailInput.hasError('email')">Please enter a valid email address</span>
+                                </div>
+                            </div>
+                        </section>
+                        <hr>
+                        <div class="card-title">User Role</div>
+                        <input type="hidden" name="org_role_id" [(ngModel)]="model.org_role_id" required>
+                        <userrole-picker (rolePicked)="onRoleSelected($event)"></userrole-picker>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="submit" [disabled]="inviteForm.invalid">Next</button>
+                    </div>
+                </div>
+            </form>            
+        </div>
+    </div>
+</section>
