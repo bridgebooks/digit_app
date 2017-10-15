@@ -14,7 +14,7 @@ export class InvoiceListComponent implements OnInit {
   route$: Subscription;
   org: any;
   type: string = 'acc_rec';
-  invoices: any[];
+  invoices: any[] = [];
   perPage: number = 30;
   currentPage: number = 1;
   total: number;
@@ -38,7 +38,7 @@ export class InvoiceListComponent implements OnInit {
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
-      include: 'contact'      
+      include: 'contact,user'      
     }
 
     options['orderBy'] = state.sort.by;
@@ -47,14 +47,14 @@ export class InvoiceListComponent implements OnInit {
     this.orgService
       .getSaleInvoices(this.org.id, options)
       .subscribe(response => {
-        this.total = response.total
+        setTimeout(() => { this.loading = false }, 0);
+        this.total = response.total;
         this.invoices = response.data;
         this.currentPage = response.current_page;
+        this.cdRef.detectChanges()
       },
       err => {
-      },
-      () => {
-        this.loading = false;        
+        setTimeout(() => { this.loading = false }, 0);
       })
   }
 

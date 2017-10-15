@@ -23,6 +23,7 @@
             <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
             <clr-dg-column [clrDgField]="'reference'">Ref</clr-dg-column>
             <clr-dg-column [clrDgField]="'contact|name'">To</clr-dg-column>
+            <clr-dg-column [clrDgField]="'user_id'">Created By</clr-dg-column>
             <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
             <clr-dg-column [clrDgField]="'due_at'">Due Date</clr-dg-column>
             <clr-dg-column>Overdue</clr-dg-column>
@@ -37,6 +38,7 @@
               <clr-dg-cell>
                   <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.contact.data.name }}</a>
               </clr-dg-cell>
+              <clr-dg-cell>{{ invoice.user.data.full_name }}</clr-dg-cell>
               <clr-dg-cell>{{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
               <clr-dg-cell>{{ invoice.due_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
               <clr-dg-cell>
