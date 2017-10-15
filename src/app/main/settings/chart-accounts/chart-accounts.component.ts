@@ -106,9 +106,9 @@ export class ChartAccountsComponent implements OnInit {
     }
 
     const options = {
-      include: 'type,tax_rate',
       page: this.currentPage,
       perPage: this.perPage,
+      include: 'type,tax_rate'      
     }
 
     options['orderBy'] = state.sort.by;

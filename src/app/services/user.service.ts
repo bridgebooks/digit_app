@@ -56,14 +56,11 @@ export class UserService {
     return this.http.put<GenericDataResponse>(url, body, options)
   }
 
-  validate(id: String, token: String, password: String) {
+  validate(id: String, body: any) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let options = { headers: headers };
-    const body = {
-      password: password,
-      token: token
-    }
-    const url = `${this.baseUrl}/${id}/validate?token=${token}`;
+   
+    const url = `${this.baseUrl}/${id}/validate?token=${body.token}`;
 
     return this.http.post<ValidateResponse>(url, body, options)
   }

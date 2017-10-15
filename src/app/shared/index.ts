@@ -1,5 +1,6 @@
 export * from './utils/object';
 export * from './guard/auth.guard';
+export * from './guard/acl.guard';
 export * from './interceptors/jwt.interceptor';
 export * from './interceptors/http-error.interceptor';
 export * from './interceptors/http-cache.interceptor';

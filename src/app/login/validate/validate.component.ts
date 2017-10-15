@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { JwtService } from '../../services/jwt.service';
+import { UserService, JwtService, SessionService } from '../../services';
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/social-shapes';
@@ -26,6 +25,8 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
   id: String;
 
   token: String;
+  invited: boolean;
+  org: string;
 
   processing: Boolean = false;
 
@@ -35,6 +36,7 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router, 
     public route: ActivatedRoute, 
+    private session: SessionService,
     private userService: UserService,
     private jwtService: JwtService) { }
 
@@ -50,14 +52,22 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
     this.btnDisabled = true;
    
     this.userService
-      .validate(this.id, this.token, this.model.password)
+      .validate(this.id, this.model)
       .subscribe(response => {
         this.requestDone();
         // save token
         this.jwtService.saveToken(response.data.token);
         // save user
-        // redirect to org setup view
-        this.router.navigate(['/setup']);
+        this.session.addUser(response.data.user);
+        // read token
+        const token = this.jwtService.getToken();
+        if (token.orgs.length < 1) {
+          // redirect to org setup view
+          this.router.navigate(['/setup']);
+        } else {
+          this.session.addDefaultOrg(token.orgs[0]);
+          this.router.navigate(['/dashboard']);          
+        }
       },
       err => {
         this.requestDone();
@@ -70,6 +80,12 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
         .filter(params => params.token)
         .subscribe(params => {
           this.token = params.token;
+          this.invited = params.invited;
+          this.org = params.org;
+
+          this.model.invited = this.invited;
+          this.model.org = this.org;
+          this.model.token = this.token;
         })
       
       this.route.params

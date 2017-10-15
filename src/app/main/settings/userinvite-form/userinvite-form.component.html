@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12 col-md-12">
-            <form #inviteForm="ngForm" novalidate>
+            <form #inviteForm="ngForm" novalidate (submit)="showMessageModal()">
                 <div class="card">
                     <div class="card-header">Enter their details</div>
                     <div class="card-block">
@@ -48,6 +48,19 @@
                         <button class="btn btn-primary" type="submit" [disabled]="inviteForm.invalid">Next</button>
                     </div>
                 </div>
+
+                <clr-modal [(clrModalOpen)]="messageModalVisible">
+                    <h3 class="modal-title">Personalize Invitation and send</h3>
+                    <div class="modal-body">
+                        <p>In order to give {{ model.first_name }} access your organization they need to accept an email invitation from  you.</p>
+                        <p>The invitation that will be email is shown here and can be changed before being sent.</p>
+            
+                        <textarea name="message" [(ngModel)]="model.message" rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" (click)="sendInvitation()" [disabled]="sending" [clrLoading]="sending">Send Invite</button>
+                    </div>
+                </clr-modal>
             </form>            
         </div>
     </div>

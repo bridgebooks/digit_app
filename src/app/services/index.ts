@@ -15,3 +15,4 @@ export * from './tax-rate.service';
 export * from './bank.service';
 export * from './bank-account.service';
 export * from './role.service';
+export * from './eventbus.service';

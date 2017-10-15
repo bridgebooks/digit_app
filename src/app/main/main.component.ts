@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import { MainNavigation } from './main.navigation';
-import { JwtService, AuthService, SessionService } from '../services';
+import { EventbusService, JwtService, AuthService, SessionService } from '../services';
+import { Subscription } from 'rxjs'
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/core-shapes';
@@ -14,7 +15,7 @@ import 'clarity-icons/shapes/technology-shapes';
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, AfterContentInit {
+export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
 
     nav = MainNavigation.NavItems
     navCollasped: boolean = false;
@@ -29,23 +30,17 @@ export class MainComponent implements OnInit, AfterContentInit {
 
     logoutBtnDisabled: boolean = false;
 
+    aclAlertShow: boolean = false;
+
+    aclErrorSub: Subscription;
+
     constructor(
         public router: Router, 
         public activatedRoute: ActivatedRoute,
+        private eventbus: EventbusService,
         private jwtService: JwtService, 
         private session: SessionService, 
         private authService: AuthService) {
-    }
-
-    ngOnInit() {
-        this.org = this.session.getDefaultOrg()
-        
-        if (this.router.url === '/') {
-            this.router.navigate(['/dashboard']);
-        }
-    }
-
-    ngAfterContentInit() {
     }
 
     showLogoutModal() {
@@ -75,5 +70,23 @@ export class MainComponent implements OnInit, AfterContentInit {
                 this.logoutBtnDisabled = false;
                 this.hideLogoutModal();
             })
+    }
+
+    ngOnInit() {
+        this.org = this.session.getDefaultOrg()
+        this.aclErrorSub = this.eventbus.subscribe('acl:error', (payload) => {
+            this.aclAlertShow = true;
+            setTimeout(() => { this.aclAlertShow = false; }, 5000);
+        })
+        
+        if (this.router.url === '/') {
+            this.router.navigate(['/dashboard']);
+        }
+    }
+
+    ngAfterContentInit() {
+    }
+
+    ngOnDestroy() {
     }
 }

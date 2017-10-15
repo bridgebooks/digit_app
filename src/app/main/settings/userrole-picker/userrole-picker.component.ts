@@ -21,7 +21,7 @@ export class UserrolePickerComponent implements OnInit {
   constructor(private roles: RoleService) { }
 
   filterChanged(value) {
-    this.rolePicked.emit(value);
+    this.rolePicked.emit(this.selected);
   }
 
   ngOnInit() {
