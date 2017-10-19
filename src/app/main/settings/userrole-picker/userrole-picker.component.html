@@ -1,0 +1,23 @@
+<p>Select the user's level of access to this organization</p>
+
+<div *ngIf="roles$ | async; let roles">
+  <form #roleForm="ngForm">
+    <div class="row org-role" *ngFor="let role of roles.data">
+      <div class="col-lg-1 col-md-1">
+          <input type="radio" name="role" id="role-{{role.id}}" [value]="role.id" [(ngModel)]="selected" (change)="filterChanged($event.target.value)">        
+      </div>
+      <div class="col-lg-3 col-md-3">
+          <p>
+            {{ role.name | uppercaseFirstChar: role.name }}
+            <clr-signpost>
+                <clr-signpost-content *clrIfOpen>
+                    <h3>{{ role.name | uppercaseFirstChar: role.name }}</h3>
+                    <p>{{ role.description }}</p>
+                </clr-signpost-content>
+            </clr-signpost>
+          </p>        
+          <span class="description">{{ role.short_description }}</span>        
+      </div>
+    </div>
+  </form>
+</div>

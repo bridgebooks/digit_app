@@ -1,58 +1,87 @@
 <section>
-  <div class="row flex-items-lg-between page-header">
-      <div class="col-lg-4">
-          <h2>Invoices</h2>
-      </div>
-      <div class="col-lg-4">
-          <a class="btn btn-primary" routerLink="/sales/edit" style="margin-top: 12px;">New Invoice</a>
-      </div>
-  </div>
+    <div class="row flex-items-lg-between page-header">
+        <div class="col-lg-4">
+            <h2>Invoices</h2>
+        </div>
+        <div class="col-lg-4">
+            <a class="btn btn-primary" routerLink="/sales/edit" style="margin-top: 12px;">New Invoice</a>
+        </div>
+    </div>
   
-  <div class="row flex-items-lg-between">
-    <div class="col-lg-4">
+    <div class="row flex-items-lg-between">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-4">
+        </div>
     </div>
-    <div class="col-lg-4">
-    </div>
-  </div>
 
-  <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
-            <clr-dg-placeholder>No items to display!</clr-dg-placeholder>
-            
-            <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
-            <clr-dg-column [clrDgField]="'reference'">Ref</clr-dg-column>
-            <clr-dg-column [clrDgField]="'contact|name'">To</clr-dg-column>
-            <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
-            <clr-dg-column [clrDgField]="'due_at'">Due Date</clr-dg-column>
-            <clr-dg-column>Overdue</clr-dg-column>
-            <clr-dg-column [clrDgField]="'total'">Total</clr-dg-column>
-            <clr-dg-column [clrDgField]="'status'">Status</clr-dg-column>
-            
-            <clr-dg-row *ngFor="let invoice of invoices">
-              <clr-dg-cell>
-                <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>        
-              </clr-dg-cell>
-              <clr-dg-cell>{{ invoice.reference }}</clr-dg-cell>
-              <clr-dg-cell>
-                  <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.contact.data.name }}</a>
-              </clr-dg-cell>
-              <clr-dg-cell>{{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
-              <clr-dg-cell>{{ invoice.due_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
-              <clr-dg-cell>
-                  <span *ngIf="invoice.overdue < 1">-</span>
-                  <span class="overdue" *ngIf="invoice.overdue > 0">{{ invoice.overdue }} day(s)</span>
-              </clr-dg-cell>
-              <clr-dg-cell>{{ invoice.total | number:'1.2-2' }}</clr-dg-cell>
-              <clr-dg-cell>{{ invoice.status }}</clr-dg-cell>
-            </clr-dg-row>
-    
-            <clr-dg-footer>
-                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-                of {{total}} Invoices
-                <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
-            </clr-dg-footer>
-          </clr-datagrid>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <nav class="subnav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/sales/invoices']" [routerLinkActive]="'active'"
+                        [queryParams]="{status: 'all'}" canSee [allowed]="'adviser,invoices'">All Invoices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'draft'}" 
+                        [routerLinkActive]="'active'" canSee [allowed]="'adviser,invoices'">Draft</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'submitted'}" 
+                        [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Awaiting Authorization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'sent'}" 
+                        [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Awaiting Payment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'paid'}" 
+                        [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Paid</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+            <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+                <clr-dg-placeholder>No items to display!</clr-dg-placeholder>
+                
+                <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
+                <clr-dg-column [clrDgField]="'reference'">Ref</clr-dg-column>
+                <clr-dg-column [clrDgField]="'contact|name'">To</clr-dg-column>
+                <clr-dg-column [clrDgField]="'user_id'">Created By</clr-dg-column>
+                <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
+                <clr-dg-column [clrDgField]="'due_at'">Due Date</clr-dg-column>
+                <clr-dg-column>Overdue</clr-dg-column>
+                <clr-dg-column [clrDgField]="'total'">Total</clr-dg-column>
+                <clr-dg-column [clrDgField]="'status'" *ngIf="status == 'all'">Status</clr-dg-column>
+                
+                <clr-dg-row *ngFor="let invoice of invoices">
+                    <clr-dg-cell>
+                    <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>        
+                    </clr-dg-cell>
+                    <clr-dg-cell>{{ invoice.reference }}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.contact.data.name }}</a>
+                    </clr-dg-cell>
+                    <clr-dg-cell>{{ invoice.user.data.full_name }}</clr-dg-cell>
+                    <clr-dg-cell>{{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
+                    <clr-dg-cell>{{ invoice.due_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <span *ngIf="invoice.overdue < 1">-</span>
+                        <span class="overdue" *ngIf="invoice.overdue > 0">{{ invoice.overdue }} day(s)</span>
+                    </clr-dg-cell>
+                    <clr-dg-cell>{{ invoice.total | number:'1.2-2' }}</clr-dg-cell>
+                    <clr-dg-cell *ngIf="status == 'all'">{{ invoice.status }}</clr-dg-cell>
+                </clr-dg-row>
+        
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    of {{total}} Invoices
+                    <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </div>
+    </div>
 </section>

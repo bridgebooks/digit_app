@@ -1,4 +1,13 @@
 <clr-main-container>
+
+    <clr-alert [clrAlertType]="'danger'" [clrAlertAppLevel]="true" *ngIf="aclAlertShow">
+        <clr-alert-item>
+            <span class="alert-text">
+                Access denied. You do not have persmission to access the requested page, contact your organization admin.
+            </span>
+        </clr-alert-item>
+    </clr-alert>
+
     <app-header></app-header>
     <div class="content-container">
         <main class="content-area">
@@ -42,7 +51,7 @@
                             {{ item.label }}
                         </a>
                         <clr-vertical-nav-group-children *clrIfExpanded="false">
-                            <a *ngFor="let child of item.children" clrVerticalNavLink routerLinkActive="active" [routerLink]="child.path">
+                            <a *ngFor="let child of item.children" clrVerticalNavLink routerLinkActive="active" [routerLink]="child.path" [queryParams]="child.queryParams">
                                 {{ child.label }}
                             </a>
                         </clr-vertical-nav-group-children>

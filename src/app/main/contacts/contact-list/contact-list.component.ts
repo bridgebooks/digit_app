@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Contact } from '../../../models/data/contact';
 import { State } from 'clarity-angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 
 @Component({
@@ -14,13 +14,14 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy {
 
   route$: Subscription;
+  cancel$: Subject<any> = new Subject();
   org: any;
   type: string;
   contacts: Contact[];
   perPage: number = 30;
   currentPage: number = 1;
   total: number;
-  loading: boolean;
+  loading: boolean = true;
   selected: Contact[] = [];
 
   enableBulkOptions: boolean = false;
@@ -44,7 +45,8 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
   }
 
   refresh(state: State) {
-        
+    if (this.loading !== true) this.loading = true;
+    
     state.sort = state.sort || {
       by: 'name',
       reverse: false
@@ -61,6 +63,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
 
     this.orgService
       .getContacts(this.org.id, options)
+      .takeUntil(this.cancel$)
       .subscribe(response => {
         this.total = response.total
         this.contacts = response.data;
@@ -70,7 +73,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
       () => {
         this.loading = false;
         this.selected = [];
-        //this.cdRef.detectChanges();
+        this.cdRef.detectChanges();
       })
   }
 
@@ -171,15 +174,17 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
 
   ngOnInit() { 
     this.org = this.session.getDefaultOrg()
-  }
 
-  ngAfterContentInit() {
     this.route$ = this.route.params
       .filter(params => params.type)
       .subscribe(params => {
         this.type = params.type;
-        this.loading = true;
+        this.cancel$.next()
+        this.refresh({});
       })
+  }
+
+  ngAfterContentInit() {
   }
 
   ngOnDestroy() {

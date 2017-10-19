@@ -35,6 +35,7 @@ export class PhoneNumberDirective implements Validator {
     onBlur(value) {
         const parsed = this.intlPhoneNumberPipe.parse(this.el.value, 'NG');
         this.el.value = this.intlPhoneNumberPipe.transform(parsed);
+        console.log(this.el.value);
 
         this.ngModelChange.emit(this.el.value);
     }

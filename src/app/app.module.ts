@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { PubSubModule } from 'angular2-pubsub';
 import { JwtHelper } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
@@ -31,7 +30,6 @@ import { AppRoutingModule } from './app-routing.module';
       storageType: 'localStorage'
     }),
     SimpleNotificationsModule.forRoot(),
-    PubSubModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

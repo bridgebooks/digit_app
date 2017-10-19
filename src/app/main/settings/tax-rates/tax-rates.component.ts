@@ -88,9 +88,9 @@ export class TaxRatesComponent implements OnInit {
     }
 
     const options = {
-      include: 'components',
       page: this.currentPage,
       perPage: this.perPage,
+      include: 'components'      
     }
 
     options['orderBy'] = state.sort.by;
