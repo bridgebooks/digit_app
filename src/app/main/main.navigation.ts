@@ -13,11 +13,15 @@ export module MainNavigation {
             children: [
                 {
                     label: 'Invoices',
-                    path: '/sales/invoices'
+                    path: '/sales/invoices',
+                    queryParams: {
+                        status: 'all'
+                    }
                 },
                 {
                     label: 'Inventory',
-                    path: '/sales/items'
+                    path: '/sales/items',
+                    queryParams: {}
                 }
             ] 
         },
@@ -28,7 +32,8 @@ export module MainNavigation {
             children: [
                 {
                     label: 'Bills',
-                    path: '/purchases/bills'
+                    path: '/purchases/bills',
+                    queryParams: {}
                 }
             ] 
         },
@@ -39,11 +44,13 @@ export module MainNavigation {
             children: [
                 {
                     label: 'Customers',
-                    path: '/contacts/customer'
+                    path: '/contacts/customer',
+                    queryParams: {}
                 },
                 {
                     label: 'Vendors',
-                    path: '/contacts/vendor'
+                    path: '/contacts/vendor',
+                    queryParams: {}
                 },
             ] 
         },
@@ -54,11 +61,13 @@ export module MainNavigation {
             children: [
                 {
                     label: 'Employees',
-                    path: '/payroll/employees'
+                    path: '/payroll/employees',
+                    queryParams: {}
                 },
                 {
                     label: 'Pay runs',
-                    paths: '/payroll/runs'
+                    paths: '/payroll/runs',
+                    queryParams: {}
                 }
             ]
         },

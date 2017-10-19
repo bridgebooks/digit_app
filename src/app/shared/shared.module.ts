@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IntlPhoneNumberPipe, UppercaseFirstCharacterPipe, NumericDirective, PhoneNumberDirective, MatchValidator } from './index';
+import { IntlPhoneNumberPipe, UppercaseFirstCharacterPipe, NumericDirective, CanseeDirective, PhoneNumberDirective, MatchValidator } from './index';
 import { BankSelectComponent } from './components/bank-select/bank-select.component';
 import { AccountSelectComponent } from './components/account-select/account-select.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
@@ -16,6 +16,7 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
     NumericDirective, 
+    CanseeDirective,
     MatchValidator,
     PhoneNumberDirective,
     BankSelectComponent,
@@ -29,6 +30,7 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
     TaxrateSelectComponent,
     OrgbankaccountSelectComponent,
     NumericDirective, 
+    CanseeDirective,
     PhoneNumberDirective, 
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe

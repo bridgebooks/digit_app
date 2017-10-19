@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy } 
 import { ActivatedRoute } from '@angular/router'; 
 import { AlertService, SessionService, OrgService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-invoice-list',
@@ -12,8 +12,11 @@ import { Subscription } from 'rxjs';
 export class InvoiceListComponent implements OnInit {
 
   route$: Subscription;
+  cancel$: Subject<any> = new Subject();
+  
   org: any;
   type: string = 'acc_rec';
+  status: string;
   invoices: any[] = [];
   perPage: number = 30;
   currentPage: number = 1;
@@ -40,12 +43,13 @@ export class InvoiceListComponent implements OnInit {
       perPage: this.perPage,
       include: 'contact,user'      
     }
-
+    if (this.status) options['status'] = this.status;
     options['orderBy'] = state.sort.by;
     options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
       .getSaleInvoices(this.org.id, options)
+      .takeUntil(this.cancel$)
       .subscribe(response => {
         setTimeout(() => { this.loading = false }, 0);
         this.total = response.total;
@@ -60,8 +64,21 @@ export class InvoiceListComponent implements OnInit {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
+
+    this.route$ = this.route.queryParams
+      .filter(params => params.status)
+      .subscribe(params => {
+        this.status = params.status || 'all';
+        if (this.status) {
+          this.loading = true;
+          this.cancel$.next();
+          this.refresh({})
+        }
+      })
   }
 
   ngOnDestroy() {
+    this.route$.unsubscribe();
+    this.cancel$.complete();
   }
 }

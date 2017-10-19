@@ -30,5 +30,6 @@ export class SessionService {
     this.localStorageService.remove('user.data');
     this.localStorageService.remove('user.token');
     this.localStorageService.remove('user.org');
+    this.localStorageService.clearAll();
   }
 }

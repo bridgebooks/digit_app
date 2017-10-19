@@ -7,5 +7,6 @@ export * from './interceptors/http-cache.interceptor';
 export * from './pipes/intl-phone-number';
 export * from './pipes/uppercase-firstcharacter';
 export * from './directives/numeric.directive';
+export * from './directives/cansee.directive';
 export * from './validators/match/match.directive';
 export * from './validators/phone/phone.directive';

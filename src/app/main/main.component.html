@@ -51,7 +51,7 @@
                             {{ item.label }}
                         </a>
                         <clr-vertical-nav-group-children *clrIfExpanded="false">
-                            <a *ngFor="let child of item.children" clrVerticalNavLink routerLinkActive="active" [routerLink]="child.path">
+                            <a *ngFor="let child of item.children" clrVerticalNavLink routerLinkActive="active" [routerLink]="child.path" [queryParams]="child.queryParams">
                                 {{ child.label }}
                             </a>
                         </clr-vertical-nav-group-children>
