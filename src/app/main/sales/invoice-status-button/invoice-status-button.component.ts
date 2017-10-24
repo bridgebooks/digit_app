@@ -8,8 +8,7 @@ import { InvoiceService } from '../../../services';
 })
 export class InvoiceStatusButtonComponent implements OnInit, OnChanges {
 
-  @Input('current') currentStatus: string;
-  @Input('id') id: string;
+  @Input('invoice') invoice: any;
   @Output() statusChanged = new EventEmitter<any>();
   status: string;
   btnText: string;
@@ -22,7 +21,7 @@ export class InvoiceStatusButtonComponent implements OnInit, OnChanges {
     let message: string = '';
     let status: string = '';
 
-    switch (this.currentStatus.toLowerCase()) {
+    switch (this.invoice.status.toLowerCase()) {
       case 'draft':
         message =  'Submit';
         status = 'submitted';
@@ -46,9 +45,12 @@ export class InvoiceStatusButtonComponent implements OnInit, OnChanges {
 
   updateStatus() {
     this.submitting = true;
-    this.invoices.update(this.id, { status: this.status })
+    this.invoices.update(this.invoice.id, { status: this.status })
       .subscribe(response => {
         this.submitting = false;
+        this.invoice = response.data;
+        this.btnText = this.getBtnText().message;
+        this.status = this.getBtnText().status;
         this.statusChanged.emit(response.data.status);
       }, err => {
         this.submitting = false;
@@ -61,8 +63,7 @@ export class InvoiceStatusButtonComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.currentStatus = changes.current ? changes.current.currentValue : this.currentStatus;
-    this.id = changes.id ? changes.id.currentValue : this.id;
+    this.invoice.status = changes.current ? changes.current.currentValue : this.invoice.status;
 
     this.btnText = this.getBtnText().message;
     this.status = this.getBtnText().status;

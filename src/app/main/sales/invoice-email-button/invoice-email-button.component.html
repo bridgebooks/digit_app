@@ -1,4 +1,7 @@
-<button class="btn btn-default" (click)="modalVisible = true" *ngIf="show"><clr-icon shape="envelope"></clr-icon> Email</button>
+<button class="btn btn-default" (click)="modalVisible = true" 
+*ngIf="show" canDo [action]="'invoices:send'" [actionable]="invoice">
+<clr-icon shape="envelope"></clr-icon> Email
+</button>
 
 <clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
   <h3 class="modal-title">Send Invoice</h3>

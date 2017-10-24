@@ -69,6 +69,7 @@ export class InvoiceListComponent implements OnInit {
       .filter(params => params.status)
       .subscribe(params => {
         this.status = params.status || 'all';
+        
         if (this.status) {
           this.loading = true;
           this.cancel$.next();
@@ -78,6 +79,7 @@ export class InvoiceListComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.cdRef.detach();
     this.route$.unsubscribe();
     this.cancel$.complete();
   }

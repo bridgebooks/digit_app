@@ -1,1 +1,3 @@
-<button class="btn btn-success" (click)="updateStatus()" [disabled]="submitting" [clrLoading]="submitting">{{ btnText }}</button>
+<button class="btn btn-success" (click)="updateStatus()" 
+[disabled]="submitting" [clrLoading]="submitting" canDo [action]="'invoices:authorize'" [actionable]="invoice">
+{{ btnText }}</button>

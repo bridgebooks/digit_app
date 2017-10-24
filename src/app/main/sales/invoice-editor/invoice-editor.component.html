@@ -77,10 +77,16 @@
           <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
-          <button type="button" clrDropdownItem (click)="save('draft')">Save as draft</button>
-          <button type="button" clrDropdownItem (click)="save('submitted')">Save &amp; submit for approval</button>
+          <button type="button" clrDropdownItem canSee (click)="save('draft')" canSee [allowed]="'adviser,invoices'">Save as draft</button>
+          <button type="button" clrDropdownItem (click)="save('submitted')" canSee [allowed]="'adviser,invoices'">Save &amp; submit for approval</button>
       </clr-dropdown-menu>
     </clr-dropdown>
+
+    <button *ngIf="!editing" type="button" class="btn btn-success" (click)="save('authorized')"
+     [clrLoading]="saving" [disabled]="saving"
+     canSee [allowed]="'adviser'">
+     Save and Authorize</button>
+
     <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving" (click)="save(model.status)">Update</button>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>
