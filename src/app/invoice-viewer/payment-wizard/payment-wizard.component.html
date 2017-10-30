@@ -1,0 +1,20 @@
+<clr-modal [(clrModalOpen)]="showWizard" [clrModalStaticBackdrop]="true" [clrModalSize]="'md'">
+  <h3 class="modal-title">Pay Invoice #{{ invoice.invoice_no }}</h3>
+  <div class="modal-body" [ngSwitch]="currentStep">
+    <payment-contact-form #contactForm *ngSwitchCase="'contact'" (formValid)="onContactFormValid($event)"></payment-contact-form>
+    <card-form #cardForm *ngSwitchCase="'card'" (formValid)="onCardFormValid($event)"></card-form>
+    <otp-form #otpForm *ngSwitchCase="'otp'" [response]="paymentResponse" (formValid)="onOtipFormValid($event)"></otp-form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline">Cancel</button>
+
+    <button type="button" class="btn btn-primary" *ngIf="currentStep == 'contact'"
+    [disabled]="disableActionBtn" (click)="goNext()">
+    {{ nextBtnText }}</button>
+
+    <button type="button" class="btn btn-primary" *ngIf="currentStep == 'card'"
+    [disabled]="disableActionBtn" (click)="goNext()" [clrLoading]="processing">
+    {{ nextBtnText }}</button>
+  </div>
+</clr-modal>

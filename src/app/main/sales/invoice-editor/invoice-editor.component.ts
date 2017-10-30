@@ -1,7 +1,19 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { 
+  Component, 
+  Input, 
+  Output, 
+  EventEmitter, 
+  SimpleChanges,   
+  OnInit, 
+  OnChanges, 
+  AfterContentInit, 
+  OnDestroy
+} from '@angular/core';
 import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
-import { InvoiceService } from '../../../services';
-import { InvoiceUtils } from '../invoice-edit/invoice-utils'
+import { InvoiceService, OrgService } from '../../../services';
+import { InvoiceUtils } from '../invoice-edit/invoice-utils';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-invoice-editor',
@@ -9,15 +21,15 @@ import { InvoiceUtils } from '../invoice-edit/invoice-utils'
   styleUrls: ['./invoice-editor.component.scss']
 })
 
-export class InvoiceEditorComponent implements OnInit, OnChanges {
+export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy {
   @Input('type') type;
   @Input('org') org;
   @Input('editing') editing: boolean;
   @Input('saving') saving: boolean;
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
-
-  itemUpdating: boolean = false;
+  
+  showInvoiceSettingsAlert: boolean = false;
 
   datePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd'
@@ -39,10 +51,14 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     status: 'draft',
     sub_total: 0.00,
     tax_total: 0.00,
-    total: 0.00
+    total: 0.00,
+    notes: null
   }
 
-  constructor(private invoices: InvoiceService) { 
+  cancel$: Subject<any> = new Subject();
+  invoiceSettings$: Observable<any>;
+
+  constructor(private invoices: InvoiceService, private orgService: OrgService) { 
   }
 
   onLineAmountTypeSelected($event) {
@@ -180,11 +196,26 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
         day: d.getDate()
       }
     }
+
+    this.invoiceSettings$ = this.orgService.getInvoiceSettings(this.org.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.editing = changes.editing ? changes.editing.currentValue : this.editing;
     this.type = changes.type ? changes.type.currentValue : this.type;
     this.saving = changes.saving ? changes.saving.currentValue : this.saving;
+  }
+
+  ngAfterContentInit() {
+    this.invoiceSettings$
+      .takeUntil(this.cancel$)
+      .subscribe(response => {
+        const settings = response.data;
+        if (!settings.org_bank_account_id) this.showInvoiceSettingsAlert = true;
+     })
+  }
+
+  ngOnDestroy() {
+    this.cancel$.complete();
   }
 }

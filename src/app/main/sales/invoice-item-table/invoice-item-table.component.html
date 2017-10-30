@@ -28,7 +28,7 @@
           <cell-account-select [selected]="item.account_id" [row]="item" (accountSelected)="rowItemSelected($event)"></cell-account-select>
         </td>
         <td class="line-item-cell">
-          <cell-taxrate-select [selected]="item.tax_rate_id" [row]="item" (rateelected)="rowItemSelected($event)"></cell-taxrate-select>
+          <cell-taxrate-select [selected]="item.tax_rate_id" [row]="item" (rateSelected)="rowItemSelected($event)"></cell-taxrate-select>
         </td>
         <td class="line-item-cell">{{ item.amount | number:'1.2-2' }}</td>
         <td class="line-item-cell">

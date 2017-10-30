@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { InvoicePayment } from '../models/responses/invoice-payment';
 
 @Injectable()
 export class InvoiceService {
@@ -11,13 +12,20 @@ export class InvoiceService {
 
   create(body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<any>(this.baseUrl, body, { headers })
+    return this.http.post<any>(this.baseUrl, body, { headers });
   }
 
   send(id: string, body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}/send`;
-    return this.http.post<any>(url, body, { headers })
+    return this.http.post<any>(url, body, { headers });
+  }
+
+  initPayment(id: string, body: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/payment`;
+
+    return this.http.post<InvoicePayment>(url, body, { headers });
   }
 
   get(id: string, options?: object) {

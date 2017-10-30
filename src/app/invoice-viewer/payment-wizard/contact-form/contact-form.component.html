@@ -1,0 +1,25 @@
+<div>
+  <form #form="ngForm" novalidate>
+    <section class="form-block">
+      <div class="form-group">
+        <label for="first_name" class="required">First Name</label>
+        <input type="text" name="first_name" id="first_name" size="50" [(ngModel)]="model.first_name" required #firstNameInput="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="last_name" class="required">Last Name</label>
+        <input type="text" name="last_name" id="last_name" size="50" [(ngModel)]="model.last_name" required #lastNameInput="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="required">Phone</label>
+        <input type="text" name="phone" id="phone" size="50" [(ngModel)]="model.phone" numeric phone required #phoneInput="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="required">Email</label>
+        <input type="email" name="email" id="email" size="50" [(ngModel)]="model.email" required #emailInput="ngModel">
+      </div>
+    </section>
+  </form>
+</div>

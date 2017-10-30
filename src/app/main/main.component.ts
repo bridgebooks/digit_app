@@ -88,5 +88,6 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.aclErrorSub.unsubscribe();
     }
 }

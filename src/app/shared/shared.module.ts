@@ -8,12 +8,15 @@ import {
   CanseeDirective, 
   CanDoDirective,
   PhoneNumberDirective, 
-  MatchValidator
+  MatchValidator,
+  CreditCardNumberDirective
 } from './index';
 import { BankSelectComponent } from './components/bank-select/bank-select.component';
 import { AccountSelectComponent } from './components/account-select/account-select.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
 import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
+import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
+import { PinpadComponent } from './components/pinpad/pinpad.component';
 
 @NgModule({
   imports: [
@@ -31,7 +34,10 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
     BankSelectComponent,
     AccountSelectComponent,
     TaxrateSelectComponent,
-    OrgbankaccountSelectComponent
+    OrgbankaccountSelectComponent,
+    CreditCardnoPipe,
+    CreditCardNumberDirective,
+    PinpadComponent,
   ],
   exports: [
     BankSelectComponent, 
@@ -41,10 +47,12 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
     NumericDirective, 
     CanseeDirective,
     CanDoDirective,
-    PhoneNumberDirective, 
+    PhoneNumberDirective,
+    CreditCardNumberDirective, 
     IntlPhoneNumberPipe,
-    UppercaseFirstCharacterPipe
+    UppercaseFirstCharacterPipe,
+    PinpadComponent
   ],
-  providers: [IntlPhoneNumberPipe]
+  providers: [IntlPhoneNumberPipe, CreditCardnoPipe]
 })
 export class SharedModule { }

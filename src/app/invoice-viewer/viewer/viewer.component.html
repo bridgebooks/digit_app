@@ -15,7 +15,7 @@
     <div class="container">
       <div class="row flex-items-lg-between">
         <div class="col-md-4">
-          <a class="btn btn-success">Pay Now</a>
+          <a class="btn btn-success" (click)="onPayBtnClick()">Pay Now</a>
           <div class="invoice-amount">
             <span class="value">
               {{ invoice.total | number:"1.2-2" }} NGN
@@ -35,7 +35,7 @@
         <div class="card-block">
           <div class="row flex-items-lg-between invoice-body-header">
             <div class="col-lg-4">
-              <div class="logo">
+              <div class="logo" *ngIf="invoice.org.data.logo_url">
                 <img class="img-responsive" [src]="invoice.org.data.logo_url" alt="{{ invoice.org.data.name }}">
               </div>
             </div>
@@ -125,3 +125,5 @@
     </div>
   </section>
 </section>
+
+<payment-wizard #paymentWizard [invoice]="invoice" *ngIf="!loading && invoice"></payment-wizard>

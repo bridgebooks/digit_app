@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { PaymentWizardComponent } from '../payment-wizard/payment-wizard.component';
 import { Subscription } from 'rxjs';
 import { InvoiceService } from '../../services';
 
@@ -9,8 +10,9 @@ import { InvoiceService } from '../../services';
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss']
 })
-export class ViewerComponent implements OnInit {
+export class ViewerComponent implements OnInit, OnDestroy {
 
+  @ViewChild('paymentWizard') paymentWizard: PaymentWizardComponent;
   route$: Subscription;
   loading: boolean = true;
   invoice: any;
@@ -24,6 +26,10 @@ export class ViewerComponent implements OnInit {
   ];
 
   constructor(private title: Title, private route: ActivatedRoute, private invoices: InvoiceService) { }
+
+  onPayBtnClick() {
+    this.paymentWizard.open();
+  }
 
   fetchInvoice(id: string) {
     this.invoices.get(id, { ref: 'invoices', include: 'org,contact,items' })
@@ -41,5 +47,9 @@ export class ViewerComponent implements OnInit {
     this.route$ = this.route.params.filter(params => params.id).subscribe(params => {
       this.fetchInvoice(params.id);
     });
+  }
+
+  ngOnDestroy() {
+    this.route$.unsubscribe();
   }
 }

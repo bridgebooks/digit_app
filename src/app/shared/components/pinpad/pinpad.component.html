@@ -1,0 +1,34 @@
+<section class="pinpad-holder">
+  <div class="pinpad-display">
+    <input type="password" disabled [(ngModel)]="pin" style="width:100%; text-align:center;">
+  </div>
+  <table class="table table-compact table-noborder pinpad-table">
+    <tr>
+      <td class="button" *ngFor="let button of controls.rowOne">
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'number'" (click)="numberSelect(button.label)">{{ button.label }}</button>
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'action'">{{ button.label }}</button>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="button" *ngFor="let button of controls.rowTwo">
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'number'" (click)="numberSelect(button.label)">{{ button.label }}</button>
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'action'">{{ button.label }}</button>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="button" *ngFor="let button of controls.rowThree">
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'number'" (click)="numberSelect(button.label)">{{ button.label }}</button>
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'action'">{{ button.label }}</button>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="button" *ngFor="let button of controls.rowFour">
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'number'" (click)="numberSelect(button.label)">{{ button.label }}</button>
+        <button class="btn btn-sm btn-outline" type="button" *ngIf="button.type == 'action'" (click)="action(button.action)">{{ button.label }}</button>
+      </td>
+    </tr>
+  </table>
+</section>

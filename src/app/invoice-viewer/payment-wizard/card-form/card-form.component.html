@@ -1,0 +1,62 @@
+<div class="card-form">
+  <form #form="ngForm" novalidate>
+    <!--<card-draw [background]="card.background" [number]="model.card_no" [ccv]="model.cvv" [expiration]="model.expiry">
+    </card-draw>-->
+
+    <div class="card-form-inner">
+      <div class="row pd-bottom">
+        <div class="col-lg-12 col-md-12">
+          <label for="">Card Number</label>
+          <label for="card_no" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" 
+              [ngClass]="{ 'invalid': !ccNumberInput.valid && !ccNumberInput.pristine }">
+              <input class="form-control card-no" type="text" name="card_no" id="card_no" size="60"
+              [(ngModel)]="model.card_no" #ccNumberInput="ngModel" cc-no numeric required>
+
+              <span class="tooltip-content" [hidden]="ccNumberInput.valid || ccNumberInput.pristine">
+                  <span class="input__errors_error" *ngIf="ccNumberInput.hasError('required')">Enter your card number</span>
+                  <span class="input__errors_error" *ngIf="ccNumberInput.hasError('cc-no')">Enter a valid card number</span>
+              </span>
+          </label>          
+        </div>
+      </div>
+
+      <div class="row pd-bottom">
+        <div class="col-lg-6 col-md-6 col-xs-6">
+          <label for="">Expiry</label>
+          <label for="card_expiry" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm"
+            [ngClass]="{ 'invalid': !expiryInput.valid && !expiryInput.pristine }">
+            <input type="text" name="card_expiry" id="card_expiry" placeholder="MM/YYYY"
+            [(ngModel)]="model.expiry" #expiryInput="ngModel" ccExp required>
+
+            <span class="tooltip-content" [hidden]="cvvInput.valid || cvvInput.pristine">
+                <span class="input__errors_error" *ngIf="expiryInput.hasError('required')">Enter your card expiry date</span>
+                <span class="input__errors_error" *ngIf="expiryInput.hasError('ccExp')">Enter a valid date</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xs-6">
+          <label for="">CVV</label>
+          <label for="card_cvv" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-top-left" 
+              [ngClass]="{ 'invalid': !cvvInput.valid && !cvvInput.pristine }">
+              <input class="form-control card-cvv" type="password" name="card_cvv" id="card_cvv" placeholder="XXX"
+              [(ngModel)]="model.cvv" #cvvInput="ngModel" numeric [minlength]="3" [maxlength]="4" required>
+
+              <span class="tooltip-content" [hidden]="cvvInput.valid || cvvInput.pristine">
+                  <span class="input__errors_error" *ngIf="cvvInput.hasError('required')">Enter your card CVV</span>
+                  <span class="input__errors_error" *ngIf="cvvInput.hasError('maxlength')">Enter a valid CVV</span>
+                  <span class="input__errors_error" *ngIf="cvvInput.hasError('minlength')">Enter a valid CVV</span>
+              </span>
+          </label>         
+        </div>
+      </div>
+
+      <div class="row pd-bottom">
+        <div class="col-lg-12 col-md-12">
+          <input type="hidden" name="pin" [(ngModel)]="model.pin" required minlength="4">
+          <pinpad (pinValueSet)="onPinValueSet($event)"></pinpad>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

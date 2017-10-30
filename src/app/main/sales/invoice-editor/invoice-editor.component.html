@@ -1,3 +1,19 @@
+<div class="alert alert-warning" *ngIf="showInvoiceSettingsAlert">
+  <div class="alert-items">
+    <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+        </div>
+        <span class="alert-text">
+          No default bank account is set for invoice payment. Please set one in order to recieve payments online.
+        </span>
+        <div class="alert-actions">
+            <a [routerLink]="['/settings/invoices']" class="alert-action">Invoice settings</a>
+        </div>
+    </div>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-header editor-header">
     <div class="editor-toolbar">
@@ -66,6 +82,14 @@
               </div>
             </div>
           </div>
+      </div>
+    </div>
+
+    <div class="row flex-items-md-between">
+      <div class="col-lg-6" style="padding: 25px;">
+        <div class="form-group">
+          <textarea name="notes" [(ngModel)]="model.notes" placeholder="Notes" rows="5"></textarea>
+        </div>
       </div>
     </div>
 
