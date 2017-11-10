@@ -7,7 +7,7 @@
       <div class="row pd-bottom">
         <div class="col-lg-12 col-md-12">
           <label for="">Card Number</label>
-          <label for="card_no" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm" 
+          <label for="card_no" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-top-left" 
               [ngClass]="{ 'invalid': !ccNumberInput.valid && !ccNumberInput.pristine }">
               <input class="form-control card-no" type="text" name="card_no" id="card_no" size="60"
               [(ngModel)]="model.card_no" #ccNumberInput="ngModel" cc-no numeric required>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { InvoicePayment } from '../models/responses/invoice-payment';
+import { VerifyPayment } from '../models/responses/verify-payment';
 
 @Injectable()
 export class InvoiceService {
@@ -26,6 +27,13 @@ export class InvoiceService {
     const url = `${this.baseUrl}/${id}/payment`;
 
     return this.http.post<InvoicePayment>(url, body, { headers });
+  }
+
+  verifyPayment(id: string, body: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/verify_payment`;
+
+    return this.http.post<VerifyPayment>(url, body, { headers });
   }
 
   get(id: string, options?: object) {

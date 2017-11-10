@@ -27,6 +27,10 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   constructor(private title: Title, private route: ActivatedRoute, private invoices: InvoiceService) { }
 
+  onPaymentSuccess($event) {
+    this.fetchInvoice(this.invoice.id);
+  }
+
   onPayBtnClick() {
     this.paymentWizard.open();
   }

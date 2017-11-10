@@ -24,10 +24,15 @@ export class OtpFormComponent implements OnInit, OnChanges, AfterViewInit {
   @Input('response') paymentResponse: InvoicePayment;
   @Output() formValid: EventEmitter<boolean> = new EventEmitter()
   formValid$: Subscription;
+  model: any = {
+    otp: null,
+    transaction_ref: null
+  }
 
   constructor() { }
 
   ngOnInit() {
+    this.model.transaction_ref = this.paymentResponse.transfer.flutterChargeReference;    
   }
 
   ngAfterViewInit() {
