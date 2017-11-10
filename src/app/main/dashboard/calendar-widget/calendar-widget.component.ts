@@ -18,6 +18,7 @@ import {
 } from 'date-fns';
 import { colors } from './colors';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { SessionService, OrgService } from '../../../services';
 
 @Component({
@@ -31,6 +32,7 @@ export class CalendarWidgetComponent implements OnInit, OnDestroy {
   view: string = 'month';
   viewDate: Date = new Date();
   events$: Observable<any>;
+  cancel$: Subject<any> = new Subject();
   events: any[];
   loading: boolean;
   activeDayIsOpen: boolean = false;  
@@ -41,6 +43,7 @@ export class CalendarWidgetComponent implements OnInit, OnDestroy {
     this.loading = true;
 
     this.events$
+      .takeUntil(this.cancel$)
       .map(response => { return response.data })
       .map(invoices => {
         return invoices.map(invoice => {
@@ -104,5 +107,6 @@ export class CalendarWidgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.cancel$.complete();
   }
 }

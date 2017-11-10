@@ -1,4 +1,5 @@
 <button class="btn btn-primary-outline" *ngIf="show" 
-(click)="download()" [clrLoading]="downloading" [disabled]="downloading">
+(click)="download()" [clrLoading]="downloading" [disabled]="downloading"
+canDo [action]="'invoices:pdf'" [actionable]="invoice">
 Print PDF
 </button>

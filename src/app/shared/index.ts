@@ -8,5 +8,7 @@ export * from './pipes/intl-phone-number';
 export * from './pipes/uppercase-firstcharacter';
 export * from './directives/numeric.directive';
 export * from './directives/cansee.directive';
+export * from './directives/cando.directive';
 export * from './validators/match/match.directive';
 export * from './validators/phone/phone.directive';
+export * from './validators/credit-cardno/credit-cardno.directive';

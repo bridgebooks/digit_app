@@ -1,42 +1,42 @@
 import { Directive, Input, HostListener, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Validator, AbstractControl, Validators, NG_VALIDATORS} from '@angular/forms';
-import { PhoneNumber } from 'google-libphonenumber';
+import { CreditCardNumberValidator } from './credit-cardno.validator';
+import { CreditCardnoPipe } from '../../pipes/credit-cardno.pipe';
 
-import { PhoneNumberValidator } from './phone.validator';
-import { IntlPhoneNumberPipe } from '../../pipes/intl-phone-number';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[phone]',
+    selector: '[cc-no]',
     providers: [
         {
             provide: NG_VALIDATORS,
-            useExisting: PhoneNumberDirective,
+            useExisting: CreditCardNumberDirective,
             multi: true
         }
     ]
 })
-export class PhoneNumberDirective implements Validator {
+export class CreditCardNumberDirective implements Validator {
     @Output() ngModelChange = new EventEmitter();
 
-    private valFn = PhoneNumberValidator();
+    private valFn = CreditCardNumberValidator();
 
     private el: HTMLInputElement;
-    private parsed: PhoneNumber;
 
     constructor(
         private elementRef: ElementRef,
-        private intlPhoneNumberPipe: IntlPhoneNumberPipe
+        private creditCardNumberPipe: CreditCardnoPipe
     ) {
         this.el = this.elementRef.nativeElement;
     }
 
+    @HostListener('keypress', ['$event.target.value'])
+    onKeyPress(value) {
+        this.el.value = this.creditCardNumberPipe.transform(value);
+    }
+
     @HostListener('blur', ['$event.target.value'])
     onBlur(value) {
-        const parsed = this.intlPhoneNumberPipe.parse(this.el.value, 'NG');
-        this.el.value = this.intlPhoneNumberPipe.transform(parsed);
-
-        this.ngModelChange.emit(this.el.value);
+        this.el.value = this.creditCardNumberPipe.transform(value);                
     }
 
     validate(control: AbstractControl): { [key: string]: any } {

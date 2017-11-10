@@ -1,3 +1,19 @@
+<div class="alert alert-warning" *ngIf="showInvoiceSettingsAlert">
+  <div class="alert-items">
+    <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+        </div>
+        <span class="alert-text">
+          No default bank account is set for invoice payment. Please set one in order to recieve payments online.
+        </span>
+        <div class="alert-actions">
+            <a [routerLink]="['/settings/invoices']" class="alert-action">Invoice settings</a>
+        </div>
+    </div>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-header editor-header">
     <div class="editor-toolbar">
@@ -69,6 +85,14 @@
       </div>
     </div>
 
+    <div class="row flex-items-md-between">
+      <div class="col-lg-6" style="padding: 25px;">
+        <div class="form-group">
+          <textarea name="notes" [(ngModel)]="model.notes" placeholder="Notes" rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="card-footer">
     <clr-dropdown *ngIf="!editing">
@@ -77,10 +101,16 @@
           <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
-          <button type="button" clrDropdownItem (click)="save('draft')">Save as draft</button>
-          <button type="button" clrDropdownItem (click)="save('submitted')">Save &amp; submit for approval</button>
+          <button type="button" clrDropdownItem canSee (click)="save('draft')" canSee [allowed]="'adviser,invoices'">Save as draft</button>
+          <button type="button" clrDropdownItem (click)="save('submitted')" canSee [allowed]="'adviser,invoices'">Save &amp; submit for approval</button>
       </clr-dropdown-menu>
     </clr-dropdown>
+
+    <button *ngIf="!editing" type="button" class="btn btn-success" (click)="save('authorized')"
+     [clrLoading]="saving" [disabled]="saving"
+     canSee [allowed]="'adviser'">
+     Save and Authorize</button>
+
     <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving" (click)="save(model.status)">Update</button>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, SessionService, InvoiceService } from '../../../services';
 import { InvoiceUtils } from './invoice-utils';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -14,6 +16,8 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   editing: boolean;
   saving: boolean = false;
   model: any;
+  route$: Subscription;
+  cancel$: Subject<any> = new Subject();
 
   constructor(
     private alert: AlertService,
@@ -24,6 +28,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   ) { }
 
   buildInvoice(model) {
+    console.log(model);
     let builder = new InvoiceUtils.Builder();
     
     builder
@@ -39,7 +44,8 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       .setStatus(model.status)
       .setSubTotal(model.sub_total)
       .setTaxTotal(model.tax_total)
-      .setTotal(model.total);
+      .setTotal(model.total)
+      .setNotes(model.notes);
     
     return builder.get()
   }
@@ -49,6 +55,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     if (!this.editing) {
       this.saving = true;
       this.invoiceService.create(model)
+        .takeUntil(this.cancel$)
         .subscribe(response => { 
           this.saving = false;
           this.alert.success('Invoice', 'Invoice successfully created', { timeOut: 3000 })
@@ -60,6 +67,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
     } else {
       this.saving = true;
       this.invoiceService.update(this.model.id, model)
+        .takeUntil(this.cancel$)
         .subscribe(response => {
           this.saving = false;
           this.alert.success('Invoice', 'Invoice successfully updated', { timeOut: 3000 })
@@ -84,13 +92,14 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg()
-
-    this.route.params.subscribe(param => {
+    this.route$ = this.route.params.subscribe(param => {
       this.editing = param.id ? true : false;
       if (this.editing) this.fetchInvoice(param.id)
     })
   }
 
   ngOnDestroy() {
+    this.cancel$.complete();
+    this.route$.unsubscribe();
   }
 }

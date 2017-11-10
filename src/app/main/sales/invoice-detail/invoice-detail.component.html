@@ -7,7 +7,7 @@
 <section class="invoice-detail" *ngIf="!loading">
   <div class="row flex-items-lg-between page-header">
     <div class="col-md-4">
-        <a routerLink="/sales/invoices"><clr-icon shape="caret" dir="left"></clr-icon> Invoices</a>
+        <a routerLink="/sales/invoices" [queryParams]="{status: 'all'}"><clr-icon shape="caret" dir="left"></clr-icon> Invoices</a>
         <h2>Invoice {{ invoice.invoice_no }}</h2>
     </div>
     <div class="col-md-4"></div>
@@ -20,11 +20,11 @@
             <div class="col-lg-3 col-md-5">
               <button class="btn btn-sm btn-link">{{ invoice.status }}</button>
             </div>
-            <div class="col-lg-6 col-md-5 invoice-actions">
+            <div class="col-lg-6 col-md-5 invoice-actions" style="text-align: right;">
               <invoice-edit-button [invoice]="invoice"></invoice-edit-button>  
               <invoice-email-button [invoice]="invoice"></invoice-email-button>
               <invoice-print-button [invoice]="invoice"></invoice-print-button>
-              <invoice-status-button [id]="invoice.id" [current]="invoice.status" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
+              <invoice-status-button [invoice]="invoice" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
             </div>
           </div>
       </div>

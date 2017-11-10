@@ -113,7 +113,7 @@ export module InvoiceUtils {
                     description: item.description,
                     quantity: item.quantity,
                     unit_price: item.unit_price,
-                    discount: item.discount,
+                    discount_rate: item.discount_rate,
                     account_id: item.account_id,
                     tax_rate_id: item.tax_rate_id,
                     amount: item.amount
@@ -143,7 +143,12 @@ export module InvoiceUtils {
         setTotal(value: number): Builder {
             this.model.total = value;
             return this; 
-         }
+        }
+
+        setNotes(value: string): Builder {
+            this.model.notes =  value;
+            return this;
+        }
 
         get() {
             return this.model;
