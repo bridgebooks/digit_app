@@ -18,17 +18,18 @@ export class CanseeDirective implements OnInit{
             this.renderer.setElementStyle(this.el.nativeElement, 'display', 'none');
     }
 
-    private getUserRoles(): string[] {
+    private getUserRolesACL(): string[] {
         const jwt = this.jwtService.getToken();
         const userRoles = []
 
-        jwt.acl.forEach(role => userRoles.push(role.name))
+        jwt.roles.forEach(role => userRoles.push(role.name));
+        jwt.acl.forEach(role => userRoles.push(role.name));
 
         return userRoles;
     }
 
     private canSee(): boolean {
-        const userRoles = this.getUserRoles();
+        const userRoles = this.getUserRolesACL();
         const allowedRoles = this.allowed.split(',');
         const canSee = _.intersection(allowedRoles, userRoles).length > 0 ? true : false;
 

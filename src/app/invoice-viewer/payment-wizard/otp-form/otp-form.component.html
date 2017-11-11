@@ -4,7 +4,7 @@
     <section class="form-block">
       <div class="form-group">
         <label for="otp">OTP</label>
-        <input type="text" name="otp" id="otp" numeric required placeholder="XXXXXX">
+        <input type="text" name="otp" id="otp" numeric required placeholder="XXXXXX" [(ngModel)]="model.otp" #optInput="ngModel">
       </div>
     </section>
   </form>

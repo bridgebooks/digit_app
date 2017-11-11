@@ -14,8 +14,9 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { PaymentWizardComponent } from './payment-wizard/payment-wizard.component';
 import { ContactFormComponent } from './payment-wizard/contact-form/contact-form.component';
 import { CardFormComponent } from './payment-wizard/card-form/card-form.component';
-import { OptFormComponent } from './payment-wizard/opt-form/opt-form.component';
 import { OtpFormComponent } from './payment-wizard/otp-form/otp-form.component';
+import { SummaryComponent } from './payment-wizard/summary/summary.component';
+import { SuccessComponent } from './payment-wizard/success/success.component';
 
 
 @NgModule({
@@ -28,7 +29,14 @@ import { OtpFormComponent } from './payment-wizard/otp-form/otp-form.component';
     SharedModule,
     InvoiceViewerRoutingModule
   ],
-  declarations: [ViewerComponent, PaymentWizardComponent, ContactFormComponent, CardFormComponent, OptFormComponent, OtpFormComponent],
+  declarations: [
+    ViewerComponent, 
+    PaymentWizardComponent, 
+    ContactFormComponent, 
+    CardFormComponent, 
+    OtpFormComponent, 
+    SummaryComponent, SuccessComponent
+  ],
   providers: [Title, InvoiceService]
 })
 export class InvoiceViewerModule { }

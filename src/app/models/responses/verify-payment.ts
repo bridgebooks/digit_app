@@ -1,0 +1,60 @@
+export interface Beneficiary {
+    id: number;
+    accountNumber: string;
+    accountName: string;
+    bankCode: string;
+    bankName: string;
+    userId: number;
+    currency: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt?: any;
+}
+
+export interface VerifyPayment {
+    id: number;
+    type: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    recipientPhone?: any;
+    status: string;
+    system_status: string;
+    medium: string;
+    ip: string;
+    exchangeRate?: any;
+    amountToSend: number;
+    amountToCharge: number;
+    disburseCurrency: string;
+    chargeCurrency: string;
+    flutterChargeResponseCode: string;
+    flutterChargeResponseMessage: string;
+    flutterDisburseResponseMessage: string;
+    flutterChargeReference: string;
+    flutterDisburseReference: string;
+    flutterDisburseResponseCode: string;
+    merchantCommission: number;
+    moneywaveCommission: number;
+    netDebitAmount: number;
+    chargedFee: number;
+    receiptNumber?: any;
+    redirectUrl: string;
+    linkingReference: string;
+    source: string;
+    source_id: number;
+    additionalFields?: any;
+    ref: string;
+    r1: number;
+    r2: number;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt?: any;
+    userId: number;
+    merchantId: number;
+    beneficiaryId: number;
+    accountId?: any;
+    cardId: number;
+    account?: any;
+    beneficiary: Beneficiary;
+    is_completed: boolean;
+}

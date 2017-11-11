@@ -1,20 +1,46 @@
 <clr-modal [(clrModalOpen)]="showWizard" [clrModalStaticBackdrop]="true" [clrModalSize]="'md'">
   <h3 class="modal-title">Pay Invoice #{{ invoice.invoice_no }}</h3>
   <div class="modal-body" [ngSwitch]="currentStep">
+    <div class="alert alert-danger" *ngIf="paymentError">
+        <div class="alert-items">
+            <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                    <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="alert-text">
+                    {{ paymentErrorMessage }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <app-summary #summary *ngSwitchCase="'summary'" [total]="invoice.total"></app-summary>
     <payment-contact-form #contactForm *ngSwitchCase="'contact'" (formValid)="onContactFormValid($event)"></payment-contact-form>
     <card-form #cardForm *ngSwitchCase="'card'" (formValid)="onCardFormValid($event)"></card-form>
-    <otp-form #otpForm *ngSwitchCase="'otp'" [response]="paymentResponse" (formValid)="onOtipFormValid($event)"></otp-form>
+    <otp-form #otpForm *ngSwitchCase="'otp'" [response]="paymentResponse" (formValid)="onOtpFormValid($event)"></otp-form>
+    <payment-success #paymentSuccess *ngSwitchCase="'success'" [invoice_no]="invoice.invoice_no"></payment-success>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline">Cancel</button>
+    <button type="button" class="btn btn-outline" (click)="resetWizard(false)" *ngIf="canCancel(currentStep)">Cancel</button>
+
+    <button type="button" class="btn btn-primary" *ngIf="currentStep == 'summary'" (click)="goNext('summary')">
+    {{ nextBtnText }}</button>
 
     <button type="button" class="btn btn-primary" *ngIf="currentStep == 'contact'"
-    [disabled]="disableActionBtn" (click)="goNext()">
+    [disabled]="disableActionBtn" (click)="goNext('contact')">
     {{ nextBtnText }}</button>
 
     <button type="button" class="btn btn-primary" *ngIf="currentStep == 'card'"
-    [disabled]="disableActionBtn" (click)="goNext()" [clrLoading]="processing">
+    [disabled]="disableActionBtn" (click)="goNext('card')" [clrLoading]="processing">
+    {{ nextBtnText }}</button>
+
+    <button type="button" class="btn btn-primary" *ngIf="currentStep == 'otp'"
+    [disabled]="disableActionBtn" (click)="goNext('otp')" [clrLoading]="processing">
+    {{ nextBtnText }}</button>
+
+    <button type="button" class="btn btn-primary" *ngIf="currentStep == 'success'"
+     (click)="goNext('success')">
     {{ nextBtnText }}</button>
   </div>
 </clr-modal>

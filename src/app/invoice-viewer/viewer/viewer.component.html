@@ -15,7 +15,7 @@
     <div class="container">
       <div class="row flex-items-lg-between">
         <div class="col-md-4">
-          <a class="btn btn-success" (click)="onPayBtnClick()">Pay Now</a>
+          <a class="btn btn-success" (click)="onPayBtnClick()" *ngIf="invoice.status != 'Paid'">Pay Now</a>
           <div class="invoice-amount">
             <span class="value">
               {{ invoice.total | number:"1.2-2" }} NGN
@@ -126,4 +126,5 @@
   </section>
 </section>
 
-<payment-wizard #paymentWizard [invoice]="invoice" *ngIf="!loading && invoice"></payment-wizard>
+<payment-wizard #paymentWizard [invoice]="invoice" *ngIf="!loading && invoice" (paymentSuccess)="onPaymentSuccess($event)">
+</payment-wizard>
