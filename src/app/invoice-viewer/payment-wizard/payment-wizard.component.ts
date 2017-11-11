@@ -59,6 +59,7 @@ export class PaymentWizardComponent implements OnInit {
     this.model = {};
     this.currentStep = 'summary';
     this.nextStep = 'contact';
+    this.paymentError = false;
 
     if (done) this.paymentSuccess.emit(true);
   }
@@ -142,8 +143,10 @@ export class PaymentWizardComponent implements OnInit {
           this.paymentErrorMessage = MoneywaveResponse.get(response.transfer.flutterChargeResponseCode);
         }
       }, err => {
-        this,
         this.processing = false;
+        this.disableActionBtn = false;
+        this.paymentError = true;
+        this.paymentErrorMessage = err.error.message;
       })
   }
 
@@ -170,6 +173,7 @@ export class PaymentWizardComponent implements OnInit {
         this.disableActionBtn = false;
         this.paymentError = true;
         this.paymentErrorMessage = err.error.message;
+        this.resetWizard(false);
       })
   }
 
