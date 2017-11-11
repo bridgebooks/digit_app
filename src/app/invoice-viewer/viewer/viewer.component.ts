@@ -14,7 +14,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   @ViewChild('paymentWizard') paymentWizard: PaymentWizardComponent;
   route$: Subscription;
-  loading: boolean = true;
+  loading: boolean;
   invoice: any;
   lineItemColumns: any[] = [
     { label: 'Description' },
@@ -28,14 +28,17 @@ export class ViewerComponent implements OnInit, OnDestroy {
   constructor(private title: Title, private route: ActivatedRoute, private invoices: InvoiceService) { }
 
   onPaymentSuccess($event) {
-    this.fetchInvoice(this.invoice.id);
+    this.fetchInvoice(this.invoice.id, true);
   }
 
   onPayBtnClick() {
     this.paymentWizard.open();
   }
 
-  fetchInvoice(id: string) {
+  fetchInvoice(id: string, loading: boolean = true) {
+
+    this.loading = loading;
+
     this.invoices.get(id, { ref: 'invoices', include: 'org,contact,items' })
       .subscribe(response => {
         this.loading = false;

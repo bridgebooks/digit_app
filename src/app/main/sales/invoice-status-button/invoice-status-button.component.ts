@@ -37,6 +37,11 @@ export class InvoiceStatusButtonComponent implements OnInit, OnChanges {
       case 'sent':
         message = 'Void';
         status = 'voided';
+        break;
+      case 'paid':
+        message = 'Void';
+        status = 'voided';
+        break;
     }
     return { 
       message, status
