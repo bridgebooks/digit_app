@@ -1,0 +1,147 @@
+<section>
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-lg-4">
+        <a><clr-icon shape="caret" dir="left"></clr-icon> Employees</a>        
+        <h2 *ngIf="editing">Edit Employee</h2>
+        <h2 *ngIf="!editing">Add Employee</h2>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        
+        <form novalidate #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">    
+          <div class="card-header">
+              <button class="btn btn-outline">Cancel</button>
+              <button class="btn btn-primary" [clrLoading]="saving" [disabled]="form.invalid || saving || loading">Save</button>                        
+          </div>
+
+          <div class="card-block">
+            <div class="progress progress-fade top loop" *ngIf="loading || saving"><progress></progress></div>              
+            <div class="card-title">Employee Information</div>
+
+            <div class="card-text">
+              <section class="form-block">
+  
+                  <div class="form-group">
+                    <label class="required" for="">First Name</label>
+                    <input type="text" name="first_name" placeholder="Employee first name" size="60" #firstNameInput="ngModel" [(ngModel)]="model.first_name" required>
+                    <div class="input__errors" [hidden]="firstNameInput.valid || firstNameInput.pristine">
+                        <span class="input__errors_error" *ngIf="firstNameInput.hasError('required')">Please enter employee's first name</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="required" for="">Last Name</label>
+                    <input type="text" name="last_name" placeholder="Employee last name" size="60" #lastNameInput="ngModel" [(ngModel)]="model.last_name" required>
+                    <div class="input__errors" [hidden]="lastNameInput.valid || lastNameInput.pristine">
+                        <span class="input__errors_error" *ngIf="lastNameInput.hasError('required')">Please enter employee's last name</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="required" for="">Gender</label>
+                    <div class="select">
+                      <select name="gender" id="gender" #genderInput="ngModel" [(ngModel)]="model.gender" required>
+                        <option>Select type</option>
+                        <option *ngFor="let gender of genders" [value]="gender.value">{{ gender.label }}</option>
+                      </select>
+                      <div class="input__errors" [hidden]="genderInput.valid || genderInput.pristine">
+                          <span class="input__errors_error" *ngIf="genderInput.hasError('required')">Select a gender</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Date of birth</label>
+                    <my-date-picker style="width: 45%;" name="date_of_birth" [options]="datePickerOptions" placeholder="Date of birth" [selDate]="dob" (dateChanged)="onDOBChanged($event)"></my-date-picker>                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Role</label>
+                    <input type="text" name="role" placeholder="Employee role/designation" size="60" [(ngModel)]="model.role">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" name="email" placeholder="Email address" size="60" #emailInput="ngModel" [(ngModel)]="model.email">
+                    <div class="input__errors" [hidden]="emailInput.valid || emailInput.pristine">
+                        <span class="input__errors_error" *ngIf="emailInput.hasError('email')">Please enter a valid email address</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="tel" name="phone" placeholder="Phone number" size="60" #phoneInput="ngModel" [(ngModel)]="model.phone" numeric phone>
+                    <div class="input__errors" [hidden]="phoneInput.valid || phoneInput.pristine">
+                        <span class="input__errors_error" *ngIf="emailInput.hasError('phone')">Please enter a valid phone number</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Address line 1</label>
+                    <input type="text" name="address_line_1" placeholder="Street Address" size="60" [(ngModel)]="model.address_line_1">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Address line 2</label>
+                    <input type="text" name="address_line_2" placeholder="Address" size="60" [(ngModel)]="model.address_line_2">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">City/Town</label>
+                    <input type="text" name="city_town" placeholder="City or Town" size="45" [(ngModel)]="model.city_town">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Postal/Zip</label>
+                    <input type="text" name="postal_zip" placeholder="Postal code or Zip code" size="45" [(ngModel)]="model.postal_zip">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">State/Region</label>
+                    <input type="text" name="state_region" placeholder="State or Region " size="45" [(ngModel)]="model.state_region">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Country</label>
+                    <input type="text" name="country" placeholder="Country " size="45" [(ngModel)]="model.country">
+                  </div>
+              </section>
+            </div>
+
+            <div class="card-title">Banking Information</div>
+
+            <div class="card-text">
+              <section class="form-block">
+                  <div class="form-group">
+                    <label for="">Bank</label>
+                    <bank-select [selected]="model.bank_id" (onBankSelected)="onBankChange($event)"></bank-select>
+                    <input type="hidden" name="bank_id" [(ngModel)]="model.bank_id">
+                  </div>
+
+                <div class="form-group">
+                  <label for="">Account Name</label>
+                  <input type="text" name="bank_account_name" placeholder="Bank Account Name" size="60" [(ngModel)]="model.bank_account_name">
+                </div>
+                
+                <div class="form-group">
+                  <label for="">Account Number</label>
+                  <input type="text" name="bank_account_no" placeholder="Bank Account No" size="60" #accountNoInput="ngModel" numeric [(ngModel)]="model.bank_account_no">
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="card-footer">
+              <div class="progress progress-fade loop" *ngIf="saving"><progress></progress></div>                            
+              <button class="btn btn-primary" [clrLoading]="saving" [disabled]="form.invalid || saving || loading">Save</button>                        
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

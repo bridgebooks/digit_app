@@ -48,6 +48,16 @@ const routes: Routes = [
                 }
             },
             {
+                path: 'payroll',
+                loadChildren: './payroll/payroll.module#PayrollModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Payroll - Bridge Books',
+                    showSideNav: true,
+                    sidenavMenu: 'contacts'
+                }
+            },
+            {
                 path: 'settings',
                 loadChildren: './settings/settings.module.ts#SettingsModule',
                 canActivate: [AuthGuard],
