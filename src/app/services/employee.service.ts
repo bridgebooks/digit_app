@@ -39,6 +39,14 @@ export class EmployeeService {
     return this.http.put<EmployeeResponse>(url, body, { headers })
   }
 
+  delete(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.http.delete<any>(url, { headers })
+  }
+
   archiveMany(employees: string[]) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/archive/bulk`;
