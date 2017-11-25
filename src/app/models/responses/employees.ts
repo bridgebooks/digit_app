@@ -1,7 +1,6 @@
-import { Contact } from '../data/contact';
-import { Employee } from 'app/models/data/employee';
+import { Employee } from '../data/employee';
 
-export interface SearchResponse {
+export interface EmployeesResponse {
     total: number;
     to: number;
     from: number;
@@ -9,5 +8,5 @@ export interface SearchResponse {
     per_page: number;
     next_page_url: string;
     prev_page_url: string;
-    data: any[];
+    data: Employee[];
 }

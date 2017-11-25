@@ -1,0 +1,120 @@
+<section>
+    <div class="row flex-items-lg-between page-header">
+        <div class="col-lg-4">
+            <h2>Employees</h2>
+        </div>
+        <div class="col-lg-4">
+            <a class="btn btn-primary" routerLink="/payroll/employees/edit">Add Employee</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="row flex-items-lg-between">
+                <div class="col-lg-4">
+                    <employee-bulkaction-dropdown [enabled]="enableBulkOptions" [selected]="selected" 
+                    (restoreSelected)="restoreSelected()" (deletedSelected)="deleteSelected()"
+                    (archiveSelected)="archiveSelected()" (terminateSelected)="terminateSelected()">
+                    </employee-bulkaction-dropdown>
+                </div>
+                <div class="col-lg-4">
+                    <employee-searchbox></employee-searchbox>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <nav class="subnav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/payroll/employees']" [routerLinkActive]="'active'"
+                        [queryParams]="{status: 'all'}">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/payroll/employees']" [queryParams]="{status: 'active'}" 
+                        [routerLinkActive]="'active'">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/payroll/employees']" [queryParams]="{status: 'terminated'}" 
+                        [routerLinkActive]="'active'">Terminated</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/payroll/employees']" [queryParams]="{status: 'archived'}" 
+                        [routerLinkActive]="'active'">Archived</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)" [clrDgSelected]="selected" (clrDgSelectedChange)="onSelectedChange($event)">
+                <clr-dg-placeholder>No employees to display!</clr-dg-placeholder>
+
+                <clr-dg-column [clrDgField]="'first_name'">First Name</clr-dg-column>
+                <clr-dg-column [clrDgField]="'last_name'">Last Name</clr-dg-column>
+                <clr-dg-column [clrDgField]="'phone'">Phone</clr-dg-column>
+                <clr-dg-column [clrDgField]="'email'">Email</clr-dg-column>
+                <clr-dg-column [clrDgField]="'role'">Role</clr-dg-column>
+                <clr-dg-column [clrDgField]="'status'" *ngIf="status == 'all'">Status</clr-dg-column>
+
+                <clr-dg-row *ngFor="let employee of employees" [clrDgItem]="employee">
+                    <clr-dg-cell>
+                        <a [routerLink]="['/payroll/employees/view', employee.id]">{{ employee.first_name }}</a>        
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <a [routerLink]="['/payroll/employees/view', employee.id]">{{ employee.last_name }}</a>
+                    </clr-dg-cell>
+                    <clr-dg-cell>{{ employee.phone }}</clr-dg-cell>
+                    <clr-dg-cell>{{ employee.email }}</clr-dg-cell>
+                    <clr-dg-cell>
+                       {{ employee.role }}
+                    </clr-dg-cell>
+                    <clr-dg-cell *ngIf="status == 'all'">{{ employee.status }}</clr-dg-cell>
+                </clr-dg-row>
+
+                <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    of {{total}} Employees
+                    <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+            
+            <clr-modal #archiveModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+                <h3 class="modal-title">Archive Employees</h3>
+                <div class="modal-body">
+                    <p style="color: #333;">Are sure you want to archive this employee(s)?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="hideArchiveModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" [clrLoading]="deleting" [disabled]="deleting" (click)="archive()">Archive</button>
+                </div>
+            </clr-modal>
+
+            <clr-modal #deleteModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+                <h3 class="modal-title">Delete Employees</h3>
+                <div class="modal-body">
+                    <p style="color: #333;">Are sure you want to delete this employee(s)?, They will be permenantly deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="hideDeleteModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" [clrLoading]="deleting" [disabled]="deleting" (click)="delete()">Delete</button>
+                </div>
+            </clr-modal>
+
+            <clr-modal #restoreModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+                    <h3 class="modal-title">Restore Employees</h3>
+                    <div class="modal-body">
+                        <p style="color: #333;">Are sure you want to restore this employee(s)?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" (click)="hideRestoreModal()">Cancel</button>
+                        <button type="button" class="btn btn-primary" [clrLoading]="restoring" [disabled]="restoring" (click)="restore()">Restore</button>
+                    </div>
+                </clr-modal>
+        </div>
+    </div>
+</section>

@@ -62,7 +62,9 @@ export module MainNavigation {
                 {
                     label: 'Employees',
                     path: '/payroll/employees',
-                    queryParams: {}
+                    queryParams: {
+                        status: 'all'
+                    }
                 },
                 {
                     label: 'Pay runs',

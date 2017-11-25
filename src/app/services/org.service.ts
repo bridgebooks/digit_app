@@ -113,6 +113,20 @@ export class OrgService {
     return this.http.get<ContactGroupsResponse>(url, { headers })
   }
 
+  getEmployees(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/employees`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<any>(url, { headers, params })
+  }
+
   getItems(id: string, options: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
