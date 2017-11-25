@@ -4,6 +4,7 @@ export interface Employee {
     user_id: string;
     first_name: string;
     last_name: string;
+    full_name?: string;
     gender?: string;
     date_of_birth?: string;
     age?: number | null;
@@ -16,8 +17,8 @@ export interface Employee {
     postal_zip?: string;
     state_region?: string;
     country?: string;
-    state_date?: number;
-    termination_date?: number;
+    start_date?: string;
+    termination_date?: string;
     bank_id?: string;
     bank_account_name?: string;
     bank_account_no?: string;
