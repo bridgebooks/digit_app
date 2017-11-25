@@ -33,6 +33,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   dob: IMyDate;
+  startDate: IMyDate;
 
   constructor(
     private route: ActivatedRoute, 
@@ -58,7 +59,9 @@ export class EmployeeFormComponent implements OnInit {
         this.loading = false;
         this.model = response.data || response;
         
-        this.dob = this.toDateObject(this.model.date_of_birth)
+        if (this.model.date_of_birth) this.dob = this.toDateObject(this.model.date_of_birth)
+        if (this.model.start_date) this.startDate = this.toDateObject(this.model.start_date)
+        console.log(this.model)
       }, (err) => {
         this.loading = false
       })
@@ -72,6 +75,13 @@ export class EmployeeFormComponent implements OnInit {
   onDOBChanged($event) {
     this.model.date_of_birth = $event.formatted;
     this.dob = $event.date;
+    (this.form.controls['date_of_birth'] as FormControl).markAsDirty()
+  }
+
+  onStartDateChanged($event) {
+    this.model.start_date = $event.formatted;
+    this.startDate = $event.date;
+    (this.form.controls['start_date'] as FormControl).markAsDirty()
   }
 
   onSubmit() {

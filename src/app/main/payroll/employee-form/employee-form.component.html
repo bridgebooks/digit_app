@@ -1,7 +1,7 @@
 <section>
   <div class="row flex-items-lg-between page-header">
     <div class="col-lg-4">
-        <a><clr-icon shape="caret" dir="left"></clr-icon> Employees</a>        
+        <a [routerLink]="['/payroll/employees']" [queryParams]="{status: 'all'}"><clr-icon shape="caret" dir="left"></clr-icon> Employees</a>        
         <h2 *ngIf="editing">Edit Employee</h2>
         <h2 *ngIf="!editing">Add Employee</h2>
     </div>
@@ -56,13 +56,20 @@
 
                   <div class="form-group">
                     <label for="">Date of birth</label>
-                    <my-date-picker style="width: 45%;" name="date_of_birth" [options]="datePickerOptions" placeholder="Date of birth" [selDate]="dob" (dateChanged)="onDOBChanged($event)"></my-date-picker>                    
+                    <my-date-picker style="width: 45%;" name="date_of_birth" [options]="datePickerOptions" placeholder="Date of birth" [selDate]="dob" (dateChanged)="onDOBChanged($event)"></my-date-picker>
+                    <input type="hidden" name="date_of_birth" [(ngModel)]="model.date_of_birth">                    
                   </div>
 
                   <div class="form-group">
                     <label for="">Role</label>
                     <input type="text" name="role" placeholder="Employee role/designation" size="60" [(ngModel)]="model.role">
                   </div>
+
+                  <div class="form-group">
+                      <label for="">Employee Start Date</label>
+                      <my-date-picker style="width: 45%;" name="start_date" [options]="datePickerOptions" placeholder="Start Date" [selDate]="startDate" (dateChanged)="onStartDateChanged($event)"></my-date-picker>
+                      <input type="hidden" name="start_date" [(ngModel)]="model.start_date">                    
+                    </div>
                   
                   <div class="form-group">
                     <label for="">Email</label>
