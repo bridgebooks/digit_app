@@ -28,7 +28,6 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   ) { }
 
   buildInvoice(model) {
-    console.log(model);
     let builder = new InvoiceUtils.Builder();
     
     builder
@@ -92,6 +91,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg()
+
     this.route$ = this.route.params.subscribe(param => {
       this.editing = param.id ? true : false;
       if (this.editing) this.fetchInvoice(param.id)

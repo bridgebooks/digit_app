@@ -25,7 +25,7 @@ export module InvoiceValidator {
         const errors = [];
 
         rules.forEach(rule => {
-            if (!input.hasOwnProperty(rule.field) && rule.required) {
+            if (input.hasOwnProperty(rule.field) && rule.required && !input[rule.field]) {
                 errors.push({
                     message: rule.message
                 })
