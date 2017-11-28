@@ -68,7 +68,7 @@ export module MainNavigation {
                 },
                 {
                     label: 'Pay runs',
-                    paths: '/payroll/runs',
+                    path: '/payroll/runs',
                     queryParams: {}
                 }
             ]

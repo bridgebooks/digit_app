@@ -20,6 +20,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeBulkactionDropdownComponent } from './employee-bulkaction-dropdown/employee-bulkaction-dropdown.component';
 import { EmployeeSearchboxComponent } from './employee-searchbox/employee-searchbox.component';
+import { PayrunsComponent } from './payruns/payruns.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { EmployeeSearchboxComponent } from './employee-searchbox/employee-search
     EmployeeListComponent, 
     EmployeeDetailComponent,
     EmployeeBulkactionDropdownComponent,
-    EmployeeSearchboxComponent
+    EmployeeSearchboxComponent,
+    PayrunsComponent
   ],
   providers: [
     SessionService,
