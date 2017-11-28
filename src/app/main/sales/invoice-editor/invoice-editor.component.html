@@ -14,6 +14,19 @@
   </div>
 </div>
 
+<div class="alert alert-warning" *ngIf="showValidationErrors">
+  <div class="alert-items">
+    <div class="alert-item static" *ngFor="let error of validationErrors">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+        </div>
+        <span class="alert-text">
+            {{ error.message }}
+        </span>
+    </div>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-header editor-header">
     <div class="editor-toolbar">
@@ -96,7 +109,7 @@
   </div>
   <div class="card-footer">
     <clr-dropdown *ngIf="!editing">
-      <button type="button" class="btn btn-primary" clrDropdownTrigger [clrLoading]="saving" [disabled]="saving">
+      <button type="button" class="btn btn-primary" clrDropdownTrigger [clrLoading]="saving" [disabled]="saving || disableBtn">
           Save
           <clr-icon shape="caret down"></clr-icon>
       </button>
@@ -107,11 +120,11 @@
     </clr-dropdown>
 
     <button *ngIf="!editing" type="button" class="btn btn-success" (click)="save('authorized')"
-     [clrLoading]="saving" [disabled]="saving"
+     [clrLoading]="saving" [disabled]="saving || disableBtn"
      canSee [allowed]="'adviser'">
      Save and Authorize</button>
 
-    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving" (click)="save(model.status)">Update</button>
+    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving || disableBtn" (click)="save(model.status)">Update</button>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>
 </div>

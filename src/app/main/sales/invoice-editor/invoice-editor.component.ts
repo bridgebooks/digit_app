@@ -3,17 +3,20 @@ import {
   Input, 
   Output, 
   EventEmitter, 
-  SimpleChanges,   
+  SimpleChanges,
+  KeyValueDiffers,   
   OnInit, 
   OnChanges, 
   AfterContentInit, 
-  OnDestroy
+  OnDestroy,
+  DoCheck
 } from '@angular/core';
 import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
 import { InvoiceService, OrgService } from '../../../services';
 import { InvoiceUtils } from '../invoice-edit/invoice-utils';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { InvoiceValidator } from './invoice-editor.validator';
 
 @Component({
   selector: 'app-invoice-editor',
@@ -21,15 +24,19 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./invoice-editor.component.scss']
 })
 
-export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy {
+export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, DoCheck {
   @Input('type') type;
   @Input('org') org;
   @Input('editing') editing: boolean;
   @Input('saving') saving: boolean;
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
+  differ: any;
   
   showInvoiceSettingsAlert: boolean = false;
+  showValidationErrors: boolean = false;
+  validationErrors: any[] = [];
+  disableBtn: boolean = false;
 
   datePickerOptions: IMyDpOptions = {
     dateFormat: 'yyyy-mm-dd'
@@ -58,7 +65,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   cancel$: Subject<any> = new Subject();
   invoiceSettings$: Observable<any>;
 
-  constructor(private invoices: InvoiceService, private orgService: OrgService) { 
+  constructor(
+    private differs: KeyValueDiffers,
+    private invoices: InvoiceService, 
+    private orgService: OrgService) { 
+      this.differ = differs.find({}).create(null);
   }
 
   onLineAmountTypeSelected($event) {
@@ -217,5 +228,33 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
 
   ngOnDestroy() {
     this.cancel$.complete();
+  }
+
+  private mapToObject(map: Map<any, any>) {
+    let obj = {};
+    map.forEach((v) => {
+      obj[v.key] = v.currentValue
+    })
+    return obj;
+  }
+
+  ngDoCheck() {
+    const changes = this.differ.diff(this.model);
+    if(changes) {
+      let model = this.mapToObject(changes._records);
+
+      setTimeout(() => {
+        let errors = InvoiceValidator.validate(model);
+        if (errors.length > 0) {
+          this.showValidationErrors = true;
+          this.validationErrors = errors;
+          this.disableBtn = true;
+        } else {
+          this.showValidationErrors = false;
+          this.validationErrors = [];
+          this.disableBtn = false;
+        }
+      }, 2000);
+		}
   }
 }
