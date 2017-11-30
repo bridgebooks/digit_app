@@ -10,6 +10,7 @@ export class InvoiceItemTableComponent implements OnInit {
   @Input('items') items;
   @Input('type') type: string;
   @Output() lineItemChanged = new EventEmitter<any>();
+  @Output() lineItemRemoved = new EventEmitter<any>();
 
   columns: any[] = [
     { label: null, width: 35, },
@@ -55,6 +56,12 @@ export class InvoiceItemTableComponent implements OnInit {
 
     row.amount = (row.unit_price * row.quantity) - discount;
     this.lineItemChanged.emit(row);
+  }
+
+  removeItem(row) {
+    const index = this.items.indexOf(row);
+    this.items.splice(index, 1);
+    this.lineItemRemoved.emit(row);
   }
 
   ngOnInit() {

@@ -99,6 +99,12 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
     this.computeTotal();
   }
 
+  onItemRemoved($event) {
+    this.computeSubTotal();
+    this.computeTax();
+    this.computeTotal();
+  }
+
   computeSubTotal() {
     let total = 0;
     const items = this.model.items.data || this.model.items;

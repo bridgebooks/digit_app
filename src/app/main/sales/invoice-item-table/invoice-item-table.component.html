@@ -32,7 +32,10 @@
         </td>
         <td class="line-item-cell">{{ item.amount | number:'1.2-2' }}</td>
         <td class="line-item-cell">
-            <clr-icon shape="times"></clr-icon>            
+            <a (click)="removeItem(item)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-sm tooltip-top-left">
+                <clr-icon shape="times"></clr-icon>
+                <span class="tooltip-content">Remove Item</span>
+            </a>          
         </td>
       </tr>
     </tbody>

@@ -61,7 +61,8 @@
         </div>
       </div>
 
-      <app-invoice-item-table [type]="type" [items]="model.items.data || model.items" (lineItemChanged)="onItemChanged($event)"></app-invoice-item-table>
+      <app-invoice-item-table [type]="type" [items]="model.items.data || model.items" (lineItemChanged)="onItemChanged($event)" (lineItemRemoved)="onItemRemoved($event)">
+      </app-invoice-item-table>
 
       <div class="row flex-items-md-between">
           <div class="col-md-4">
