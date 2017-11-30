@@ -4,7 +4,17 @@
           <h2>Pay Runs</h2>
       </div>
       <div class="col-lg-4">
-          <a class="btn btn-primary" routerLink="/payroll/runs/create">New Pay Run</a>
+          <a class="btn btn-primary" (click)="payrunModal.open()" style="margin-top: 10px;">New Pay Run</a>
       </div>
   </div>
+
+  <clr-modal #payrunModal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+        <h3 class="modal-title">New Pay Run</h3>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="payrunModal.close()">Cancel</button>
+            <button type="button" class="btn btn-primary">Create</button>
+        </div>
+  </clr-modal>
 </section>
