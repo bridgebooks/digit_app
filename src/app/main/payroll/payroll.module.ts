@@ -12,6 +12,7 @@ import {
   AlertService,
   SearchService, 
   EmployeeService, 
+  PayrunService,
   OrgService 
 } from '../../services';
 
@@ -44,6 +45,7 @@ import { PayrunsComponent } from './payruns/payruns.component';
     AlertService,
     SearchService,
     EmployeeService,
+    PayrunService,
     OrgService
   ]
 })
