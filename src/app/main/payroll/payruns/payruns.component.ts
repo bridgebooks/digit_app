@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewChild, Component, OnInit } from '@angular/core';
+import { Modal } from 'clarity-angular';
+import { PayrunService } from '../../../services';
 
 @Component({
   selector: 'app-payruns',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayrunsComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('payrunModal') payrunModal: Modal;
+
+  constructor(private payruns: PayrunService) { }
 
   ngOnInit() {
   }
