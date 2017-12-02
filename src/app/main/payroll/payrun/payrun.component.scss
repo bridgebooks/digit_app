@@ -1,0 +1,55 @@
+
+.payslips
+{
+    .toolbar {
+        padding: 15px 0px;
+        background: #f1f1f1;
+        margin-top: 10px;
+
+        .info-td 
+        {
+            p {
+                margin: 0;
+                padding: 5px 0px;
+            }
+        }
+    }
+
+    .payslip-list-header {
+        background: #FFF;
+        border-bottom: 1px solid #d4d4d4;
+
+        .th {
+            padding: 15px 15px;
+        }
+    }
+
+    .payslip-list
+    {
+        height: 500px;
+        overflow-y: auto;
+
+        .tr {
+            border-bottom: 1px solid #d4d4d4;
+            margin: 0;
+
+            &:hover {
+                background-color: #9dbedf;
+                cursor: pointer;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .td {
+            padding: 10px 12px;
+        }
+    }
+
+    .payslip-list-footer {
+        background: #FFF;
+        padding: 10px 0px;
+    }
+}

@@ -11,6 +11,7 @@ import { ItemsResponse } from '../models/responses/items';
 import { AccountsResponse } from '../models/responses/accounts';
 import { TaxRatesResponse } from '../models/responses/tax-rates';
 import { Org } from '../models/data/org';
+import { PayrunsResponse } from 'app/models/responses/payruns';
 
 interface OrgCreateResponseData {
   org: any;
@@ -125,6 +126,20 @@ export class OrgService {
     }
 
     return this.http.get<any>(url, { headers, params })
+  }
+
+  getPayruns(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/payruns`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<PayrunsResponse>(url, { headers, params })
   }
 
   getItems(id: string, options: object) {

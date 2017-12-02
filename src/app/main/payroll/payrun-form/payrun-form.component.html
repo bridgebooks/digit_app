@@ -1,0 +1,20 @@
+<form #form="ngForm" novalidate>
+  <section class="form-block">
+    <label>Period covered by pay run</label>      
+    <div class="form-group">
+      <label for="" class="required">Start date</label>
+      <my-date-picker name="start_date" [options]="datepickerOptions" [(ngModel)]="model.start_date" required></my-date-picker>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="required">End date</label>
+      <my-date-picker name="end_date" [options]="datepickerOptions" [(ngModel)]="model.end_date" required></my-date-picker>
+    </div>
+
+    <label>Payment date</label>
+    <div class="form-group">
+        <label for="" class="required">Payment date</label>
+        <my-date-picker name="payment_date" [options]="datepickerOptions" [(ngModel)]="model.payment_date" required></my-date-picker>
+      </div>
+  </section>
+</form>

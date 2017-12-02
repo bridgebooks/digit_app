@@ -1,0 +1,26 @@
+<div class="payslip-editor" [ngClass]="{'open': open, 'close': !open }">
+  <div class="editor-header" *ngIf="slip">
+    <div class="row flex-items-lg-between">
+      <a class="editor-close" (click)="open = false"><clr-icon shape="times"></clr-icon></a>
+      <div class="col-lg-4 col-md-4">
+        <p class="employee-name">
+            <clr-icon shape="user" class="is-solid"></clr-icon>           
+            {{ slip.employee.data.first_name }} {{ slip.employee.data.last_name }}
+        </p>
+      </div>
+      <div class="col-lg-5 col-md-5">
+        <div class="slip-totals">
+          <div class="net-total total">
+            <p>NGN 0.00</p>
+            <span>Net Pay</span>
+          </div>
+
+          <div class="gross-total total">
+              <p>NGN 0.00</p>
+              <span>Total Cost</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
