@@ -11,6 +11,7 @@ import { BankAccountsComponent } from './bank-accounts/bank-accounts.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { UsersComponent } from './users/users.component';
 import { UserinviteFormComponent } from './userinvite-form/userinvite-form.component';
+import { PayItemsComponent } from 'app/main/settings/pay-items/pay-items.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
@@ -51,6 +52,24 @@ const routes: Routes = [
       data: {
         title: 'Invoice Settings - Bridge Books',
         acl: 'settings.invoices'
+      }
+    },
+    {
+      path: 'payitems',
+      component: PayItemsComponent,
+      canActivate: [ACLGuard],
+      data: {
+        title: 'Pay items - Bridge Books',
+        acl: 'payroll'
+      }
+    },
+    {
+      path: 'payitems/:id',
+      component: PayItemsComponent,
+      canActivate: [ACLGuard],
+      data: {
+        title: 'Pay items - Bridge Books',
+        acl: 'payroll'
       }
     },
     {

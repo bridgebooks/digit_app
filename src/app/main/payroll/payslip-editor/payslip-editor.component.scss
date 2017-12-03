@@ -1,0 +1,60 @@
+@import '~scss/mixins.scss';
+
+.payslip-editor
+{
+    position: absolute;
+    width: 60%;
+    min-height: 550px;
+    background: #FFF;
+    top: 75px;
+    @include transition(right 0.25s linear);
+    -webkit-box-shadow: -1px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    -1px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         -1px 0px 5px 0px rgba(50, 50, 50, 0.75);
+
+    &.open {
+        right: 0;
+    }
+
+    &.close {
+        right: -100%;
+    }
+
+    .editor-header {
+        background: #274655;
+        border-bottom: 1px solid #d4d4d4;
+        min-height: 50px;
+        color: #FFF;
+
+        .row {
+            margin: 0;
+            position: relative;
+
+            .editor-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                z-index: 1;
+                padding: 10px;
+            }
+        }
+
+        .employee-name {
+            margin: 0;
+            padding: 25px 0px;
+        }
+
+        .slip-totals
+        {
+            display: table;
+            .total {
+                padding: 15px 15px;
+                display: table-cell;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

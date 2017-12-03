@@ -14,7 +14,8 @@ import {
   AccountsService, 
   TaxRateService,
   BankAccountService,
-  RoleService
+  RoleService,
+  PayitemService
 } from '../../services';
 
 import { SettingsRoutingModule } from './settings-routing.module';
@@ -42,6 +43,8 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { UsersComponent } from './users/users.component';
 import { UserinviteFormComponent } from './userinvite-form/userinvite-form.component';
 import { UserrolePickerComponent } from './userrole-picker/userrole-picker.component';
+import { PayItemsComponent } from './pay-items/pay-items.component';
+import { PayitemFormModalComponent } from './payitem-form-modal/payitem-form-modal.component';
 
 @NgModule({
   imports: [
@@ -76,8 +79,20 @@ import { UserrolePickerComponent } from './userrole-picker/userrole-picker.compo
     InvoicesComponent,
     UsersComponent,
     UserinviteFormComponent,
-    UserrolePickerComponent
+    UserrolePickerComponent,
+    PayItemsComponent,
+    PayitemFormModalComponent
   ],
-  providers: [ AlertService, UserService, OrgService, SessionService, AccountsService, TaxRateService, BankAccountService, RoleService ]
+  providers: [ 
+    AlertService, 
+    UserService, 
+    OrgService, 
+    SessionService, 
+    AccountsService, 
+    TaxRateService, 
+    BankAccountService, 
+    RoleService, 
+    PayitemService 
+  ]
 })
 export class SettingsModule { }

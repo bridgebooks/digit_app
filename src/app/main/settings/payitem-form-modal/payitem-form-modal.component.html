@@ -1,0 +1,75 @@
+<clr-modal #modal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title" *ngIf="!editing">New Pay item</h3>
+    <h3 class="modal-title" *ngIf="editing">Edit Pay item</h3>
+
+    <div class="modal-body">
+      <div class="progress progress-fade top loop" *ngIf="loading"><progress></progress></div>
+      <form class="compact" #form="ngForm">
+        <label>Describe this pay item</label>
+        <hr>
+        <section class="form-block">
+          <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" size="60" name="name" #nameInput="ngModel" [(ngModel)]="model.name" required [maxlength]="50">
+            <span class="help-text">The name as you would like it to appear in Bridge Books</span>
+            <div class="input__errors" [hidden]="nameInput.valid || nameInput.pristine">
+                <span class="input__errors_error" *ngIf="nameInput.hasError('required')">Please enter a name</span>
+                <span class="input__errors_error" *ngIf="nameInput.hasError('maxlength')">Enter a shorter name</span>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="name">Description (optional)</label>
+              <textarea name="description" id="desription" rows="5" [(ngModel)]="model.description"></textarea>
+            </div>
+        </section>
+
+        <section class="form-block">
+          <div class="form-group">
+            <label for="pay_item_type" class="required">Pay item type
+              <clr-signpost>
+                  <clr-signpost-content>
+                      <h3 style="margin-top: 0">Inline signpost</h3>
+                      <p>Position: <code class="clr-code">right-middle</code></p>
+                  </clr-signpost-content>
+              </clr-signpost>
+            </label>
+            <span class="help-text">Select what kind of pay item this pay item is</span>
+            <div class="select">
+              <select name="pay_item_type" #typeInput="ngModel" id="pay_item_type" [(ngModel)]="model.pay_item_type" required>
+                <option selected="selected">Select type</option>
+                <option *ngFor="let type of payitemTypes" [value]="type.value">{{ type.label }}</option>
+              </select>
+            </div>
+            <div class="input__errors" [hidden]="typeInput.valid || typeInput.pristine">
+                <span class="input__errors_error" *ngIf="typeInput.hasError('required')">Please select a pay item type</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="account_id" class="required">Account</label>
+            <span class="help-text">An account for reporting</span>            
+            <account-select [org]="org" [selected]="model.account_id" (onAccountSelected)="accountChanged($event)"></account-select>
+            <input type="hidden" #accountInput="ngModel" name="account_id" [(ngModel)]="model.account_id" required>
+            <div class="input__errors" [hidden]="accountInput.valid || accountInput.pristine">
+                <span class="input__errors_error" *ngIf="accountInput.hasError('required')">Please select an account</span>
+            </div>
+          </div>
+        </section>
+
+        <label>Preferences</label>
+        <hr>
+        <div class="radio">
+            <input type="radio" name="mark_default" id="mark_default" [(ngModel)]="model.mark_default" [value]="true">
+            <label for="mark_default">Show as default pay item for all employees</label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" 
+        [clrLoading]="saving" 
+        [disabled]="form.invalid || saving" 
+        (click)="save()">Save</button>
+
+        <button type="button" class="btn btn-outline" (click)="hide()">Cancel</button>
+    </div>
+  </clr-modal>

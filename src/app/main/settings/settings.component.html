@@ -39,6 +39,11 @@
         <a routerLink="/settings/invoices">Invoices</a>
         <span>Adjust your invoice settings</span>
       </div>
+
+      <div class="setting-item">
+          <a routerLink="/settings/payitems" [queryParams]="{status: 'active'}">Pay Items</a>
+          <span>Manage the pay items used for payroll.</span>
+        </div>
     </div>
   </div>
 </section>
