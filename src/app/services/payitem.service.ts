@@ -44,10 +44,24 @@ export class PayitemService {
     return this.http.put<PayitemResponse>(url, body, { headers, params })
   }
 
+  restore(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/restore`;
+
+    return this.http.post<any>(url, {}, { headers });
+  }
+
+  archive(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/archive`;
+
+    return this.http.post<any>(url, {}, { headers });
+  }
+
   delete(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.delete(url, { headers });
+    return this.http.delete<any>(url, { headers });
   }
 }
