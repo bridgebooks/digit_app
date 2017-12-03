@@ -21,12 +21,14 @@ export class ACLGuard implements CanActivate {
         let allow = false;
 
         userACL.forEach(acl => {
-            if (parsedRole.length > 0) {
+            if (parsedRole.length > 1) {
                 const test = !!acl.permissions[group][action] ? acl.permissions[group][action] : 0
                 allow = Boolean(test)
             } else {
-                if (!!acl.permissions[group] && acl.permissions[group] == 1) allow = true;
-                allow = false;
+                if (acl.permissions[group] && acl.permissions[group] == 1) 
+                    allow = true;
+                else
+                    allow = false;
             }
         })
 
