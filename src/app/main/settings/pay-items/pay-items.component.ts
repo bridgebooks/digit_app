@@ -36,6 +36,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('restoreModal') restoreModal: Modal
   cancel$: Subject<any> = new Subject();
   route$: Subscription;
+  route$$: Subscription;
   modal$: Subscription;
 
   constructor(
@@ -169,7 +170,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     
-    this.route$ = this.route.queryParams
+    this.route$$ = this.route.queryParams
       .filter(params => params.status)
       .subscribe(params => {
         this.status = params.status || 'active';
@@ -198,6 +199,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.cancel$.complete();
     this.route$.unsubscribe();
+    this.route$$.unsubscribe()
     this.modal$.unsubscribe();
   }
 }
