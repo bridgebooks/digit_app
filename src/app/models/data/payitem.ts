@@ -18,6 +18,7 @@ export interface Payitem {
     mark_default?: boolean;
     is_archived?: boolean;
     deleted_at?: number;
+    is_new?: boolean;
     created_at?: number;
     updated_at?: number;
 }

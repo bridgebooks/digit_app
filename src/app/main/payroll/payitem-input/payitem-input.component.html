@@ -1,0 +1,14 @@
+<span (click)="showSelector()" *ngIf="!selectorVisible && selected.item">{{ selected.item.data.name }}</span>
+<div class="select" *ngIf="selectorVisible">
+    <select #selectInput name="pay_item_id" (change)="onPayItemChanged($event)" (focusout)="onFocusOut($event)"
+    [(ngModel)]="selected.pay_item_id" [disabled]="disabled">
+      <option></option>
+      <option value="new">+ Add new pay item</option>
+      <ng-template #loading>
+        <option *ngIf="loading">Loading...</option>
+      </ng-template>
+      <option *ngFor="let payitem of (payitems$ | async)?.data" [value]="payitem.id">
+        {{ payitem.name }}
+      </option>
+    </select>      
+</div>

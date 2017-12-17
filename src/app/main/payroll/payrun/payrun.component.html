@@ -62,7 +62,8 @@
           </div>
         </div>
       </div>
-      <app-payslip-editor #playslipPanel [selected]="selected"></app-payslip-editor>              
+      <app-payslip-editor #playslipPanel [selected]="selected" (payslipUpdated)="onPayslipUpdate($event)"></app-payslip-editor>
+      <app-payitem-form-modal [org]="org" #payitemModal (itemCreated)="payItemAdded($event)"></app-payitem-form-modal>              
     </div>
   </div>
 </section>

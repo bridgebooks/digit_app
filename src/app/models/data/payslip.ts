@@ -1,4 +1,5 @@
 import { Employee } from "app/models/data/employee";
+import { PayslipItem } from "app/models/data/payslip-item";
 
 interface EmployeeData {
     data: Employee;
@@ -16,4 +17,5 @@ export interface Payslip {
     created_at: number; 
     updated_at: number;
     employee: EmployeeData;
+    items?: PayslipItem[];
 }

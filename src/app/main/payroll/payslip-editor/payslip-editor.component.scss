@@ -48,13 +48,34 @@
         {
             display: table;
             .total {
-                padding: 15px 15px;
+                padding: 15px 20px;
                 display: table-cell;
 
                 p {
                     margin: 0;
                 }
             }
+        }
+    }
+
+    .editor-body {
+        overflow-y: auto;
+    }
+
+    .item-table {
+        margin: 0;
+
+        .col-item {
+            width: 65%;
+            position: relative;
+        }
+
+        .col-amount {
+            width: 25%;
+        }
+
+        .col-action {
+            width: 10%;
         }
     }
 }

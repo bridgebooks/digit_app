@@ -27,4 +27,8 @@ export class EventbusService {
       .map(message => message.payload)
       .subscribe(callback);
   }
+
+  unsubscribe() {
+    this.handler.unsubscribe();
+  }
 }

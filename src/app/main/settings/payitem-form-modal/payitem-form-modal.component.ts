@@ -30,10 +30,10 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
   }
 
   payitemTypes: any = [
-    { label: 'Wages', value: 'wages' },
-    { label: 'Allowances', value: 'allowances' },
-    { label: 'Deductions', value: 'deductions' },
-    { label: 'Reimbursements', value: 'reimbursements' }
+    { label: 'Wages', value: 'wage' },
+    { label: 'Allowances', value: 'allowance' },
+    { label: 'Deductions', value: 'deduction' },
+    { label: 'Reimbursements', value: 'reimbursement' }
   ]
 
   constructor(private alerts: AlertService, private payItems: PayitemService) { }
@@ -77,7 +77,7 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
 
   createItem() {
     this.model.mark_default = !!this.model.mark_default ? this.model.mark_default : false;
-    this.payItems.create(this.model)
+    this.payItems.create(this.model, { include: 'item' })
       .takeUntil(this.cancel$)
       .subscribe(response => {
         this.saving = false;

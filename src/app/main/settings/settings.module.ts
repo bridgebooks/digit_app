@@ -93,6 +93,9 @@ import { PayitemFormModalComponent } from './payitem-form-modal/payitem-form-mod
     BankAccountService, 
     RoleService, 
     PayitemService 
+  ],
+  exports: [
+    PayitemFormModalComponent
   ]
 })
 export class SettingsModule { }

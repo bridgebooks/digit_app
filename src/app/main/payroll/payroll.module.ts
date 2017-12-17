@@ -6,14 +6,17 @@ import { ClarityModule } from 'clarity-angular';
 import { MyDatePickerModule } from 'mydatepicker';
 
 import { SharedModule } from '../../shared/shared.module';
+import { SettingsModule } from '../settings/settings.module';
 import { PayrollRoutingModule } from './payroll-routing.module';
 
 import {
+  EventbusService,
   SessionService,
   AlertService,
   SearchService, 
   EmployeeService, 
   PayrunService,
+  PayslipService,
   OrgService 
 } from '../../services';
 
@@ -27,6 +30,8 @@ import { PayrunFormComponent } from './payrun-form/payrun-form.component';
 import { PayrunListComponent } from './payrun-list/payrun-list.component';
 import { PayrunComponent } from './payrun/payrun.component';
 import { PayslipEditorComponent } from './payslip-editor/payslip-editor.component';
+import { PayitemInputComponent } from './payitem-input/payitem-input.component';
+import { PayitemAmountInputComponent } from './payitem-amount-input/payitem-amount-input.component';
 
 @NgModule({
   imports: [
@@ -36,6 +41,7 @@ import { PayslipEditorComponent } from './payslip-editor/payslip-editor.componen
     ClarityModule.forRoot(),
     MyDatePickerModule,
     SharedModule,
+    SettingsModule,
     PayrollRoutingModule
   ],
   declarations: [
@@ -48,7 +54,9 @@ import { PayslipEditorComponent } from './payslip-editor/payslip-editor.componen
     PayrunFormComponent,
     PayrunListComponent,
     PayrunComponent,
-    PayslipEditorComponent
+    PayslipEditorComponent,
+    PayitemInputComponent,
+    PayitemAmountInputComponent
   ],
   providers: [
     SessionService,
@@ -56,6 +64,7 @@ import { PayslipEditorComponent } from './payslip-editor/payslip-editor.componen
     SearchService,
     EmployeeService,
     PayrunService,
+    PayslipService,
     OrgService
   ]
 })

@@ -11,16 +11,57 @@
       <div class="col-lg-5 col-md-5">
         <div class="slip-totals">
           <div class="net-total total">
-            <p>NGN 0.00</p>
+            <p>NGN {{ net_total | number:"1.2-2" }}</p>
             <span>Net Pay</span>
           </div>
 
           <div class="gross-total total">
-              <p>NGN 0.00</p>
+              <p>NGN {{ gross_total | number:"1.2-2" }}</p>
               <span>Total Cost</span>
             </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="editor-body" *ngIf="slip">
+    <div class="spinner-container" *ngIf="loading">
+      <span class="spinner">
+          Loading...
+        </span>
+    </div>
+
+    <table class="table item-table" *ngIf="!loading">
+      <thead>
+        <tr>
+          <th class="left col-item">Item</th>
+          <th class="left col-amount">Amount</th>
+          <th class="col-action"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of slip.items">
+          <td class="left col-item">
+            <payitem-input [item]="item" (itemSelected)="onPayItemSelected($event, item)" 
+            (itemCreated)="onPayslipItemCreated($event, item)"></payitem-input> 
+          </td>
+          <td class="left col-amount">
+            <payitem-amount-input [item]="item" (amountChanged)="onPayItemAmountChanged($event, item)"></payitem-amount-input>              
+          </td>
+          <td class="col-action">
+            <a class="item-remove" role="tooltip" aria-haspopup="true" 
+            class="tooltip tooltip-md tooltip-top-left" (click)="removeLine(item)">
+              <clr-icon shape="times"></clr-icon>
+              <span class="tooltip-content">Remove item</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="padding: 15px;">
+        <button class="btn btn-outline-primary" (click)="addLine()" *ngIf="!loading">Add Line</button>        
     </div>
   </div>
 </div>

@@ -10,9 +10,17 @@ export class PayitemService {
 
   constructor(private http: HttpClient) { }
 
-  create(body: object) {
+  create(body: object, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<PayitemResponse>(this.baseUrl, body, { headers })
+    let params = new HttpParams();
+    
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.post<PayitemResponse>(this.baseUrl, body, { headers, params })
   }
 
   get(id: string, options?: object) {
