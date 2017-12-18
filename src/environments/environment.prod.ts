@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://core.bridgebooks.com/v1/'
+  apiUrl: 'https://core.bridgebooks.com.ng/v1/'
 };
