@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://core.bridgebooks.com/v1/'
+  apiUrl: 'https://core.bridgebooks.com.ng/v1/'
 };
