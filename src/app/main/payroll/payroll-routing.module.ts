@@ -5,6 +5,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { PayrunsComponent } from 'app/main/payroll/payruns/payruns.component';
+import { PayrunComponent } from 'app/main/payroll/payrun/payrun.component';
 
 const routes: Routes = [
     { 
@@ -40,6 +41,13 @@ const routes: Routes = [
         component: PayrunsComponent,
         data: {
             title: 'Payruns - Bridge Books'
+        }
+    },
+    {
+        path: 'runs/:id',
+        component: PayrunComponent,
+        data: {
+            title: 'Payrun - Bridge Books'
         }
     }
 ];

@@ -20,7 +20,7 @@
 <clr-modal [(clrModalOpen)]="showImageSelectModal" [clrModalStaticBackdrop]="true">
     <h3 class="modal-title">Upload Logo</h3>
     <div class="modal-body">
-        <div class="progress progress-fade top loop" *ngIf="uploading"><progress></progress></div>        
+        <div class="progress top progress-fade loop" *ngIf="uploading"><progress></progress></div>        
         <p>The maximum file size is 1MB. For best results, upload the largest logo you have, at least 140 pixels on its shortest side.</p>
         <h4>Choose a file to upload</h4>
         <input type="file" ng2FileSelect [uploader]="uploader">

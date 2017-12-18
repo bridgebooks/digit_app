@@ -1,0 +1,23 @@
+<section class="invoice-creator">
+  <div [ngSwitch]="mode">
+    <a *ngSwitchCase="'acc_pay'" [routerLink]="['/invoices', 'bills']" [queryParams]="{status: 'all'}">
+      <clr-icon shape="caret" dir="left"></clr-icon> Bills
+    </a>
+    <a *ngSwitchCase="'acc_rec'" [routerLink]="['/invoices', 'sales']" [queryParams]="{status: 'all'}">
+      <clr-icon shape="caret" dir="left"></clr-icon> Invoices
+    </a>       
+  </div>
+
+  <h2 *ngIf="!editing && mode == 'acc_rec'">New Invoice</h2>
+  <h2 *ngIf="!editing && mode == 'acc_pay'">New Bill</h2>
+  <h2 *ngIf="editing && !loading && mode == 'acc_rec'">Edit Invoice {{ model.invoice_no }}</h2>
+  <h2 *ngIf="editing && !loading && mode == 'acc_pay'">Edit Bill {{ model.invoice_no }}</h2>
+
+  <div class="spinner-container" *ngIf="loading">
+    <span class="spinner">
+        Loading...
+      </span>
+  </div>
+  
+  <app-invoice-editor *ngIf="!loading" [type]="mode" [editing]="editing" [org]="org" [model]="model" [saving]="saving" (onSaveInvoice)="saveInvoice($event)"></app-invoice-editor>
+</section>

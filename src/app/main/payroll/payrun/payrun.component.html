@@ -1,0 +1,69 @@
+<div class="spinner-container" *ngIf="loading">
+  <span class="spinner">
+      Loading...
+    </span>
+</div>
+
+<section class="employee-detail" *ngIf="!loading">
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-6">
+        <a [routerLink]="['/payroll/runs']" [queryParams]="{status: 'all'}"><clr-icon shape="caret" dir="left"></clr-icon> Payroll</a>                
+        <h3>
+            Payroll ({{ run.start_date | amDateFormat:'D MMM YYYY' }} -  {{ run.end_date | amDateFormat:'D MMM YYYY' }})
+        </h3>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="payslips">
+        <div class="toolbar row">
+          <div class="col-lg-1 col-md-1">
+              <button class="btn btn-sm btn-outline">{{ run.status }}</button>
+          </div>
+          <div class="col-lg-2 col-md-2 info-td">
+              <p>Payday: {{ run.payment_date | amDateFormat: 'D/MM/YYYY' }}</p>                            
+          </div>
+          <div class="col-lg-2 col-md-2 info-td">
+              <p>Employees: {{ run.payslips.data.length }}</p>                            
+          </div>
+        </div>
+
+        <div class="payslip-list-header row">
+          <div class="col-lg-4 col-md-4 th">Employee</div>
+          <div class="col-lg-2 col-md-2 th">Wages</div>
+          <div class="col-lg-2 col-md-2 th">Deductions</div>
+          <div class="col-lg-2 col-md-2 th">Reimbursements</div>
+          <div class="col-lg-2 col-md-2 th">Tax</div>
+        </div>
+
+        <div class="payslip-list">
+          <div class="row tr" *ngFor="let slip of run.payslips.data" (click)="openSlipEditor(slip)">
+            <div class="col-lg-4 col-md-4 td">
+              {{ slip.employee.data.first_name }} {{ slip.employee.data.last_name }}
+            </div>
+            <div class="col-lg-2 col-md-2 td">{{ slip.wages | number:'1.2-2'}}</div>
+            <div class="col-lg-2 col-md-2 td">{{ slip.deductions | number:'1.2-2'}}</div>
+            <div class="col-lg-2 col-md-2 td">{{ slip.reimbursements | number:'1.2-2'}}</div>
+            <div class="col-lg-2 col-md-2 td">
+              {{ slip.tax | number:'1.2-2'}}
+            </div>
+          </div>
+        </div>
+
+        <div class="payslip-list-footer row flex-items-lg-between">
+          <div class="col-md-6">
+              <button class="btn btn-outline">Finish Later</button>
+          </div>
+          <div class="col-md-4">
+              <button class="btn btn-primary">Review and Approve</button>
+          </div>
+        </div>
+      </div>
+      <app-payslip-editor #playslipPanel [selected]="selected" (payslipUpdated)="onPayslipUpdate($event)"></app-payslip-editor>
+      <app-payitem-form-modal [org]="org" #payitemModal (itemCreated)="payItemAdded($event)"></app-payitem-form-modal>              
+    </div>
+  </div>
+</section>
