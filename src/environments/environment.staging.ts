@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://core.ingest.stream/v1/'
+  apiUrl: 'https://core.bridgebooks.com/v1/'
 };
