@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SalesComponent } from './sales.component';
+import { InvoicesComponent } from './invoices.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
@@ -9,16 +9,9 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { InventoryDetailComponent } from './inventory-detail/inventory-detail.component';
 
 const routes: Routes = [
-    { path: '', component: SalesComponent },
+    { path: '', component: InvoicesComponent },
     {
-      path: 'invoices',
-      component: InvoiceListComponent,
-      data: {
-        title: 'Invoices - Bridge Books'
-      }
-    },
-    {
-      path: 'invoices/view/:id',
+      path: 'view/:id',
       component: InvoiceDetailComponent,
       data: {
         title: 'Invoice - Bridge Books'
@@ -43,6 +36,13 @@ const routes: Routes = [
       component: InventoryComponent,
       data: {
         title: 'Inventory - Bridge Books'
+      }
+    },
+    {
+      path: ':type',
+      component: InvoiceListComponent,
+      data: {
+        title: 'Invoices - Bridge Books'
       }
     },
     {

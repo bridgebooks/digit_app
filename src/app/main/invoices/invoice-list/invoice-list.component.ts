@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService, SessionService, OrgService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid';
 import { Subscription, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-invoice-list',
@@ -15,7 +16,7 @@ export class InvoiceListComponent implements OnInit {
   cancel$: Subject<any> = new Subject();
   
   org: any;
-  type: string = 'acc_rec';
+  type: string;
   status: string;
   invoices: any[] = [];
   perPage: number = 30;
@@ -30,6 +31,12 @@ export class InvoiceListComponent implements OnInit {
     private session: SessionService,
     private orgService: OrgService
   ) { }
+
+  setListType(type: string) {
+    if (!type) return 'acc_rec';
+
+    return type === 'bills' ? 'acc_pay' : 'acc_rec';
+  }
 
   refresh(state: State) {
     state.sort = state.sort || {
@@ -48,7 +55,7 @@ export class InvoiceListComponent implements OnInit {
     options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
-      .getSaleInvoices(this.org.id, options)
+      .getInvoices(this.org.id, options)
       .takeUntil(this.cancel$)
       .subscribe(response => {
         setTimeout(() => { this.loading = false }, 0);
@@ -65,17 +72,17 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
 
-    this.route$ = this.route.queryParams
-      .filter(params => params.status)
-      .subscribe(params => {
-        this.status = params.status || 'all';
-        
-        if (this.status) {
-          this.loading = true;
-          this.cancel$.next();
-          this.refresh({})
-        }
-      })
+    let route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
+    this.route$ = route$.subscribe(route => {
+      this.status = route.qparams.status || 'all';
+      this.type = this.setListType(route.params.type);
+      
+      if (this.status) {
+        this.loading = true;
+        this.cancel$.next();
+        this.refresh({})
+      }
+    })
   }
 
   ngOnDestroy() {

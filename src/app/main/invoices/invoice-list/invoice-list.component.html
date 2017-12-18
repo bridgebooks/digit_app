@@ -1,10 +1,14 @@
 <section>
     <div class="row flex-items-lg-between page-header">
-        <div class="col-lg-4">
-            <h2>Invoices</h2>
+        <div class="col-lg-4" [ngSwitch]="type">
+            <h2 *ngSwitchCase="'acc_rec'">Invoices</h2>
+            <h2 *ngSwitchCase="'acc_pay'">Bills</h2>
         </div>
-        <div class="col-lg-4">
-            <a class="btn btn-primary" routerLink="/sales/edit" style="margin-top: 12px;">New Invoice</a>
+        <div class="col-lg-4" [ngSwitch]="type">
+            <a class="btn btn-primary" *ngSwitchCase="'acc_rec'" routerLink="/invoices/edit" [queryParams]="{type: 'acc_rec'}"
+             style="margin-top: 12px;">New Invoice</a>
+             <a class="btn btn-primary" *ngSwitchCase="'acc_pay'" routerLink="/invoices/edit" [queryParams]="{type: 'acc_pay'}"
+             style="margin-top: 12px;">New Bill</a>
         </div>
     </div>
   
@@ -20,7 +24,7 @@
             <nav class="subnav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sales/invoices']" [routerLinkActive]="'active'"
+                        <a class="nav-link" [routerLink]="['/invoices/']" [routerLinkActive]="'active'"
                         [queryParams]="{status: 'all'}" canSee [allowed]="'adviser,invoices'">All Invoices</a>
                     </li>
                     <li class="nav-item">
@@ -59,11 +63,11 @@
                 
                 <clr-dg-row *ngFor="let invoice of invoices">
                     <clr-dg-cell>
-                    <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>        
+                    <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>        
                     </clr-dg-cell>
                     <clr-dg-cell>{{ invoice.reference }}</clr-dg-cell>
                     <clr-dg-cell>
-                        <a [routerLink]="['/sales/invoices/view', invoice.id]">{{ invoice.contact.data.name }}</a>
+                        <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.contact.data.name }}</a>
                     </clr-dg-cell>
                     <clr-dg-cell>{{ invoice.user.data.full_name }}</clr-dg-cell>
                     <clr-dg-cell>{{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>

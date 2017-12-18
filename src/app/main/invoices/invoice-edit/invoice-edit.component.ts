@@ -4,6 +4,7 @@ import { AlertService, SessionService, InvoiceService } from '../../../services'
 import { InvoiceUtils } from './invoice-utils';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -12,6 +13,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class InvoiceEditComponent implements OnInit, OnDestroy {
   org: any;
+  mode: string;
   loading: boolean;
   editing: boolean;
   saving: boolean = false;
@@ -58,7 +60,9 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
         .subscribe(response => { 
           this.saving = false;
           this.alert.success('Invoice', 'Invoice successfully created', { timeOut: 3000 })
-          this.router.navigate(['/sales/invoices']);
+          this.mode === 'acc_rec' 
+            ? this.router.navigate(['/invoices', 'sales'], { queryParams: { status: 'all' } })
+            : this.router.navigate(['/invoices', 'bills'], { queryParams: { status: 'all' } })
         }, 
         err => {
           this.saving = false;
@@ -91,10 +95,12 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg()
-
-    this.route$ = this.route.params.subscribe(param => {
-      this.editing = param.id ? true : false;
-      if (this.editing) this.fetchInvoice(param.id)
+    let route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
+    
+    this.route$ = route$.subscribe(route => {
+      this.editing = route.params.id ? true : false;
+      this.mode = route.qparams.type || 'acc_rec';
+      if (this.editing) this.fetchInvoice(route.params.id)
     })
   }
 

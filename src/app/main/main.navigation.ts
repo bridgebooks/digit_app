@@ -7,32 +7,27 @@ export module MainNavigation {
             children: null
         },
         {
-            label: 'Sales',
+            label: 'Invoices',
             icon: 'credit-card',
-            path: '/sales',
+            path: '/invoices',
             children: [
                 {
-                    label: 'Invoices',
-                    path: '/sales/invoices',
+                    label: 'Sales',
+                    path: '/invoices/sales',
                     queryParams: {
-                        status: 'all'
+                        status: 'all',
+                    }
+                },
+                {
+                    label: 'Purchases',
+                    path: '/invoices/bills',
+                    queryParams: {
+                        status: 'all',
                     }
                 },
                 {
                     label: 'Inventory',
-                    path: '/sales/items',
-                    queryParams: {}
-                }
-            ] 
-        },
-        {
-            label: 'Purchases',
-            icon: 'shopping-cart',
-            path: '/purchases',
-            children: [
-                {
-                    label: 'Bills',
-                    path: '/purchases/bills',
+                    path: '/invoices/items',
                     queryParams: {}
                 }
             ] 

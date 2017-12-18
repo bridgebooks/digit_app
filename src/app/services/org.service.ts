@@ -183,10 +183,10 @@ export class OrgService {
     return this.http.get<any>(url, { headers, params })
   }
 
-  getSaleInvoices(id: string, options?: object) {
+  getInvoices(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
-    const url = `${this.baseUrl}/${id}/sales`;
+    const url = `${this.baseUrl}/${id}/invoices`;
 
     if (options) {
       Object.keys(options).forEach(key => {

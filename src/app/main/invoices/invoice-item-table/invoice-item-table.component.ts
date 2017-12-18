@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-invoice-item-table',
   templateUrl: './invoice-item-table.component.html',
   styleUrls: ['./invoice-item-table.component.scss']
 })
-export class InvoiceItemTableComponent implements OnInit {
+export class InvoiceItemTableComponent implements OnInit, OnChanges {
   
   @Input('items') items;
   @Input('type') type: string;
@@ -29,7 +29,7 @@ export class InvoiceItemTableComponent implements OnInit {
 
   rowItemSelected(row) {
     row.quantity = 1;
-
+    
     if (this.type === 'acc_rec' && row.item.sale_account) {
 
       row.account_id = row.item.sale_account.data.id;
@@ -38,13 +38,14 @@ export class InvoiceItemTableComponent implements OnInit {
       row.account = row.item.sale_account ? row.item.sale_account.data : row.account ;
       row.tax_rate = row.item.sale_tax ?  row.item.sale_tax.data : row.tax_rate;
       row.tax_rate_id = row.item.sale_tax ? row.item.sale_tax.data.id : row.tax_rate.id
-    } else if (this.type === 'acc_pay' && row.item.purhcase_account) {
+    } else if (this.type === 'acc_pay' && row.item.purchase_account) {
       
-      row.account_id = row.item.purhcase_account.data.id;
+      row.account_id = row.item.purchase_account.data.id;
       row.description = row.item.purchase_description;
       row.unit_price = row.item.purchase_unit_price;
       row.account = row.item.purchase_account ? row.item.purchase_account.data : row.account ;
       row.tax_rate = row.item.purchase_tax ?  row.item.purchase_tax.data : row.tax_rate;
+      row.tax_rate_id = row.item.purchase_tax ? row.item.purchase_tax.data.id : row.tax_rate.id
     }
 
     this.calculateLineAmount(row)
@@ -65,6 +66,9 @@ export class InvoiceItemTableComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
   }
 
 }

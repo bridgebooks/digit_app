@@ -7,8 +7,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { MomentModule, DateFormatPipe } from 'angular2-moment';
 
-import { SalesRoutingModule } from './sales-routing.module';
-import { SalesComponent } from './sales.component';
+import { SalesRoutingModule } from './invoices-routing.module';
+import { InvoicesComponent } from './invoices.component';
 import { InvoiceEditorComponent } from './invoice-editor/invoice-editor.component';
 import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
@@ -48,7 +48,7 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     SalesRoutingModule
   ],
   declarations: [
-    SalesComponent, 
+    InvoicesComponent, 
     InvoiceEditorComponent, 
     InvoiceEditComponent, 
     InvoiceListComponent, 
@@ -73,4 +73,4 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     DateFormatPipe
   ]
 })
-export class SalesModule { }
+export class InvoicesModule { }

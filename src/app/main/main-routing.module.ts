@@ -18,23 +18,13 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'sales',
-                loadChildren: './sales/sales.module#SalesModule',
+                path: 'invoices',
+                loadChildren: './invoices/invoices.module#InvoicesModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Sales - Brigde Books',
+                    title: 'Invoices - Brigde Books',
                     showSideNav: true,
                     sidenavMenu: 'sales'
-                }
-            },
-            {
-                path: 'purchases',
-                loadChildren: './purchases/purchases.module#PurchasesModule',
-                canActivate: [AuthGuard],
-                data: {
-                    title: 'Purchases - Bridge Books',
-                    showSideNav: true,
-                    sidenavMenu: 'purchases'
                 }
             },
             {
