@@ -17,6 +17,7 @@ export class InvoiceListComponent implements OnInit {
   
   org: any;
   type: string;
+  invoiceType: string;
   status: string;
   invoices: any[] = [];
   perPage: number = 30;
@@ -76,7 +77,8 @@ export class InvoiceListComponent implements OnInit {
     this.route$ = route$.subscribe(route => {
       this.status = route.qparams.status || 'all';
       this.type = this.setListType(route.params.type);
-      
+      this.invoiceType = route.params.type
+
       if (this.status) {
         this.loading = true;
         this.cancel$.next();

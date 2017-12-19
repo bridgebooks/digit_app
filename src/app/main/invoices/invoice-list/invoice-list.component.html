@@ -24,23 +24,23 @@
             <nav class="subnav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/invoices/']" [routerLinkActive]="'active'"
+                        <a class="nav-link" [routerLink]="['/invoices/', invoiceType]" [routerLinkActive]="'active'"
                         [queryParams]="{status: 'all'}" canSee [allowed]="'adviser,invoices'">All Invoices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'draft'}" 
+                        <a class="nav-link" [routerLink]="['/invoices', invoiceType]" [queryParams]="{status: 'draft'}" 
                         [routerLinkActive]="'active'" canSee [allowed]="'adviser,invoices'">Draft</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'submitted'}" 
+                        <a class="nav-link" [routerLink]="['/invoices', invoiceType]" [queryParams]="{status: 'submitted'}" 
                         [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Awaiting Authorization</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'sent'}" 
+                        <a class="nav-link" [routerLink]="['/invoices', invoiceType]" [queryParams]="{status: 'sent'}" 
                         [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Awaiting Payment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sales/invoices']" [queryParams]="{status: 'paid'}" 
+                        <a class="nav-link" [routerLink]="['/invoices', invoiceType]" [queryParams]="{status: 'paid'}" 
                         [routerLinkActive]="'active'" canSee [allowed]="'adviser'">Paid</a>
                     </li>
                 </ul>
