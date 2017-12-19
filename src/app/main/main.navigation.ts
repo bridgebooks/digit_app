@@ -19,7 +19,7 @@ export module MainNavigation {
                     }
                 },
                 {
-                    label: 'Purchases',
+                    label: 'Bills',
                     path: '/invoices/bills',
                     queryParams: {
                         status: 'all',
