@@ -141,10 +141,6 @@
   version "2.0.0-beta.13"
   resolved "https://registry.yarnpkg.com/@ng-idle/core/-/core-2.0.0-beta.13.tgz#4c2c375a36b38ec826e4db00603c3a1da11aae88"
 
-"@ng-idle/keepalive@^2.0.0-beta.13":
-  version "2.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@ng-idle/keepalive/-/keepalive-2.0.0-beta.13.tgz#f504a899c7e75eb87227a10c7105a76692af4409"
-
 "@ngtools/json-schema@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
