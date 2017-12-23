@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NgIdleModule } from '@ng-idle/core'
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { JwtHelper } from 'angular2-jwt';
@@ -26,7 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgIdleModule.forRoot(),
     LocalStorageModule.withConfig({
       prefix: 'bb',
       storageType: 'localStorage'

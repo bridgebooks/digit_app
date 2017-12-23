@@ -49,7 +49,7 @@ const routes: Routes = [
             },
             {
                 path: 'settings',
-                loadChildren: './settings/settings.module.ts#SettingsModule',
+                loadChildren: './settings/settings.module#SettingsModule',
                 canActivate: [AuthGuard],
                 data: {
                     title: 'General Settings - Bridge Books',
