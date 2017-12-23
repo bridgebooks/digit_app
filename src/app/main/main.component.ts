@@ -27,7 +27,7 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
     user: any;
     org: any;
     security: any = {}
-    securityCheck$: Subject<any> = new Subject();
+    securityCheck$: Subject<boolean> = new Subject();
     
     @ViewChild('logoutModal') logoutModal: Modal;
     @ViewChild('loginModal') loginModal: Modal;
@@ -68,6 +68,7 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
                 this.securityCheck$.next(true);
             }, err => {
                 this.checking = false;
+                this.securityCheck$.next(false);
             }, () => {
                 this.checking = false;
             })
@@ -105,9 +106,13 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
             setTimeout(() => { this.aclAlertShow = false; }, 5000);
         })
 
-        this.securityCheck$.subscribe(() => {
-            this.loginModalOpen = false;
-            this.security.password = null;
+        this.securityCheck$.subscribe(check => {
+            if (check) {
+                this.loginModalOpen = false;
+                this.security.password = null;
+            } else {
+                this.logout();
+            }
         })
         
         if (this.router.url === '/') {
