@@ -34,7 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   providers: [
     AlertService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },    
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },    
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     Title,
