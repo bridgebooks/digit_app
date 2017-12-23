@@ -6,12 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { JwtHelper } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HttpCacheInterceptor, HttpErrorInterceptor, JwtInterceptor } from './shared';
-
+import { JwtHelper } from './shared/utils/jwt';
 import { AlertService, SessionService, JwtService, HttpCacheService } from './services';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +37,7 @@ import { AppRoutingModule } from './app-routing.module';
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     Title,
-    JwtHelper, 
+    JwtHelper,
     SessionService,
     JwtService,
     HttpCacheService,
