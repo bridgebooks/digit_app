@@ -5,9 +5,9 @@ import { State } from 'clarity-angular/data/datagrid'
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
-import { Payitem } from 'app/models/data/payitem';
+import { Payitem } from '../../../models/data/payitem';
 import { Subject } from 'rxjs/Subject';
-import { PayitemFormModalComponent } from 'app/main/settings/payitem-form-modal/payitem-form-modal.component';
+import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/payitem-form-modal.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Modal } from 'clarity-angular';
 import { Observable } from 'rxjs/Observable';
