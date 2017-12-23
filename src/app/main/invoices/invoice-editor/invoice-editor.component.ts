@@ -69,7 +69,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
     private differs: KeyValueDiffers,
     private invoices: InvoiceService, 
     private orgService: OrgService) { 
-      this.differ = differs.find({}).create(null);
+      this.differ = differs.find({}).create();
   }
 
   onLineAmountTypeSelected($event) {
