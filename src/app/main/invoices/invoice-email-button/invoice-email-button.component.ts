@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { AlertService, SessionService, InvoiceService } from '../../../services';
 import { DateFormatPipe } from 'angular2-moment'
 import { Subject } from 'rxjs';
-import 'clarity-icons/shapes/social-shapes';
+import '@clr/icons/shapes/social-shapes';
 
 @Component({
   selector: 'invoice-email-button',

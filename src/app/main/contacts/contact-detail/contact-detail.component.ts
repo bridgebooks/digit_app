@@ -5,10 +5,10 @@ import { AlertService, ContactService } from '../../../services';
 
 import { Contact } from '../../../models/data/contact';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/social-shapes';
-import 'clarity-icons/shapes/technology-shapes';
-import 'clarity-icons/shapes/travel-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/social-shapes';
+import '@clr/icons/shapes/technology-shapes';
+import '@clr/icons/shapes/travel-shapes';
 
 @Component({
   selector: 'app-contact-detail',

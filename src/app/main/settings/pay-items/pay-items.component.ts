@@ -3,8 +3,8 @@ import { SessionService, OrgService, AlertService, PayitemService } from '../../
 import { ActivatedRoute } from '@angular/router';
 import { State } from '@clr/angular/data/datagrid'
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/essential-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/essential-shapes';
 import { Payitem } from '../../../models/data/payitem';
 import { Subject } from 'rxjs/Subject';
 import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/payitem-form-modal.component';
