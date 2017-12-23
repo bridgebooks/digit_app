@@ -1,81 +1,91 @@
-// Helper class to decode and find JWT expiration.
-export class JwtHelper{
+export class JwtHelper {
     
-      private b64c:string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";   // base64 dictionary
-      private b64u:string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";  // base64url dictionary
-      private b64pad:string = '=';
-    
-      /* base64_charIndex
-       * Internal helper to translate a base64 character to its integer index.
-       */
-      private base64_charIndex(c) {
-          if (c == "+") return 62
-          if (c == "/") return 63
-          return this.b64u.indexOf(c)
+      public urlBase64Decode(str: string): string {
+        let output = str.replace(/-/g, '+').replace(/_/g, '/');
+        switch (output.length % 4) {
+          case 0: { break; }
+          case 2: { output += '=='; break; }
+          case 3: { output += '='; break; }
+          default: {
+            throw 'Illegal base64url string!';
+          }
+        }
+        return this.b64DecodeUnicode(output);
       }
     
-      /* base64_decode
-       * Decode a base64 or base64url string to a JavaScript string.
-       * Input is assumed to be a base64/base64url encoded UTF-8 string.
-       * Returned result is a JavaScript (UCS-2) string.
-       */
-       base64Decode(data:string){
-         var dst = "";
-         var i = 0, a, b, c, d, z;
-         var len = data.length;
+      // credits for decoder goes to https://github.com/atk
+      private b64decode(str: string): string {
+        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+        let output: string = '';
     
-         for(; i < len - 3;i += 4){
-           a = this.base64_charIndex(data.charAt(i+0));
-           b = this.base64_charIndex(data.charAt(i+1));
-           c = this.base64_charIndex(data.charAt(i+2));
-           d = this.base64_charIndex(data.charAt(i+3));
-           dst += String.fromCharCode((a << 2) | b >>> 4);
-           if(data.charAt(i+2) != this.b64pad){
-             dst += String.fromCharCode(((b << 4) & 0xF0) | ((c >>> 2) & 0x0F));
-           }
-           if(data.charAt(i+3) != this.b64pad){
-             dst += String.fromCharCode(((c << 6) & 0xC0) | d);
-           }
-         }
-         return decodeURIComponent(dst);
-       }
+        str = String(str).replace(/=+$/, '');
     
-      // decode token
-      decodeToken(token:string){
-        var parts = token.split('.');
-        if(parts.length !== 3){
+        if (str.length % 4 == 1) {
+          throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
+        }
+    
+        for (
+          // initialize result and counters
+          let bc: number = 0, bs: any, buffer: any, idx: number = 0;
+          // get next character
+          buffer = str.charAt(idx++);
+          // character found in table? initialize bit storage and add its ascii value;
+          ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+            // and if not first of each 4 characters,
+            // convert the first 8 bits to one ascii character
+            bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
+        ) {
+          // try to find character in table (0-63, not found => -1)
+          buffer = chars.indexOf(buffer);
+        }
+        return output;
+      }
+    
+      // https://developer.mozilla.org/en/docs/Web/API/WindowBase64/Base64_encoding_and_decoding#The_Unicode_Problem
+      private b64DecodeUnicode(str: any) {
+        return decodeURIComponent(Array.prototype.map.call(this.b64decode(str), (c: any) => {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+      }
+    
+      public decodeToken(token: string): any {
+        let parts = token.split('.');
+    
+        if (parts.length !== 3) {
           throw new Error('JWT must have 3 parts');
         }
-        var decoded = this.base64Decode(parts[1]);
-        if(!decoded){
+    
+        let decoded = this.urlBase64Decode(parts[1]);
+        if (!decoded) {
           throw new Error('Cannot decode the token');
         }
+    
         return JSON.parse(decoded);
       }
     
-      getTokenExpirationDate(token:string) {
-        var decoded: any;
+      public getTokenExpirationDate(token: string): Date {
+        let decoded: any;
         decoded = this.decodeToken(token);
     
-        if(typeof decoded.exp === "undefined") {
+        if (!decoded.hasOwnProperty('exp')) {
           return null;
         }
     
-        var date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+        let date = new Date(0); // The 0 here is the key, which sets the date to the epoch
         date.setUTCSeconds(decoded.exp);
     
         return date;
       }
     
-      isTokenExpired(token:string, offsetSeconds?:number) {
-        var date = this.getTokenExpirationDate(token);
+      public isTokenExpired(token: string, offsetSeconds?: number): boolean {
+        let date = this.getTokenExpirationDate(token);
         offsetSeconds = offsetSeconds || 0;
-        if (date === null) {
+    
+        if (date == null) {
           return false;
         }
     
         // Token expired?
         return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
       }
-    
     }
