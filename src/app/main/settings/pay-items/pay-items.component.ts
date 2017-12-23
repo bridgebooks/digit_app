@@ -1,7 +1,7 @@
 import { ViewChild, ChangeDetectorRef, Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { SessionService, OrgService, AlertService, PayitemService } from '../../../services';
 import { ActivatedRoute } from '@angular/router';
-import { State } from 'clarity-angular/data/datagrid'
+import { State } from '@clr/angular/data/datagrid'
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/essential-shapes';
@@ -9,7 +9,7 @@ import { Payitem } from '../../../models/data/payitem';
 import { Subject } from 'rxjs/Subject';
 import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/payitem-form-modal.component';
 import { Subscription } from 'rxjs/Subscription';
-import { Modal } from 'clarity-angular';
+import { Modal } from '@clr/angular';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

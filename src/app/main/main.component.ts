@@ -11,7 +11,7 @@ import 'clarity-icons/shapes/core-shapes';
 import 'clarity-icons/shapes/commerce-shapes';
 import 'clarity-icons/shapes/essential-shapes';
 import 'clarity-icons/shapes/technology-shapes';
-import { Modal } from 'clarity-angular';
+import { Modal } from '@clr/angular';
 import { Subject } from 'rxjs/Subject';
 
 @Component({

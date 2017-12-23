@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, AccountsService } from '../../../services';
-import { State } from 'clarity-angular/data/datagrid'
+import { State } from '@clr/angular/data/datagrid'
 import { Account } from '../../../models/data/account';
 import { TaxRate } from '../../../models/data/tax-rate';
 

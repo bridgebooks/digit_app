@@ -1,6 +1,6 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Modal } from 'clarity-angular';
+import { Modal } from '@clr/angular';
 import { PayrunFormComponent } from '../payrun-form/payrun-form.component';
 import { SessionService, PayrunService } from '../../../services';
 import { Subject } from 'rxjs/Subject';

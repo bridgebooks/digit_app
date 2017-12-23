@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { Contact } from '../../../models/data/contact';
-import { State } from 'clarity-angular/data/datagrid'
+import { State } from '@clr/angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
 import { Subscription, Subject } from 'rxjs';
 
