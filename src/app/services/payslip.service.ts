@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { PayslipItems } from 'app/models/responses/payslip-items';
+import { PayslipItems } from '../models/responses/payslip-items';
 
 @Injectable()
 export class PayslipService {

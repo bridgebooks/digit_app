@@ -11,8 +11,8 @@ import { ItemsResponse } from '../models/responses/items';
 import { AccountsResponse } from '../models/responses/accounts';
 import { TaxRatesResponse } from '../models/responses/tax-rates';
 import { Org } from '../models/data/org';
-import { PayrunsResponse } from 'app/models/responses/payruns';
-import { PayitemsResponse } from 'app/models/responses/payitems';
+import { PayrunsResponse } from '../models/responses/payruns';
+import { PayitemsResponse } from '../models/responses/payitems';
 
 interface OrgCreateResponseData {
   org: any;
