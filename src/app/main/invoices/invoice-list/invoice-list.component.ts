@@ -5,6 +5,9 @@ import { State } from 'clarity-angular/data/datagrid';
 import { Subscription, Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/observable/combineLatest';
+
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
@@ -79,11 +82,10 @@ export class InvoiceListComponent implements OnInit {
       this.type = this.setListType(route.params.type);
       this.invoiceType = route.params.type
 
-      if (this.status) {
-        this.loading = true;
-        this.cancel$.next();
-        this.refresh({})
-      }
+      this.loading = true;
+      this.cancel$.next();
+      this.refresh({})
+      
     })
   }
 
