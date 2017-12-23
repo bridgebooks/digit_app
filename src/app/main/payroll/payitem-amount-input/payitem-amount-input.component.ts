@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
-import { PayslipService, AlertService } from 'app/services';
+import { PayslipService, AlertService } from '../../../services';
 
 @Component({
   selector: 'payitem-amount-input',

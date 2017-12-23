@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { PayrunService, SessionService, EventbusService } from 'app/services';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
-import { Payrun } from 'app/models/data/payrun';
-import { PayslipEditorComponent } from 'app/main/payroll/payslip-editor/payslip-editor.component';
-import { Payslip } from 'app/models/data/payslip';
-import { PayitemFormModalComponent } from 'app/main/settings/payitem-form-modal/payitem-form-modal.component';
+import { Payrun } from '../../../models/data/payrun';
+import { PayslipEditorComponent } from '../../../main/payroll/payslip-editor/payslip-editor.component';
+import { Payslip } from '../../../models/data/payslip';
+import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/payitem-form-modal.component';
 
 @Component({
   selector: 'app-payrun',

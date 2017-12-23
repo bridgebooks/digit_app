@@ -8,9 +8,9 @@ import {
   SimpleChanges 
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrgService, PayrunService } from 'app/services';
+import { OrgService, PayrunService } from '../../../services';
 import { State } from 'clarity-angular/data/datagrid';
-import { Payrun } from 'app/models/data/payrun';
+import { Payrun } from '../../../models/data/payrun';
 import { Subscription, Subject } from 'rxjs';
 
 @Component({
