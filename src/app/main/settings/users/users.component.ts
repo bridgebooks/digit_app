@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService, OrgService } from '../../../services';
-import { State } from 'clarity-angular/data/datagrid'
+import { State } from '@clr/angular/data/datagrid'
 import { Observable, Subject } from 'rxjs';
 
 @Component({

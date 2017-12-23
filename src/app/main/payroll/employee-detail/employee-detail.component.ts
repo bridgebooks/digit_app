@@ -4,7 +4,7 @@ import { EmployeeService, AlertService } from '../../../services';
 import { Employee } from '../../../models/data/employee';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
-import { Modal } from 'clarity-angular';
+import { Modal } from '@clr/angular';
 import { Observable } from 'rxjs/Observable';
 import { IMyDate, IMyDpOptions } from 'mydatepicker';
 

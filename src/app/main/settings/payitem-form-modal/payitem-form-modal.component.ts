@@ -1,6 +1,6 @@
 import { ViewChild, Input, Output, EventEmitter, Component, OnInit, OnDestroy } from '@angular/core';
 import { Payitem } from '../../../models/data/payitem';
-import { Modal } from 'clarity-angular';
+import { Modal } from '@clr/angular';
 import { ControlContainer, FormControl } from '@angular/forms';
 import { ObjectUtils } from '../../../shared';
 import { AlertService, PayitemService } from '../../../services';

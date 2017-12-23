@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PayslipItem } from '../../../models/data/payslip-item';
 import * as _ from 'lodash';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/core-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/core-shapes';
 
 enum PayItemType {
   WAGE = <any>'wage',

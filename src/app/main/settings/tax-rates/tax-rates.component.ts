@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, TaxRateService } from '../../../services';
-import { State } from 'clarity-angular/data/datagrid'
+import { State } from '@clr/angular/data/datagrid'
 import { TaxRate } from '../../../models/data/tax-rate';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/essential-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/essential-shapes';
 
 @Component({
   selector: 'app-tax-rates',

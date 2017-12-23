@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/commerce-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/commerce-shapes';
 
 @Component({
   selector: 'payment-success',

@@ -6,12 +6,12 @@ import { MainNavigation } from './main.navigation';
 import { EventbusService, JwtService, AuthService, SessionService } from '../services';
 import { Subscription } from 'rxjs'
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/core-shapes';
-import 'clarity-icons/shapes/commerce-shapes';
-import 'clarity-icons/shapes/essential-shapes';
-import 'clarity-icons/shapes/technology-shapes';
-import { Modal } from 'clarity-angular';
+import '@clr/icons';
+import '@clr/icons/shapes/core-shapes';
+import '@clr/icons/shapes/essential-shapes';
+import '@clr/icons/shapes/commerce-shapes';
+import '@clr/icons/shapes/technology-shapes';
+import { Modal } from '@clr/angular';
 import { Subject } from 'rxjs/Subject';
 
 @Component({

@@ -2,8 +2,8 @@ import { ViewChild, ChangeDetectorRef, Component, OnInit, OnDestroy } from '@ang
 import { ActivatedRoute } from '@angular/router';
 import { SessionService, AlertService, OrgService, EmployeeService } from '../../../services';
 import { Employee } from '../../../models/data/employee';
-import { Modal } from 'clarity-angular';
-import { State } from 'clarity-angular/data/datagrid';
+import { Modal } from '@clr/angular';
+import { State } from '@clr/angular/data/datagrid';
 import { Subject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 

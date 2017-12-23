@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { AlertService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/core-shapes';
+import '@clr/icons';
+import '@clr/icons/shapes/core-shapes';
 
 @Component({
   selector: 'app-inventory-detail',
