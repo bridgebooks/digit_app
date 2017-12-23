@@ -9,6 +9,9 @@
   "angularCompilerOptions": {
     "preserveWhitespaces": false
   },
+  "paths": {
+    "@angular/*": ["../node_modules/@angular/*"]
+  },
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
