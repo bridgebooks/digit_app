@@ -1,5 +1,5 @@
-import { Employee } from "app/models/data/employee";
-import { PayslipItem } from "app/models/data/payslip-item";
+import { Employee } from "../data/employee";
+import { PayslipItem } from "../data/payslip-item";
 
 interface EmployeeData {
     data: Employee;

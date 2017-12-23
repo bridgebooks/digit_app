@@ -1,4 +1,4 @@
-import { PayslipItem } from "app/models/data/payslip-item";
+import { PayslipItem } from "../data/payslip-item";
 
 export interface PayslipItems {
     data: PayslipItem[];

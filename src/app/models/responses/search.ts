@@ -1,5 +1,5 @@
 import { Contact } from '../data/contact';
-import { Employee } from 'app/models/data/employee';
+import { Employee } from '../data/employee';
 
 export interface SearchResponse {
     total: number;
