@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://core.bridgebooks.com.ng/v1/'
+  apiUrl: 'https://core.bridgebooks.com.ng/v1/',
+  idleTime: 600,
+  idleTimeout: 660
 };
