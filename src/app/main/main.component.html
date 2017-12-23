@@ -59,21 +59,33 @@
             </nav>
 
             <div class="logout">
-                <a (click)="showLogoutModal()">
+                <a (click)="logoutModal.open()">
                     <clr-icon shape="logout"></clr-icon>                        
                     Logout
                 </a>
             </div>
         </clr-vertical-nav>
 
-        <clr-modal [(clrModalOpen)]="logoutModalVisible" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+        <clr-modal #logoutModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
             <h3 class="modal-title">Logout</h3>
             <div class="modal-body">
                 <p style="color: #333;">Are sure you want to logout</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline" (click)="hideLogoutModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" [clrLoading]="logoutProcessing" [disabled]="logoutBtnDisabled" (click)="logout()">Ok</button>
+                <button type="button" class="btn btn-outline" (click)="logoutModal.close()">Cancel</button>
+                <button type="button" class="btn btn-primary" [clrLoading]="logoutProcessing" [disabled]="logoutProcessing" (click)="logout()">Ok</button>
+            </div>
+        </clr-modal>
+
+        <clr-modal #loginModal [(clrModalOpen)]="loginModalOpen" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true" [clrModalClosable]="false">
+            <h3 class="modal-title">Security Check</h3>
+            <div class="modal-body">
+                <p>Please enter your password to confirm your identity</p>
+                <form #loginForm="ngForm" novalidate>
+                    <input type="hidden" name="email" id="email" [(ngModel)]="security.email">
+                    <input type="password" name="password" id="password" placeholder="Enter password" size="60" [(ngModel)]="security.password" required>
+                    <button type="button" class="btn btn-block btn-primary" [clrLoading]="checking" [disabled]="loginForm.invalid || checking" (click)="securityCheck()">Login</button>                    
+                </form>
             </div>
         </clr-modal>
     </div>
