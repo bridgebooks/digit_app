@@ -15,7 +15,7 @@ import {
 import { Subject } from 'rxjs';
 import { SearchService, SessionService, OrgService, PayslipService, AlertService, EventbusService } from 'app/services';
 import { Observable } from 'rxjs/Observable';
-import { PayitemsResponse } from 'app/models/responses/payitems';
+import { PayitemsResponse } from '../../../models/responses/payitems';
 
 @Component({
   selector: 'payitem-input',

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Employee } from 'app/models/data/employee';
+import { Employee } from '../../../models/data/employee';
 
 @Component({
   selector: 'employee-bulkaction-dropdown',

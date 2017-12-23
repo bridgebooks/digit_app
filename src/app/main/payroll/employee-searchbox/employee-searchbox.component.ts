@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { SessionService, SearchService } from 'app/services';
+import { SessionService, SearchService } from '../../../services';
 
 @Component({
   selector: 'employee-searchbox',

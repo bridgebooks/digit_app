@@ -5,6 +5,6 @@ git pull
 
 yarn install
 
-ng build --prod --base-href / --env=prod
+./node_modules/.bin/ng build --prod --env=prod
 
 yarn start

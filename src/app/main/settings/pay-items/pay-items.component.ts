@@ -1,5 +1,5 @@
 import { ViewChild, ChangeDetectorRef, Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { SessionService, OrgService, AlertService, PayitemService } from 'app/services';
+import { SessionService, OrgService, AlertService, PayitemService } from '../../../services';
 import { ActivatedRoute } from '@angular/router';
 import { State } from 'clarity-angular/data/datagrid'
 

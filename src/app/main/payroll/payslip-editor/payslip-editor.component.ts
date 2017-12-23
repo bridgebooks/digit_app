@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
-import { Payslip } from 'app/models/data/payslip';
+import { Payslip } from '../../../models/data/payslip';
 import { Subject } from 'rxjs/Subject';
 
-import { AlertService, PayslipService } from 'app/services';
+import { AlertService, PayslipService } from '../../../services';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { PayslipItem } from 'app/models/data/payslip-item';
+import { PayslipItem } from '../../../models/data/payslip-item';
 import * as _ from 'lodash';
 
 import 'clarity-icons';

@@ -1,9 +1,9 @@
 import { ViewChild, Input, Output, EventEmitter, Component, OnInit, OnDestroy } from '@angular/core';
-import { Payitem } from 'app/models/data/payitem';
+import { Payitem } from '../../../models/data/payitem';
 import { Modal } from 'clarity-angular';
 import { ControlContainer, FormControl } from '@angular/forms';
-import { ObjectUtils } from 'app/shared';
-import { AlertService, PayitemService } from 'app/services';
+import { ObjectUtils } from '../../../shared';
+import { AlertService, PayitemService } from '../../../services';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
