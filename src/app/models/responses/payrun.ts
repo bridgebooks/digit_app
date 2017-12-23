@@ -1,4 +1,4 @@
-import { Payrun } from "app/models/data/payrun";
+import { Payrun } from "../data/payrun";
 
 export interface PayrunResponse {
     data: Payrun;

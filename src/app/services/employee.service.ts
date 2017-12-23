@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { EmployeesResponse } from '../models/responses/employees';
-import { EmployeeResponse } from 'app/models/responses/employee';
+import { EmployeeResponse } from '../models/responses/employee';
 
 @Injectable()
 export class EmployeeService {

@@ -1,4 +1,4 @@
-import { Payitem } from "app/models/data/payitem";
+import { Payitem } from "../data/payitem";
 
 export interface PayitemResponse {
     data: Payitem
