@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { PayitemResponse } from 'app/models/responses/payitem';
+import { PayitemResponse } from '../models/responses/payitem';
 
 @Injectable()
 export class PayitemService {
