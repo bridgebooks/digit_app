@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelper } from '../shared/utils/jwt';
 
 @Injectable()
 export class JwtService {
-
-  constructor(private localStorageService: LocalStorageService, private jwtHelper: JwtHelper) { 
-    this.jwtHelper = new JwtHelper();
+  constructor(private localStorageService: LocalStorageService, private jwtHelper: JwtHelper) {
   }
 
   saveToken(token: string) {
