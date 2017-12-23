@@ -19,6 +19,9 @@
       { 
         "name": "@angular/language-service"        
       }
-    ]
+    ],
+    "paths": {
+      "@angular/*": ["../node_modules/@angular/*"]
+    }
   }
 }
