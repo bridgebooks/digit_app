@@ -1,6 +1,6 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PayrunService, SessionService, EventbusService } from 'app/services';
+import { PayrunService, SessionService, EventbusService } from '../../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { Payrun } from '../../../models/data/payrun';

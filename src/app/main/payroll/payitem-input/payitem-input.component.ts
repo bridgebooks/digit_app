@@ -13,7 +13,7 @@ import {
   AfterViewInit 
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { SearchService, SessionService, OrgService, PayslipService, AlertService, EventbusService } from 'app/services';
+import { SearchService, SessionService, OrgService, PayslipService, AlertService, EventbusService } from '../../../services';
 import { Observable } from 'rxjs/Observable';
 import { PayitemsResponse } from '../../../models/responses/payitems';
 

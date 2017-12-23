@@ -1,4 +1,4 @@
-import { Account } from 'app/models/data/account';
+import { Account } from '../data/account';
 
 interface PayitemAccount {
     data: Account;

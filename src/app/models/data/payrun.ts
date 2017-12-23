@@ -1,4 +1,4 @@
-import { Payslip } from "app/models/data/payslip";
+import { Payslip } from "../data/payslip";
 
 interface Payslips {
     data: Payslip
