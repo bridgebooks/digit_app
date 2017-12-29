@@ -129,7 +129,7 @@ export class OrgService {
     return this.http.get<any>(url, { headers, params })
   }
 
-  getPayruns(id: string, options?: object) {
+  getPayruns(id: string, options?: object): Observable<PayrunsResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/payruns`;

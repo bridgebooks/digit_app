@@ -11,7 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 import { OrgService, PayrunService } from '../../../services';
 import { State } from '@clr/angular/data/datagrid';
 import { Payrun } from '../../../models/data/payrun';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription} from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 
 @Component({
   selector: 'app-payrun-list',
@@ -19,7 +21,7 @@ import { Subscription, Subject } from 'rxjs';
   styleUrls: ['./payrun-list.component.scss']
 })
 
-export class PayrunListComponent implements OnInit, OnChanges {
+export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input('org_id') org_id: string;
   loading: boolean = true;
@@ -59,7 +61,7 @@ export class PayrunListComponent implements OnInit, OnChanges {
 
     this.orgs
       .getPayruns(this.org_id, options)
-      .takeUntil(this.cancel$)
+      .pipe(takeUntil(this.cancel$))
       .subscribe(response => {
         setTimeout(() => { this.loading = false }, 0);
         this.total = response.total;
@@ -91,4 +93,7 @@ export class PayrunListComponent implements OnInit, OnChanges {
     this.org_id = changes.org_id ? changes.org_id.currentValue : this.org_id;
   }
 
+  ngOnDestroy() {
+    this.cancel$.complete();
+  }
 }

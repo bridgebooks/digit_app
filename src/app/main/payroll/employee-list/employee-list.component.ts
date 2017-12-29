@@ -6,6 +6,8 @@ import { Modal } from '@clr/angular';
 import { State } from '@clr/angular/data/datagrid';
 import { Subject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/concat';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-employee-list',
@@ -183,7 +185,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     this.org = this.session.getDefaultOrg();
 
     this.modals$ = Observable
-      .merge(this.archiveModal._openChanged, this.restoreModal._openChanged)
+      .concat(this.archiveModal._openChanged, this.restoreModal._openChanged)
       .subscribe(open => {
         if (!open) this.selected = []
       });

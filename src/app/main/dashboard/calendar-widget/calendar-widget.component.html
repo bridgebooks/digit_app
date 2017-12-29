@@ -18,22 +18,40 @@
         </div>
         
       <div *ngIf="!loading">
-          <div [ngSwitch]="view">
-              <mwl-calendar-month-view *ngSwitchCase="'month'" 
+          <div>
+            <div class="row flex-items-lg-between page-header">
+                <div class="col-lg-4">
+                    <h3 style="margin: 0;">{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>                        
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="btn-group btn-primary">
+                        <button class="btn" mwlCalendarPreviousView
+                        (viewDateChange)="viewDateChanged($event)"
+                        [(viewDate)]="viewDate" [view]="view">Previous</button>
+        
+                        <button class="btn" mwlCalendarNextView
+                        (viewDateChange)="viewDateChanged($event)"
+                        [(viewDate)]="viewDate" [view]="view">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <mwl-calendar-month-view #calendarRef
               [viewDate]="viewDate" [events]="events" 
               [eventTitleTemplate]="eventTitleTemplate"
               [activeDayIsOpen]="activeDayIsOpen"
               (dayClicked)="dayClicked($event.day)"
               (eventClicked)="eventClicked($event)">
-              </mwl-calendar-month-view>
-              <mwl-calendar-week-view *ngSwitchCase="'week'" 
+            </mwl-calendar-month-view>
+            <!--<mwl-calendar-week-view *ngSwitchCase="'week'" #calendarRef
               [viewDate]="viewDate" [events]="events" (eventClicked)="eventClicked($event)">
-              </mwl-calendar-week-view>
+            </mwl-calendar-week-view>-->
           </div>
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn" (click)="switchView('month')" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
-      <button class="btn" (click)="switchView('week')" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>
+      <!--<button class="btn" (click)="switchView('month')" [ngClass]="{'btn-primary': view == 'month'}">This Month</button>
+      <button class="btn" (click)="switchView('week')" [ngClass]="{'btn-primary': view == 'week'}">This Week</button>-->
     </div>
 </div>
