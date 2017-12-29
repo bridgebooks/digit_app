@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
+import { PayslipService, AlertService } from '../../../services';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
-import { PayslipService, AlertService } from '../../../services';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'payitem-amount-input',
