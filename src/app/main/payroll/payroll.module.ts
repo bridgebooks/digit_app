@@ -45,6 +45,9 @@ import { SetupModalComponent } from './setup-modal/setup-modal.component';
     SettingsModule,
     PayrollRoutingModule
   ],
+  entryComponents: [
+    SetupModalComponent
+  ],
   declarations: [
     EmployeeFormComponent, 
     EmployeeListComponent, 
