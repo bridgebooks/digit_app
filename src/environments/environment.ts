@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/v1/',
-  idleTime: 300,
-  idleTimeout: 350
+  idleTime: 500,
+  idleTimeout: 550
 };
