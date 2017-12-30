@@ -219,6 +219,14 @@ export class OrgService {
     return this.http.get<any>(url, { headers })
   }
 
+  getPayrunSettings(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/payrun_settings`;
+
+    return this.http.get<any>(url, { headers })
+  }
+
   getUsers(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
