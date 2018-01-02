@@ -20,7 +20,6 @@ export class PayitemAmountInputComponent implements OnInit, OnChanges {
 
   update(value) {
     this.disabled = true;
-    console.log(this.selected);
     this.payslips.updateItem(this.selected.id, { amount: value })
       .subscribe(response => {
         this.disabled = false;

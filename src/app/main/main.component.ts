@@ -114,6 +114,10 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
                 this.logout();
             }
         })
+
+        this.loginModal._openChanged.subscribe(open => {
+            if (!open) this.logout();
+        })
         
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);

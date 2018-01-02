@@ -13,6 +13,7 @@ import { TaxRatesResponse } from '../models/responses/tax-rates';
 import { Org } from '../models/data/org';
 import { PayrunsResponse } from '../models/responses/payruns';
 import { PayitemsResponse } from '../models/responses/payitems';
+import { PayrunSettings } from '../models/responses/payrun-settings';
 
 interface OrgCreateResponseData {
   org: any;
@@ -214,7 +215,7 @@ export class OrgService {
   getInvoiceSettings(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
-    const url = `${this.baseUrl}/${id}/invoice_settings`;
+    const url = `${this.baseUrl}/${id}/settings/invoices`;
 
     return this.http.get<any>(url, { headers })
   }
@@ -222,9 +223,9 @@ export class OrgService {
   getPayrunSettings(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
-    const url = `${this.baseUrl}/${id}/payrun_settings`;
+    const url = `${this.baseUrl}/${id}/settings/payruns`;
 
-    return this.http.get<any>(url, { headers })
+    return this.http.get<PayrunSettings>(url, { headers })
   }
 
   getUsers(id: string) {
@@ -245,7 +246,15 @@ export class OrgService {
   updateInvoiceSettings(id: string, data: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
-    const url = `${this.baseUrl}/${id}/invoice_settings`;
+    const url = `${this.baseUrl}/${id}/settings/invoices`;
+
+    return this.http.put<any>(url, data, { headers })
+  }
+
+  updatePayrunSettings(id: string, data: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    const url = `${this.baseUrl}/${id}/settings/payruns`;
 
     return this.http.put<any>(url, data, { headers })
   }

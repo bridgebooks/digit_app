@@ -30,6 +30,7 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
       this.selectInputElRef = elRef;
   }
   @Input('item') selected;
+  @Input('mode') mode: string;
   @Output() itemSelected: EventEmitter<string> = new EventEmitter();
   @Output() itemCreated: EventEmitter<any> = new EventEmitter();
   selectorVisible: boolean = false;
@@ -120,5 +121,6 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     this.selected = changes.selected ? changes.selected.currentValue : this.selected;
+    this.mode = changes.mode ? changes.mode.currentValue : 'select-create';
   }
 }

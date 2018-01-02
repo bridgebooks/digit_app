@@ -17,6 +17,7 @@ import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-sele
 import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
 import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
 import { PinpadComponent } from './components/pinpad/pinpad.component';
+import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
 
 @NgModule({
   imports: [
@@ -38,12 +39,14 @@ import { PinpadComponent } from './components/pinpad/pinpad.component';
     CreditCardnoPipe,
     CreditCardNumberDirective,
     PinpadComponent,
+    PayitemSelectComponent,
   ],
   exports: [
     BankSelectComponent, 
     AccountSelectComponent, 
     TaxrateSelectComponent,
     OrgbankaccountSelectComponent,
+    PayitemSelectComponent,
     NumericDirective, 
     CanseeDirective,
     CanDoDirective,
