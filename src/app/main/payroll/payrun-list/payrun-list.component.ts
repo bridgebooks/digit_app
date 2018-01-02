@@ -24,6 +24,7 @@ import { takeUntil } from 'rxjs/operators/takeUntil';
 export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input('org_id') org_id: string;
+  @Input('defer') defer: Subject<boolean>;
   loading: boolean = true;
 
   runs: Payrun[] = [];
@@ -61,7 +62,7 @@ export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
 
     this.orgs
       .getPayruns(this.org_id, options)
-      .pipe(takeUntil(this.cancel$))
+      .takeUntil(this.cancel$)
       .subscribe(response => {
         setTimeout(() => { this.loading = false }, 0);
         this.total = response.total;
@@ -76,21 +77,32 @@ export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.route$ = this.route.queryParams
-    .filter(params => params.status)
-    .subscribe(params => {
-      this.status = params.status || 'all';
-      
-      if (this.status) {
+    this.defer.subscribe(defer => {
+      if (defer) {
+        this.loading = false;
+        this.cancel$.next() 
+      } else {
         this.loading = true;
-        this.cancel$.next();
-        this.refresh({})
+        this.refresh({});
       }
     })
+
+    this.route$ = this.route.queryParams
+      .filter(params => params.status)
+      .subscribe(params => {
+        this.status = params.status || 'all';
+        
+        if (this.status) {
+          this.loading = true;
+          this.cancel$.next();
+          this.refresh({})
+        }
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.org_id = changes.org_id ? changes.org_id.currentValue : this.org_id;
+    this.defer = changes.defer ? changes.defer.currentValue : this.defer;
   }
 
   ngOnDestroy() {

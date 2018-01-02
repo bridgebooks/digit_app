@@ -1,0 +1,59 @@
+<clr-modal #modal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Payroll Setup</h3>
+    <div class="modal-body">
+      <p>Let's setup a few things for your payroll.</p>
+
+      <form #form="ngForm" novalidate>
+        <div class="form-section">
+          <label for="">Accounts</label>
+          <div class="form-group">
+            <label for="">Wage Account</label>
+            <account-select [org]="org" [selected]="settings.values.wages_account" 
+            (onAccountSelected)="settings.values.wages_account = $event"></account-select>
+            <input type="hidden" name="wages_account" [(ngModel)]="settings.values.wages_account" required>
+            <span class="help-text">Select an account for employee wages</span>
+          </div>
+
+          <div class="form-group">
+              <label for="">Employee Tax Payable</label>
+              <account-select [org]="org" [selected]="settings.values.employee_tax_account"
+              (onAccountSelected)="settings.values.employee_tax_account = $event"></account-select>
+              <input type="hidden" name="employee_tax_account" [(ngModel)]="settings.values.employee_tax_account" required>
+              <span class="help-text">Select an account for employee taxes</span>
+            </div>
+        </div>
+        <hr>
+        <label for="">Employee Tax Variables</label>
+        <p>Setup pay items used to calculate employee taxes. <br>
+        Create pay items <a routerLink="/settings/payitems" [queryParams]="{ status: 'active' }">here</a>, if don't have any setup already</p>
+
+        <div class="form-group">
+          <label for="">Basic Salary/Wage Item</label>
+          <payitem-select [org]="org" [selected]="settings.values.basic_wage_item" 
+          (itemSelected)="settings.values.basic_wage_item = $event"></payitem-select>
+          <input type="hidden" name="basic_wage_item" [(ngModel)]="settings.values.basic_wage_item" required>
+          <span class="help-text">Select an pay item for basic wage/salary</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">Housing Allowance Item</label>
+          <payitem-select [org]="org" [selected]="settings.values.housing_allowance_item" 
+          (itemSelected)="settings.values.housing_allowance_item = $event"></payitem-select>
+          <input type="hidden" name="housing_allowance_item" [(ngModel)]="settings.values.housing_allowance_item" required>
+          <span class="help-text">Select an pay item for housing allowance</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">Transportation Allowance Item</label>
+          <payitem-select [org]="org" [selected]="settings.values.transport_allowance_item" 
+          (itemSelected)="settings.values.transport_allowance_item = $event"></payitem-select>
+          <input type="hidden" name="transport_allowance_item" [(ngModel)]="settings.values.transport_allowance_item" required>
+          <span class="help-text">Select an pay item for transportation allowance</span>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="form.invalid || saving" 
+       [clrLoading]="saving" (click)="save()">Save and continue</button>
+    </div>
+</clr-modal>

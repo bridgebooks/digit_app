@@ -35,7 +35,7 @@
 
   <div class="row">
       <div class="col-lg-12 col-md-12">
-          <app-payrun-list [org_id]="org.id"></app-payrun-list>   
+          <app-payrun-list [defer]="defer" [org_id]="org.id"></app-payrun-list>   
       </div>
   </div>
 
@@ -50,4 +50,6 @@
             (click)="submit()" [clrLoading]="processing">Next</button>
         </div>
   </clr-modal>
+
+  <template #setupcontainer></template>
 </section>

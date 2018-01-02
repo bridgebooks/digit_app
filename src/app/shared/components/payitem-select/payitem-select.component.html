@@ -1,0 +1,6 @@
+<div class="select">
+  <select (change)="filterChanged($event.target.value)" [(ngModel)]="selected">
+    <option value="-1">Select a pay item</option>
+    <option *ngFor="let child of data" [value]="child.id">{{ child.name }}</option>
+  </select>
+</div>

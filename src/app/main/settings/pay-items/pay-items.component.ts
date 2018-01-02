@@ -11,6 +11,8 @@ import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/pay
 import { Subscription } from 'rxjs/Subscription';
 import { Modal } from '@clr/angular';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-pay-items',
@@ -184,7 +186,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const modal$ = Observable.zip(
+    const modal$ = Observable.merge(
       this.archiveModal._openChanged, 
       this.deleteModal._openChanged, 
       this.restoreModal._openChanged);

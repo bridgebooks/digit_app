@@ -1,12 +1,15 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PayrunService, SessionService, EventbusService } from '../../../services';
+import { PayrunService, SessionService, EventbusService, OrgService } from '../../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { Payrun } from '../../../models/data/payrun';
 import { PayslipEditorComponent } from '../../../main/payroll/payslip-editor/payslip-editor.component';
 import { Payslip } from '../../../models/data/payslip';
 import { PayitemFormModalComponent } from '../../settings/payitem-form-modal/payitem-form-modal.component';
+import { Observable } from 'rxjs/Observable';
+import { mergeMap } from 'rxjs/operators';
+import { PayrunSettingsData } from '../../../models/responses/payrun-settings';
 
 @Component({
   selector: 'app-payrun',
@@ -23,12 +26,14 @@ export class PayrunComponent implements OnInit, OnDestroy {
   cancel$: Subject<any> = new Subject();
 
   run: Payrun;
+  settings: PayrunSettingsData;
   selected: Payslip;
 
   constructor(
     private eventBus$: EventbusService,
     private route: ActivatedRoute,
     private session: SessionService,
+    private orgService: OrgService,
     private payruns: PayrunService) { }
   
   updateTotals(id: string) {
@@ -54,15 +59,20 @@ export class PayrunComponent implements OnInit, OnDestroy {
       include: 'payslips'
     }
 
-    this.payruns.get(id, options)
-      .takeUntil(this.cancel$)
-      .subscribe(response => {
-        this.loading = false;
-        this.run = response.data;
-      },
-      err => {
-        this.loading = false;
+    let payrun$ = this.payruns.get(id, options);
+    let settings$ = this.orgService.getPayrunSettings(this.org.id);
+
+    settings$.pipe(
+      mergeMap(response => {
+        this.settings = response.data
+        return payrun$;
       })
+    ).subscribe(response => {
+      this.run = response.data;
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+    })
   }
 
   ngOnInit() {
