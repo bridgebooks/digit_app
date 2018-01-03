@@ -2,11 +2,18 @@ export module TaxUtils {
     const NHF_VALUE = 2.5;
     const PENSION = 7.5;
 
-    interface Payload {
+    export interface TaxPayload {
         basic: number;
         housing: number;
         transport: number;
         others: number;
+    }
+
+    export interface TaxResult {
+        tax: number;
+        taxrate: number;
+        taxable: number;
+        exemption: number;
     }
 
     function computeRelief(income: number) {
@@ -33,7 +40,7 @@ export module TaxUtils {
         return t1 + t2 + t3 + t4 + t5 + t6;
     }
 
-    export function computeTax(options: Payload) {
+    export function computeTax(options: TaxPayload): TaxResult {
         let income = 0;
         let pension = 0;
         let nhf = 0;
