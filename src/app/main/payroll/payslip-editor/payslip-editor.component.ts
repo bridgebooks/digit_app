@@ -34,6 +34,15 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   open$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   open: boolean = false;
   loading: boolean = false;
+  tax: TaxUtils.TaxResult = {
+    tax: 0.00,
+    taxable: 0.00,
+    taxrate: 0.00,
+    exemption: 0.00
+  };
+  wages: number = 0;
+  deductions: number = 0;
+  allowances: number = 0;
   gross_total: number = 0;
   net_total: number = 0;
 
@@ -51,6 +60,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     item.amount = $event;
     this.computeTax();
     this.computeTotals()
+    this.updateTotals()
   }
 
   removeLine(item) {
@@ -67,6 +77,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.slip.items.splice(idx, 1);
     this.computeTax();
     this.computeTotals();
+    this.updateTotals()
   }
 
   updateTaxPayitem(tax) {
@@ -88,7 +99,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.slip.items.push(item);
   }
 
-  computeTax() {
+  computeTax(update: boolean = true) {
     let otherAllowances = 0;
     let basic = this.slip.items.filter(item => {
       return <any>item.item.data.id == this.settings.values.basic_wage_item
@@ -123,11 +134,11 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       others: otherAllowances
     }
 
-    const taxResult = TaxUtils.computeTax(options);
+    this.tax = TaxUtils.computeTax(options);
     // set tax amount
-    tax.amount = taxResult.tax;
+    tax.amount = this.tax.tax;
     // update tax pay item
-    this.updateTaxPayitem(tax);
+    if (update) this.updateTaxPayitem(tax);
   }
 
   computeTotals() {
@@ -176,13 +187,55 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.payslipUpdated.emit(this.slip);
   }
 
+  updateTotals() {
+    let allowances = this.slip.items.filter(item => {
+      return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
+    });
+
+    let wages = this.slip.items.filter(item => {
+      return <any>item.item.data.pay_item_type == PayItemType.WAGE;
+    });
+
+    let deductions = this.slip.items.filter(item => {
+      return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
+    });
+
+    allowances
+      .map(item => {
+        return Number(item.amount);
+      })
+      .map(amount => {
+        this.allowances = amount + this.allowances;
+      })
+    
+    deductions
+      .map(item => {
+        return Number(item.amount);
+      })
+      .map(amount => {
+        this.deductions = amount + this.allowances;
+      })
+    
+    wages
+      .map(item => {
+        return Number(item.amount);
+      })
+      .map(amount => {
+        this.wages = amount + this.wages;
+      })
+    
+    this.wages = this.allowances - this.deductions;
+  }
+
   fetchPayItems() {
     this.loading = true;
     this.payslips.payItems(this.slip.id, { include: 'item' })
       .subscribe(response => {
         this.loading = false;
         this.slip.items = response.data;
+        this.computeTax(false);
         this.computeTotals();
+        this.updateTotals()
       }, err => {
         this.loading = false;
       });
