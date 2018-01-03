@@ -19,10 +19,10 @@
       </clr-dg-cell>
       <clr-dg-cell>{{ run.employees }}</clr-dg-cell>
       <clr-dg-cell>{{ run.payment_date | amDateFormat:'D MMM YYYY' }}</clr-dg-cell>
-      <clr-dg-cell>{{ run.wages }}</clr-dg-cell>
-      <clr-dg-cell>{{ run.deductions }}</clr-dg-cell>
-      <clr-dg-cell>{{ run.reimbursements }}</clr-dg-cell>
-      <clr-dg-cell>{{ run.tax }}</clr-dg-cell>
+      <clr-dg-cell>{{ run.wages | number:'1.2-2' }}</clr-dg-cell>
+      <clr-dg-cell>{{ run.deductions | number:'1.2-2' }}</clr-dg-cell>
+      <clr-dg-cell>{{ run.reimbursements | number:'1.2-2' }}</clr-dg-cell>
+      <clr-dg-cell>{{ run.tax | number:'1.2-2' }}</clr-dg-cell>
       <clr-dg-cell *ngIf="status == 'all'">{{ run.status }}</clr-dg-cell>
   </clr-dg-row>
 

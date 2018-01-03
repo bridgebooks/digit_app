@@ -31,37 +31,72 @@
         </span>
     </div>
 
-    <table class="table item-table" *ngIf="!loading">
-      <thead>
-        <tr>
-          <th class="left col-item">Item</th>
-          <th class="left col-amount">Amount</th>
-          <th class="col-action"></th>
-        </tr>
-      </thead>
+    <div class="row" style="margin: 0;">
+      <div class="col-lg-8 col-md-8">
+        <table class="table item-table" *ngIf="!loading">
+          <thead>
+            <tr>
+              <th class="left col-item">Item</th>
+              <th class="left col-amount">Amount</th>
+              <th class="col-action"></th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <tr *ngFor="let item of slip.items">
-          <td class="left col-item">
-            <payitem-input [item]="item" (itemSelected)="onPayItemSelected($event, item)" 
-            (itemCreated)="onPayslipItemCreated($event, item)"></payitem-input> 
-          </td>
-          <td class="left col-amount">
-            <payitem-amount-input [item]="item" (amountChanged)="onPayItemAmountChanged($event, item)"></payitem-amount-input>              
-          </td>
-          <td class="col-action">
-            <a class="item-remove" role="tooltip" aria-haspopup="true" 
-            class="tooltip tooltip-md tooltip-top-left" (click)="removeLine(item)">
-              <clr-icon shape="times"></clr-icon>
-              <span class="tooltip-content">Remove item</span>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <tbody>
+            <tr *ngFor="let item of slip.items">
+              <td class="left col-item">
+                <payitem-input [item]="item" (itemSelected)="onPayItemSelected($event, item)" 
+                (itemCreated)="onPayslipItemCreated($event, item)"></payitem-input> 
+              </td>
+              <td class="left col-amount">
+                <payitem-amount-input [item]="item" (amountChanged)="onPayItemAmountChanged($event, item)"></payitem-amount-input>              
+              </td>
+              <td class="col-action">
+                <a class="item-remove" role="tooltip" aria-haspopup="true" 
+                class="tooltip tooltip-md tooltip-top-left" (click)="removeLine(item)">
+                  <clr-icon shape="times"></clr-icon>
+                  <span class="tooltip-content">Remove item</span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-    <div style="padding: 15px;">
-        <button class="btn btn-outline-primary" (click)="addLine()" *ngIf="!loading">Add Line</button>        
+        <div style="padding: 15px;">
+            <button class="btn btn-outline-primary" (click)="addLine()" *ngIf="!loading">Add Line</button>        
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 pay-calculator">
+        <h3 class="calculator-header">Pay Calculation</h3>
+        <hr>
+        <dl class="clearfix">
+          <dt>Wages</dt>
+          <dd>{{ wages | number:'1.2-2' }}</dd>
+
+          <dt>
+            <em>plus</em>
+            Allowances
+          </dt>
+          <dd>{{ allowances | number:'1.2-2' }}</dd>
+          
+          <dt>
+            <em>less</em>
+            Deductions
+          </dt>
+          <dd>{{ deductions | number:'1.2-2' }}</dd>
+
+          <dt class="border-top">Tax</dt>
+          <dd class="border-top">{{ tax.tax | number:'1.2-2'}}</dd>
+          <dt>Taxable Income</dt>
+          <dd>{{ tax.taxable | number:'1.2-2' }}</dd>
+          <dt>Tax Rate</dt>
+          <dd>{{ tax.taxrate | number:'1.2-2' }}%</dd>
+
+          <dt class="border-top bold">Net Pay</dt>
+          <dd class="border-top bold">{{ net_total | number:'1.2-2' }}</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </div>
