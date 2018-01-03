@@ -3,9 +3,9 @@
 .payslip-editor
 {
     position: absolute;
-    width: 60%;
+    width: 90%;
     min-height: 550px;
-    background: #FFF;
+    background: #fafafa;
     top: 75px;
     @include transition(right 0.25s linear);
     -webkit-box-shadow: -1px 0px 5px 0px rgba(50, 50, 50, 0.75);
@@ -61,6 +61,7 @@
     }
 
     .editor-body {
+        padding: 15px 0px;
         overflow-y: auto;
     }
 
@@ -78,6 +79,46 @@
 
         .col-action {
             width: 10%;
+        }
+    }
+
+    .pay-calculator
+    {
+        .calculator-header {
+            margin: 0;
+            padding: 10px 0px;
+        }
+
+        dl
+        {
+            dt, dd {
+                padding: 2px 4px;
+                margin: 2px 0;
+
+                &.border-top {
+                    border-top: 1px solid #CCC;
+                }
+
+                &.bold {
+                    font-weight: bold;
+                }
+            }
+
+            dt {
+                float: left;
+                width: 60%;
+
+                em {
+                    font-style: oblique;
+                    color: #CCC;
+                    font-size: .8em;
+                }
+            }
+
+            dd {
+                float: right;
+                width: 40%;
+            }
         }
     }
 }
