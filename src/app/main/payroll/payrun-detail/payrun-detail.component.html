@@ -19,21 +19,39 @@
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <div class="card">
+          <div class="card-header">
+            <div class="row flex-items-lg-between">
+              <div class="col-lg-3 col-md-5">
+                <button class="btn btn-sm btn-link">{{ run.status | uppercase }}</button>
+              </div>
+              <div class="col-lg-6 col-md-5 invoice-actions" style="text-align: right;">
+                <button class="btn btn-default">Send Payslips</button>
+              </div>
+            </div>
+          </div>
           <div class="card-block">
             <h3>Summary</h3>
             <hr>
   
             <div class="row">
               <div class="col-lg-3">
-                <p>Pay Period</p>
+                <p class="bold">Pay Period</p>
                 <span>{{ run.start_date | amDateFormat:'D MMM YYYY' }} -  {{ run.end_date | amDateFormat:'D MMM YYYY' }}</span>
               </div>
               <div class="col-lg-2">
-                <p>Payment Date</p>
+                <p class="bold">Payment Date</p>
                 <span>{{ run.payment_date | amDateFormat:'D MMM YYYY' }}</span>
               </div>
               <div class="col-lg-2">
-                <p>Payroll Total</p>
+                <p class="bold">Employee Payments</p>
+                <span>{{ run.net_pay | number:"1.2-2" }}</span>
+              </div>
+              <div class="col-lg-2">
+                  <p class="bold">Other Payments</p>
+                  <span>{{ run.tax | number:"1.2-2" }}</span>
+                </div>
+              <div class="col-lg-2">
+                <p class="bold">Payroll Total</p>
                 <span>{{ run.total | number:"1.2-2" }}</span>
               </div>
             </div>
@@ -67,7 +85,7 @@
                       <td class="left">{{ run.deductions | number:"1.2-2" }}</td>
                       <td class="left">{{ run.reimbursements | number:"1.2-2" }}</td>
                       <td class="left">{{ run.tax | number:"1.2-2" }}</td>
-                      <td class="left">{{ run.total | number:"1.2-2" }}</td>
+                      <td class="left">{{ run.net_pay | number:"1.2-2" }}</td>
                     </tr>
                   </tbody>
                 </table>

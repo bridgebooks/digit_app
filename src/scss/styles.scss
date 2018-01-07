@@ -12,6 +12,10 @@ app-header {
     }
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .clr-vertical-nav {
     .nav-group-content:hover, .nav-group-content.active {
         background-color: map-get($colors, 'secondary') !important;
