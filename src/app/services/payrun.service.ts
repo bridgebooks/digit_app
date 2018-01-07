@@ -16,7 +16,11 @@ export class PayrunService {
     return this.http.post<PayrunResponse>(this.baseUrl, body, { headers })
   }
 
-  update(id: string, body: object) {
+  approve(id: string, body: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/approve`;
+
+    return this.http.put<PayrunResponse>(url, body, { headers});
   }
 
   get(id: string, options?: object) {

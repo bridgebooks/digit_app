@@ -1,0 +1,87 @@
+<div class="spinner-container" *ngIf="loading">
+    <span class="spinner">
+        Loading...
+      </span>
+  </div>
+  
+  <section class="payrun-review" *ngIf="!loading">
+    <div class="row flex-items-lg-between page-header">
+      <div class="col-md-6">
+          <a [routerLink]="['/payroll/runs/']" [queryParams]="{ status: 'all' }"><clr-icon shape="caret" dir="left"></clr-icon> Payroll</a>                
+          <h3>
+            Payroll ({{ run.start_date | amDateFormat:'D MMM YYYY' }} -  {{ run.end_date | amDateFormat:'D MMM YYYY' }})
+          </h3>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-block">
+            <h3>Summary</h3>
+            <hr>
+  
+            <div class="row">
+              <div class="col-lg-3">
+                <p>Pay Period</p>
+                <span>{{ run.start_date | amDateFormat:'D MMM YYYY' }} -  {{ run.end_date | amDateFormat:'D MMM YYYY' }}</span>
+              </div>
+              <div class="col-lg-2">
+                <p>Payment Date</p>
+                <span>{{ run.payment_date | amDateFormat:'D MMM YYYY' }}</span>
+              </div>
+              <div class="col-lg-2">
+                <p>Payroll Total</p>
+                <span>{{ run.total | number:"1.2-2" }}</span>
+              </div>
+            </div>
+  
+            <h3>Employee Payments</h3>
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="left">Name</th>
+                      <th class="left">Wages</th>
+                      <th class="left">Deductions</th>
+                      <th class="left">Reimbursements</th>
+                      <th class="left">Tax</th>
+                      <th class="left">Net Pay</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let slip of run.payslips.data">
+                      <td class="left">{{ slip.employee.data.full_name }}</td>
+                      <td class="left">{{ slip.wages | number:"1.2-2" }}</td>
+                      <td class="left">{{ slip.deductions | number:"1.2-2" }}</td>
+                      <td class="left">{{ slip.reimbursements | number:"1.2-2" }}</td>
+                      <td class="left">{{ slip.tax | number:"1.2-2" }}</td>
+                      <td class="left">{{ slip.net_pay | number:"1.2-2" }}</td>
+                    </tr>
+                    <tr class="totals">
+                      <td class="left">Total</td>
+                      <td class="left">{{ run.wages | number:"1.2-2" }}</td>
+                      <td class="left">{{ run.deductions | number:"1.2-2" }}</td>
+                      <td class="left">{{ run.reimbursements | number:"1.2-2" }}</td>
+                      <td class="left">{{ run.tax | number:"1.2-2" }}</td>
+                      <td class="left">{{ run.total | number:"1.2-2" }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <h4>Payslip notes</h4>
+                <p>{{ run.notes }}</p>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </section>

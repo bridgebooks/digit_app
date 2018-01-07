@@ -17,6 +17,8 @@ export interface Payrun {
     tax: number;
     reimbursements: number;
     net_pay: number;
+    total: number;
     status: string;
+    notes: string;
     payslips: Payslips;
 }

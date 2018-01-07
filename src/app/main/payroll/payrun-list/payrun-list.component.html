@@ -12,7 +12,11 @@
 
   <clr-dg-row *ngFor="let run of runs" [clrDgItem]="run">
       <clr-dg-cell>
-          <a [routerLink]="['/payroll/runs', run.id]">
+          <a *ngIf="run.status == 'draft'" [routerLink]="['/payroll/runs', run.id]">
+            {{ run.start_date | amDateFormat:'D MMM YYYY' }} - 
+            {{ run.end_date | amDateFormat:'D MMM YYYY' }}
+          </a>  
+          <a *ngIf="run.status == 'approved'" [routerLink]="['/payroll/runs', run.id, 'view']">
             {{ run.start_date | amDateFormat:'D MMM YYYY' }} - 
             {{ run.end_date | amDateFormat:'D MMM YYYY' }}
           </a>        
@@ -23,7 +27,7 @@
       <clr-dg-cell>{{ run.deductions | number:'1.2-2' }}</clr-dg-cell>
       <clr-dg-cell>{{ run.reimbursements | number:'1.2-2' }}</clr-dg-cell>
       <clr-dg-cell>{{ run.tax | number:'1.2-2' }}</clr-dg-cell>
-      <clr-dg-cell *ngIf="status == 'all'">{{ run.status }}</clr-dg-cell>
+      <clr-dg-cell *ngIf="status == 'all'">{{ run.status | uppercaseFirstChar }}</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>

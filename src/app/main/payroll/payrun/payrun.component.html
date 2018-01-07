@@ -21,13 +21,17 @@
       <div class="payslips">
         <div class="toolbar row">
           <div class="col-lg-1 col-md-1">
-              <button class="btn btn-sm btn-outline">{{ run.status }}</button>
+              <button class="btn btn-sm btn-outline" *ngIf="run.status === 'draft'">{{ run.status }}</button>
+              <button class="btn btn-sm btn-success" *ngIf="run.status === 'approved'">{{ run.status }}</button>
           </div>
           <div class="col-lg-2 col-md-2 info-td">
               <p>Payday: {{ run.payment_date | amDateFormat: 'D/MM/YYYY' }}</p>                            
           </div>
           <div class="col-lg-2 col-md-2 info-td">
               <p>Employees: {{ run.payslips.data.length }}</p>                            
+          </div>
+          <div class="col-lg-2 col-md-2 info-td">
+              <p>Cost: {{ run.total | number:"1.2-2" }}</p>                            
           </div>
         </div>
 
@@ -53,12 +57,12 @@
           </div>
         </div>
 
-        <div class="payslip-list-footer row flex-items-lg-between">
+        <div class="payslip-list-footer row flex-items-lg-between" *ngIf="run.status == 'draft'">
           <div class="col-md-6">
               <button class="btn btn-outline">Finish Later</button>
           </div>
           <div class="col-md-4">
-              <button class="btn btn-primary">Review and Approve</button>
+              <button class="btn btn-primary" (click)="review()">Review and Approve</button>
           </div>
         </div>
       </div>
