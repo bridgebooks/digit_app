@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PayslipItems } from '../models/responses/payslip-items';
+import { PayslipReponse } from '../models/responses/payslip';
 
 @Injectable()
 export class PayslipService {
@@ -9,6 +10,20 @@ export class PayslipService {
   baseUrl: string = environment.apiUrl + 'payslips';
   
   constructor(private http: HttpClient) { }
+
+  get(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}`;
+    let params = new HttpParams();
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<PayslipReponse>(url, { headers, params })
+  }
 
   payItems(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

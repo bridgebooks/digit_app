@@ -8,6 +8,7 @@ import { PayrunsComponent } from './payruns/payruns.component';
 import { PayrunComponent } from './payrun/payrun.component';
 import { PayrunReviewComponent } from './payrun-review/payrun-review.component';
 import { PayrunDetailComponent } from './payrun-detail/payrun-detail.component';
+import { PayslipComponent } from './payslip/payslip.component';
 
 const routes: Routes = [
     { 
@@ -64,6 +65,13 @@ const routes: Routes = [
         component: PayrunReviewComponent,
         data: {
             title: 'Review Payrun - Bridgebooks'
+        }
+    },
+    {
+        path: 'payslips/:id',
+        component: PayslipComponent,
+        data: {
+            title: 'Payslip - Bridgebooks'
         }
     }
 ];
