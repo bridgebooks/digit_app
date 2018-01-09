@@ -64,7 +64,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   removeLine(item) {
-    let idx = this.slip.items.indexOf(item);
+    let idx = this.slip.items.data.indexOf(item);
 
     if (item) {
       this.alerts.info('Deleting', 'Deleting item', { timeOut: 3000 })      
@@ -74,7 +74,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       })
     }
 
-    this.slip.items.splice(idx, 1);
+    this.slip.items.data.splice(idx, 1);
     this.computeTax();
     this.computeTotals();
     this.updateTotals()
@@ -96,28 +96,28 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       is_new: true
     }
 
-    this.slip.items.push(item);
+    this.slip.items.data.push(item);
   }
 
   computeTax(update: boolean = true) {
     let otherAllowances = 0;
-    let basic = this.slip.items.filter(item => {
+    let basic = this.slip.items.data.filter(item => {
       return <any>item.item.data.id == this.settings.values.basic_wage_item
     })[0];
 
-    let housing = this.slip.items.filter(item => {
+    let housing = this.slip.items.data.filter(item => {
       return <any>item.item.data.id == this.settings.values.housing_allowance_item
     })[0];
 
-    let transport = this.slip.items.filter(item => {
+    let transport = this.slip.items.data.filter(item => {
       return <any>item.item.data.id == this.settings.values.transport_allowance_item
     })[0];
 
-    let tax = this.slip.items.filter(item => {
+    let tax = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.TAX;
     })[0];
 
-    let others = this.slip.items.filter(item => {
+    let others = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE
         && <any>item.item.data.id != this.settings.values.housing_allowance_item
         && <any>item.item.data.id != this.settings.values.transport_allowance_item
@@ -144,23 +144,23 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   computeTotals() {
     let gross = 0;
     let less = 0;
-    let allowances = this.slip.items.filter(item => {
+    let allowances = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
     });
 
-    let wages = this.slip.items.filter(item => {
+    let wages = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.WAGE;
     });
 
-    let deductions = this.slip.items.filter(item => {
+    let deductions = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
     });
 
-    let tax = this.slip.items.filter(item => {
+    let tax = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.TAX;
     })
 
-    let reimbursements = this.slip.items.filter(item => {
+    let reimbursements = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.REIMBURSEMENT;
     });
 
@@ -188,15 +188,15 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateTotals() {
-    let allowances = this.slip.items.filter(item => {
+    let allowances = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
     });
 
-    let wages = this.slip.items.filter(item => {
+    let wages = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.WAGE;
     });
 
-    let deductions = this.slip.items.filter(item => {
+    let deductions = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
     });
 
@@ -232,7 +232,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.payslips.payItems(this.slip.id, { include: 'item' })
       .subscribe(response => {
         this.loading = false;
-        this.slip.items = response.data;
+        this.slip.items.data = response.data;
         this.computeTax(false);
         this.computeTotals();
         this.updateTotals()
