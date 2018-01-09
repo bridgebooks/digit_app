@@ -232,7 +232,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     this.payslips.payItems(this.slip.id, { include: 'item' })
       .subscribe(response => {
         this.loading = false;
-        this.slip.items.data = response.data;
+        this.slip.items = response;
         this.computeTax(false);
         this.computeTotals();
         this.updateTotals()
