@@ -33,6 +33,9 @@ import { PayslipEditorComponent } from './payslip-editor/payslip-editor.componen
 import { PayitemInputComponent } from './payitem-input/payitem-input.component';
 import { PayitemAmountInputComponent } from './payitem-amount-input/payitem-amount-input.component';
 import { SetupModalComponent } from './setup-modal/setup-modal.component';
+import { PayrunReviewComponent } from './payrun-review/payrun-review.component';
+import { PayrunDetailComponent } from './payrun-detail/payrun-detail.component';
+import { PayslipComponent } from './payslip/payslip.component';
 
 @NgModule({
   imports: [
@@ -61,7 +64,10 @@ import { SetupModalComponent } from './setup-modal/setup-modal.component';
     PayslipEditorComponent,
     PayitemInputComponent,
     PayitemAmountInputComponent,
-    SetupModalComponent
+    SetupModalComponent,
+    PayrunReviewComponent,
+    PayrunDetailComponent,
+    PayslipComponent
   ],
   providers: [
     SessionService,

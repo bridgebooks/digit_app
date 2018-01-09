@@ -213,7 +213,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
         return Number(item.amount);
       })
       .map(amount => {
-        this.deductions = amount + this.allowances;
+        this.deductions = amount + this.deductions;
       })
     
     wages

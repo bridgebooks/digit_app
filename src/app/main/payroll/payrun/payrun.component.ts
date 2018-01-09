@@ -1,5 +1,5 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PayrunService, SessionService, EventbusService, OrgService } from '../../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
@@ -32,6 +32,7 @@ export class PayrunComponent implements OnInit, OnDestroy {
   constructor(
     private eventBus$: EventbusService,
     private route: ActivatedRoute,
+    private router: Router,
     private session: SessionService,
     private orgService: OrgService,
     private payruns: PayrunService) { }
@@ -50,6 +51,10 @@ export class PayrunComponent implements OnInit, OnDestroy {
 
   openSlipEditor(slip) {
     this.selected = slip;
+  }
+
+  review() {
+    this.router.navigate(['/payroll/runs/', this.run.id, 'review']);
   }
   
   fetchPayrun(id: string, showLoading: boolean = true) {
