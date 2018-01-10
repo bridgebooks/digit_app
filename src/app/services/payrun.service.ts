@@ -23,6 +23,13 @@ export class PayrunService {
     return this.http.put<PayrunResponse>(url, body, { headers});
   }
 
+  send(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/slips/send`;
+
+    return this.http.post<any>(url, {}, { headers});
+  }
+
   get(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}`;

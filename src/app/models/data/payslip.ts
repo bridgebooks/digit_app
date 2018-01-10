@@ -25,6 +25,7 @@ export interface Payslip {
     tax: number;
     reimbursements: number; 
     net_pay: number;
+    pdf_url?: number;
     created_at: number; 
     updated_at: number;
     employee: EmployeeData;

@@ -25,6 +25,13 @@ export class PayslipService {
     return this.http.get<PayslipReponse>(url, { headers, params })
   }
 
+  send(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/send`;
+
+    return this.http.post<any>(url, {}, { headers });
+  }
+
   payItems(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}/items`;
