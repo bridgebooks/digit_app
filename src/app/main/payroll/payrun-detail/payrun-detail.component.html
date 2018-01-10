@@ -25,7 +25,8 @@
                 <button class="btn btn-sm btn-link">{{ run.status | uppercase }}</button>
               </div>
               <div class="col-lg-6 col-md-5 invoice-actions" style="text-align: right;">
-                <button class="btn btn-default">Send Payslips</button>
+                <button class="btn btn-primary" (click)="send(run.id)" 
+                [clrLoading]="sending" [disabled]="sending">Send Payslips</button>
               </div>
             </div>
           </div>

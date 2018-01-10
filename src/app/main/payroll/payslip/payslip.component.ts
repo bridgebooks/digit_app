@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PayslipService } from '../../../services/index';
+import { PayslipService, AlertService } from '../../../services/index';
 import { Payslip } from '../../../models/data/payslip';
 import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -23,6 +23,7 @@ enum PayItemType {
 export class PayslipComponent implements OnInit, OnDestroy {
 
   loading: boolean = true;
+  sending: boolean = false;
   slip: Payslip;
   earnings: PayslipItem[];
   deductions: PayslipItem[];
@@ -32,19 +33,33 @@ export class PayslipComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private alerts: AlertService,
     private payslipService: PayslipService
   ) { }
 
-  getEarnings(items: PayslipItem[]) {
+  private getEarnings(items: PayslipItem[]) {
     return items.filter(item => {
       return [ PayItemType.TAX, PayItemType.DEDUCTION ].indexOf(<any>item.item.data.pay_item_type) == -1
     })
   }
 
-  getDeductions(items: PayslipItem[]) {
+  private getDeductions(items: PayslipItem[]) {
     return items.filter(item => {
       return [ PayItemType.TAX, PayItemType.DEDUCTION ].indexOf(<any>item.item.data.pay_item_type) != -1 
     })
+  }
+
+  send(id: string) {
+    this.sending = true;
+
+    this.payslipService.send(id)
+      .takeUntil(this.cancel$)
+      .subscribe(response => {
+        this.sending = false;
+        this.alerts.success('Send Payslip', response.message, { timeOut: 3000 });
+      }, err => {
+        this.sending = false;
+      })
   }
 
   fetchSlip(id: string) {

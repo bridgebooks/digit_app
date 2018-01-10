@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { Payrun } from '../../../models/data/payrun';
-import { PayrunService } from '../../../services/index';
+import { PayrunService, AlertService } from '../../../services/index';
 
 @Component({
   selector: 'app-payrun-detail',
@@ -12,6 +12,7 @@ import { PayrunService } from '../../../services/index';
 export class PayrunDetailComponent implements OnInit {
 
   loading: boolean = true;
+  sending: boolean = false;
   saving: boolean = false;
 
   cancel$: Subject<any> = new Subject();
@@ -21,9 +22,23 @@ export class PayrunDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private alert: AlertService,
     private route: ActivatedRoute,
     private payruns: PayrunService
   ) { }
+
+  send(id: string) {
+    this.sending = true;
+
+    this.payruns.send(id)
+      .takeUntil(this.cancel$)
+      .subscribe(response => {
+        this.sending = false;
+        this.alert.success('Send Payslips', response.message, { timeOut: 3000 });
+      }, err => {
+        this.sending = false;
+      })
+  }
 
   fetchPayrun(id: string, showLoading: boolean = true) {
     this.loading = showLoading ? true : false;

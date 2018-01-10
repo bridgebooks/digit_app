@@ -25,11 +25,11 @@
         <div class="card-header">
           <div class="row flex-items-lg-between lex-items-md-between">
             <div class="col-lg-3 col-md-5">
-              <button class="btn btn-sm btn-link"></button>
             </div>
             <div class="col-lg-6 col-md-5 slip-actions" style="text-align: right;">
-              <button class="btn btn-default">Email</button>
-              <button class="btn btn-default">Print PDF</button>
+              <button class="btn btn-primary" (click)="send(slip.id)" 
+              [clrLoading]="sending" [disabled]="sending">Email</button>
+              <a class="btn btn-default" [href]="slip.pdf_url" target="_blank" norl>Print PDF</a>
             </div>
           </div>
         </div>
@@ -107,10 +107,9 @@
 
           <div class="row flex-items-lg-between lex-items-md-between">
             <div class="col-lg-4 col-md-4">
-              <h3>Take Home</h3>
             </div>
             <div class="col-lg-4 col-md-4" style="text-align: right;">
-              <h3>NGN {{ slip.net_pay | number:"1.2-2" }}</h3>
+              <h3>Net Pay: NGN {{ slip.net_pay | number:"1.2-2" }}</h3>
             </div>
           </div>
         </div>
