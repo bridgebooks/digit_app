@@ -12,7 +12,7 @@ const routes: Routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Dashboard - Bridge Books',
+                    title: 'Dashboard - Bridgebooks',
                     showSideNav: false,
                     sidenavMenu: null
                 }
@@ -32,7 +32,7 @@ const routes: Routes = [
                 loadChildren: './contacts/contacts.module#ContactsModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Contacts - Bridge Books',
+                    title: 'Contacts - Bridgebooks',
                     showSideNav: true,
                     sidenavMenu: 'contacts'
                 }
@@ -42,7 +42,17 @@ const routes: Routes = [
                 loadChildren: './payroll/payroll.module#PayrollModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'Payroll - Bridge Books',
+                    title: 'Payroll - Bridgebooks',
+                    showSideNav: true,
+                    sidenavMenu: 'contacts'
+                }
+            },
+            {
+                path: 'reports',
+                loadChildren: './reports/reports.module#ReportsModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Reports - Bridgebooks',
                     showSideNav: true,
                     sidenavMenu: 'contacts'
                 }
@@ -52,7 +62,7 @@ const routes: Routes = [
                 loadChildren: './settings/settings.module#SettingsModule',
                 canActivate: [AuthGuard],
                 data: {
-                    title: 'General Settings - Bridge Books',
+                    title: 'General Settings - Bridgebooks',
                     showSideNav: true,
                     sidenavMenu: 'settings'
                 }
