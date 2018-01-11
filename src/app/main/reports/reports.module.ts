@@ -15,6 +15,9 @@ import {
   OrgService 
 } from '../../services';
 import { ReportsComponent } from './reports.component';
+import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
+import { AgedReceivablesComponent } from './aged-receivables/aged-receivables.component';
+import { AgedPayablesComponent } from './aged-payables/aged-payables.component';
 
 @NgModule({
   imports: [
@@ -26,7 +29,7 @@ import { ReportsComponent } from './reports.component';
     SharedModule,
     ReportsRoutingModule
   ],
-  declarations: [ReportsComponent],
+  declarations: [ReportsComponent, BalanceSheetComponent, AgedReceivablesComponent, AgedPayablesComponent],
   providers: [
     EventbusService,
     SessionService,
