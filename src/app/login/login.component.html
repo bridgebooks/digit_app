@@ -1,7 +1,7 @@
 <div class="login-wrapper account-wrapper" id="login-page">
     <form class="login" autocomplete="off" novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="logo">
-            <img src="assets/img/logo-blue.png" alt="ZenBooks">
+            <img src="assets/img/logo-blue.png" alt="Bridgebooks">
         </div>
 
         <label class="title">
@@ -23,7 +23,7 @@
  
             <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="loginForm.form.invalid || loginBtnDisabled">{{loginBtnStatus}}</button>
             <a routerLink="/password/reset" class="signup">Forgot your password?</a>
-            <a class="btn btn-primary-outline" routerLink="/signup" class="signup">Sign up for an account</a>
+            <a class="btn btn-primary-outline" routerLink="/signup" [queryParams]="{ plan: 'pro' }" class="signup">Sign up for an account</a>
         </div>
     </form>
 </div>
