@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../models/requests/user';
 import { SignupFormModel } from '../models/forms/signup';
 import { UserService } from '../services/user.service';
 import { SignupService } from './services/signup.service';
+import { Subscription } from 'rxjs/Subscription';
 
 enum SignupBtnStatus {
   DEFAULT = <any>'SIGN UP',
@@ -15,8 +16,10 @@ enum SignupBtnStatus {
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   @ViewChild('signupForm') form: FormData;
+  route$: Subscription;
+  plan: string;
 
   model: SignupFormModel = {
     first_name: null,
@@ -31,12 +34,17 @@ export class SignupComponent implements OnInit {
 
   processing: Boolean = false;
 
-  constructor(public router: Router, private userService: UserService, private signupService: SignupService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private userService: UserService, 
+    private signupService: SignupService) { }
 
   onSubmit() {
     this.signupBtnStatus = SignupBtnStatus.PROCESSING;
     this.signupBtnDisabled = true;
     this.processing = true;
+    if(this.plan) this.model.plan = this.plan;
 
     this.userService
       .create(this.model)
@@ -58,5 +66,12 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route$ = this.route.queryParams.subscribe(params => {
+      this.plan = params.plan;
+    })
+  }
+
+  ngOnDestroy() {
+    this.route$.unsubscribe();
   }
 }
