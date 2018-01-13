@@ -4,4 +4,5 @@ export interface SignupFormModel {
     email: String;
     phone: String;
     primary_user: boolean;
+    plan?: string;
 }
