@@ -24,6 +24,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.alert.error('Session', 'Your session has expired, please login again', { timeOut: 3000 });
             this.router.navigate(['/login']);
         }
+
+        if (response.status === 500) {
+            this.alert.error('Error', 'An error occured on the server. We working it fix it, please try again later', { timeOut: 3000 });
+        } 
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
