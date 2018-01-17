@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { User } from '../models/requests/user';
 import { ValidateResponse } from '../models/responses/user-validate';
 import { GenericResponse } from '../models/responses/generic';
 import { GenericDataResponse } from '../models/responses/generic-data';
-import { Observable } from 'rxjs';
-
-import 'rxjs/add/operator/catch';
+import { BillResponse } from '../models/responses/billing';
 
 @Injectable()
 export class UserService {
@@ -21,7 +19,21 @@ export class UserService {
     let options = { headers: headers };
     let url = `${this.baseUrl}/${id}`;
 
-    return this.http.get(url, options)
+    return this.http.get<any>(url, options)
+  }
+
+  getBilling(options?: object) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    let url = `${this.baseUrl}/billing`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    return this.http.get<BillResponse>(url, { headers, params });
   }
 
   create(body: Object) {
@@ -36,8 +48,7 @@ export class UserService {
     let options = { headers: headers };
     let url = `${this.baseUrl}/email`;
 
-    return this.http.post(url, body, options)
-                    .catch((error: any) => Observable.throw(error.json().error) || 'An error occured');
+    return this.http.post<any>(url, body, options)
   }
 
   updatePassword(body: Object) {

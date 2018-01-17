@@ -1,0 +1,39 @@
+<section>
+  <h2>Billing</h2>
+  <app-billing-nav></app-billing-nav>
+
+  <div class="row">
+    <div class="spinner-container" *ngIf="loading">
+      <span class="spinner">
+          Loading...
+        </span>
+    </div>
+
+    <div class="card" *ngIf="!loading">
+      <div class="card-block">
+        <p>Active Plan:</p>
+        <h3>{{ subscription.plan.data.display_name }} 
+          <span *ngIf="subscription.is_trial" class="label label-warning">Trial Mode</span>
+          <span *ngIf="!subscription.is_trial" class="label label-info">Active</span>
+        </h3>
+
+        <div *ngIf="subscription.is_trial">
+          <p>Trials ends:</p>
+          <h4>{{ subscription.trial_ends_at | amDateFormat:'D MMM YYYY' }}</h4>
+        </div>
+        <div *ngIf="!subscription.is_trial">
+            <p>Next Billing Date:</p>
+            <h4>{{ subscription.ends_at | amDateFormat:'D MMM YYYY' }}</h4>
+          </div>
+        <hr>
+
+        <div>
+          <button class="btn btn-lg btn-default" *ngIf="subscription.is_trial" (click)="cancelTrial()">
+            Cancel Trial</button>
+          <button class="btn btn-lg btn-default" *ngIf="!subscription.is_trial" (click)="cancelSubscription()">
+            Cancel Subscription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -18,6 +18,8 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
 import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
 import { PinpadComponent } from './components/pinpad/pinpad.component';
 import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
+import { EventbusService } from '../services/index';
+import { WindowService } from '../services/window.service';
 
 @NgModule({
   imports: [
@@ -58,4 +60,14 @@ import { PayitemSelectComponent } from './components/payitem-select/payitem-sele
   ],
   providers: [IntlPhoneNumberPipe, CreditCardnoPipe]
 })
-export class SharedModule { }
+export class SharedModule { 
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        EventbusService,
+        WindowService,
+      ]
+    }
+  }
+}
