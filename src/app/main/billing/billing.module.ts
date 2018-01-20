@@ -7,12 +7,14 @@ import { MomentModule, DateFormatPipe } from 'angular2-moment';
 
 import {
   AlertService,
-  UserService
+  UserService,
+  PlanService
 } from '../../services';
 
 import { BillingRoutingModule } from './billing-routing.module';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { BillingNavComponent } from './billing-nav/billing-nav.component';
+import { PlanPickerComponent } from './plan-picker/plan-picker.component';
 
 @NgModule({
   imports: [
@@ -25,11 +27,13 @@ import { BillingNavComponent } from './billing-nav/billing-nav.component';
   ],
   declarations: [
     SubscriptionComponent,
-    BillingNavComponent
+    BillingNavComponent,
+    PlanPickerComponent
   ],
   providers: [
     AlertService,
-    UserService
+    UserService,
+    PlanService
   ]
 })
 export class BillingModule { }

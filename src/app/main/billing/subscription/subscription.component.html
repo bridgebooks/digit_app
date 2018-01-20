@@ -11,29 +11,52 @@
 
     <div class="card" *ngIf="!loading">
       <div class="card-block">
-        <p>Active Plan:</p>
+        <p>Plan:</p>
         <h3>{{ subscription.plan.data.display_name }} 
-          <span *ngIf="subscription.is_trial" class="label label-warning">Trial Mode</span>
-          <span *ngIf="!subscription.is_trial" class="label label-info">Active</span>
+          <span *ngIf="subscription.is_active && subscription.is_trial" class="label label-warning">Trial Mode</span>
+          <span *ngIf="subscription.is_active && !subscription.is_trial && !subscription.is_canceled"
+           class="label label-info">Active</span>
+          <span *ngIf="!subscription.is_active" class="label label-danger">Inactive</span>
+          <span *ngIf="subscription.is_canceled" class="label label-danger">Canceled</span>
         </h3>
 
         <div *ngIf="subscription.is_trial">
           <p>Trials ends:</p>
           <h4>{{ subscription.trial_ends_at | amDateFormat:'D MMM YYYY' }}</h4>
         </div>
-        <div *ngIf="!subscription.is_trial">
-            <p>Next Billing Date:</p>
+        <div *ngIf="!subscription.is_ended && !subscription.is_canceled">
+          <p>Next Billing Date:</p>
+          <h4>{{ subscription.ends_at | amDateFormat:'D MMM YYYY' }}</h4>
+        </div>
+        <div *ngIf="subscription.is_canceled">
+            <p>Last Billing Date:</p>
             <h4>{{ subscription.ends_at | amDateFormat:'D MMM YYYY' }}</h4>
           </div>
         <hr>
 
         <div>
-          <button class="btn btn-lg btn-default" *ngIf="subscription.is_trial" (click)="cancelTrial()">
-            Cancel Trial</button>
-          <button class="btn btn-lg btn-default" *ngIf="!subscription.is_trial" (click)="cancelSubscription()">
+          <button class="btn btn-lg btn-default" *ngIf="!subscription.is_ended && !subscription.is_canceled" 
+          (click)="cancelModal.open()">
             Cancel Subscription</button>
+          <button class="btn btn-lg btn-default" *ngIf="subscription.is_ended || subscription.is_canceled" 
+          [clrLoading]="processing" [disabled]="processing" (click)="planPicker.modal.open()">
+            Renew Subscription</button>
         </div>
       </div>
+
+      <plan-picker #planPicker [current]="subscription.plan" (selected)="planSelected($event)"></plan-picker>
+
+      <clr-modal #cancelModal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+        <h3 class="modal-title">Cancel subscription</h3>
+        <div class="modal-body">
+          <p>Are sure you want to cancel your subscription?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" (click)="cancelModal.close()">No</button>
+          <button class="btn btn-primary" type="button" [clrLoading]="processing" [disabled]="processing"
+          (click)="cancelSubscription()">Yes</button>
+        </div>
+      </clr-modal>
     </div>
   </div>
 </section>

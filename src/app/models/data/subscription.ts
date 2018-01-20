@@ -10,6 +10,7 @@ export interface UserSubscription {
     is_trial: boolean;
     is_canceled: boolean;
     is_ended: boolean;
+    is_active: boolean;
     trial_ends_at: number;
     starts_at: number | null;
     ends_at?: number | null;

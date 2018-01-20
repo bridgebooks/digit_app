@@ -3,7 +3,10 @@ export interface SubscriptionPlan {
   display_name: string;
   name: string;
   description: string;
-  interval: string;
+  invoice_interval: string;
+  invoice_period: string;
+  trial_internval: string;
+  trial_period: string;
   amount: number;
   currency: string;
   paystack_plan_code: string;

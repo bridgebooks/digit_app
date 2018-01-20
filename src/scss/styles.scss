@@ -16,6 +16,11 @@ app-header {
     font-weight: bold;
 }
 
+.currency-ngn {
+    &::before {
+        content: "\0020A6";
+    }
+}
 .clr-vertical-nav {
     .nav-group-content:hover, .nav-group-content.active {
         background-color: map-get($colors, 'secondary') !important;

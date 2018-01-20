@@ -36,6 +36,34 @@ export class UserService {
     return this.http.get<BillResponse>(url, { headers, params });
   }
 
+  newSubscription(body: object, options?: object) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    let url = `${this.baseUrl}/billing/subscriptions`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+    
+    return this.http.post<any>(url, body, { headers, params });
+  }
+
+  cancelSubscription(options?: object) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+    let url = `${this.baseUrl}/billing/subscriptions/cancel`;
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+    
+    return this.http.post<any>(url, {}, { headers, params });
+  }
+
   create(body: Object) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let options = { headers: headers };
