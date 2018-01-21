@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 
     this.eventBus.subscribe('billing:error', payload => {
       const toast = this.alert.error('Billing', payload.message, {
-        timeOut: 30000,
+        timeOut: 10000,
         pauseOnHover: true,
         preventDuplicates: true
       })

@@ -34,6 +34,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.eventbus.broadcast('billing:error', { message: response.error.message })
         }
 
+        if (response.status === 426) {
+            this.eventbus.broadcast('billing:error', { message: response.error.message })
+        }
+
         if (response.status === 401) {
             this.session.end();
             this.alert.error('Session', 'Your session has expired, please login again', { timeOut: 3000 });
