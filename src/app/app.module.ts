@@ -12,9 +12,10 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HttpCacheInterceptor, HttpErrorInterceptor, JwtInterceptor } from './shared';
 import { JwtHelper } from './shared/utils/jwt';
-import { AlertService, SessionService, JwtService, HttpCacheService } from './services';
+import { AlertService, SessionService, JwtService, HttpCacheService, EventbusService } from './services';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
       storageType: 'localStorage'
     }),
     SimpleNotificationsModule.forRoot(),
+    SharedModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

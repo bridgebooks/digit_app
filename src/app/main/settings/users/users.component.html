@@ -18,9 +18,10 @@
             <clr-dg-column>Email</clr-dg-column>
             <clr-dg-column>Status</clr-dg-column>
             <clr-dg-column>Permissions</clr-dg-column>
+            <clr-dg-column>Actions</clr-dg-column>
     
             <clr-dg-row *ngFor="let user of users">
-              <clr-dg-cell><a href="javascript;">{{ user.first_name }} {{ user.last_name }}</a></clr-dg-cell>
+              <clr-dg-cell><a href="#">{{ user.first_name }} {{ user.last_name }}</a></clr-dg-cell>
               <clr-dg-cell>{{ user.email }}</clr-dg-cell>
               <clr-dg-cell>{{ user.status | uppercaseFirstChar:user.status }}</clr-dg-cell>
               <clr-dg-cell>
@@ -28,6 +29,9 @@
                   <p>{{ role.name | uppercaseFirstChar: role.name }}</p>
                   <span>{{ role.short_description }}</span>
                 </div>
+              </clr-dg-cell>
+              <clr-dg-cell>
+                <a *ngIf="!isAdmin(user)" (click)="showDeleteModal(user.id)">Delete</a>
               </clr-dg-cell>
             </clr-dg-row>
     
@@ -37,6 +41,18 @@
                 <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
             </clr-dg-footer>
         </clr-datagrid>
+
+        <clr-modal #deleteModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+            <h3 class="modal-title">Delete User</h3>
+            <div class="modal-body">
+              <p>Are sure you want to delete this user?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" (click)="deleteModal.close()" [disabled]="deleting">No</button>
+              <button class="btn btn-primary" type="button" [clrLoading]="deleting" [disabled]="deleting"
+              (click)="delete()">Yes</button>
+            </div>
+          </clr-modal>
       </div>
     </div>
 </section>

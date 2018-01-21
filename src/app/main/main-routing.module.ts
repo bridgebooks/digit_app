@@ -18,6 +18,16 @@ const routes: Routes = [
                 }
             },
             {
+                path: 'billing',
+                loadChildren: './billing/billing.module#BillingModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Billing - Bridgebooks',
+                    showSideNav: false,
+                    sidenavMenu: null
+                }
+            },
+            {
                 path: 'invoices',
                 loadChildren: './invoices/invoices.module#InvoicesModule',
                 canActivate: [AuthGuard],
