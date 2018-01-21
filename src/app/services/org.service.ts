@@ -243,6 +243,13 @@ export class OrgService {
     return this.http.post<any>(url, body, { headers })
   }
 
+  deleteUser(id: string, user_id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/users/${user_id}`;
+
+    return this.http.delete<any>(url, { headers })
+  }
+
   updateInvoiceSettings(id: string, data: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();

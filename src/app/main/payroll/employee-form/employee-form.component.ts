@@ -108,6 +108,9 @@ export class EmployeeFormComponent implements OnInit {
           this.saving = false;
           this.alerts.success('Employee', 'Employee sucessfully created', { timeOut: 3000 })
           this.form.resetForm();
+          this.router.navigate(['/payroll/employees'], { queryParams: {
+            status: 'all'
+          }})
         }, err => {
           this.saving = false;
         })

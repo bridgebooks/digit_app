@@ -1,0 +1,12 @@
+.plan-card
+{
+    .price
+    {
+        &::after {
+            content: '/mo';
+            font-size: 16px;
+            line-height: 19px;
+            padding: 0px 7px;
+        }
+    }
+}
