@@ -65,7 +65,7 @@
               <p><strong>Due Date:</strong> {{ invoice.due_at | amDateFormat:'D MMM YYYY' }}</p>
               <p><strong>Invoice #:</strong> {{ invoice.invoice_no }}</p>
               <p><strong>Reference:</strong> {{ invoice.reference }}</p>
-              <p><strong>Total:</strong> {{ invoice.total | number:'1.2-2' }}</p>
+              <p class="currency-ngn"><strong>Total:</strong> {{ invoice.total | number:'1.2-2' }}</p>
             </div>
           </div>
         </div>
@@ -99,15 +99,15 @@
                 <div class="invoice-totals">
                   <div class="clearfix">
                     <label for="">Subtotal</label>
-                    <span>{{ invoice.sub_total | number:'1.2-2' }}</span>
+                    <span class="currency-ngn">{{ invoice.sub_total | number:'1.2-2' }}</span>
                   </div>
                   <div class="clearfix">
                     <label for="">Tax</label>
-                    <span>{{ invoice.tax_total | number:'1.2-2' }}</span>
+                    <span class="currency-ngn">{{ invoice.tax_total | number:'1.2-2' }}</span>
                   </div>
                   <div class="clearfix total">
                     <label for=""><strong>Total</strong></label>
-                    <span><strong>{{ invoice.total | number:'1.2-2' }}</strong></span>
+                    <span class="currency-ngn"><strong>{{ invoice.total | number:'1.2-2' }}</strong></span>
                   </div>
                 </div>
               </div>

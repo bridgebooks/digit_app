@@ -84,15 +84,15 @@
             <div class="invoice-totals">
               <div class="clearfix">
                 <label for="">Subtotal</label>
-                <span>{{ model.sub_total | number:'1.2-2' }}</span>
+                <span class="currency-ngn">{{ model.sub_total | number:'1.2-2' }}</span>
               </div>
               <div class="clearfix">
                 <label for="">Tax</label>
-                <span>{{ model.tax_total | number:'1.2-2' }}</span>
+                <span class="currency-ngn">{{ model.tax_total | number:'1.2-2' }}</span>
               </div>
               <div class="clearfix total">
                 <label for=""><strong>Total</strong></label>
-                <span><strong>{{ model.total | number:'1.2-2' }}</strong></span>
+                <span class="currency-ngn"><strong>{{ model.total | number:'1.2-2' }}</strong></span>
               </div>
             </div>
           </div>
