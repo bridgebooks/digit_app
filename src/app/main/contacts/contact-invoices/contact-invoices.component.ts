@@ -13,6 +13,7 @@ export class ContactInvoicesComponent implements OnInit, OnDestroy {
   @Input('type') type: string;
   loading: boolean = true;
   invoices: any[] = [];
+  total: number = 0;
 
   constructor(
     private contacts: ContactService
@@ -21,6 +22,13 @@ export class ContactInvoicesComponent implements OnInit, OnDestroy {
   refresh(state: State) {
     
     this.contacts.invoices(this.contact, { type: this.type })
+      .map(response => {
+        let totals = response.data.map(invoice => { return Number(invoice.total )});
+        this.total = totals.reduce((a, b) => {
+          return a + b
+        }, 0);
+        return response;
+      })
       .subscribe(response => {
         this.loading = false;
         this.invoices = response.data;

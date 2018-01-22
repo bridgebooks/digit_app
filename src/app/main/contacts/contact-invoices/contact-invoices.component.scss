@@ -1,0 +1,17 @@
+.card-header
+{
+    .total 
+    {
+        p {
+            margin: 0;
+        }
+
+        &.acc_rec span {
+            color: red;
+        }
+
+        &.acc_pay span {
+            color: blue;
+        }
+    }
+}
