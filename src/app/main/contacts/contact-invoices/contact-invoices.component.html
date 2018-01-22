@@ -1,4 +1,42 @@
 <div class="card">
-  <div class="card-header">Invoices</div>
-  <div class="card-block"></div>
+  <div class="card-header">
+    <div class="row flex-items-lg-between flex-items-md-between page-header">
+      <div class="col-lg-4 col-md-4">
+          {{ type === 'acc_rec' ? 'Invoice' : 'Bills' }}
+      </div>
+      <div class="col-lg-4 col-md-4 total {{ type }}">
+        <p>{{ type === 'acc_rec' ? 'They owe' : 'We owe' }}: <span class="currency-ngn">
+          {{ total | number:"1.2-2" }}
+        </span></p>
+      </div>
+    </div>
+  </div>
+  <div class="card-block" style="padding: 0;">
+    <clr-datagrid class="datagrid-nomargin" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+      <clr-dg-placeholder>Yay! you don't any outstanding {{ type === 'acc_rec' ? 'invoices' : 'bills' }}!</clr-dg-placeholder>
+      
+      <clr-dg-column [clrDgField]="'status'">Status</clr-dg-column>
+      <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
+      <clr-dg-column [clrDgField]="'reference'">Reference</clr-dg-column>
+      <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
+      <clr-dg-column [clrDgField]="'total'">Total</clr-dg-column>
+
+      <clr-dg-row *ngFor="let invoice of invoices">
+        <clr-dg-cell>{{ invoice.status | uppercaseFirstChar }}</clr-dg-cell>
+        <clr-dg-cell>
+          <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>      
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.reference }}</a>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          {{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}
+        </clr-dg-cell>
+        <clr-dg-cell>
+          {{ invoice.total | number:"1.2-2" }}
+        </clr-dg-cell>
+      </clr-dg-row>
+
+    </clr-datagrid>
+  </div>
 </div>

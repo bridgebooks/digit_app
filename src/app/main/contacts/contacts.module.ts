@@ -17,6 +17,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactGroupSelectComponent } from './contact-group-select/contact-group-select.component';
 import { ContactInvoicesComponent } from './contact-invoices/contact-invoices.component';
 import { ContactBillsComponent } from './contact-bills/contact-bills.component';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ContactBillsComponent } from './contact-bills/contact-bills.component';
     FormsModule,
     ClarityModule.forRoot(),
     SharedModule,    
+    MomentModule,
     ContactsRoutingModule
   ],
   declarations: [
