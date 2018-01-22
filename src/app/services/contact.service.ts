@@ -30,7 +30,7 @@ export class ContactService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/groups/${id}/bulk`;
     
-    return this.http.post(url, { contacts }, { headers })
+    return this.http.post<any>(url, { contacts }, { headers })
   }
 
   get(id: string, options: object) {
@@ -43,6 +43,21 @@ export class ContactService {
     const url = `${this.baseUrl}/${id}`;
 
     return this.http.get<ContactResponse>(url, { headers, params })
+  }
+
+  invoices(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    const url = `${this.baseUrl}/${id}/invoices`;
+
+    return this.http.get<any>(url, { headers, params });
   }
 
   people(id: string) {

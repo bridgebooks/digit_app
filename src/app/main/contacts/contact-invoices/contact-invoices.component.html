@@ -1,4 +1,29 @@
 <div class="card">
-  <div class="card-header">Invoices</div>
-  <div class="card-block"></div>
+  <div class="card-header">{{ type == 'acc_rec' ? 'Invoices' : 'Bills' }}</div>
+  <div class="card-block" style="padding: 0;">
+    <clr-datagrid class="datagrid-nomargin" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+      <clr-dg-placeholder>Seems like you don't have any contacts!</clr-dg-placeholder>
+      
+      <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
+      <clr-dg-column [clrDgField]="'reference'">Reference</clr-dg-column>
+      <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
+      <clr-dg-column [clrDgField]="'total'">Total</clr-dg-column>
+
+      <clr-dg-row *ngFor="let invoice of invoices">
+        <clr-dg-cell>
+          <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.invoice_no }}</a>      
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <a [routerLink]="['/invoices/view', invoice.id]">{{ invoice.reference }}</a>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          {{ invoice.raised_at | amDateFormat:'D MMM YYYY' }}
+        </clr-dg-cell>
+        <clr-dg-cell>
+          {{ invoice.total | number:"1.2-2" }}
+        </clr-dg-cell>
+      </clr-dg-row>
+
+    </clr-datagrid>
+  </div>
 </div>

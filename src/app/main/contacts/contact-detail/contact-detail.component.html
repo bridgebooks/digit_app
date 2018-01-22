@@ -124,8 +124,8 @@
     </div>
 
     <div class="col-md-8">
-      <app-contact-invoices></app-contact-invoices>
-      <app-contact-bills></app-contact-bills>
+      <app-contact-invoices [contact]="contact.id" [type]="'acc_rec'"></app-contact-invoices>
+      <app-contact-invoices [contact]="contact.id" [type]="'acc_pay'"></app-contact-invoices>
     </div>
   </div>
 </section>
