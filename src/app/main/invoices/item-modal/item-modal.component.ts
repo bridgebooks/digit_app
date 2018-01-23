@@ -1,17 +1,19 @@
-import { Component, OnInit, OnChanges, ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { ViewChild, Component, OnInit, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AlertService, SessionService, ItemService } from '../../../services';
 import { ObjectUtils } from '../../../shared';
 import { Item } from '../../../models/data/item';
+import { Modal } from '@clr/angular';
 
 @Component({
-  selector: 'app-item-modal-btn',
-  templateUrl: './item-modal-btn.component.html',
-  styleUrls: ['./item-modal-btn.component.scss']
+  selector: 'item-modal',
+  templateUrl: './item-modal.component.html',
+  styleUrls: ['./item-modal.component.scss']
 })
-export class ItemModalBtnComponent implements OnInit, OnChanges {
+export class ItemModalComponent implements OnInit, OnChanges {
 
   @ViewChild('itemForm') form;
+  @ViewChild('modal') modal: Modal;
   @Input('item') item: Item;  
   @Output() onItemCreated = new EventEmitter();
   @Output() onItemSaved = new EventEmitter<Item>();
@@ -19,7 +21,6 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
   org: any;
   mode: string;
   processing: boolean = false;
-  btnText: string = 'Add Item';
 
   modalVisible: boolean = false;
   modalTitle: string = 'New Item';
@@ -63,8 +64,9 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
         .subscribe(response => {
           this.onItemCreated.emit(true)
           this.processing = false;
-          this.modalVisible = false;
+          this.modal.close();
           this.form.resetForm();
+          this.alerts.success('Item', 'Item successfully created', { timeOut: 5000 });
         }, 
         err => {
           this.processing = false;
@@ -90,7 +92,6 @@ export class ItemModalBtnComponent implements OnInit, OnChanges {
     this.org = this.session.getDefaultOrg();
     this.mode = this.item ? 'edit' : 'create';
     this.modalTitle = this.mode === 'create' ? 'Add Item' : 'Edit Item';
-    this.btnText = this.mode === 'create' ? 'Add Item' : 'Edit';
     this.model = this.mode === 'create' ? this.modelDefaults : this.item;
     this.model.org_id = this.model.org_id || this.org.id;    
   }

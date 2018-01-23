@@ -4,12 +4,14 @@
         <h2>Inventory</h2>
     </div>
     <div class="col-lg-4">
-        <app-item-modal-btn (onItemCreated)="refresh({})"></app-item-modal-btn>
+      <a class="btn btn-primary" (click)="itemModal.modal.open()">New Item</a>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12 col-md-12">
+      <item-modal #itemModal (onItemCreated)="refresh({})"></item-modal>
+
       <clr-datagrid (clrDgRefresh)="refresh($event)" [(clrDgLoading)]="loading" [clrDgSelected]="selected">
         <clr-dg-placeholder>Seems like you don't have any items!</clr-dg-placeholder>
         
@@ -22,7 +24,7 @@
         <clr-dg-row *ngFor="let item of items" [clrDgItem]="item">
           <clr-dg-cell>{{ item.code }}</clr-dg-cell>            
           <clr-dg-cell>
-            <a [routerLink]="['/sales/items', item.id]">{{ item.name }}</a>         
+            <a [routerLink]="['/invoices/items', item.id]">{{ item.name }}</a>         
           </clr-dg-cell>
           <clr-dg-cell>{{ item.sale_unit_price | number:'1.2' }}</clr-dg-cell>
           <clr-dg-cell>{{ item.purchase_unit_price | number:'1.2' }}</clr-dg-cell>
