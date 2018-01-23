@@ -8,9 +8,13 @@
         <span class="spinner">Loading...</span>
     </div>
     
-    <ul class="list-unstyled item-list">
+    <ul class="list-unstyled item-list" *ngIf="!fetching">
         <li class="item" *ngFor="let item of items" [ngClass]="{'selected': isSelected(item.id) }" (click)="selectItem(item)">
             {{ item.code }}: {{ item.name }}
         </li>
     </ul>
+
+    <button class="btn btn-block btn-sm btn-link" (click)="showItemModal()">Add Item</button>
 </div>
+
+<template #modalcontainer></template>
