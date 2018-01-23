@@ -14,11 +14,6 @@ export module InvoiceValidator {
             field: 'invoice_no',
             required: true,
             message: 'Please enter an invoice no for this invoice'
-        },
-        {
-            field: 'reference',
-            required: true,
-            message: 'Please enter a reference for this invoice'
         }
     ]
     export function validate(input: Object) {

@@ -1,6 +1,4 @@
-<a class="btn btn-primary" (click)="modalVisible = true">{{ btnText }}</a>
-
-<clr-modal [(clrModalOpen)]="modalVisible" [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+<clr-modal #modal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
   <h3 class="modal-title">{{ modalTitle }}</h3>
   <div class="modal-body">
     <form #itemForm="ngForm">

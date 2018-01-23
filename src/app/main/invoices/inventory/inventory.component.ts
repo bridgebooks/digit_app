@@ -1,6 +1,7 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { ViewChild, Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
+import { ItemModalComponent } from '../item-modal/item-modal.component';
 
 @Component({
   selector: 'app-inventory',
@@ -9,6 +10,7 @@ import { Item } from '../../../models/data/item';
 })
 export class InventoryComponent implements OnInit {
 
+  @ViewChild('itemModal') itemModal: ItemModalComponent;
   loading: boolean;
   org: any;
   perPage: number = 30;

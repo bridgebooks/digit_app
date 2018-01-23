@@ -5,6 +5,7 @@ import 'rxjs/add/operator/mergeMap';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { EventbusService, AlertService } from './services/index';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,17 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent implements OnInit {
 
   toastOptions: any = {
-      position: ["top","right"],
+      position: [ "top","right" ],
       preventDuplicates: true,
       lastOnBottom: false
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private titleService: Title) {
+  constructor(
+    private router: Router, 
+    private alert: AlertService,
+    private eventBus: EventbusService,
+    private activatedRoute: ActivatedRoute, 
+    private titleService: Title) {
   }
 
   setPageTitle() {
@@ -41,5 +47,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.setPageTitle();
+
+    this.eventBus.subscribe('billing:error', payload => {
+      const toast = this.alert.error('Billing', payload.message, {
+        timeOut: 10000,
+        pauseOnHover: true,
+        preventDuplicates: true
+      })
+
+      toast.click.subscribe(event => {
+        this.router.navigate(['/billing/subscription']);
+      })
+    })
   }
 }

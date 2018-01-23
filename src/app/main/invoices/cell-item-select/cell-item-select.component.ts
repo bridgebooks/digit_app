@@ -1,6 +1,21 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { 
+  ViewChild,
+  Component,
+  ViewContainerRef, 
+  ComponentRef,
+  ComponentFactoryResolver, 
+  ComponentFactory,  
+  Input, 
+  Output, 
+  EventEmitter, 
+  SimpleChanges, 
+  OnInit, 
+  OnChanges, 
+  OnDestroy 
+} from '@angular/core';
 import { SessionService, OrgService, InvoiceService } from '../../../services';
 import { Subject } from 'rxjs';
+import { ItemModalComponent } from '../item-modal/item-modal.component';
 
 @Component({
   selector: 'cell-item-select',
@@ -8,11 +23,12 @@ import { Subject } from 'rxjs';
   styleUrls: ['./cell-item-select.component.scss']
 })
 export class CellItemSelectComponent implements OnInit, OnChanges {
+
   @Input('selected') selected: any;
-
   @Input('row') row: any;
-
   @Output() itemSelected = new EventEmitter<any>();
+  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
+  itemModalComponentRef: ComponentRef<ItemModalComponent>;
 
   org: any;
   items: any[] = [];
@@ -20,7 +36,23 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
   fetching: boolean = false;
   fetching$: Subject<any> = new Subject();
 
-  constructor(private session: SessionService, private orgService: OrgService, private invoices: InvoiceService) { }
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private session: SessionService, 
+    private orgService: OrgService, 
+    private invoices: InvoiceService) { }
+
+  showItemModal() {
+    this.modalContainer.clear();
+    const factory: ComponentFactory<ItemModalComponent> = this.resolver.resolveComponentFactory(ItemModalComponent);
+    this.itemModalComponentRef = this.modalContainer.createComponent(factory);
+
+    this.itemModalComponentRef.instance.onItemCreated.subscribe($event => {
+      this.refresh();
+    })
+
+    this.itemModalComponentRef.instance.modal.open();  
+  }
 
   isSelected(id) {
     return this.selected === id;

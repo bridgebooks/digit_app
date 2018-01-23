@@ -13,6 +13,9 @@ import '@clr/icons/shapes/commerce-shapes';
 import '@clr/icons/shapes/technology-shapes';
 import { Modal } from '@clr/angular';
 import { Subject } from 'rxjs/Subject';
+import { PubSubService } from 'angular2-pubsub';
+import { WindowService, GlobalEventbusEvent } from '../services/window.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-main',
@@ -35,14 +38,16 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
     logoutProcessing: boolean = false;
     checking: boolean = false;
     loginModalOpen: boolean = false;
-    aclAlertShow: boolean = false;
 
+    aclAlertShow: boolean = false;
+    
     aclErrorSub: Subscription;
 
     constructor(
         private idleMonitor: Idle,
         public router: Router, 
         public activatedRoute: ActivatedRoute,
+        private windowRef: WindowService,
         private eventbus: EventbusService,
         private jwtService: JwtService, 
         private session: SessionService, 

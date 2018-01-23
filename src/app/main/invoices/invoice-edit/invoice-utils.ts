@@ -99,7 +99,7 @@ export module InvoiceUtils {
         }
 
         setInvoiceReference(value: string): Builder {
-            this.model.reference = value;
+            value ? this.model.reference = value : delete this.model.reference;
             return this;
         }
 

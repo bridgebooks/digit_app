@@ -25,7 +25,7 @@ import {
 import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { ItemModalBtnComponent } from './item-modal-btn/item-modal-btn.component';
+import { ItemModalComponent } from './item-modal/item-modal.component';
 import { InventoryDetailComponent } from './inventory-detail/inventory-detail.component';
 import { CellItemSelectComponent } from './cell-item-select/cell-item-select.component';
 import { CellItemDescriptionComponent } from './cell-item-description/cell-item-description.component';
@@ -47,6 +47,9 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     MyDatePickerModule,
     SalesRoutingModule
   ],
+  entryComponents: [
+    ItemModalComponent
+  ],
   declarations: [
     InvoicesComponent, 
     InvoiceEditorComponent, 
@@ -56,7 +59,7 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     LineAmountTypeSelectComponent, 
     InvoiceItemTableComponent, 
     InventoryComponent, 
-    ItemModalBtnComponent, 
+    ItemModalComponent, 
     InventoryDetailComponent, 
     CellItemSelectComponent, 
     CellItemDescriptionComponent, 

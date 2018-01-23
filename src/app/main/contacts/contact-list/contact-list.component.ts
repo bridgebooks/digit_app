@@ -4,7 +4,7 @@ import { Contact } from '../../../models/data/contact';
 import { State } from '@clr/angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
 import { Subscription, Subject } from 'rxjs';
-
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-contact-list',

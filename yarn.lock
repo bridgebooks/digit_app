@@ -427,9 +427,9 @@ angular2-notifications@^0.9.5:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/angular2-notifications/-/angular2-notifications-0.9.6.tgz#ccc42b093ec322860b67bf08b66d202d829756d2"
 
-angular2-pubsub@next:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/angular2-pubsub/-/angular2-pubsub-4.0.0.tgz#ea04bc717941e7691a3e12cdcc3d53a11fe10428"
+angular2-pubsub@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/angular2-pubsub/-/angular2-pubsub-4.0.3.tgz#4b1efc1c1737883eb8bf0c388400a74dde4d1576"
   dependencies:
     "@angular/common" "^4.0.0"
     "@angular/compiler" "^4.0.0"
