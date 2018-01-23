@@ -7,16 +7,17 @@
 <section class="inventory-detail" *ngIf="!loading">
   <div class="row flex-items-lg-between page-header">
     <div class="col-md-4">
-        <a routerLink="/sales/items"><clr-icon shape="caret" dir="left"></clr-icon> Inventory</a>
+        <a routerLink="/invoices/items"><clr-icon shape="caret" dir="left"></clr-icon> Inventory</a>
         <h2>{{ item.name }}</h2>
     </div>
     <div class="col-md-4"></div>
   </div>
 
   <div class="row">
+    <template #modalcontainer></template>
     <div class="card inventory-detail-card">
       <div class="card-header">
-        <a class="btn btn-primary">Edit Item</a>          
+        <a class="btn btn-primary" (click)="addItemModalComponent()">Edit Item</a>          
         <button class="btn btn-danger" type="button">Delete</button>
       </div>
       <div class="card-block">

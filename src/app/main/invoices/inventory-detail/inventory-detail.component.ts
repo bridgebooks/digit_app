@@ -1,4 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { 
+  ViewChild,
+  Component,
+  ViewContainerRef, 
+  ComponentRef,
+  ComponentFactoryResolver, 
+  ComponentFactory, 
+  OnInit, 
+  OnDestroy 
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlertService, ItemService } from '../../../services';
@@ -6,6 +15,7 @@ import { Item } from '../../../models/data/item';
 
 import '@clr/icons';
 import '@clr/icons/shapes/core-shapes';
+import { ItemModalComponent } from '../item-modal/item-modal.component';
 
 @Component({
   selector: 'app-inventory-detail',
@@ -14,6 +24,8 @@ import '@clr/icons/shapes/core-shapes';
 })
 export class InventoryDetailComponent implements OnInit {
 
+  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
+  itemModalComponentRef: ComponentRef<ItemModalComponent>;
   route$: Subscription;
   item: Item;
   loading: boolean = false;
@@ -21,12 +33,22 @@ export class InventoryDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private resolver: ComponentFactoryResolver,
     private alert: AlertService,
     private itemService: ItemService
   ) { }
 
-  itemUpdated($event: Item) {
-    this.item = $event;
+  addItemModalComponent() {
+    this.modalContainer.clear();
+    const factory: ComponentFactory<ItemModalComponent> = this.resolver.resolveComponentFactory(ItemModalComponent);
+    this.itemModalComponentRef = this.modalContainer.createComponent(factory);
+    this.itemModalComponentRef.instance.item = this.item;
+
+    this.itemModalComponentRef.instance.onItemSaved.subscribe($event => {
+      this.item = $event;
+    })
+
+    this.itemModalComponentRef.instance.modal.open();
   }
 
   fetchItem(id: string) {

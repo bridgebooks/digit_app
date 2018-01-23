@@ -79,7 +79,7 @@ export class ItemModalComponent implements OnInit, OnChanges {
           this.onItemSaved.emit(response.data)          
           this.item = response.data;
           this.processing = false;
-          this.modalVisible = false;
+          this.modal.close();
           this.alerts.success('Item', 'Item successfully updated', { timeOut: 5000 });
         },
         err => {

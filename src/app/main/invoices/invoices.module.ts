@@ -47,6 +47,9 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     MyDatePickerModule,
     SalesRoutingModule
   ],
+  entryComponents: [
+    ItemModalComponent
+  ],
   declarations: [
     InvoicesComponent, 
     InvoiceEditorComponent, 
