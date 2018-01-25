@@ -20,11 +20,11 @@
       <div *ngIf="!loading">
           <div>
             <div class="row flex-items-lg-between page-header">
-                <div class="col-lg-4">
-                    <h3 style="margin: 0;">{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h3>                        
+                <div class="col-lg-4 col-md-5">
+                    <h5 style="margin: 0;">{{ viewDate | calendarDate:(view + 'ViewTitle'):locale }}</h5>                        
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-7">
                     <div class="btn-group btn-primary">
                         <button class="btn" mwlCalendarPreviousView
                         (viewDateChange)="viewDateChanged($event)"

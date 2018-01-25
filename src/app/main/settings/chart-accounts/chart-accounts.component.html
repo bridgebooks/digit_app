@@ -34,6 +34,7 @@
         <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
         <clr-dg-column [clrDgField]="'account_types|name'">Type</clr-dg-column>
         <clr-dg-column>Tax Rate</clr-dg-column>
+        <clr-dg-column [clrDgField]="'ytd_balance'">YTD</clr-dg-column>
 
         <clr-dg-row *ngFor="let account of accounts" [clrDgItem]="account">
           <clr-dg-cell>{{ account.code }}</clr-dg-cell>
@@ -43,6 +44,9 @@
           <clr-dg-cell>{{ account.type.data.name }}</clr-dg-cell>
           <clr-dg-cell *ngIf="account.tax_rate">{{ account.tax_rate.data.name }} ({{ account.tax_rate.data.value }}%)</clr-dg-cell>
           <clr-dg-cell *ngIf="!account.tax_rate">-</clr-dg-cell>
+          <clr-dg-cell>
+            <a [routerLink]="['/ledger/account/', account.id]">{{ account.ytd_balance | number:"1.2-2" }}</a>
+          </clr-dg-cell>
         </clr-dg-row>
 
         <clr-dg-footer>

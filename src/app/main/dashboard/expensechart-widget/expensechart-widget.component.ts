@@ -1,5 +1,6 @@
 import { ViewChild, Component, OnInit } from '@angular/core';
-import { PieChartComponent } from '@swimlane/ngx-charts';
+import * as DataSource from './sample';
+import { FusionChartsComponent } from 'angular4-fusioncharts/dist/src/fusioncharts/fusioncharts.component';
 
 @Component({
   selector: 'app-expensechart-widget',
@@ -7,27 +8,16 @@ import { PieChartComponent } from '@swimlane/ngx-charts';
   styleUrls: ['./expensechart-widget.component.scss']
 })
 export class ExpensechartWidgetComponent implements OnInit {
-  @ViewChild('chart') chart: PieChartComponent;
-  data: any[] = [
-    {
-      "name": "Advertising",
-      "value": 2000
-    },
-    {
-      "name": "Internet Bills",
-      "value": 3500
-    },
-    {
-      "name": "Rent",
-      "value": 7000
-    }
-  ]
   
-  view: any[];
-  
+  @ViewChild('chartel') chartEl: FusionChartsComponent
+  chart: any = {
+    type: 'doughnut2d',
+    dataFormat: 'json',
+    dataSource: JSON.stringify(DataSource.source)
+  }
+    
   constructor() { }
 
   ngOnInit() {
-    console.log(this.chart);
   }
 }
