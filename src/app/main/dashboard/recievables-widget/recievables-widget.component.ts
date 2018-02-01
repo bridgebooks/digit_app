@@ -20,7 +20,7 @@ export class RecievablesWidgetComponent implements OnInit, AfterContentInit {
   constructor() { }
 
   ngOnInit() {
-    let width = this.chartEl.chartContainer.nativeElement.clientWidth;
+    const width = this.chartEl.chartContainer.nativeElement.clientWidth;
     this.chartEl.width = width - (0.25 * width);
   }
 
