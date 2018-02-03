@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/observable';
 import { SearchResponse } from '../models/responses/search';
+
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class SearchService {
@@ -19,9 +23,9 @@ export class SearchService {
   }
 
   searchEntries(term: string, options: object) {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams().set('search', term);
-    
+
     Object.keys(options).forEach(key => {
       params = params.append(key, options[key]);
     })
