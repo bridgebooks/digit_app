@@ -1,10 +1,26 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import {
+  ViewChild,
+  Component,
+  ViewContainerRef,
+  ComponentRef,
+  ComponentFactoryResolver,
+  ComponentFactory,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnInit,
+  OnChanges,
+  OnDestroy
+} from '@angular/core';
 import { SessionService, SearchService, OrgService } from '../../../services';
 import { Contact } from '../../../models/data/contact';
+import { Modal } from '@clr/angular';
+import { ContactModalComponent } from '../contact-modal/contact-modal.component';
+import { Subject } from 'rxjs/Subject';
 
 enum BtnStatus {
-  DEFAULT = <any>'Select contact'
+  DEFAULT = <any>'Select Contact'
 }
 
 @Component({
@@ -13,9 +29,14 @@ enum BtnStatus {
   styleUrls: ['./contact-select.component.scss']
 })
 
-export class ContactSelectComponent implements OnInit {
+export class ContactSelectComponent implements OnInit, OnDestroy {
+
+  @ViewChild('modal') modal: Modal;
+  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
+  contactModalComponentRef: ComponentRef<ContactModalComponent>;
+
   btnText;
-  selectModalVisible: boolean = false;
+  searchTerm$: Subject<string> = new Subject();
   results: any[] = [];
   fetching: boolean;
   org: any;
@@ -24,26 +45,44 @@ export class ContactSelectComponent implements OnInit {
   @Output() onContactSelected = new EventEmitter();
 
   constructor(
-    private session: SessionService, 
-    private searchService: SearchService, 
+    private resolver: ComponentFactoryResolver,
+    private session: SessionService,
+    private searchService: SearchService,
     private orgService: OrgService) { }
+
+  showContactModal() {
+    this.modalContainer.clear();
+    const factory: ComponentFactory<ContactModalComponent> = this.resolver.resolveComponentFactory(ContactModalComponent);
+    this.contactModalComponentRef = this.modalContainer.createComponent(factory);
+
+    this.modal.close();
+    this.contactModalComponentRef.instance.model.org_id = this.org.id;
+    this.contactModalComponentRef.instance.model.type = 'customer';
+    this.contactModalComponentRef.instance.modal.open();
+
+    this.contactModalComponentRef.instance.modal.
+      _openChanged.subscribe(open => {
+        if (!open) {
+          this.modal.open();
+        }
+      });
+  }
 
   selectContact(contact) {
     this.onContactSelected.emit(contact);
     this.btnText = contact.name;
-    this.selectModalVisible = false;
-  }
-
-  openSelectModal() {
-    this.selectModalVisible = true;
-    this.fetchContacts();
+    this.modal.close();
   }
 
   fetchContacts() {
     this.fetching = true;
 
     this.orgService
-      .getContacts(this.org.id, {})
+      .getContacts(this.org.id, {
+        orderBy: 'created_at',
+        sortedBy: 'desc',
+        perPage: 5
+      })
       .subscribe(response => {
         this.results = response.data
         this.fetching = false;
@@ -54,6 +93,22 @@ export class ContactSelectComponent implements OnInit {
 
   ngOnInit() {
     this.btnText = (this.selected && this.selected.data) ? this.selected.data.name : BtnStatus.DEFAULT;
-    this.org = this.session.getDefaultOrg();    
+    this.org = this.session.getDefaultOrg();
+
+    this.modal._openChanged.subscribe(open => {
+      if (open) {
+        this.fetchContacts();
+      }
+    })
+
+    this.searchService
+      .search(this.searchTerm$, { index: 'contacts', org_id: this.org.id })
+      .subscribe(result => {
+        this.results = result.data;
+      });
+  }
+
+  ngOnDestroy() {
+    this.contactModalComponentRef.destroy();
   }
 }
