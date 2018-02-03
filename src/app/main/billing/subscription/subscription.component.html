@@ -21,7 +21,7 @@
         </span>
     </div>
 
-    <div class="card" *ngIf="!loading && subscription">
+    <div class="card" *ngIf="!loading && subscription !== null">
       <div class="card-block">
         <p>Plan:</p>
         <h3 *ngIf="subscription && subscription.plan">{{ subscription.plan.data.display_name }} 
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="card" *ngIf="!loading && !subscription">
+    <div class="card" *ngIf="!loading && subscription === null">
       <div class="card-block">
         <p>Plan:</p>
         <h3>No Subscription / Trial</h3>
