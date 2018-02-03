@@ -17,9 +17,10 @@ export class SubscriptionComponent implements OnInit, AfterContentInit {
   @ViewChild('cancelModal') cancelModal: Modal;
   loading: boolean = true;
   processing: boolean = false;
-  subscription: UserSubscription;
+  subscription: UserSubscription = null;
+  subscriptionNotFound: boolean = true;
   cancel$: Subject<any> = new Subject();
-
+  
   constructor(
     private alert: AlertService,
     private userService: UserService
@@ -70,8 +71,15 @@ export class SubscriptionComponent implements OnInit, AfterContentInit {
       .subscribe(response => {
         this.loading = false;
         this.subscription = response.data;
+        this.subscriptionNotFound = false;
       }, err => {
         this.loading = false;
+        if (err.status === 404) {
+          this.subscriptionNotFound = true;
+          this.subscription = null;
+        }
+      }, () => {
+        console.log(this.subscription);
       })
   }
 
@@ -81,7 +89,9 @@ export class SubscriptionComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.cancelModal._openChanged.subscribe(open => {
-      if (!open) this.cancel$.next();
+      if (!open) { 
+        this.cancel$.next();
+      }
     });
   }
 }

@@ -21,17 +21,18 @@
         </span>
     </div>
 
-    <div class="card" *ngIf="!loading">
+    <div class="card" *ngIf="!loading && subscription">
       <div class="card-block">
         <p>Plan:</p>
-        <h3>{{ subscription.plan.data.display_name }} 
+        <h3 *ngIf="subscription && subscription.plan">{{ subscription.plan.data.display_name }} 
           <span *ngIf="subscription.is_active && subscription.is_trial" class="label label-warning">Trial Mode</span>
           <span *ngIf="subscription.is_active && !subscription.is_trial && !subscription.is_canceled"
            class="label label-info">Active</span>
           <span *ngIf="!subscription.is_active" class="label label-danger">Inactive</span>
           <span *ngIf="subscription.is_canceled" class="label label-danger">Canceled</span>
         </h3>
-        <p class="currency-ngn">{{ subscription.plan.data.amount | number:"1.2-2" }} / mo</p>
+        <p class="currency-ngn" *ngIf="subscription && subscription.plan">
+          {{ subscription.plan.data.amount | number:"1.2-2" }} / mo</p>
 
         <div *ngIf="subscription.is_trial">
           <p>Trials ends:</p>
@@ -55,9 +56,21 @@
           [clrLoading]="processing" [disabled]="processing" (click)="planPicker.modal.open()">
             Renew Subscription</button>
         </div>
+        <plan-picker #planPicker [current]="subscription.plan" (selected)="planSelected($event)"></plan-picker>
       </div>
+    </div>
 
-      <plan-picker #planPicker [current]="subscription.plan" (selected)="planSelected($event)"></plan-picker>
+    <div class="card" *ngIf="!loading && !subscription">
+      <div class="card-block">
+        <p>Plan:</p>
+        <h3>No Subscription / Trial</h3>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-lg btn-default" [clrLoading]="processing" [disabled]="processing" (click)="planPicker.modal.open()">
+          Select a plan
+        </button>
+      </div>
+      <plan-picker #planPicker (selected)="planSelected($event)"></plan-picker>
     </div>
   </div>
 </section>
