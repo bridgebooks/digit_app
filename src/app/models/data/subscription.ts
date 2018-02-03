@@ -1,4 +1,8 @@
-import { SubscriptionPlan } from "./subscription-plan";
+import { SubscriptionPlan } from './subscription-plan';
+
+interface SubscriptionPlanData {
+    data: SubscriptionPlan
+}
 
 export interface UserSubscription {
     id: string;
@@ -17,5 +21,5 @@ export interface UserSubscription {
     canceled_at: number | null;
     created_at: number;
     updated_at: number;
-    plan?: SubscriptionPlan;
+    plan?: SubscriptionPlanData;
 }

@@ -109,6 +109,8 @@ export class ContactSelectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.contactModalComponentRef.destroy();
+    if (this.contactModalComponentRef) {
+      this.contactModalComponentRef.destroy();
+    }
   }
 }

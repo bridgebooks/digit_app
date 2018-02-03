@@ -13,7 +13,7 @@
   </div>
   <div class="card-block" style="padding: 0;">
     <clr-datagrid class="datagrid-nomargin" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
-      <clr-dg-placeholder>Yay! you don't any outstanding {{ type === 'acc_rec' ? 'invoices' : 'bills' }}!</clr-dg-placeholder>
+      <clr-dg-placeholder>Awesome! you don't have any outstanding {{ type === 'acc_rec' ? 'invoices' : 'bills' }}!</clr-dg-placeholder>
       
       <clr-dg-column [clrDgField]="'status'">Status</clr-dg-column>
       <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
