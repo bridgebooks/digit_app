@@ -7,11 +7,11 @@
         <div class="form-section">
           <label for="">Accounts</label>
           <div class="form-group">
-            <label for="">Wage Account</label>
+            <label for="">Wages Payable</label>
             <account-select [org]="org" [selected]="settings.values.wages_account" 
             (onAccountSelected)="settings.values.wages_account = $event"></account-select>
             <input type="hidden" name="wages_account" [(ngModel)]="settings.values.wages_account" required>
-            <span class="help-text">Select an account for employee wages</span>
+            <span class="help-text">Select an account for unpaid employee wages</span>
           </div>
 
           <div class="form-group">
@@ -19,7 +19,7 @@
               <account-select [org]="org" [selected]="settings.values.employee_tax_account"
               (onAccountSelected)="settings.values.employee_tax_account = $event"></account-select>
               <input type="hidden" name="employee_tax_account" [(ngModel)]="settings.values.employee_tax_account" required>
-              <span class="help-text">Select an account for employee taxes</span>
+              <span class="help-text">Select an account for unpaid employee taxes</span>
             </div>
         </div>
         <hr>

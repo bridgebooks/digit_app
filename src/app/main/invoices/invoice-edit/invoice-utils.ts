@@ -3,11 +3,18 @@ import { isNumeric } from 'rxjs/util/isNumeric';
 
 export module InvoiceUtils {
 
+    export function generateInvoiceNo(max: number =  9999999, min = 1) {
+        const now = new Date();
+        const sequence = Math.floor((Math.random() * max) + min);
+        const no = 'INV-' + sequence;
+        return no;
+    }
+
     export class ItemBuilder {
         private model: any = {}
 
         constructor() {}
-        
+
         setItem(value: string) {
             this.model.item_id = value;
             return this;
@@ -52,14 +59,14 @@ export module InvoiceUtils {
             return this.model;
         }
     }
-    
+
     export class Builder {
         private model: any = {};
 
         constructor() {}
 
         private toDate(timestamp: number) {
-            let d = new Date(timestamp);
+            const d = new Date(timestamp);
             return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDay()}`
         }
 
@@ -93,7 +100,7 @@ export module InvoiceUtils {
             return this;
         }
 
-        setInvoiceNo(value: string): Builder {   
+        setInvoiceNo(value: string): Builder {
             this.model.invoice_no = value;
             return this;
         }
@@ -132,17 +139,17 @@ export module InvoiceUtils {
 
         setSubTotal(value: number): Builder {
            this.model.sub_total = value;
-           return this; 
+           return this;
         }
 
         setTaxTotal(value: number): Builder {
             this.model.tax_total = value;
-            return this; 
+            return this;
         }
 
         setTotal(value: number): Builder {
             this.model.total = value;
-            return this; 
+            return this;
         }
 
         setNotes(value: string): Builder {

@@ -1,20 +1,20 @@
-import { 
+import {
   ViewChild,
   Component,
-  ViewContainerRef, 
+  ViewContainerRef,
   ComponentRef,
-  ComponentFactoryResolver, 
-  ComponentFactory,  
-  Input, 
-  Output, 
-  EventEmitter, 
-  SimpleChanges, 
-  OnInit, 
-  OnChanges, 
-  OnDestroy 
+  ComponentFactoryResolver,
+  ComponentFactory,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnInit,
+  OnChanges,
+  OnDestroy
 } from '@angular/core';
 import { SessionService, OrgService, InvoiceService } from '../../../services';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { ItemModalComponent } from '../item-modal/item-modal.component';
 
 @Component({
@@ -32,14 +32,14 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
 
   org: any;
   items: any[] = [];
-  hideItemSelector: boolean = true;
-  fetching: boolean = false;
+  hideItemSelector = true;
+  fetching = false;
   fetching$: Subject<any> = new Subject();
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    private session: SessionService, 
-    private orgService: OrgService, 
+    private session: SessionService,
+    private orgService: OrgService,
     private invoices: InvoiceService) { }
 
   showItemModal() {
@@ -51,7 +51,7 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
       this.refresh();
     })
 
-    this.itemModalComponentRef.instance.modal.open();  
+    this.itemModalComponentRef.instance.modal.open();
   }
 
   isSelected(id) {
@@ -60,7 +60,7 @@ export class CellItemSelectComponent implements OnInit, OnChanges {
 
   showSelector() {
     this.hideItemSelector = false;
-    if (this.items.length < 1) this.refresh(); 
+    if (this.items.length < 1) this.refresh();
   }
 
   hideSelector() {

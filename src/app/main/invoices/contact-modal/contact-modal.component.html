@@ -1,0 +1,24 @@
+<clr-modal #modal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Create Contact</h3>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div class="form-block">
+        <div class="form-group">
+          <label for="name" class="required">Name</label>
+          <input type="text" name="name" id="name" placeholder="Contact / Company name" size="60"
+           #nameInput="ngModel" [(ngModel)]="model.name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="required">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email Address" size="60"
+          #emailInput="ngModel" [(ngModel)]="model.email" required>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" (click)="modal.close()">Cancel</button>
+    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || saving" [clrLoading]="saving">Save</button>
+  </div>
+</clr-modal>

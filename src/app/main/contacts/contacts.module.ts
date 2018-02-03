@@ -24,24 +24,24 @@ import { MomentModule } from 'angular2-moment';
     CommonModule,
     FormsModule,
     ClarityModule.forRoot(),
-    SharedModule,    
+    SharedModule,
     MomentModule,
     ContactsRoutingModule
   ],
   declarations: [
-    ContactsComponent, 
+    ContactsComponent,
     ContactFormComponent,
-    ContactListComponent, 
-    ContactDetailComponent, 
-    ContactBulkActionDropdownComponent, 
-    ContactSearchBoxComponent, 
-    ContactGroupSelectComponent, 
-    ContactInvoicesComponent, 
-    ContactBillsComponent
+    ContactListComponent,
+    ContactDetailComponent,
+    ContactBulkActionDropdownComponent,
+    ContactSearchBoxComponent,
+    ContactGroupSelectComponent,
+    ContactInvoicesComponent,
+    ContactBillsComponent,
   ],
   providers: [
     SessionService,
-    SearchService, 
+    SearchService,
     OrgService,
     ContactService
   ]

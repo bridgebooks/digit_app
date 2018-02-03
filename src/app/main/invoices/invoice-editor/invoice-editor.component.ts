@@ -49,7 +49,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
     org_id: null,
     contact_id: null,
     type: this.type,
-    invoice_no: null,
+    invoice_no: InvoiceUtils.generateInvoiceNo(99999, 6),
     reference: null,
     due_at: null,
     raised_at: null,
