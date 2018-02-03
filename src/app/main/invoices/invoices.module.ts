@@ -14,10 +14,10 @@ import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { ContactSelectComponent } from './contact-select/contact-select.component';
 
-import { 
-  AlertService, 
-  SearchService, 
-  ContactService, 
+import {
+  AlertService,
+  SearchService,
+  ContactService,
   OrgService,
   ItemService,
   InvoiceService
@@ -36,6 +36,7 @@ import { InvoiceEmailButtonComponent } from './invoice-email-button/invoice-emai
 import { InvoiceStatusButtonComponent } from './invoice-status-button/invoice-status-button.component';
 import { InvoicePrintButtonComponent } from './invoice-print-button/invoice-print-button.component';
 import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-button.component';
+import { ContactModalComponent } from './contact-modal/contact-modal.component';
 
 @NgModule({
   imports: [
@@ -48,23 +49,30 @@ import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-b
     SalesRoutingModule
   ],
   entryComponents: [
-    ItemModalComponent
+    ItemModalComponent,
+    ContactModalComponent
   ],
   declarations: [
-    InvoicesComponent, 
-    InvoiceEditorComponent, 
-    InvoiceEditComponent, 
-    InvoiceListComponent, 
-    ContactSelectComponent, 
-    LineAmountTypeSelectComponent, 
-    InvoiceItemTableComponent, 
-    InventoryComponent, 
-    ItemModalComponent, 
-    InventoryDetailComponent, 
-    CellItemSelectComponent, 
-    CellItemDescriptionComponent, 
-    CellAccountSelectComponent, 
-    CellTaxrateSelectComponent, InvoiceDetailComponent, InvoiceEmailButtonComponent, InvoiceStatusButtonComponent, InvoicePrintButtonComponent, InvoiceEditButtonComponent
+    InvoicesComponent,
+    InvoiceEditorComponent,
+    InvoiceEditComponent,
+    InvoiceListComponent,
+    ContactSelectComponent,
+    LineAmountTypeSelectComponent,
+    InvoiceItemTableComponent,
+    InventoryComponent,
+    ItemModalComponent,
+    InventoryDetailComponent,
+    CellItemSelectComponent,
+    CellItemDescriptionComponent,
+    CellAccountSelectComponent,
+    CellTaxrateSelectComponent,
+    InvoiceDetailComponent,
+    InvoiceEmailButtonComponent,
+    InvoiceStatusButtonComponent,
+    InvoicePrintButtonComponent,
+    InvoiceEditButtonComponent,
+    ContactModalComponent
   ],
   providers: [
     AlertService,
