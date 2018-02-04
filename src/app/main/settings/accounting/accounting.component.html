@@ -1,0 +1,57 @@
+<section>
+  <a routerLink="/settings"><clr-icon shape="caret" dir="left"></clr-icon> General Settings</a>
+  <h2>Accounting</h2>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <form novalidate #form="ngForm" autocomplete="off" (submit)="save()">
+          <div class="card-block">
+              <div class="progress progress-fade top loop" *ngIf="loading"><progress></progress></div>
+              <div class="card-text" *ngIf="!loading">
+                <p>Manage which accounts to use for invoices, and tax.</p>
+                <section class="form-block">
+                    <div class="form-group">
+                      <label for="">Accounts Recievable</label>
+                      <account-select [org]="org" [selected]="model.values.accounts_recievable" 
+                      (onAccountSelected)="model.values.accounts_recievable = $event"></account-select>
+                      <input type="hidden" name="accounts_recievable" [(ngModel)]="model.values.accounts_recievable" required>
+                      <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+                        <clr-icon shape="info-circle" size="24"></clr-icon>
+                        <span class="tooltip-content">Select an account for unpaid sales invoices</span>
+                      </a>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Accounts Payable</label>
+                      <account-select [org]="org" [selected]="model.values.accounts_payable" 
+                      (onAccountSelected)="model.values.accounts_payable = $event"></account-select>
+                      <input type="hidden" name="accounts_payable" [(ngModel)]="model.values.accounts_payable" required>
+                      <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+                        <clr-icon shape="info-circle" size="24"></clr-icon>
+                        <span class="tooltip-content">Select an account for unpaid bills</span>
+                      </a>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Sales Tax</label>
+                      <account-select [org]="org" [selected]="model.values.sales_tax" 
+                      (onAccountSelected)="model.values.sales_tax = $event"></account-select>
+                      <input type="hidden" name="sales_tax" [(ngModel)]="model.values.sales_tax" required>
+                      <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+                        <clr-icon shape="info-circle" size="24"></clr-icon>
+                        <span class="tooltip-content">Select an account for unpaid sales tax</span>
+                      </a>
+                    </div>
+                </section>                        
+              </div>
+          </div>
+          <div class="card-footer">
+              <div class="progress progress-fade loop" *ngIf="processing"><progress></progress></div>              
+              <button class="btn btn-primary" [clrLoading]="processing" [disabled]="form.invalid || processing || loading">Save</button>          
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -12,13 +12,23 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { UsersComponent } from './users/users.component';
 import { UserinviteFormComponent } from './userinvite-form/userinvite-form.component';
 import { PayItemsComponent } from '../settings/pay-items/pay-items.component';
+import { AccountingComponent } from './accounting/accounting.component';
 
 const routes: Routes = [
     { path: '', component: SettingsComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'account', component: AccountComponent },
     { path: 'org', component: OrgProfileComponent },
-    { 
+    {
+      path: 'accounting',
+      component: AccountingComponent,
+      canActivate: [ACLGuard],
+      data: {
+        title: 'Accounting - Bridge Books',
+        acl: 'settings.accounts'
+      }
+    },
+    {
       path: 'accounts',
       component: ChartAccountsComponent,
       canActivate: [ACLGuard],
