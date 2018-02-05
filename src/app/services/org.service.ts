@@ -214,7 +214,6 @@ export class OrgService {
 
   getInvoiceSettings(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/settings/invoices`;
 
     return this.http.get<any>(url, { headers })
@@ -222,15 +221,20 @@ export class OrgService {
 
   getPayrunSettings(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/settings/payruns`;
 
     return this.http.get<PayrunSettings>(url, { headers })
   }
 
+  getAccountSettings(id: string) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/settings/accounts`;
+
+    return this.http.get<any>(url, { headers })
+  }
+
   getUsers(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/users`;
 
     return this.http.get<any>(url, { headers })
@@ -252,8 +256,14 @@ export class OrgService {
 
   updateInvoiceSettings(id: string, data: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/settings/invoices`;
+
+    return this.http.put<any>(url, data, { headers })
+  }
+
+  updateAccountSettings(id: string, data: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.baseUrl}/${id}/settings/accounts`;
 
     return this.http.put<any>(url, data, { headers })
   }

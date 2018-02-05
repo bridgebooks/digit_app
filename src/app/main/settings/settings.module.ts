@@ -45,6 +45,7 @@ import { UserinviteFormComponent } from './userinvite-form/userinvite-form.compo
 import { UserrolePickerComponent } from './userrole-picker/userrole-picker.component';
 import { PayItemsComponent } from './pay-items/pay-items.component';
 import { PayitemFormModalComponent } from './payitem-form-modal/payitem-form-modal.component';
+import { AccountingComponent } from './accounting/accounting.component';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { PayitemFormModalComponent } from './payitem-form-modal/payitem-form-mod
     UserinviteFormComponent,
     UserrolePickerComponent,
     PayItemsComponent,
-    PayitemFormModalComponent
+    PayitemFormModalComponent,
+    AccountingComponent
   ],
   providers: [ 
     AlertService, 
