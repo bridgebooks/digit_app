@@ -33,18 +33,38 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupBtnDisabled: Boolean = false;
 
   processing: Boolean = false;
+  showError: Boolean = false;
+  errorMessages: any[];
+  errorMessage: any;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router, 
-    private userService: UserService, 
+    private router: Router,
+    private userService: UserService,
     private signupService: SignupService) { }
+
+  private generateErrorMessage(response): any {
+    let message;
+
+    if (response.status !== 422) {
+      message = response.error.message;
+    }
+
+    if (response.status === 422) {
+      message = response.error.errrors;
+    }
+
+    return message;
+  }
 
   onSubmit() {
     this.signupBtnStatus = SignupBtnStatus.PROCESSING;
     this.signupBtnDisabled = true;
     this.processing = true;
-    if(this.plan) this.model.plan = this.plan;
+    this.showError = false;
+
+    // tslint:disable-next-line:curly
+    if (this.plan) this.model.plan = this.plan;
 
     this.userService
       .create(this.model)
@@ -60,8 +80,11 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.signupBtnStatus = SignupBtnStatus.DEFAULT;
         this.signupBtnDisabled = false;
         this.processing = false;
+        this.showError = true;
 
-        console.log(err);
+        Array.isArray(this.generateErrorMessage(err)) ?
+          this.errorMessages = this.generateErrorMessage(err) :
+          this.errorMessage = this.generateErrorMessage(err);
       })
   }
 
