@@ -36,11 +36,8 @@
                 <span class="input__errors_error" *ngIf="phoneInput.hasError('phone')">Please enter a valid phone number</span>
             </div>
 
-            <div class="error active" *ngIf="showError && errorMessage">
+            <div class="error active" *ngIf="showError">
                 {{ errorMessage }}
-            </div>
-            <div class="error active" *ngIf="showError && errorMessages">
-                <span style="display:block; color: #FFF" *ngFor="let msg of errorMessages">{{ msg }}</span>
             </div>
  
             <button type="submit" class="btn btn-primary" [clrLoading]="processing" [disabled]="signupForm.form.invalid || signupBtnDisabled">{{signupBtnStatus}}</button>

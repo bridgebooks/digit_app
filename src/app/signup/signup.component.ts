@@ -82,9 +82,13 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.processing = false;
         this.showError = true;
 
-        Array.isArray(this.generateErrorMessage(err)) ?
-          this.errorMessages = this.generateErrorMessage(err) :
-          this.errorMessage = this.generateErrorMessage(err);
+        if (err.status === 422) {
+          // tslint:disable-next-line:max-line-length
+          this.errorMessage = `A Bridgebooks account may be associated with this email/phone.
+          If you have forgotten your password, please use the password reset link below`;
+        } else {
+          this.errorMessage = err.error.message;
+        }
       })
   }
 
