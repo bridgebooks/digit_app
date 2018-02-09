@@ -15,7 +15,7 @@ export interface Payitem {
     account_id?: string;
     account?: PayitemAccount,
     default_amount?: number;
-    mark_default?: boolean;
+    default?: boolean;
     is_archived?: boolean;
     deleted_at?: number;
     is_new?: boolean;

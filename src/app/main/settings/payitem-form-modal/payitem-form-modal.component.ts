@@ -26,7 +26,7 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
   model: Payitem = {
     name: null,
     pay_item_type: 'wages',
-    mark_default: true
+    default: true
   }
 
   payitemTypes: any = [
