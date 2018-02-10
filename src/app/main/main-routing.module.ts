@@ -73,8 +73,16 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
                 data: {
                     title: 'General Settings - Bridgebooks',
-                    showSideNav: true,
-                    sidenavMenu: 'settings'
+                    showSideNav: true
+                }
+            },
+            {
+                path: 'ledger',
+                loadChildren: './ledger/ledger.module#LedgerModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Ledger - Bridgebooks',
+                    showSideNav: true
                 }
             }
         ]
