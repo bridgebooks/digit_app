@@ -39,7 +39,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
     this.loading = loading;
 
-    this.invoices.get(id, { ref: 'invoices', include: 'org,contact,items' })
+    this.invoices.get(id, { ref: 'invoices', include: 'org,contact,items', skipCache: true })
       .subscribe(response => {
         this.loading = false;
         this.invoice = response.data;

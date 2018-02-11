@@ -1,7 +1,7 @@
 import { 
   Component, 
   ViewChild,
-  Input, 
+  Input,
   Output, 
   EventEmitter, 
   OnInit
@@ -33,14 +33,14 @@ export class PaymentWizardComponent implements OnInit {
 
   paymentResponse: InvoicePayment;
   paymentErrorMessage: string;
-  paymentError: boolean = false;
+  paymentError = false;
   showWizard: boolean = false;
-  disableActionBtn: boolean = true;
-  nextBtnText: string = 'Next';
-  currentStep: string = 'summary';
-  nextStep: string = 'contact';
+  disableActionBtn = true;
+  nextBtnText = 'Next';
+  currentStep = 'summary';
+  nextStep = 'contact';
   previousStep: string;
-  processing: boolean = false;
+  processing = false;
 
   model: any = {}
 
@@ -55,7 +55,7 @@ export class PaymentWizardComponent implements OnInit {
   }
 
   resetWizard(done: boolean) {
-    this.showWizard = false;    
+    this.showWizard = false;
     this.model = {};
     this.currentStep = 'summary';
     this.nextStep = 'contact';
@@ -110,20 +110,20 @@ export class PaymentWizardComponent implements OnInit {
 
   gotoSuccessPane() {
     this.currentStep = this.nextStep;
-    this.nextBtnText = "Done";
+    this.nextBtnText = 'Done';
   }
 
   initPayment() {
     this.model = _.merge(this.model, this.cardForm.transformModel());
     this.processing = true;
     this.disableActionBtn = true;
-          
+
     this.invoices.initPayment(this.invoice.id, this.model)
       .subscribe(response => {
         this.processing = false;
         this.disableActionBtn = false;
         this.paymentResponse = response;
-        
+
         if ([ '02', '0', '00' ].indexOf(response.transfer.flutterChargeResponseCode) !== -1) {
           this.paymentError = false;
           if ([ '0', '00' ].indexOf(response.transfer.flutterChargeResponseCode) !== -1) {
@@ -163,7 +163,7 @@ export class PaymentWizardComponent implements OnInit {
         this.paymentError = false
 
         if ([ '0', '00', 'RR-00' ].indexOf(response.flutterChargeResponseCode) !== -1) {
-          this.gotoSuccessPane(); 
+          this.gotoSuccessPane();
         } else {
           this.paymentError = true
           this.paymentErrorMessage = MoneywaveResponse.get(response.flutterChargeResponseCode);
@@ -190,7 +190,7 @@ export class PaymentWizardComponent implements OnInit {
   }
 
   onOtpFormValid($event: boolean) {
-    this.disableActionBtn = this.currentStep === 'otp' && $event ? false: true;
+    this.disableActionBtn = this.currentStep === 'otp' && $event ? false : true;
   }
 
   ngOnInit() {
