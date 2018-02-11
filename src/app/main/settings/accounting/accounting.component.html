@@ -43,6 +43,17 @@
                         <span class="tooltip-content">Select an account for unpaid sales tax</span>
                       </a>
                     </div>
+
+                    <div class="form-group">
+                        <label for="">Wages</label>
+                        <account-select [org]="org" [selected]="model.values.wages" 
+                        (onAccountSelected)="model.values.wages = $event"></account-select>
+                        <input type="hidden" name="wages" [(ngModel)]="model.values.wages" required>
+                        <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+                          <clr-icon shape="info-circle" size="24"></clr-icon>
+                          <span class="tooltip-content">Select an account for wages and salaries</span>
+                        </a>
+                      </div>
                 </section>                        
               </div>
           </div>

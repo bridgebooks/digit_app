@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AccountResponse } from '../models/responses/account';
+import { AccountTransactionsResponse } from '../models/responses/account-transactions';
 
 @Injectable()
 export class AccountsService {
@@ -30,9 +31,23 @@ export class AccountsService {
     return this.http.get<AccountResponse>(url, { headers, params })
   }
 
+  getTransactions(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    const url = `${this.baseUrl}/${id}/transactions`;
+
+    return this.http.get<AccountTransactionsResponse>(url, { headers, params })
+  }
+
   types() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-  
     const url = `${this.baseUrl}/account_types`;
 
     return this.http.get<any>(url, { headers })
