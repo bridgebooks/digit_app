@@ -70,6 +70,9 @@
             <a *ngIf="transaction.source_type == 'Invoice'" [routerLink]="['/invoices/view', transaction.source_id]">
               Invoice #{{ transaction.source.data.invoice_no }}
             </a>
+            <a *ngIf="transaction.source_type == 'InvoicePayment'" [routerLink]="['/payments/view', transaction.source_id]">
+              Payment: Invoice #{{ transaction.source.data.invoice.data.invoice_no }}
+            </a>
           </clr-dg-cell>
           <clr-dg-cell>{{ transaction.debit | number:"1.2-2" }}</clr-dg-cell>
           <clr-dg-cell>{{ transaction.credit | number:"1.2-2" }}</clr-dg-cell>
