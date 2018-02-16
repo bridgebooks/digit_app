@@ -84,6 +84,14 @@ const routes: Routes = [
                     title: 'Ledger - Bridgebooks',
                     showSideNav: true
                 }
+            },
+            {
+                path: 'payments',
+                loadChildren: './payments/payments.module#PaymentsModule',
+                canActivate: [AuthGuard],
+                data: {
+                    title: 'Payments - Bridgebooks'
+                }
             }
         ]
     }

@@ -1,0 +1,28 @@
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pull-left {
+    float: left;
+}
+
+.total-block
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 0px;
+    text-align: right;
+    border-top: 2px solid #cccccc;
+    border-bottom: 2px solid #cccccc;
+
+    .block-label {
+        width: 40%;
+        padding: 0px 15px;
+    }
+
+    .block-value {
+        width: 60%;
+    }
+}

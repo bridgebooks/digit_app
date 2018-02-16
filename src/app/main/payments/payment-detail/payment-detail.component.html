@@ -1,0 +1,74 @@
+<div class="spinner-container" *ngIf="loading">
+  <span class="spinner">
+      Loading...
+    </span>
+</div>
+
+<section class="invoice-payment-viewer" *ngIf="!loading">
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-4">
+        <a routerLink="/invoices/sales">
+          <clr-icon shape="caret" dir="left"></clr-icon> Back
+        </a>
+           
+        <h2>Invoice Payment</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-lg-3">
+            <p class="bold">Payment Date</p>
+            <span>{{ payment.paid_at | amDateFormat:'D MMM YYYY' }}</span>
+          </div>
+          <div class="col-lg-3">
+              <p class="bold">Reference</p>
+              <span>{{ payment.reference }}</span>
+            </div>
+        </div>
+        <hr>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>Paid By</th>
+              <th>Invoice Number</th>
+              <th>Due Date</th>
+              <th>Payment NGN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ payment.invoice.data.contact.data.name }}</td>
+              <td>{{ payment.full_name }}</td>
+              <td>
+                <a [routerLink]="['/invoices/view', payment.invoice_id]">{{ payment.invoice.data.invoice_no }}</a>
+              </td>
+              <td>{{ payment.invoice.data.due_at | amDateFormat:'D MMM YYYY' }}</td>
+              <td>{{ payment.amount | number:"1.2-2" }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row flex-items-lg-between flex-items-md-between">
+          <div class="col-lg-4 col-md-4"></div>
+          <div class="col-lg-4 col-md-4">
+            <div class="total-block clearfix">
+              <div class="pull-left block-label">
+                <h3>Total</h3>
+              </div>
+              <div class="pull-left block-value">
+                  <h3>
+                    <span class="currency-ngn"></span>{{ payment.amount | number:"1.2-2" }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
