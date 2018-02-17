@@ -39,6 +39,9 @@ export class AccountComponent implements OnInit, OnDestroy {
       include: 'source'
     }
 
+    options['orderBy'] = state.sort.by;
+    options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
+
     this.accounts
       .getTransactions(this.id, options)
       .subscribe(response => {
