@@ -43,8 +43,8 @@
                 </clr-dg-cell>
                 <clr-dg-cell>{{ item.pay_item_type | uppercaseFirstChar }}</clr-dg-cell>
                 <clr-dg-cell>
-                    <clr-icon shape="check-circle" class="is-success" size="24" *ngIf="item.mark_default"></clr-icon>
-                    <clr-icon shape="check-circle" class="is-danger" size="24" *ngIf="!item.mark_default"></clr-icon>                    
+                    <clr-icon shape="check-circle" class="is-success" size="24" *ngIf="item.default"></clr-icon>
+                    <clr-icon shape="check-circle" class="is-danger" size="24" *ngIf="!item.default"></clr-icon>                    
                 </clr-dg-cell>
                 <clr-dg-cell>
                     <a (click)="archiveItem(item.id)" *ngIf="!item.is_archived">Archive</a>

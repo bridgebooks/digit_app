@@ -26,7 +26,7 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
   model: Payitem = {
     name: null,
     pay_item_type: 'wages',
-    mark_default: true
+    default: true
   }
 
   payitemTypes: any = [
@@ -60,7 +60,7 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
   }
 
   updateItem() {
-    let model = ObjectUtils.getDirtyValues(this.form)
+    const model = ObjectUtils.getDirtyValues(this.form)
 
     this.payItems.update(this.model.id, model)
       .takeUntil(this.cancel$)
@@ -76,7 +76,7 @@ export class PayitemFormModalComponent implements OnInit, OnDestroy {
   }
 
   createItem() {
-    this.model.mark_default = !!this.model.mark_default ? this.model.mark_default : false;
+    this.model.default = !!this.model.default ? this.model.default : false;
     this.payItems.create(this.model, { include: 'item' })
       .takeUntil(this.cancel$)
       .subscribe(response => {

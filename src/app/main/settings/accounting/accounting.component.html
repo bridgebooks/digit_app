@@ -13,9 +13,9 @@
                 <section class="form-block">
                     <div class="form-group">
                       <label for="">Accounts Recievable</label>
-                      <account-select [org]="org" [selected]="model.values.accounts_recievable" 
-                      (onAccountSelected)="model.values.accounts_recievable = $event"></account-select>
-                      <input type="hidden" name="accounts_recievable" [(ngModel)]="model.values.accounts_recievable" required>
+                      <account-select [org]="org" [selected]="model.values.accounts_receivable" 
+                      (onAccountSelected)="model.values.accounts_receivable = $event"></account-select>
+                      <input type="hidden" name="accounts_recievable" [(ngModel)]="model.values.accounts_receivable" required>
                       <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
                         <clr-icon shape="info-circle" size="24"></clr-icon>
                         <span class="tooltip-content">Select an account for unpaid sales invoices</span>
@@ -42,6 +42,37 @@
                         <clr-icon shape="info-circle" size="24"></clr-icon>
                         <span class="tooltip-content">Select an account for unpaid sales tax</span>
                       </a>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Wages</label>
+                      <account-select [org]="org" [selected]="model.values.wages" 
+                      (onAccountSelected)="model.values.wages = $event"></account-select>
+                      <input type="hidden" name="wages" [(ngModel)]="model.values.wages" required>
+                      <a href="#" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+                        <clr-icon shape="info-circle" size="24"></clr-icon>
+                        <span class="tooltip-content">Select an account for wages and salaries</span>
+                      </a>
+                    </div>
+
+                    <hr>
+                    <p>Financial Year End</p>
+                    <div class="form-group">
+                      <label for="">Day of Month</label>
+                      <div class="select">
+                        <select name="financial_year_end_day" id="" [(ngModel)]="model.values.financial_year.day">
+                          <option [value]="day" *ngFor="let day of days">{{ day }}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="">Month</label>
+                      <div class="select">
+                        <select name="financial_year_end_month" id="" [(ngModel)]="model.values.financial_year.month">
+                          <option [value]="month.value" *ngFor="let month of months">{{ month.label }}</option>
+                        </select>
+                      </div>
                     </div>
                 </section>                        
               </div>

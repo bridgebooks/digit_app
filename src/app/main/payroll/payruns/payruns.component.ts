@@ -61,6 +61,7 @@ export class PayrunsComponent implements OnInit, OnDestroy{
     this.setupModalComponentRef.instance.setupComplete.subscribe(complete => {
       if (complete) {
         this.defer.next(false);
+        this.setupModalComponentRef.instance.modal.close();
       }
     })
   }
@@ -70,7 +71,7 @@ export class PayrunsComponent implements OnInit, OnDestroy{
       .getPayrunSettings(this.org.id)
       .subscribe(response => {
         this.settings = response.data;
-        let settings = response.data.values;
+        const settings = response.data.values;
         if (!settings.wages_account || !settings.employee_tax_account || !settings.basic_wage_item) {
           this.defer.next(true);
           this.addSetupModalComponent(this.settings);
@@ -84,14 +85,14 @@ export class PayrunsComponent implements OnInit, OnDestroy{
   submit() {
     this.processing = true;
     this.periodForm.model.org_id = this.org.id
-    let model = this.formateDates(this.periodForm.model);
+    const model = this.formateDates(this.periodForm.model);
 
     this.payruns.create(model)
       .takeUntil(this.cancel$)
       .subscribe(response => {
         this.processing = false;
         this.router.navigate(['/payroll/runs', response.data.id]);
-      }, 
+      },
       err => {
         this.processing = false;
       })
@@ -112,6 +113,6 @@ export class PayrunsComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.payrunModal._openChanged.unsubscribe();
-    if (this.setupModalComponentRef) this.setupModalComponentRef.destroy();
+    if (this.setupModalComponentRef) { this.setupModalComponentRef.destroy(); }
   }
 }

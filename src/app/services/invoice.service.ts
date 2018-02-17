@@ -51,6 +51,21 @@ export class InvoiceService {
     return this.http.get<any>(url, { headers, params })
   }
 
+  getPayment(id: string, options?: object) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams();
+
+    if (options) {
+      Object.keys(options).forEach(key => {
+        params = params.append(key, options[key]);
+      })
+    }
+
+    const url = `${this.baseUrl}/payments/${id}`;
+
+    return this.http.get<any>(url, { headers, params })
+  }
+
   download(id: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json')
     const url = `${this.baseUrl}/${id}/download`;

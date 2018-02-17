@@ -1,0 +1,89 @@
+<div class="spinner-container" *ngIf="fetching">
+  <span class="spinner">
+      Loading...
+    </span>
+</div>
+
+<section class="account-detail" *ngIf="!fetching">
+  <div class="row">
+  </div>
+
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-5">
+        <a routerLink="/settings/accounts">
+          <clr-icon shape="caret" dir="left"></clr-icon> Chart Of Accounts
+        </a>
+        <h3>Account: {{ account.name }}</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+        <p *ngIf="account.description">{{ account.description }}</p>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-block" style="padding: 0;">
+          <table class="table" style="margin-top: 0;">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Tax</th>
+                <th>YTD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ account.code }}</td>
+                <td>{{ account.type.data.name }}</td>
+                <td>{{ account.tax_rate ? account.tax_rate.name : 'N/A' }}</td>
+                <td>{{ account.ytd_balance | number:"1.2-2" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+        <clr-dg-placeholder>No transactions to display!</clr-dg-placeholder>
+
+        <clr-dg-column [clrDgField]="'created_at'">Date</clr-dg-column>
+        <clr-dg-column [clrDgField]="'source_type'">Transaction</clr-dg-column>
+        <clr-dg-column [clrDgField]="'debit'">Debit</clr-dg-column>
+        <clr-dg-column [clrDgField]="'credit'">Credit</clr-dg-column>
+
+        <clr-dg-row *ngFor="let transaction of transactions">
+          <clr-dg-cell>
+            {{ transaction.created_at | amDateFormat:'D MMM YYYY' }}
+          </clr-dg-cell>
+          <clr-dg-cell>
+            <a *ngIf="transaction.source_type == 'Payslip'" [routerLink]="['/payroll/payslips', transaction.source_id]">
+              Wage Payable Invoice: {{ transaction.source.data.employee.data.full_name }}
+            </a>
+            <a *ngIf="transaction.source_type == 'Invoice'" [routerLink]="['/invoices/view', transaction.source_id]">
+              Invoice #{{ transaction.source.data.invoice_no }}
+            </a>
+            <a *ngIf="transaction.source_type == 'InvoicePayment'" [routerLink]="['/payments/view', transaction.source_id]">
+              Payment: Invoice #{{ transaction.source.data.invoice.data.invoice_no }}
+            </a>
+          </clr-dg-cell>
+          <clr-dg-cell>{{ transaction.debit | number:"1.2-2" }}</clr-dg-cell>
+          <clr-dg-cell>{{ transaction.credit | number:"1.2-2" }}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{total}} Transactions
+            <clr-dg-pagination #pagination [(clrDgPage)]="currentPage" [clrDgPageSize]="perPage" [clrDgTotalItems]="total"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+</section>

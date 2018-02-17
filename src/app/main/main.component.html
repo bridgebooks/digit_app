@@ -84,10 +84,10 @@
             <h3 class="modal-title">Security Check</h3>
             <div class="modal-body">
                 <p>Please enter your password to confirm your identity</p>
-                <form #loginForm="ngForm" novalidate>
+                <form #loginForm="ngForm" novalidate (submit)="securityCheck()">
                     <input type="hidden" name="email" id="email" [(ngModel)]="security.email">
                     <input type="password" name="password" id="password" placeholder="Enter password" size="60" [(ngModel)]="security.password" required>
-                    <button type="button" class="btn btn-block btn-primary" [clrLoading]="checking" [disabled]="loginForm.invalid || checking" (click)="securityCheck()">Login</button>                    
+                    <button type="button" class="btn btn-block btn-primary" [clrLoading]="checking" [disabled]="loginForm.invalid || checking">Login</button>                    
                 </form>
             </div>
         </clr-modal>
