@@ -14,6 +14,7 @@ import { Org } from '../models/data/org';
 import { PayrunsResponse } from '../models/responses/payruns';
 import { PayitemsResponse } from '../models/responses/payitems';
 import { PayrunSettings } from '../models/responses/payrun-settings';
+import { AccountingSettings } from '../models/responses/account-settings';
 
 interface OrgCreateResponseData {
   org: any;
@@ -230,7 +231,7 @@ export class OrgService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}/settings/accounts`;
 
-    return this.http.get<any>(url, { headers })
+    return this.http.get<AccountingSettings>(url, { headers })
   }
 
   getUsers(id: string) {
