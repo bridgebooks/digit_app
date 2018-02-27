@@ -16,6 +16,14 @@ app-header {
     font-weight: bold;
 }
 
+.txt-center {
+    text-align: center;
+}
+
+.no-margin {
+    margin: 0;
+}
+
 .currency-ngn {
     &::before {
         content: "\0020A6";
