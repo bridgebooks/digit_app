@@ -1,3 +1,95 @@
-<p>
-  balance-sheet works!
-</p>
+<section class="report-page">
+  <div class="row">
+  </div>
+
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-5">
+        <a routerLink="/reports">
+          <clr-icon shape="caret" dir="left"></clr-icon> Reports
+        </a>
+        <h2>Balance Sheet</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-lg-3 col-md-3">
+            <p>Balance Date</p>
+            <div class="select balance-date-picker">
+              <select name="balance-date" id="" [(ngModel)]="balanceDate">
+                <option [value]="d.value" *ngFor="let d of balanceDates">{{ d.label }}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="button" [clrLoading]="loading"
+            (click)="getReport()" [disabled]="loading">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h2 class="txt-center">Balance Sheet</h2>
+      <h3 class="txt-center no-margin">{{ org.name }}</h3>
+      <p class="txt-center no-margin">As at {{ balanceDate }}</p>
+    </div>
+
+    <div class="spinner-container" *ngIf="loading">
+      <span class="spinner">
+          Loading...
+        </span>
+    </div>
+
+    <div class="col-lg-12 col-md-12" *ngIf="!loading">
+      <h3>Assets</h3>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let account of report.assets">
+            <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Total Assets</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets.total | number:"1.2-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Liabilites</h3>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let account of report.liabilities">
+            <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Total Liabilites</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.liabilities.total | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Net Assets</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets.total - report.liabilities.total | number:"1.2-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Equity</h3>
+      <table class="table">
+        <tbody>
+            <tr *ngFor="let account of report.equity">
+              <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+            </tr>
+            <tr class="total">
+              <td class="left" style="width: 50%;">Total Equity</td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.equity.total | number:"1.2-2" }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -19,6 +19,7 @@ import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
 import { AgedReceivablesComponent } from './aged-receivables/aged-receivables.component';
 import { AgedPayablesComponent } from './aged-payables/aged-payables.component';
 import { ProfitLossComponent } from './profit-loss/profit-loss.component';
+import { ReportService } from '../../services/report.service';
 
 @NgModule({
   imports: [
@@ -31,17 +32,18 @@ import { ProfitLossComponent } from './profit-loss/profit-loss.component';
     ReportsRoutingModule
   ],
   declarations: [
-    ReportsComponent, 
-    BalanceSheetComponent, 
-    AgedReceivablesComponent, 
-    AgedPayablesComponent, 
+    ReportsComponent,
+    BalanceSheetComponent,
+    AgedReceivablesComponent,
+    AgedPayablesComponent,
     ProfitLossComponent
   ],
   providers: [
     EventbusService,
     SessionService,
     AlertService,
-    OrgService 
+    OrgService,
+    ReportService
   ]
 })
 export class ReportsModule { }
