@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, BankAccountService } from '../../../services';
-import { State } from '@clr/angular/data/datagrid'
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { BankAccount } from '../../../models/data/bank-account';
 
 @Component({
@@ -22,8 +22,8 @@ export class BankAccountsComponent implements OnInit {
   deleteBtnDisabled: boolean = false;
   toDelete: BankAccount;
 
-  constructor(private alertService: AlertService, 
-    private session: SessionService, 
+  constructor(private alertService: AlertService,
+    private session: SessionService,
     private bankAccountService: BankAccountService,
     private cdRef: ChangeDetectorRef) { }
 
@@ -48,7 +48,7 @@ export class BankAccountsComponent implements OnInit {
       })
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'name',
       reverse: false
@@ -67,7 +67,7 @@ export class BankAccountsComponent implements OnInit {
       .subscribe(response => {
         this.accounts = response.data;
         this.total = response.total;
-        this.currentPage = response.current_page;        
+        this.currentPage = response.current_page;
       },
       err => {
       },

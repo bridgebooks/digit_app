@@ -12,7 +12,7 @@ import { OrgSetupComponent } from './org-setup.component';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     OrgSetupRoutingModule,
   ],
   declarations: [OrgSetupComponent],

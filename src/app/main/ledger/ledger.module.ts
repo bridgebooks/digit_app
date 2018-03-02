@@ -16,7 +16,7 @@ import { AccountsService } from '../../services';
     CommonModule,
     FormsModule,
     MomentModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     MyDatePickerModule,
     SharedModule,
     LedgerRoutingModule

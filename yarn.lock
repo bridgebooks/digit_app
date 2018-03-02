@@ -184,17 +184,19 @@
   dependencies:
     tslib "^1.7.1"
 
-"@clr/angular@^0.11.0-beta.1":
-  version "0.11.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@clr/angular/-/angular-0.11.0-beta.1.tgz#bc0a63e700d9352961f450950d40ad672e66a26a"
+"@clr/angular@^0.11.7-patch.1":
+  version "0.11.7-patch.1"
+  resolved "https://registry.yarnpkg.com/@clr/angular/-/angular-0.11.7-patch.1.tgz#e81d6ff0e2670e92cfb7ff70b29df2765d439613"
+  dependencies:
+    tslib "^1.7.1"
 
-"@clr/icons@^0.11.0-beta.1":
-  version "0.11.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@clr/icons/-/icons-0.11.0-beta.1.tgz#da21ec0f80ddf3ec01e696de9f5a38a55cece04f"
+"@clr/icons@^0.11.7":
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/@clr/icons/-/icons-0.11.7.tgz#b0fb45291c4c517bce1bccf44c8bcca6e444b580"
 
-"@clr/ui@^0.11.0-beta.1":
-  version "0.11.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@clr/ui/-/ui-0.11.0-beta.1.tgz#a9ee55219e68a0bab2e0d3aa4d54f20bcaaef52a"
+"@clr/ui@^0.11.7-patch.1":
+  version "0.11.7-patch.1"
+  resolved "https://registry.yarnpkg.com/@clr/ui/-/ui-0.11.7-patch.1.tgz#cba4bc557efe7c0f016536748a3284fa92b6651f"
 
 "@ng-idle/core@^2.0.0-beta.12":
   version "2.0.0-beta.13"

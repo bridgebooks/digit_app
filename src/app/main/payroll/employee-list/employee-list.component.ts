@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SessionService, AlertService, OrgService, EmployeeService } from '../../../services';
 import { Employee } from '../../../models/data/employee';
 import { Modal } from '@clr/angular';
-import { State } from '@clr/angular/data/datagrid';
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -147,7 +147,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'created_at',
       reverse: true

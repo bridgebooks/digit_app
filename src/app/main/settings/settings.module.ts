@@ -51,7 +51,7 @@ import { AccountingComponent } from './accounting/accounting.component';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     SharedModule,
     FileUploadModule,
     SettingsRoutingModule

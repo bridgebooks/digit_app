@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, TaxRateService } from '../../../services';
-import { State } from '@clr/angular/data/datagrid'
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { TaxRate } from '../../../models/data/tax-rate';
 
 import '@clr/icons';
@@ -29,9 +29,9 @@ export class TaxRatesComponent implements OnInit {
   toDelete: TaxRate[] | TaxRate | null;
 
   constructor(
-    private alertService: AlertService, 
-    private session: SessionService, 
-    private orgService: OrgService, 
+    private alertService: AlertService,
+    private session: SessionService,
+    private orgService: OrgService,
     private taxRateService: TaxRateService) { }
 
   onDeleteSelected($event) {
@@ -56,7 +56,7 @@ export class TaxRatesComponent implements OnInit {
 
     if (Array.isArray(this.toDelete)) {
       const ids = []
-      this.toDelete.forEach(contact => ids.push(contact.id)) 
+      this.toDelete.forEach(contact => ids.push(contact.id))
       this.taxRateService
         .deleteMany(ids)
         .subscribe(response => {
@@ -79,7 +79,7 @@ export class TaxRatesComponent implements OnInit {
     this.enableBulkOptions = selected.length > 0 ? true : false;
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     this.loading = true;
 
     state.sort = state.sort || {
@@ -90,7 +90,7 @@ export class TaxRatesComponent implements OnInit {
     const options = {
       page: this.currentPage,
       perPage: this.perPage,
-      include: 'components'      
+      include: 'components'
     }
 
     options['orderBy'] = state.sort.by;
@@ -102,7 +102,7 @@ export class TaxRatesComponent implements OnInit {
         this.rates = response.data;
         this.total = response.total;
         this.currentPage = response.current_page;
-        
+
         this.loading = false;
       },
       err => {

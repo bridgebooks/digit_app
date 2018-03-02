@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService, SessionService, OrgService } from '../../../services';
-import { State } from '@clr/angular/data/datagrid';
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -43,7 +43,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
     return type === 'bills' ? 'acc_pay' : 'acc_rec';
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'created_at',
       reverse: true

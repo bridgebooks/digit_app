@@ -15,7 +15,7 @@ import { InvoiceService } from '../../services';
     CommonModule,
     FormsModule,
     MomentModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     MyDatePickerModule,
     SharedModule,
     PaymentsRoutingModule

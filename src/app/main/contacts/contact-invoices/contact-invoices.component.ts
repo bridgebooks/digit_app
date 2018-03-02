@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ContactService } from '../../../services/index';
-import { State } from '@clr/angular/data/datagrid';
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 
 @Component({
   selector: 'app-contact-invoices',
@@ -19,11 +19,11 @@ export class ContactInvoicesComponent implements OnInit, OnDestroy {
     private contacts: ContactService
   ) { }
 
-  refresh(state: State) {
-    
+  refresh(state: ClrDatagridStateInterface) {
+
     this.contacts.invoices(this.contact, { type: this.type })
       .map(response => {
-        let totals = response.data.map(invoice => { return Number(invoice.total )});
+        const totals = response.data.map(invoice => { return Number(invoice.total )});
         this.total = totals.reduce((a, b) => {
           return a + b
         }, 0);

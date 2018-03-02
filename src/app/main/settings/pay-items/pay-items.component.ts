@@ -1,7 +1,7 @@
 import { ViewChild, ChangeDetectorRef, Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { SessionService, OrgService, AlertService, PayitemService } from '../../../services';
 import { ActivatedRoute } from '@angular/router';
-import { State } from '@clr/angular/data/datagrid'
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 
 import '@clr/icons';
 import '@clr/icons/shapes/essential-shapes';
@@ -57,12 +57,12 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
   archiveItem(id: string) {
     this.archiveModal.open();
     this.toDelete = id;
-  } 
+  }
 
   deleteItem(id: string) {
     this.deleteModal.open();
     this.toDelete = id;
-  } 
+  }
 
   restoreItem(id: string) {
     this.restoreModal.open();
@@ -87,7 +87,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   restore() {
     this.deleting = true;
-    
+
     this.payitemService.restore(this.toDelete)
       .takeUntil(this.cancel$)
       .subscribe(response => {
@@ -117,7 +117,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
   }
 
-  refresh(state: State) {    
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'name',
       reverse: false
@@ -127,7 +127,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
       page: this.currentPage,
       perPage: this.perPage,
       status: this.status,
-      include: 'account'      
+      include: 'account'
     }
 
     options['orderBy'] = state.sort.by;
@@ -140,7 +140,7 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.items = response.data;
         this.total = response.total;
         this.currentPage = response.current_page;
-        
+
         this.cdRef.detectChanges();
         this.loading = false;
       },
@@ -171,12 +171,12 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.payitemModal.edit(params.id);
         }
       });
-    
+
     this.route$$ = this.route.queryParams
       .filter(params => params.status)
       .subscribe(params => {
         this.status = params.status || 'active';
-        
+
         if (this.status) {
           this.loading = true;
           this.cancel$.next();
@@ -187,8 +187,8 @@ export class PayItemsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const modal$ = Observable.merge(
-      this.archiveModal._openChanged, 
-      this.deleteModal._openChanged, 
+      this.archiveModal._openChanged,
+      this.deleteModal._openChanged,
       this.restoreModal._openChanged);
 
     this.modal$ = modal$.subscribe(open => {

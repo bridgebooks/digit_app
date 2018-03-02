@@ -1,9 +1,10 @@
 import { Component, ChangeDetectorRef, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
 import { Contact } from '../../../models/data/contact';
-import { State } from '@clr/angular/data/datagrid'
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 @Component({
@@ -38,15 +39,15 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
   constructor(
     private route: ActivatedRoute,
     private alertService: AlertService,
-    private session: SessionService, 
-    private orgService: OrgService, 
+    private session: SessionService,
+    private orgService: OrgService,
     private contactService: ContactService,
-    private cdRef: ChangeDetectorRef) { 
+    private cdRef: ChangeDetectorRef) {
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     if (this.loading !== true) this.loading = true;
-    
+
     state.sort = state.sort || {
       by: 'name',
       reverse: false
@@ -116,7 +117,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
         this.contactGroupBtnDisabled = true;
         this.selectedContactGroup = '';
         this.selected = []
-        this.alertService.success('Group', 'Contact(s) successfully added to group', { timeOut: 5000 })        
+        this.alertService.success('Group', 'Contact(s) successfully added to group', { timeOut: 5000 })
 
         this.refresh({});
         this.cdRef.detectChanges();
@@ -133,7 +134,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
 
     if (Array.isArray(this.toDelete)) {
       const ids = []
-      this.toDelete.forEach(contact => ids.push(contact.id)) 
+      this.toDelete.forEach(contact => ids.push(contact.id))
       this.contactService
         .deleteMany(ids)
         .subscribe(response => {
@@ -172,7 +173,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
     }
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.org = this.session.getDefaultOrg()
 
     this.route$ = this.route.params

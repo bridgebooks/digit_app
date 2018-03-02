@@ -42,7 +42,7 @@ import { PayslipComponent } from './payslip/payslip.component';
     CommonModule,
     FormsModule,
     MomentModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     MyDatePickerModule,
     SharedModule,
     SettingsModule,

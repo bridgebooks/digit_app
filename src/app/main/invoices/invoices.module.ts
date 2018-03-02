@@ -42,7 +42,7 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     SharedModule,
     MomentModule,
     MyDatePickerModule,
