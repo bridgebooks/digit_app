@@ -4,9 +4,9 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { environment } from '../../environments/environment';
 import { MainNavigation } from './main.navigation';
 import { EventbusService, JwtService, AuthService, SessionService } from '../services';
-import { Subscription } from 'rxjs'
+import { Subscription } from 'rxjs/Subscription';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/core-shapes';
 import '@clr/icons/shapes/essential-shapes';
 import '@clr/icons/shapes/commerce-shapes';

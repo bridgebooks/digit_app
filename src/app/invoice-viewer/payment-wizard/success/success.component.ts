@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/commerce-shapes';
 
 @Component({
@@ -11,7 +11,7 @@ import '@clr/icons/shapes/commerce-shapes';
 export class SuccessComponent implements OnInit {
 
   @Input('invoice_no') invoice_no: string;
-  
+
   constructor() { }
 
   ngOnInit() {

@@ -14,7 +14,7 @@ import { LoginValidateComponent } from './validate/validate.component';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     LoginRoutingModule,
   ],
   providers: [ JwtService, SessionService, AuthService, UserService ],

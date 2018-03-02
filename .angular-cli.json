@@ -26,7 +26,7 @@
       ],
       "scripts": [
         "../node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-        "../node_modules/@clr/icons/clr-icons.min.js"
+        "../node_modules/@clr/icons/clr-icons-lite.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

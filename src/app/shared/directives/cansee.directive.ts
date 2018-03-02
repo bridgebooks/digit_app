@@ -1,12 +1,12 @@
 import { Directive, ElementRef, HostListener, Input, Renderer, OnInit } from '@angular/core';
 import { JwtService } from '../../services';
-import * as _ from 'lodash';
+import { intersection } from 'lodash';
 
 @Directive({
     selector: '[canSee]'
 })
 
-export class CanseeDirective implements OnInit{
+export class CanseeDirective implements OnInit {
 
     @Input('allowed') allowed: string;
     
@@ -31,7 +31,7 @@ export class CanseeDirective implements OnInit{
     private canSee(): boolean {
         const userRoles = this.getUserRolesACL();
         const allowedRoles = this.allowed.split(',');
-        const canSee = _.intersection(allowedRoles, userRoles).length > 0 ? true : false;
+        const canSee = intersection(allowedRoles, userRoles).length > 0 ? true : false;
 
         return canSee;
     }

@@ -24,7 +24,7 @@ import { SuccessComponent } from './payment-wizard/success/success.component';
     CommonModule,
     FormsModule,
     MomentModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     CreditCardDirectivesModule,
     SharedModule,
     InvoiceViewerRoutingModule

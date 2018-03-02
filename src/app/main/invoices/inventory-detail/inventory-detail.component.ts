@@ -1,19 +1,19 @@
-import { 
+import {
   ViewChild,
   Component,
-  ViewContainerRef, 
+  ViewContainerRef,
   ComponentRef,
-  ComponentFactoryResolver, 
-  ComponentFactory, 
-  OnInit, 
-  OnDestroy 
+  ComponentFactoryResolver,
+  ComponentFactory,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { AlertService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/core-shapes';
 import { ItemModalComponent } from '../item-modal/item-modal.component';
 
@@ -22,7 +22,7 @@ import { ItemModalComponent } from '../item-modal/item-modal.component';
   templateUrl: './inventory-detail.component.html',
   styleUrls: ['./inventory-detail.component.scss']
 })
-export class InventoryDetailComponent implements OnInit {
+export class InventoryDetailComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
   itemModalComponentRef: ComponentRef<ItemModalComponent>;

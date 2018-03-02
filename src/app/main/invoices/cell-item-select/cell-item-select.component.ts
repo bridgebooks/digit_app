@@ -16,13 +16,14 @@ import {
 import { SessionService, OrgService, InvoiceService } from '../../../services';
 import { Subject } from 'rxjs/Subject';
 import { ItemModalComponent } from '../item-modal/item-modal.component';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'cell-item-select',
   templateUrl: './cell-item-select.component.html',
   styleUrls: ['./cell-item-select.component.scss']
 })
-export class CellItemSelectComponent implements OnInit, OnChanges {
+export class CellItemSelectComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input('selected') selected: any;
   @Input('row') row: any;

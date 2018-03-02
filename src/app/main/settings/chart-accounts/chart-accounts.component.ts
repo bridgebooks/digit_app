@@ -1,10 +1,10 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { AlertService, SessionService, OrgService, AccountsService } from '../../../services';
-import { State } from '@clr/angular/data/datagrid'
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { Account } from '../../../models/data/account';
 import { TaxRate } from '../../../models/data/tax-rate';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/essential-shapes';
 
 @Component({
@@ -32,12 +32,12 @@ export class ChartAccountsComponent implements OnInit {
   deleteBtnDisabled: boolean = false;
   toDelete: Account[] | Account | null;
 
-  constructor(private alertService: AlertService, 
-    private session: SessionService, 
-    private orgService: OrgService, 
+  constructor(private alertService: AlertService,
+    private session: SessionService,
+    private orgService: OrgService,
     private accountService: AccountsService,
     private cdRef: ChangeDetectorRef) { }
-  
+
   onDeleteSelected($event) {
     this.delete(this.selected);
   }
@@ -60,7 +60,7 @@ export class ChartAccountsComponent implements OnInit {
 
     if (Array.isArray(this.toDelete)) {
       const ids = []
-      this.toDelete.forEach(contact => ids.push(contact.id)) 
+      this.toDelete.forEach(contact => ids.push(contact.id))
       this.accountService
         .deleteMany(ids)
         .subscribe(response => {
@@ -98,8 +98,8 @@ export class ChartAccountsComponent implements OnInit {
   onSelectedChange(selected: Account[]) {
     this.enableBulkOptions = selected.length > 0 ? true : false;
   }
-  
-  refresh(state: State) {
+
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'code',
       reverse: false
@@ -108,7 +108,7 @@ export class ChartAccountsComponent implements OnInit {
     const options = {
       page: this.currentPage,
       perPage: this.perPage,
-      include: 'type,tax_rate'      
+      include: 'type,tax_rate'
     }
 
     options['orderBy'] = state.sort.by;
@@ -119,7 +119,7 @@ export class ChartAccountsComponent implements OnInit {
       .subscribe(response => {
         this.accounts = response.data;
         this.total = response.total;
-        this.currentPage = response.current_page;        
+        this.currentPage = response.current_page;
       },
       err => {
       },

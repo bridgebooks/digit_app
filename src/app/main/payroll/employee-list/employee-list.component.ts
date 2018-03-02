@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { SessionService, AlertService, OrgService, EmployeeService } from '../../../services';
 import { Employee } from '../../../models/data/employee';
 import { Modal } from '@clr/angular';
-import { State } from '@clr/angular/data/datagrid';
-import { Subject, Subscription } from 'rxjs';
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/concat';
 import 'rxjs/add/operator/takeUntil';
@@ -23,7 +24,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   route$: Subscription;
   modals$: Subscription;
   cancel$: Subject<any> = new Subject();
-  
   loading: boolean = true;
   deleting: boolean = false;
   restoring: boolean = false;
@@ -42,10 +42,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private alerts: AlertService,
-    private session: SessionService, 
+    private session: SessionService,
     private orgService: OrgService,
     private employeeService: EmployeeService) { }
-  
+
   hideArchiveModal() {
     this.archiveModal.close();
   }
@@ -73,7 +73,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   terminateSelected() {
-    //this.terminate(this.selected)
+    // this.terminate(this.selected)
   }
 
   restoreSelected() {
@@ -82,9 +82,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
   archive() {
     this.deleting = true
-    
+
     const ids = []
-    this.selected.forEach(employee => ids.push(employee.id)) 
+    this.selected.forEach(employee => ids.push(employee.id))
 
     this.employeeService
       .archiveMany(ids)
@@ -103,9 +103,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
   delete() {
     this.deleting = true
-    
+
     const ids = []
-    this.selected.forEach(employee => ids.push(employee.id)) 
+    this.selected.forEach(employee => ids.push(employee.id))
 
     this.employeeService
       .deleteMany(ids)
@@ -126,7 +126,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     this.restoring = true;
 
     const ids = []
-    this.selected.forEach(employee => ids.push(employee.id)) 
+    this.selected.forEach(employee => ids.push(employee.id))
 
     this.employeeService
       .restoreMany(ids)
@@ -147,7 +147,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'created_at',
       reverse: true
@@ -173,7 +173,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         this.total = response.total;
         this.employees = response.data;
         this.currentPage = response.current_page;
-        
+
         this.cdRef.detectChanges()
       },
       err => {
@@ -194,7 +194,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     .filter(params => params.status)
     .subscribe(params => {
       this.status = params.status || 'all';
-      
+
       if (this.status) {
         this.loading = true;
         this.cancel$.next();
@@ -206,7 +206,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.cdRef.detach();
     this.route$.unsubscribe();
-    this.modals$.unsubscribe();    
+    this.modals$.unsubscribe();
     this.cancel$.complete();
   }
 }

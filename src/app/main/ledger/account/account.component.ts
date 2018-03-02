@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AccountsService } from '../../../services';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { State } from '@clr/angular';
+import { ClrDatagridStateInterface } from '@clr/angular';
 import { AccountTransaction } from '../../../models/data/transaction';
 import { Account } from '../../../models/data/account';
 
@@ -27,7 +27,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) { }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     state.sort = state.sort || {
       by: 'created_at',
       reverse: true

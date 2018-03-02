@@ -19,7 +19,7 @@ export class InventoryComponent implements OnInit {
   orderBy: string = 'created_at';
   sortedBy: string = 'desc';
   items: Item[];
-  selected: Item[] = [];  
+  selected: Item[] = [];
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -32,7 +32,7 @@ export class InventoryComponent implements OnInit {
   delete(item) {
     if (window.confirm('Are sure you want to delete this item?')) {
       this.alert.info('Item', 'Deleting item', { timeOut: 3000 })
-      
+
       this.itemService
         .delete(item.id)
         .subscribe(response => {
@@ -42,7 +42,7 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  refresh(state: any) {  
+  refresh(state: any) {
     this.loading = true;
     this.cdRef.detectChanges();
 

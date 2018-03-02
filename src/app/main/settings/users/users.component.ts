@@ -1,7 +1,8 @@
 import { ViewChild, Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService, OrgService } from '../../../services';
-import { State } from '@clr/angular/data/datagrid'
-import { Observable, Subject } from 'rxjs';
+import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Modal } from '@clr/angular';
 
 @Component({
@@ -26,7 +27,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(private session: SessionService, private orgService: OrgService) { }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     
     this.users$
       .takeUntil(this.cancel$)

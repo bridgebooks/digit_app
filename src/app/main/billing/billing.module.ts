@@ -20,7 +20,7 @@ import { PlanPickerComponent } from './plan-picker/plan-picker.component';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     SharedModule,
     MomentModule,
     BillingRoutingModule

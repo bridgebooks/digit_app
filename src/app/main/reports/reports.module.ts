@@ -26,7 +26,7 @@ import { ReportService } from '../../services/report.service';
     CommonModule,
     FormsModule,
     MomentModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     MyDatePickerModule,
     SharedModule,
     ReportsRoutingModule

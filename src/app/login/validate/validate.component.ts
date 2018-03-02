@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService, JwtService, SessionService } from '../../services';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/social-shapes';
 
 enum BtnStatus {

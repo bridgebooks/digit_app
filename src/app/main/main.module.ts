@@ -15,7 +15,7 @@ import { HeaderComponent } from './header/header.component';
         CommonModule,
         FormsModule,
         NgIdleModule.forRoot(),
-        ClarityModule.forRoot(),
+        ClarityModule,
         SharedModule.forRoot(),
         MainRoutingModule
     ],

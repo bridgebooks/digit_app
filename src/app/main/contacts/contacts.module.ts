@@ -23,7 +23,7 @@ import { MomentModule } from 'angular2-moment';
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     SharedModule,
     MomentModule,
     ContactsRoutingModule

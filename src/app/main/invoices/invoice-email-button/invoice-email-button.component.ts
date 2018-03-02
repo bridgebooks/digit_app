@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { AlertService, SessionService, InvoiceService } from '../../../services';
 import { DateFormatPipe } from 'angular2-moment'
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+
 import '@clr/icons/shapes/social-shapes';
 
 @Component({
@@ -12,7 +13,7 @@ import '@clr/icons/shapes/social-shapes';
 export class InvoiceEmailButtonComponent implements OnInit {
 
   @Input('invoice') invoice;
-  
+
   org: any;
 
   modalVisible: boolean = false;
@@ -92,15 +93,15 @@ export class InvoiceEmailButtonComponent implements OnInit {
   }
 
   constructor(
-    private alert: AlertService, 
-    private session: SessionService, 
-    private invoices: InvoiceService, 
+    private alert: AlertService,
+    private session: SessionService,
+    private invoices: InvoiceService,
     private dateFormatPipe: DateFormatPipe
   ) { }
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
-    this.show = this.invoice.status === 'voided' ? false : true;    
+    this.show = this.invoice.status === 'voided' ? false : true;
     this.model = {
       to: this.invoice.contact.data.email || null,
       subject: this.generateSubject(),

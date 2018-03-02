@@ -16,7 +16,7 @@ import { SignupSuccessComponent } from './signup-success/signup-success.componen
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule.forRoot(),
+    ClarityModule,
     SharedModule,
     SignupRoutingModule,
   ],

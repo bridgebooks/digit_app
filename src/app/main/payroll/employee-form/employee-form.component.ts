@@ -36,21 +36,21 @@ export class EmployeeFormComponent implements OnInit {
   startDate: IMyDate;
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router,
     private session: SessionService,
     private alerts: AlertService,
     private employeeService: EmployeeService) { }
-  
+
   toDateObject(dateString: string) {
-    let d: Date = new Date(dateString);
+    const d: Date = new Date(dateString);
     return {
       year: d.getFullYear(),
       month: d.getMonth() + 1,
       day: d.getDate()
     }
   }
-  
+
   getEmployee(id: string) {
     this.loading = true;
 
@@ -58,7 +58,7 @@ export class EmployeeFormComponent implements OnInit {
       .subscribe(response => {
         this.loading = false;
         this.model = response.data || response;
-        
+
         if (this.model.date_of_birth) this.dob = this.toDateObject(this.model.date_of_birth)
         if (this.model.start_date) this.startDate = this.toDateObject(this.model.start_date)
         console.log(this.model)
@@ -69,7 +69,7 @@ export class EmployeeFormComponent implements OnInit {
 
   onBankChange($event) {
     this.model.bank_id = $event;
-    (this.form.controls['bank_id'] as FormControl).markAsDirty()    
+    (this.form.controls['bank_id'] as FormControl).markAsDirty()
   }
 
   onDOBChanged($event) {
@@ -86,8 +86,8 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit() {
     this.saving = true;
-    let model = ObjectUtils.getDirtyValues(this.form);
-    
+    const model = ObjectUtils.getDirtyValues(this.form);
+
     if (this.editing) {
       this.employeeService
         .update(this.modelID, model)
