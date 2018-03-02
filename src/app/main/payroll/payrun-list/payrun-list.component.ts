@@ -1,11 +1,11 @@
-import { 
-  Component, 
-  Input, 
-  OnInit, 
-  OnChanges, 
-  OnDestroy, 
-  ChangeDetectorRef, 
-  SimpleChanges 
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  OnDestroy,
+  ChangeDetectorRef,
+  SimpleChanges
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrgService, PayrunService } from '../../../services';
@@ -68,7 +68,7 @@ export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
         this.total = response.total;
         this.runs = response.data;
         this.currentPage = response.current_page;
-        
+
         this.cdRef.detectChanges()
       },
       err => {
@@ -80,7 +80,7 @@ export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
     this.defer.subscribe(defer => {
       if (defer) {
         this.loading = false;
-        this.cancel$.next() 
+        this.cancel$.next()
       } else {
         this.loading = true;
         this.refresh({});
@@ -91,7 +91,7 @@ export class PayrunListComponent implements OnInit, OnChanges, OnDestroy {
       .filter(params => params.status)
       .subscribe(params => {
         this.status = params.status || 'all';
-        
+
         if (this.status) {
           this.loading = true;
           this.cancel$.next();
