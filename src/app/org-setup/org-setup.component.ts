@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { JwtService, SessionService,IndustryService, OrgService,  } from '../services';
 import { OrgSetupModel } from '../models/forms/org-setup';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/core-shapes';
 
 enum BtnStatus {

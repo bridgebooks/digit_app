@@ -1,9 +1,9 @@
-import { 
-  Component, 
+import {
+  Component,
   ViewChild,
   Input,
-  Output, 
-  EventEmitter, 
+  Output,
+  EventEmitter,
   OnInit
 } from '@angular/core';
 import { merge } from 'lodash';
@@ -65,7 +65,7 @@ export class PaymentWizardComponent implements OnInit {
   }
 
   goNext(step: string) {
-    switch(step) {
+    switch (step) {
       case 'summary':
       this.gotoContactForm()
       break;

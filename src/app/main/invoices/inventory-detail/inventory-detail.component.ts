@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AlertService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/core-shapes';
 import { ItemModalComponent } from '../item-modal/item-modal.component';
 

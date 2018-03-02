@@ -3,7 +3,7 @@ import { AlertService, SessionService, OrgService, TaxRateService } from '../../
 import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { TaxRate } from '../../../models/data/tax-rate';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/essential-shapes';
 
 @Component({

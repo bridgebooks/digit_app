@@ -4,7 +4,7 @@ import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { Account } from '../../../models/data/account';
 import { TaxRate } from '../../../models/data/tax-rate';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/essential-shapes';
 
 @Component({

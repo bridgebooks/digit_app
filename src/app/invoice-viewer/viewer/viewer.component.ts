@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { PaymentWizardComponent } from '../payment-wizard/payment-wizard.component';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { InvoiceService } from '../../services';
 
 @Component({

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/requests/user';
 import { SignupService } from '../services/signup.service';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/social-shapes';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { AlertService, ContactService } from '../../../services';
 
 import { Contact } from '../../../models/data/contact';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/social-shapes';
 import '@clr/icons/shapes/technology-shapes';
 import '@clr/icons/shapes/travel-shapes';

@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PayslipItem } from '../../../models/data/payslip-item';
 import { merge } from 'lodash';
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/core-shapes';
 import { PayrunSettingsData } from '../../../models/responses/payrun-settings';
 import { TaxUtils } from '../utils/tax';

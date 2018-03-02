@@ -3,7 +3,7 @@ import { SessionService, OrgService, AlertService, PayitemService } from '../../
 import { ActivatedRoute } from '@angular/router';
 import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 
-import '@clr/icons';
+
 import '@clr/icons/shapes/essential-shapes';
 import { Payitem } from '../../../models/data/payitem';
 import { Subject } from 'rxjs/Subject';
