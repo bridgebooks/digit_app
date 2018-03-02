@@ -1,8 +1,9 @@
 import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
 import { AlertService, SessionService, OrgService } from '../../../services';
 import { State } from '@clr/angular/data/datagrid';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/takeUntil';
@@ -13,11 +14,11 @@ import 'rxjs/add/observable/combineLatest';
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.scss']
 })
-export class InvoiceListComponent implements OnInit {
+export class InvoiceListComponent implements OnInit, OnDestroy {
 
   route$: Subscription;
   cancel$: Subject<any> = new Subject();
-  
+
   org: any;
   type: string;
   invoiceType: string;
@@ -52,7 +53,7 @@ export class InvoiceListComponent implements OnInit {
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
-      include: 'contact,user'      
+      include: 'contact,user'
     }
     if (this.status) options['status'] = this.status;
     options['orderBy'] = state.sort.by;
@@ -76,7 +77,7 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
 
-    let route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
+    const route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
     this.route$ = route$.subscribe(route => {
       this.status = route.qparams.status || 'all';
       this.type = this.setListType(route.params.type);
@@ -85,7 +86,7 @@ export class InvoiceListComponent implements OnInit {
       this.loading = true;
       this.cancel$.next();
       this.refresh({})
-      
+
     })
   }
 

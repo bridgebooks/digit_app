@@ -8,14 +8,14 @@ import { FusionChartsComponent } from 'angular4-fusioncharts/dist/src/fusionchar
   styleUrls: ['./expensechart-widget.component.scss']
 })
 export class ExpensechartWidgetComponent implements OnInit {
-  
+
   @ViewChild('chartel') chartEl: FusionChartsComponent
   chart: any = {
     type: 'doughnut2d',
     dataFormat: 'json',
     dataSource: JSON.stringify(DataSource.source)
   }
-    
+
   constructor() { }
 
   ngOnInit() {

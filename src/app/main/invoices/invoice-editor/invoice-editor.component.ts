@@ -1,13 +1,13 @@
-import { 
-  Component, 
-  Input, 
-  Output, 
-  EventEmitter, 
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
   SimpleChanges,
-  KeyValueDiffers,   
-  OnInit, 
-  OnChanges, 
-  AfterContentInit, 
+  KeyValueDiffers,
+  OnInit,
+  OnChanges,
+  AfterContentInit,
   OnDestroy,
   DoCheck
 } from '@angular/core';
@@ -32,7 +32,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
   differ: any;
-  
+
   showInvoiceSettingsAlert: boolean = false;
   showValidationErrors: boolean = false;
   validationErrors: any[] = [];
@@ -67,8 +67,8 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
 
   constructor(
     private differs: KeyValueDiffers,
-    private invoices: InvoiceService, 
-    private orgService: OrgService) { 
+    private invoices: InvoiceService,
+    private orgService: OrgService) {
       this.differ = differs.find({}).create();
   }
 
@@ -82,7 +82,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   onContactSelect($event) {
     this.model.contact_id = $event.id;
   }
-  
+
   onRaisedAtDateChanged($event: IMyDateModel) {
     this.model.raised_at = $event.formatted;
     this.raisedAtDate = $event.date;
@@ -130,7 +130,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
           case 'no_tax':
             total = 0;
             break;
-          
+
           default:
             total = total + (item.tax_rate.value / 100) * item.amount;
             break;
@@ -152,7 +152,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
       case 'no_tax':
         this.model.total = this.model.sub_total;
         break;
-      
+
       default:
         this.model.total = this.model.sub_total + this.model.tax_total;
         break;
@@ -161,7 +161,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
 
   addLineItems(count: number = 1) {
     for (let i = 0; i < count; i++) {
-      let item = {
+      const item = {
         row_order: i,
         item_id: null,
         description: null,
@@ -173,7 +173,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
         amount: null
       }
 
-      !this.editing ? this.model.items.push(item) : this.model.items.data.push(item);      
+      !this.editing ? this.model.items.push(item) : this.model.items.data.push(item);
     }
   }
 
@@ -185,8 +185,8 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   ngOnInit() {
     if (!this.editing) {
       this.model = this.modelDefaults;
-      let d: Date = new Date();
-      
+      const d: Date = new Date();
+
       this.raisedAtDate = {
         year: d.getFullYear(),
         month: d.getMonth() + 1,
@@ -198,8 +198,8 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
       this.modelDefaults.raised_at = `${this.raisedAtDate.year}-${this.raisedAtDate.month}-${this.raisedAtDate.day}`;
       this.addLineItems();
     } else {
-      let r: Date = new Date(this.model.raised_at);
-      let d: Date = new Date(this.model.due_at);
+      const r: Date = new Date(this.model.raised_at);
+      const d: Date = new Date(this.model.due_at);
 
       this.raisedAtDate = {
         year: r.getFullYear(),
@@ -237,7 +237,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   }
 
   private mapToObject(map: Map<any, any>) {
-    let obj = {};
+    const obj = {};
     map.forEach((v) => {
       obj[v.key] = v.currentValue
     })
@@ -246,11 +246,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
 
   ngDoCheck() {
     const changes = this.differ.diff(this.model);
-    if(changes) {
-      let model = this.mapToObject(changes._records);
+    if (changes) {
+      const model = this.mapToObject(changes._records);
 
       setTimeout(() => {
-        let errors = InvoiceValidator.validate(model);
+        const errors = InvoiceValidator.validate(model);
         if (errors.length > 0) {
           this.showValidationErrors = true;
           this.validationErrors = errors;
@@ -261,6 +261,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
           this.disableBtn = false;
         }
       }, 2000);
-		}
+	  }
   }
 }

@@ -5,6 +5,8 @@ import { InvoiceUtils } from './invoice-utils';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/combineLatest';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -24,14 +26,14 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
   constructor(
     private alert: AlertService,
     private router: Router,
-    private route: ActivatedRoute, 
-    private session: SessionService, 
+    private route: ActivatedRoute,
+    private session: SessionService,
     private invoiceService: InvoiceService
   ) { }
 
   buildInvoice(model) {
-    let builder = new InvoiceUtils.Builder();
-    
+    const builder = new InvoiceUtils.Builder();
+
     builder
       .setType(model.type)
       .setOrg(model.org_id)
@@ -47,23 +49,23 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
       .setTaxTotal(model.tax_total)
       .setTotal(model.total)
       .setNotes(model.notes);
-    
+
     return builder.get()
   }
   saveInvoice($event) {
-    let model = this.buildInvoice($event);
-    
+    const model = this.buildInvoice($event);
+
     if (!this.editing) {
       this.saving = true;
       this.invoiceService.create(model)
         .takeUntil(this.cancel$)
-        .subscribe(response => { 
+        .subscribe(response => {
           this.saving = false;
           this.alert.success('Invoice', 'Invoice successfully created', { timeOut: 3000 })
-          this.mode === 'acc_rec' 
+          this.mode === 'acc_rec'
             ? this.router.navigate(['/invoices', 'sales'], { queryParams: { status: 'all' } })
             : this.router.navigate(['/invoices', 'bills'], { queryParams: { status: 'all' } })
-        }, 
+        },
         err => {
           this.saving = false;
         });
@@ -80,10 +82,10 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
         })
     }
   }
-  
+
   fetchInvoice(id: string) {
     this.loading = true
-    
+
     this.invoiceService.get(id, { ref: 'invoice', include: 'contact,items' })
       .subscribe(response => {
         this.model = response.data;
@@ -95,8 +97,8 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg()
-    let route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
-    
+    const route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
+
     this.route$ = route$.subscribe(route => {
       this.editing = route.params.id ? true : false;
       this.mode = route.qparams.type || 'acc_rec';

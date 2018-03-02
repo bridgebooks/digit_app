@@ -27,9 +27,11 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme)
     FusionChartsModule
   ],
   declarations: [
-    DashboardComponent, 
-    CalendarWidgetComponent, 
-    ExpensechartWidgetComponent, InvoicesWidgetComponent, RecievablesWidgetComponent
+    DashboardComponent,
+    CalendarWidgetComponent,
+    ExpensechartWidgetComponent,
+    InvoicesWidgetComponent,
+    RecievablesWidgetComponent
   ],
   providers: [
     SessionService,

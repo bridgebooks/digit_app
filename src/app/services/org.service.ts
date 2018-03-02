@@ -39,11 +39,9 @@ export class OrgService {
   constructor(private http: HttpClient) { }
 
   create(body: object): Observable<OrgCreateResponse> {
-    
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let options = { headers: headers };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post<OrgCreateResponse>(this.baseUrl, body, options)
+    return this.http.post<OrgCreateResponse>(this.baseUrl, body, { headers })
   }
 
   addContactGroup(id: string, body: object) {
@@ -59,7 +57,7 @@ export class OrgService {
     const params = new HttpParams().set('include', 'industry')
     const url = `${this.baseUrl}/${id}`;
 
-    return this.http.get<OrgResponse>(url, { 
+    return this.http.get<OrgResponse>(url, {
       headers: headers,
       params: params
     })
@@ -67,7 +65,7 @@ export class OrgService {
 
   getAccounts(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();    
+    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/accounts`;
 
     if (options) {
@@ -76,7 +74,7 @@ export class OrgService {
       })
     }
 
-    return this.http.get<AccountsResponse>(url, { 
+    return this.http.get<AccountsResponse>(url, {
       headers: headers,
       params: params
     })
@@ -84,15 +82,15 @@ export class OrgService {
 
   getTaxRates(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();    
+    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/tax_rates`;
-    
+
     if (options) {
       Object.keys(options).forEach(key => {
         params = params.append(key, options[key]);
       })
     }
-    return this.http.get<TaxRatesResponse>(url, { 
+    return this.http.get<TaxRatesResponse>(url, {
       headers: headers,
       params: params
     })
@@ -271,7 +269,6 @@ export class OrgService {
 
   updatePayrunSettings(id: string, data: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/settings/payruns`;
 
     return this.http.put<any>(url, data, { headers })

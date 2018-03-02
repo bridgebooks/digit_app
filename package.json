@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "pm2 restart config.yml",
-    "build": "ng build",
+    "build": "ng build --prod --env=prod --build-optimizer --stats-json",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "bundle-report": "./node_modules/.bin/webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -72,9 +73,11 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
+    "rxjs-tslint-rules": "^3.14.0",
     "ts-node": "~3.3.0",
     "tslint": "~5.5.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "webpack-bundle-analyzer": "^2.11.1"
   },
   "browserslist": [
     "> 1%",
