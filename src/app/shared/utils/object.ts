@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { isEqual, map, reduce } from 'lodash';
 
 export module ObjectUtils {
     interface compareResult {
@@ -36,9 +36,9 @@ export module ObjectUtils {
             missing_from_second: []
         }
 
-        _.reduce(a, (result, value, key) => {
+        reduce(a, (result, value, key) => {
             if (b.hasOwnProperty(key)) {
-                if (_.isEqual(value, b[key])) {
+                if (isEqual(value, b[key])) {
                 return result;
                 } else {
                 if (typeof (a[key]) != typeof ({}) || typeof (b[key]) != typeof ({})) {
@@ -47,15 +47,15 @@ export module ObjectUtils {
                     return result;
                 } else {
                     const deeper = compare(a[key], b[key]);
-                    result.different = result.different.concat(_.map(deeper.different, (sub_path) => {
+                    result.different = result.different.concat(map(deeper.different, (sub_path) => {
                         return key + '.' + sub_path;
                     }));
 
-                    result.missing_from_second = result.missing_from_second.concat(_.map(deeper.missing_from_second, (sub_path) => {
+                    result.missing_from_second = result.missing_from_second.concat(map(deeper.missing_from_second, (sub_path) => {
                         return key + '.' + sub_path;
                     }));
 
-                    result.missing_from_first = result.missing_from_first.concat(_.map(deeper.missing_from_first, (sub_path) => {
+                    result.missing_from_first = result.missing_from_first.concat(map(deeper.missing_from_first, (sub_path) => {
                         return key + '.' + sub_path;
                     }));
                     return result;
@@ -67,7 +67,7 @@ export module ObjectUtils {
             }
         }, result);
 
-        _.reduce(b, function (result, value, key) {
+        reduce(b, function (result, value, key) {
             if (a.hasOwnProperty(key)) {
                 return result;
             } else {

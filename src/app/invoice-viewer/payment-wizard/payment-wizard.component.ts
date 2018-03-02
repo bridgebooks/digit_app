@@ -6,7 +6,7 @@ import {
   EventEmitter, 
   OnInit
 } from '@angular/core';
-import * as _ from 'lodash';
+import { merge } from 'lodash';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CardFormComponent } from './card-form/card-form.component';
 import { OtpFormComponent } from './otp-form/otp-form.component';
@@ -93,7 +93,7 @@ export class PaymentWizardComponent implements OnInit {
   }
 
   gotoCardForm() {
-    this.model = _.merge(this.model, this.contactForm.model);
+    this.model = merge(this.model, this.contactForm.model);
     this.currentStep = this.nextStep;
     this.nextStep = 'otp';
     this.previousStep = 'card';
@@ -114,7 +114,7 @@ export class PaymentWizardComponent implements OnInit {
   }
 
   initPayment() {
-    this.model = _.merge(this.model, this.cardForm.transformModel());
+    this.model = merge(this.model, this.cardForm.transformModel());
     this.processing = true;
     this.disableActionBtn = true;
 

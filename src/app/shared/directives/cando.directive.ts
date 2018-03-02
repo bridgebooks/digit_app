@@ -1,12 +1,11 @@
 import { Directive, ElementRef, HostListener, Input, Renderer, OnInit } from '@angular/core';
 import { JwtService } from '../../services';
-import * as _ from 'lodash';
 
 @Directive({
     selector: '[canDo]'
 })
 
-export class CanDoDirective implements OnInit{
+export class CanDoDirective implements OnInit {
 
     @Input('action') action: string;
     @Input('actionable') actionable: any;
@@ -32,8 +31,8 @@ export class CanDoDirective implements OnInit{
         let canSee = false;
 
         if (check.length > 1) {
-            let group = check[0];
-            let action = check[1];
+            const group = check[0];
+            const action = check[1];
 
             userRoles.forEach(role => {
                 canSee = role.permissions[group][action] === 1 ||

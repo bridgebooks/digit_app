@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { AlertService, PayslipService } from '../../../services';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PayslipItem } from '../../../models/data/payslip-item';
-import * as _ from 'lodash';
+import { merge } from 'lodash';
 
 import '@clr/icons';
 import '@clr/icons/shapes/core-shapes';
@@ -53,7 +53,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onPayslipItemCreated($event, item) {
-    item = _.merge(item, $event);
+    item = merge(item, $event);
   }
 
   onPayItemAmountChanged($event, item: PayslipItem) {

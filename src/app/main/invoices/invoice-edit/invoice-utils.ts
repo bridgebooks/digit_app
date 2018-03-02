@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { isNumeric } from 'rxjs/util/isNumeric';
 
 export module InvoiceUtils {
