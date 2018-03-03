@@ -15,7 +15,7 @@
   <div class="row">
     <div class="card">
       <div class="card-block">
-        <div class="row">
+        <div class="row flex-items-lg-between">
           <div class="col-lg-3 col-md-3">
             <p>Balance Date</p>
             <div class="select balance-date-picker">
@@ -37,7 +37,16 @@
       <h3 class="txt-center no-margin">{{ org.name }}</h3>
       <p class="txt-center no-margin">As at {{ balanceDate }}</p>
     </div>
+  </div>
 
+  <div class="row flex-items-lg-between flex-items-md-between report-page-toolbar" *ngIf="!loading">
+    <div class="col-lg-4 col-md-4">
+      <button class="btn btn-primary" (click)="export()" [clrLoading]="exporting" [disabled]="exporting">Export PDF</button>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+  </div>
+
+  <div class="row">
     <div class="spinner-container" *ngIf="loading">
       <span class="spinner">
           Loading...
@@ -54,7 +63,7 @@
           </tr>
           <tr class="total">
             <td class="left" style="width: 50%;">Total Assets</td>
-            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets.total | number:"1.2-2" }}</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets_total | number:"1.2-2" }}</td>
           </tr>
         </tbody>
       </table>
@@ -68,11 +77,11 @@
           </tr>
           <tr class="total">
             <td class="left" style="width: 50%;">Total Liabilites</td>
-            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.liabilities.total | number:"1.2-2" }}</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.liabilities_total | number:"1.2-2" }}</td>
           </tr>
           <tr class="total">
             <td class="left" style="width: 50%;">Net Assets</td>
-            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets.total - report.liabilities.total | number:"1.2-2" }}</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets_total - report.liabilities_total | number:"1.2-2" }}</td>
           </tr>
         </tbody>
       </table>
@@ -86,7 +95,7 @@
             </tr>
             <tr class="total">
               <td class="left" style="width: 50%;">Total Equity</td>
-              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.equity.total | number:"1.2-2" }}</td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.equity_total | number:"1.2-2" }}</td>
             </tr>
         </tbody>
       </table>

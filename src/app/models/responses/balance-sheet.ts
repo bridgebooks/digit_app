@@ -7,8 +7,11 @@ export interface BalancheSheetAccount {
 
 export interface BalanceSheetReportData {
     assets: any;
+    assets_total: number;
     liabilities: any;
+    liabilities_tota: number;
     equity: any;
+    equity_total: number;
 }
 
 export interface BalanceSheetReport {
