@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { SessionService, ReportService } from '../../../services';
+import { SessionService, ReportService, JwtService } from '../../../services';
 import { BalanceSheetReportData } from '../../../models/responses/balance-sheet';
 
 @Component({
@@ -12,11 +12,14 @@ export class BalanceSheetComponent implements OnInit {
 
   report: BalanceSheetReportData;
   org: any;
+  token: any;
   balanceDates: any[];
   balanceDate: string = moment().endOf('month').format('YYYY-MM-DD');
   loading: boolean;
+  exporting: boolean;
 
   constructor(
+    private jwtservice: JwtService,
     private session: SessionService,
     private reports: ReportService) { }
 
@@ -44,19 +47,21 @@ export class BalanceSheetComponent implements OnInit {
       .balanceSheet(this.org.id, options)
       .subscribe(response => {
         this.report = response.data;
-        this.report.assets['total'] = this.report.assets.map(a => { return a.balance }).reduce((a, b) => a + b);
-        this.report.liabilities['total'] = this.report.liabilities.map(a => { return a.balance }).reduce((a, b) => a + b);
-        this.report.equity['total'] = this.report.equity.length > 0
-          ? this.report.equity.map(a => { return a.balance }).reduce((a, b) => a + b)
-          : 0;
         this.loading = false;
       }, err => {
         this.loading = false;
       })
   }
 
+  export() {
+    const url = `${this.reports.baseUrl}/${this.org.id}/balance-sheet?balance_date=
+    ${this.balanceDate}&export_pdf=true&token=${this.token}`;
+    window.open(url, '_blank');
+  }
+
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
+    this.token = this.jwtservice.readToken();
     this.balanceDates = this.getBalanceDates();
     this.getReport();
   }
