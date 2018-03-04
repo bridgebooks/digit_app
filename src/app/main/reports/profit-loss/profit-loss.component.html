@@ -1,3 +1,114 @@
-<p>
-  profit-loss works!
-</p>
+<section class="report-page">
+  <div class="row">
+  </div>
+
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-5">
+        <a routerLink="/reports">
+          <clr-icon shape="caret" dir="left"></clr-icon> Reports
+        </a>
+        <h2>Profit &amp; Loss</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <form #form="ngForm" name="form">
+            <div class="row">
+              <div class="col-lg-3 col-md-3">
+                From
+                <my-date-picker [options]="datePickerOptions" required name="start"
+                [(ngModel)]="start" (dateChanged)="onStartDateChange($event)"></my-date-picker>
+              </div>
+              <div class="col-lg-3 col-md-3">
+                To
+                <my-date-picker [options]="datePickerOptions" required name="end"
+                [(ngModel)]="end" (dateChanged)="onEndDateChange($event)"></my-date-picker>
+              </div>
+            </div>
+         </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" type="button" [clrLoading]="loading"
+          (click)="getReport()" [disabled]="loading || form.invalid">Update</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h2 class="txt-center">Profit &amp; Loss</h2>
+      <h3 class="txt-center no-margin">{{ org.name }}</h3>
+      <p class="txt-center no-margin">Reporting Period: {{ startDate }} to {{ endDate }}</p>
+    </div>
+  </div>
+
+  <div class="row flex-items-lg-between flex-items-md-between report-page-toolbar" *ngIf="!loading">
+    <div class="col-lg-4 col-md-4">
+      <button class="btn btn-primary" (click)="export()" [clrLoading]="exporting" [disabled]="exporting">Export PDF</button>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="spinner-container" *ngIf="loading">
+      <span class="spinner">
+          Loading...
+        </span>
+    </div>
+
+    <div class="col-lg-12 col-md-12" *ngIf="!loading">
+      <h3>Income</h3>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let account of report.income">
+            <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Total Assets</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.income_total | number:"1.2-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Less Cost of Sales</h3>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let account of report.purchases">
+            <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Total Cost of Sales</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.purchase_total | number:"1.2-2" }}</td>
+          </tr>
+          <tr class="total">
+            <td class="left" style="width: 50%;">Gross Profit</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.gross_profit | number:"1.2-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Less Operating Expenses</h3>
+      <table class="table">
+        <tbody>
+            <tr *ngFor="let account of report.expenses">
+              <td class="left" style="width: 50%;"><a [routerLink]="['/ledger/account', account.id]">{{ account.name }}</a></td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ account.balance | number:"1.2-2" }}</td>
+            </tr>
+            <tr class="total">
+              <td class="left" style="width: 50%;">Total Operating Expenses</td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.expense_total | number:"1.2-2" }}</td>
+            </tr>
+            <tr class="total">
+              <td class="left" style="width: 50%;">Net Profit</td>
+              <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.net_profit | number:"1.2-2" }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
