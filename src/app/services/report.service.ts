@@ -5,10 +5,6 @@ import { SubscriptionPlan } from '../models/data/subscription-plan';
 import { BalanceSheetReport } from '../models/responses/balance-sheet';
 import { ProfitLossReport } from '../models/responses/profit-loss';
 
-interface BalanceSheetOptions {
-  export_pdf?: boolean;
-  balance_date:
-}
 @Injectable()
 export class ReportService {
   baseUrl: string = environment.apiUrl + 'reports';
