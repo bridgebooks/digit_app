@@ -1,3 +1,97 @@
-<p>
-  aged-payables works!
-</p>
+<section class="report-page">
+  <div class="row">
+  </div>
+
+  <div class="row flex-items-lg-between page-header">
+    <div class="col-md-5">
+        <a routerLink="/reports">
+          <clr-icon shape="caret" dir="left"></clr-icon> Reports
+        </a>
+        <h2>Age Payables</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-block">
+        <div class="row flex-items-lg-between">
+          <div class="col-lg-3 col-md-3">
+            <p>Date</p>
+            <div class="select balance-date-picker">
+              <select name="balance-date" id="" [(ngModel)]="balanceDate">
+                <option [value]="d.value" *ngFor="let d of balanceDates">{{ d.label }}</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="button" [clrLoading]="loading"
+            (click)="getReport()" [disabled]="loading">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <h2 class="txt-center">Aged Payables</h2>
+      <h3 class="txt-center no-margin">{{ org.name }}</h3>
+      <p class="txt-center no-margin">As at {{ balanceDate }}</p>
+    </div>
+  </div>
+
+  <div class="row flex-items-lg-between flex-items-md-between report-page-toolbar" *ngIf="!loading">
+    <div class="col-lg-4 col-md-4">
+      <button class="btn btn-primary" (click)="export()" [clrLoading]="exporting" [disabled]="exporting">Export PDF</button>
+    </div>
+    <div class="col-lg-4 col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="spinner-container" *ngIf="loading">
+      <span class="spinner">
+          Loading...
+        </span>
+    </div>
+
+    <div class="col-lg-12 col-md-12" *ngIf="!loading">
+      <table class="table" *ngIf="report">
+        <thead>
+          <tr>
+            <th class="left">Contact</th>
+            <th class="left">Current</th>
+            <th class="left">1 - 30 Days</th>
+            <th class="left">31 - 60 Days</th>
+            <th class="left">61 to 90 Days</th>
+            <th class="left">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of report.contacts">
+              <td class="left"><a>{{ item.name }}</a></td>
+              <td class="left">{{ item.current | number:"1.2-2" }}</td>
+              <td class="left">{{ item.thirty_day | number:"1.2-2" }}</td>
+              <td class="left">{{ item.sixty_day | number:"1.2-2" }}</td>
+              <td class="left">{{ item.ninety_day | number:"1.2-2" }}</td>
+              <td class="left">{{ item.total | number:"1.2-2" }}</td>
+            </tr>
+            <tr class="total">
+              <td class="left">Total Payables</td>
+              <td class="left">{{ report.current_total | number:"1.2-2" }}</td>
+              <td class="left">{{ report.thirty_day_total | number:"1.2-2" }}</td>
+              <td class="left">{{ report.sixty_day_total | number:"1.2-2" }}</td>
+              <td class="left">{{ report.ninety_day_total | number:"1.2-2" }}</td>
+              <td class="left">{{ report.total | number:"1.2-2" }}</td>
+            </tr>
+            <tr class="total">
+              <td class="left"></td>
+              <td class="left">{{ report.current_ratio | number:"1.2-2" }}%</td>
+              <td class="left">{{ report.thirty_day_ratio | number:"1.2-2" }}%</td>
+              <td class="left">{{ report.sixty_day_ratio | number:"1.2-2" }}%</td>
+              <td class="left">{{ report.ninety_day_ratio | number:"1.2-2" }}%</td>
+              <td class="left"></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
