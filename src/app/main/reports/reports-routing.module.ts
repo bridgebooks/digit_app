@@ -7,8 +7,8 @@ import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
 import { ProfitLossComponent } from './profit-loss/profit-loss.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: ReportsComponent,
     data: {
       title: 'Reports - Bridgebooks',
