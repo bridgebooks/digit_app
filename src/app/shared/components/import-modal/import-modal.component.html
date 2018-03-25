@@ -1,0 +1,31 @@
+<clr-modal #modal [clrModalSize]="'md'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">{{ title }}</h3>
+  <div class="modal-body">
+    <div class="progress top progress-fade" *ngIf="uploading"><progress [value]="uploadProgress"></progress></div> 
+    <div class="instructions" *ngIf="mode === 'contacts'">
+      <p>Download our contacts CSV (Comma Separated Values) template file. 
+        This file has the correct column headings Bridgebooks needs to import your contact data.</p>
+        <a class="btn btn-success" [href]="templateFile" target="_blank">
+          Download Template File
+        </a>
+    </div>
+    <hr>
+    <div class="instructions">
+      <clr-alert *ngIf="uploadErrorMessage" [clrAlertType]="'alert-danger'">
+          <div clr-alert-item class="alert-item">
+            <span class="alert-text">
+              {{ uploadErrorMessage }}
+            </span>
+          </div>
+        </clr-alert>
+      <p>Choose a file to import.</p>
+      <input type="file" ng2FileSelect [uploader]="uploader">
+      <span class="warning">The file you import must be a CSV (Comma Separated Values) file. The name of your file should end with .csv</span>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" [clrLoading]="uploading" 
+      [disabled]="disableImportBtn || uploading" (click)="import()">Import</button>
+      <button type="button" class="btn btn-outline" (click)="modal.close()">Cancel</button>
+  </div>
+</clr-modal>

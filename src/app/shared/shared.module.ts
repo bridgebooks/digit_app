@@ -1,13 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IntlPhoneNumberPipe, 
-  UppercaseFirstCharacterPipe, 
-  NumericDirective, 
-  CanseeDirective, 
+import { ClarityModule } from '@clr/angular';
+import { FileUploadModule } from 'ng2-file-upload';
+
+import {
+  IntlPhoneNumberPipe,
+  UppercaseFirstCharacterPipe,
+  NumericDirective,
+  CanseeDirective,
   CanDoDirective,
-  PhoneNumberDirective, 
+  PhoneNumberDirective,
   MatchValidator,
   CreditCardNumberDirective
 } from './index';
@@ -20,16 +23,19 @@ import { PinpadComponent } from './components/pinpad/pinpad.component';
 import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
 import { EventbusService } from '../services/index';
 import { WindowService } from '../services/window.service';
+import { ImportModalComponent } from './components/import-modal/import-modal.component';
 
 @NgModule({
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    ClarityModule,
+    FileUploadModule
   ],
   declarations: [
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
-    NumericDirective, 
+    NumericDirective,
     CanseeDirective,
     CanDoDirective,
     MatchValidator,
@@ -42,25 +48,29 @@ import { WindowService } from '../services/window.service';
     CreditCardNumberDirective,
     PinpadComponent,
     PayitemSelectComponent,
+    ImportModalComponent
+  ],
+  entryComponents: [
+    ImportModalComponent,
   ],
   exports: [
-    BankSelectComponent, 
-    AccountSelectComponent, 
+    BankSelectComponent,
+    AccountSelectComponent,
     TaxrateSelectComponent,
     OrgbankaccountSelectComponent,
     PayitemSelectComponent,
-    NumericDirective, 
+    NumericDirective,
     CanseeDirective,
     CanDoDirective,
     PhoneNumberDirective,
-    CreditCardNumberDirective, 
+    CreditCardNumberDirective,
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
     PinpadComponent
   ],
   providers: [IntlPhoneNumberPipe, CreditCardnoPipe]
 })
-export class SharedModule { 
+export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,

@@ -5,6 +5,7 @@
       </div>
       <div class="col-lg-4">
           <a class="btn btn-primary" routerLink="/contacts/edit">Add Contact</a>
+          <a class="btn btn-primary" (click)="openImportModal()">Import Contacts</a>
       </div>
   </div>
 
@@ -74,4 +75,6 @@
       </clr-modal>
     </div>
   </div>
+
+  <template #modalcontainer></template>
 </section>
