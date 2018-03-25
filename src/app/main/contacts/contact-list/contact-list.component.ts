@@ -1,8 +1,20 @@
-import { Component, ChangeDetectorRef, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
+import {
+  ViewChild,
+  Component,
+  ChangeDetectorRef,
+  OnInit,
+  AfterContentInit,
+  OnDestroy,
+  ViewContainerRef,
+  ComponentRef,
+  ComponentFactoryResolver,
+  ComponentFactory
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Contact } from '../../../models/data/contact';
 import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid'
 import { SessionService, AlertService, OrgService, ContactService } from '../../../services';
+import { ImportModalComponent } from '../../../shared/components/import-modal/import-modal.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
@@ -13,6 +25,9 @@ import 'rxjs/add/operator/takeUntil';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy {
+
+  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
+  importModalComponentRef: ComponentRef<ImportModalComponent>;
 
   route$: Subscription;
   cancel$: Subject<any> = new Subject();
@@ -37,6 +52,7 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
   selectedContactGroup: string;
 
   constructor(
+    private resolver: ComponentFactoryResolver,
     private route: ActivatedRoute,
     private alertService: AlertService,
     private session: SessionService,
@@ -45,7 +61,22 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
     private cdRef: ChangeDetectorRef) {
   }
 
-  refresh(state: ClrDatagridStateInterface) {
+  openImportModal() {
+    this.modalContainer.clear();
+    const factory: ComponentFactory<ImportModalComponent> = this.resolver.resolveComponentFactory(ImportModalComponent);
+    this.importModalComponentRef = this.modalContainer.createComponent(factory);
+
+    const importModal = this.importModalComponentRef.instance;
+    importModal.setMode('contacts');
+    importModal.uploadComplete.subscribe(complete => {
+      this.refresh({});
+      importModal.modal.close();
+      this.importModalComponentRef.destroy();
+    })
+    importModal.modal.open();
+  }
+
+  refresh(state?: ClrDatagridStateInterface) {
     if (this.loading !== true) this.loading = true;
 
     state.sort = state.sort || {
@@ -190,5 +221,6 @@ export class ContactListComponent implements OnInit, AfterContentInit, OnDestroy
 
   ngOnDestroy() {
     this.route$.unsubscribe();
+    if (this.importModalComponentRef) this.importModalComponentRef.destroy();
   }
 }
