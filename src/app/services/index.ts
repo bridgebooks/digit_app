@@ -9,6 +9,7 @@ export * from './industry.service';
 export * from './invoice.service';
 export * from './org.service';
 export * from './report.service';
+export * from './stats.service';
 export * from './contact.service';
 export * from './employee.service';
 export * from './payrun.service';
