@@ -8,7 +8,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { FusionChartsModule } from 'angular4-fusioncharts';
 
-import { SessionService, OrgService } from '../../services';
+import { SessionService, OrgService, StatsService } from '../../services';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -35,7 +35,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme)
   ],
   providers: [
     SessionService,
-    OrgService
+    OrgService,
+    StatsService
   ]
 })
 export class DashboardModule { }
