@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as DataSource from './sample';
 import { SessionService, StatsService } from '../../../services';
 import * as moment from 'moment';
-import { merge } from 'lodash';
 import { FusionChartsComponent } from 'angular4-fusioncharts';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
