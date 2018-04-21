@@ -64,13 +64,13 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   removeLine(item) {
-    let idx = this.slip.items.data.indexOf(item);
+    const idx = this.slip.items.data.indexOf(item);
 
     if (item) {
-      this.alerts.info('Deleting', 'Deleting item', { timeOut: 3000 })      
+      this.alerts.info('Deleting', 'Deleting item', { timeOut: 3000 })
       this.payslips.deleteItem(item.id)
       .subscribe(response => {
-        this.alerts.success('Deleting', 'Item deleted', { timeOut: 3000 })  
+        this.alerts.success('Deleting', 'Item deleted', { timeOut: 3000 })
       })
     }
 
@@ -101,28 +101,28 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   computeTax(update: boolean = true) {
     let otherAllowances = 0;
-    let basic = this.slip.items.data.filter(item => {
-      return <any>item.item.data.id == this.settings.values.basic_wage_item
+    const basic = this.slip.items.data.filter(item => {
+      return <any>item.item.data.id === this.settings.values.basic_wage_item
     })[0];
 
-    let housing = this.slip.items.data.filter(item => {
-      return <any>item.item.data.id == this.settings.values.housing_allowance_item
+    const housing = this.slip.items.data.filter(item => {
+      return <any>item.item.data.id === this.settings.values.housing_allowance_item
     })[0];
 
-    let transport = this.slip.items.data.filter(item => {
-      return <any>item.item.data.id == this.settings.values.transport_allowance_item
+    const transport = this.slip.items.data.filter(item => {
+      return <any>item.item.data.id === this.settings.values.transport_allowance_item
     })[0];
 
-    let tax = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.TAX;
+    const tax = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.TAX;
     })[0];
 
-    let others = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE
-        && <any>item.item.data.id != this.settings.values.housing_allowance_item
-        && <any>item.item.data.id != this.settings.values.transport_allowance_item
+    const others = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.ALLOWANCE
+        && <any>item.item.data.id !== this.settings.values.housing_allowance_item
+        && <any>item.item.data.id !== this.settings.values.transport_allowance_item
     });
-    
+
     others.forEach(item => {
       otherAllowances = otherAllowances + Number(item.amount);
     });
@@ -192,11 +192,11 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
     });
 
-    let wages = this.slip.items.data.filter(item => {
+    const wages = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.WAGE;
     });
 
-    let deductions = this.slip.items.data.filter(item => {
+    const deductions = this.slip.items.data.filter(item => {
       return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
     });
 
