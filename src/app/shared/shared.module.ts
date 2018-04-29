@@ -24,6 +24,7 @@ import { PayitemSelectComponent } from './components/payitem-select/payitem-sele
 import { EventbusService } from '../services/index';
 import { WindowService } from '../services/window.service';
 import { ImportModalComponent } from './components/import-modal/import-modal.component';
+import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 
 @NgModule({
   imports: [
@@ -48,10 +49,12 @@ import { ImportModalComponent } from './components/import-modal/import-modal.com
     CreditCardNumberDirective,
     PinpadComponent,
     PayitemSelectComponent,
-    ImportModalComponent
+    ImportModalComponent,
+    PaymentModalComponent,
   ],
   entryComponents: [
     ImportModalComponent,
+    PaymentModalComponent
   ],
   exports: [
     BankSelectComponent,

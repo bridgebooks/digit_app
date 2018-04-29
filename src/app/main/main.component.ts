@@ -30,8 +30,10 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
     user: any;
     org: any;
     security: any = {}
-    securityCheck$: Subject<boolean> = new Subject();
-    
+    securityCheck$: Subject<any> = new Subject();
+    securityCheckError: string;
+    securityCheckFailCount: number = 0;
+
     @ViewChild('logoutModal') logoutModal: Modal;
     @ViewChild('loginModal') loginModal: Modal;
 
@@ -40,23 +42,23 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
     loginModalOpen: boolean = false;
 
     aclAlertShow: boolean = false;
-    
+
     aclErrorSub: Subscription;
 
     constructor(
         private idleMonitor: Idle,
-        public router: Router, 
+        public router: Router,
         public activatedRoute: ActivatedRoute,
         private windowRef: WindowService,
         private eventbus: EventbusService,
-        private jwtService: JwtService, 
-        private session: SessionService, 
+        private jwtService: JwtService,
+        private session: SessionService,
         private authService: AuthService) {
         // configure idle state monitor
         this.idleMonitor.setIdle(environment.idleTime);
         this.idleMonitor.setTimeout(environment.idleTimeout);
         this.idleMonitor.setInterrupts(DEFAULT_INTERRUPTSOURCES);
-        
+
         this.idleMonitor.onTimeout.subscribe(() => {
             if (!this.loginModal._open) this.loginModalOpen = true;
         })
@@ -73,7 +75,8 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
                 this.securityCheck$.next(true);
             }, err => {
                 this.checking = false;
-                this.securityCheck$.next(false);
+                const message = err.error ? err.error.message : 'Please check your password.'
+                this.securityCheck$.next(message);
             }, () => {
                 this.checking = false;
             })
@@ -112,14 +115,18 @@ export class MainComponent implements OnInit, AfterContentInit, OnDestroy {
         })
 
         this.securityCheck$.subscribe(check => {
-            if (check) {
+            if (check === true) {
                 this.loginModalOpen = false;
                 this.security.password = null;
+                this.securityCheckFailCount = 0;
+                this.securityCheckError = null;
             } else {
-                this.logout();
+                this.securityCheckError = check;
+                this.securityCheckFailCount++;
+                if (this.securityCheckFailCount >= 3) this.logout();
             }
         })
-        
+
         if (this.router.url === '/') {
             this.router.navigate(['/dashboard']);
         }

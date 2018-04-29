@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
-
-import 'rxjs/add/operator/catch';
-
+import { Observable } from 'rxjs/Observable';
 import { Contact } from '../models/data/contact';
 
 interface ContactResponse {
@@ -15,7 +12,7 @@ interface ContactResponse {
 export class ContactService {
 
   baseUrl: string = environment.apiUrl + 'contacts';
-  
+
   constructor(private http: HttpClient) { }
 
   add(body: object) {
@@ -29,7 +26,6 @@ export class ContactService {
   addToGroup(id: string, contacts: string[]) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/groups/${id}/bulk`;
-    
     return this.http.post<any>(url, { contacts }, { headers })
   }
 
@@ -87,7 +83,7 @@ export class ContactService {
     return this.http.post(url, { contacts }, { headers });
   }
 
-  deletePerson(id: string) { 
+  deletePerson(id: string) {
   }
 
   deleteGroup(id: string) {
