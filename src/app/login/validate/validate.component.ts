@@ -34,8 +34,8 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
   btnDisabled: Boolean = false;
 
   constructor(
-    public router: Router, 
-    public route: ActivatedRoute, 
+    public router: Router,
+    public route: ActivatedRoute,
     private session: SessionService,
     private userService: UserService,
     private jwtService: JwtService) { }
@@ -50,7 +50,7 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
     this.processing = true;
     this.btnStatus = BtnStatus.PROCESSING;
     this.btnDisabled = true;
-   
+
     this.userService
       .validate(this.id, this.model)
       .subscribe(response => {
@@ -66,7 +66,7 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
           this.router.navigate(['/setup']);
         } else {
           this.session.addDefaultOrg(token.orgs[0]);
-          this.router.navigate(['/dashboard']);          
+          this.router.navigate(['/dashboard']);
         }
       },
       err => {
@@ -87,7 +87,7 @@ export class LoginValidateComponent implements OnInit, OnDestroy {
           this.model.org = this.org;
           this.model.token = this.token;
         })
-      
+
       this.route.params
         .filter(params => params.user_id)
         .subscribe(params => {

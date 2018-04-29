@@ -17,10 +17,10 @@ import { SessionService, AlertService, EventbusService } from '../../services';
 export class HttpErrorInterceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router, 
+        private router: Router,
         private eventbus: EventbusService,
-        private session: SessionService, 
-        private alert: AlertService) { 
+        private session: SessionService,
+        private alert: AlertService) {
         }
 
     private handleError(response: HttpErrorResponse) {
@@ -45,8 +45,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         if (response.status === 500) {
-            this.alert.error('Error', 'An error occured on the server. We working it fix it, please try again later', { timeOut: 3000 });
-        } 
+            this.alert.error('Error', 'An error occured on the server. We working to fix it, please try again later', { timeOut: 3000 });
+        }
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

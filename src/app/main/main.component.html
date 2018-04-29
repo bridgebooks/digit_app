@@ -84,10 +84,24 @@
             <h3 class="modal-title">Security Check</h3>
             <div class="modal-body">
                 <p>Please enter your password to confirm your identity</p>
+
+                <div class="alert alert-danger" *ngIf="securityCheckError">
+                    <div class="alert-items">
+                        <div class="alert-item static">
+                            <div class="alert-icon-wrapper">
+                                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+                            </div>
+                            <span class="alert-text">
+                                {{ securityCheckError }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
                 <form #loginForm="ngForm" novalidate (submit)="securityCheck()">
                     <input type="hidden" name="email" id="email" [(ngModel)]="security.email">
                     <input type="password" name="password" id="password" placeholder="Enter password" size="60" [(ngModel)]="security.password" required>
-                    <button type="button" class="btn btn-block btn-primary" [clrLoading]="checking" [disabled]="loginForm.invalid || checking">Login</button>                    
+                    <button type="submit" class="btn btn-block btn-primary" [clrLoading]="checking" [disabled]="loginForm.invalid || checking">Login</button>                    
                 </form>
             </div>
         </clr-modal>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';  
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { SharedModule } from '../../shared/shared.module';
@@ -20,7 +20,8 @@ import {
   ContactService,
   OrgService,
   ItemService,
-  InvoiceService
+  InvoiceService,
+  PaymentsService
 } from '../../services';
 import { LineAmountTypeSelectComponent } from './line-amount-type-select/line-amount-type-select.component';
 import { InvoiceItemTableComponent } from './invoice-item-table/invoice-item-table.component';
@@ -81,6 +82,7 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
     OrgService,
     ItemService,
     InvoiceService,
+    PaymentsService,
     DateFormatPipe
   ]
 })

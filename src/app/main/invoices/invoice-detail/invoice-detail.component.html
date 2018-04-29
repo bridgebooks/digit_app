@@ -28,13 +28,14 @@
     <div class="card invoice-detail-card">
       <div class="card-header">
           <div class="row flex-items-lg-between">
-            <div class="col-lg-3 col-md-5">
+            <div class="col-lg-3 col-md-3">
               <button class="btn btn-sm btn-link">{{ invoice.status }}</button>
             </div>
-            <div class="col-lg-6 col-md-5 invoice-actions" style="text-align: right;">
+            <div class="col-lg-7 col-md-7 invoice-actions" style="text-align: right;">
               <invoice-edit-button [invoice]="invoice"></invoice-edit-button>  
               <invoice-email-button [invoice]="invoice"></invoice-email-button>
               <invoice-print-button [invoice]="invoice"></invoice-print-button>
+              <!-- <button class="btn" [hidden]="!isPaid()" (click)="showPaymentModal()">Receive Payment</button> -->
               <invoice-status-button [hidden]="invoice.status === 'Paid'" [invoice]="invoice" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
             </div>
           </div>
@@ -117,4 +118,6 @@
       </div>
     </div>
   </div>
+
+  <template #modalcontainer></template>
 </section>
