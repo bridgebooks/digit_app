@@ -1,16 +1,15 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, OnDestroy } from '@angular/core';
-import { Payslip } from '../../../models/data/payslip';
-import { Subject } from 'rxjs/Subject';
-
-import { AlertService, PayslipService } from '../../../services';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { PayslipItem } from '../../../models/data/payslip-item';
-import { merge } from 'lodash';
-
-
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import '@clr/icons/shapes/core-shapes';
+import { merge } from 'lodash';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Payslip } from '../../../models/data/payslip';
+import { PayslipItem } from '../../../models/data/payslip-item';
 import { PayrunSettingsData } from '../../../models/responses/payrun-settings';
+import { AlertService, PayslipService } from '../../../services';
 import { TaxUtils } from '../utils/tax';
+
+
+
 
 enum PayItemType {
   WAGE = <any>'wage',
@@ -144,24 +143,24 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
   computeTotals() {
     let gross = 0;
     let less = 0;
-    let allowances = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
+    const allowances = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.ALLOWANCE;
     });
 
-    let wages = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.WAGE;
+    const wages = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.WAGE;
     });
 
-    let deductions = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
+    const deductions = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.DEDUCTION;
     });
 
-    let tax = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.TAX;
+    const tax = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.TAX;
     })
 
-    let reimbursements = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.REIMBURSEMENT;
+    const reimbursements = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.REIMBURSEMENT;
     });
 
     allowances
@@ -172,7 +171,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       .map(amount => {
         gross = amount + gross;
       })
-    
+
     deductions
       .concat(tax)
       .map(item => {
@@ -181,23 +180,27 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       .map(amount => {
         less = amount + less;
       })
-    
+
     this.gross_total = gross;
     this.net_total = this.gross_total - less;
     this.payslipUpdated.emit(this.slip);
   }
 
   updateTotals() {
-    let allowances = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.ALLOWANCE;
+    this.allowances = 0;
+    this.wages = 0;
+    this.deductions = 0;
+
+    const allowances = this.slip.items.data.filter(item => {
+      return <any>item.item.data.pay_item_type === PayItemType.ALLOWANCE;
     });
 
     const wages = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.WAGE;
+      return <any>item.item.data.pay_item_type === PayItemType.WAGE;
     });
 
     const deductions = this.slip.items.data.filter(item => {
-      return <any>item.item.data.pay_item_type == PayItemType.DEDUCTION;
+      return <any>item.item.data.pay_item_type === PayItemType.DEDUCTION;
     });
 
     allowances
@@ -207,7 +210,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       .map(amount => {
         this.allowances = amount + this.allowances;
       })
-    
+
     deductions
       .map(item => {
         return Number(item.amount);
@@ -215,7 +218,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       .map(amount => {
         this.deductions = amount + this.deductions;
       })
-    
+
     wages
       .map(item => {
         return Number(item.amount);
@@ -223,8 +226,11 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
       .map(amount => {
         this.wages = amount + this.wages;
       })
-    
-    this.wages = this.allowances - this.deductions;
+  }
+
+  canShowItem(item: PayslipItem) {
+    if (item.hasOwnProperty('is_new') || item.item && !item.item.data.is_system) return false;
+    return true;
   }
 
   fetchPayItems() {
@@ -243,6 +249,7 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.open$.subscribe(open => {
+      console.log(open);
       if (open) this.fetchPayItems();
     })
   }

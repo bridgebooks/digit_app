@@ -1,21 +1,8 @@
-import { 
-  ChangeDetectorRef,
-  ViewChild, 
-  Component, 
-  Renderer, 
-  ElementRef,
-  Input, 
-  Output, 
-  EventEmitter, 
-  SimpleChanges, 
-  OnInit, 
-  OnChanges,
-  AfterViewInit 
-} from '@angular/core';
-import { Subject } from 'rxjs';
-import { SearchService, SessionService, OrgService, PayslipService, AlertService, EventbusService } from '../../../services';
+// tslint:disable-next-line:max-line-length
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer, SimpleChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PayitemsResponse } from '../../../models/responses/payitems';
+import { AlertService, EventbusService, OrgService, PayslipService, SessionService } from '../../../services';
 
 @Component({
   selector: 'payitem-input',
@@ -24,7 +11,7 @@ import { PayitemsResponse } from '../../../models/responses/payitems';
 })
 
 export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
-  
+
   private selectInputElRef: ElementRef;
   @ViewChild('selectInput') set selectInput(elRef: ElementRef) {
       this.selectInputElRef = elRef;
@@ -34,14 +21,14 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
   @Output() itemCreated: EventEmitter<any> = new EventEmitter();
   selectorVisible: boolean = false;
   payitems$: Observable<PayitemsResponse>
-  userSelection: any; 
+  userSelection: any;
   disabled: boolean = false;
   org: any;
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private renderer: Renderer,
-    private eventBus$: EventbusService,    
+    private eventBus$: EventbusService,
     private session: SessionService,
     private alert: AlertService,
     private payslips: PayslipService,
@@ -49,7 +36,7 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
 
   showSelector() {
     this.selectorVisible = true;
-    setTimeout(() => { 
+    setTimeout(() => {
       this.renderer.invokeElementMethod(this.selectInputElRef.nativeElement, 'focus');
     }, 0);
 
@@ -58,7 +45,7 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
 
   onPayItemChanged($event) {
     if ($event.target.value === 'new') {
-      this.eventBus$.broadcast('payitem-modal:open', true);      
+      this.eventBus$.broadcast('payitem-modal:open', true);
     } else {
       if (this.selected && this.selected.is_new) {
         this.create($event.target.value);
@@ -89,7 +76,7 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
   create(pay_item_id: string) {
     this.disabled = true;
     const slipID = this.selected.pay_slip_id;
-    
+
     this.payslips.addItem(slipID, this.selected, { include: 'item' })
       .subscribe(response => {
         this.disabled = false;
@@ -106,13 +93,14 @@ export class PayitemInputComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
-    
+
     this.eventBus$.subscribe('payitem-modal:created', payitem => {
       console.log(payitem);
     })
   }
 
   ngAfterViewInit() {
+    console.log(this.selected);
     if (this.selected.hasOwnProperty('is_new') && this.selected.is_new) {
       this.showSelector();
     }

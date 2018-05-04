@@ -1,6 +1,6 @@
-import { Employee } from "../data/employee";
-import { PayslipItem } from "../data/payslip-item";
-import { Payrun } from "./payrun";
+import { Employee } from '../data/employee';
+import { PayslipItem } from '../data/payslip-item';
+import { Payrun } from './payrun';
 
 interface EmployeeData {
     data: Employee;
@@ -21,12 +21,12 @@ export interface Payslip {
     payrun: PayrunData;
     employee_id: string;
     wages: number;
-    deductions: number; 
+    deductions: number;
     tax: number;
-    reimbursements: number; 
+    reimbursements: number;
     net_pay: number;
     pdf_url?: number;
-    created_at: number; 
+    created_at: number;
     updated_at: number;
     employee: EmployeeData;
     items?: PayslipItemData;

@@ -1,4 +1,4 @@
-import { Payitem } from "../data/payitem";
+import { Payitem } from '../data/payitem';
 
 interface PayitemData {
     data: Payitem;

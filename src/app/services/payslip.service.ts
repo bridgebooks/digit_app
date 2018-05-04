@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { PayslipItems } from '../models/responses/payslip-items';
 import { PayslipReponse } from '../models/responses/payslip';
+import { PayslipItems } from '../models/responses/payslip-items';
 
 @Injectable()
 export class PayslipService {
@@ -65,7 +65,7 @@ export class PayslipService {
     const url = `${this.baseUrl}/${id}/items`;
 
     let params = new HttpParams();
-    
+
     if (options) {
       Object.keys(options).forEach(key => {
         params = params.append(key, options[key]);

@@ -43,7 +43,7 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let item of slip.items.data">
+            <tr *ngFor="let item of slip.items.data" [hidden]="canShowItem(item)">
               <td class="left col-item">
                 <payitem-input [item]="item" (itemSelected)="onPayItemSelected($event, item)" 
                 (itemCreated)="onPayslipItemCreated($event, item)"></payitem-input> 
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-4 pay-calculator">
+      <div class="col-lg-4 col-md-4 pay-calculator" *ngIf="!loading">
         <h3 class="calculator-header">Pay Calculation</h3>
         <hr>
         <dl class="clearfix">
