@@ -51,7 +51,7 @@
               <td class="left col-amount">
                 <payitem-amount-input [item]="item" (amountChanged)="onPayItemAmountChanged($event, item)"></payitem-amount-input>              
               </td>
-              <td class="col-action">
+              <td class="col-action" [hidden]="canDelete(item)">
                 <a class="item-remove" role="tooltip" aria-haspopup="true" 
                 class="tooltip tooltip-md tooltip-top-left" (click)="removeLine(item)">
                   <clr-icon shape="times"></clr-icon>

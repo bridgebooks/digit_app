@@ -233,6 +233,18 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     return true;
   }
 
+  canDelete(item: PayslipItem) {
+    if (item.hasOwnProperty('is_new')) return false;
+
+    if ([
+      this.settings.values.basic_wage_item,
+      this.settings.values.housing_allowance_item,
+      this.settings.values.transport_allowance_item
+    ].indexOf(item.pay_item_id) !== -1) {
+      return true;
+    }
+  }
+
   fetchPayItems() {
     this.loading = true;
     this.payslips.payItems(this.slip.id, { include: 'item' })
