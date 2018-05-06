@@ -1,20 +1,10 @@
-import { 
-  ViewChild, 
-  ViewContainerRef, 
-  ComponentRef,
-  ComponentFactoryResolver, 
-  ComponentFactory,
-  Component, 
-  OnInit, 
-  OnDestroy 
-} from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Modal } from '@clr/angular';
-import { PayrunFormComponent } from '../payrun-form/payrun-form.component';
-import { SessionService, PayrunService, OrgService } from '../../../services';
 import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { PayrunSettings, PayrunSettingsData } from '../../../models/responses/payrun-settings';
+import { PayrunSettingsData } from '../../../models/responses/payrun-settings';
+import { OrgService, PayrunService, SessionService } from '../../../services';
+import { PayrunFormComponent } from '../payrun-form/payrun-form.component';
 import { SetupModalComponent } from '../setup-modal/setup-modal.component';
 
 @Component({
@@ -60,8 +50,8 @@ export class PayrunsComponent implements OnInit, OnDestroy{
 
     this.setupModalComponentRef.instance.setupComplete.subscribe(complete => {
       if (complete) {
+        this.setupModalComponentRef.destroy();
         this.defer.next(false);
-        this.setupModalComponentRef.instance.modal.close();
       }
     })
   }
