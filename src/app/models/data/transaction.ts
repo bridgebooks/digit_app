@@ -1,11 +1,10 @@
-import { Payslip } from './payslip';
 
 interface AccountData {
     data: Account;
 };
 
 interface TransactionSource {
-    data: Payslip | any;
+    data: any;
 }
 
 export interface AccountTransaction {
