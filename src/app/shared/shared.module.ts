@@ -8,9 +8,9 @@ import { WindowService } from '../services/window.service';
 import { AccountSelectComponent } from './components/account-select/account-select.component';
 import { BankSelectComponent } from './components/bank-select/bank-select.component';
 import { ImportModalComponent } from './components/import-modal/import-modal.component';
+import { MarkPaidButtonComponent } from './components/mark-paid-button/mark-paid-button.component';
 import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
 import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
-import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 import { PinpadComponent } from './components/pinpad/pinpad.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
 import { CanDoDirective, CanseeDirective, CreditCardNumberDirective, IntlPhoneNumberPipe, MatchValidator, NumericDirective, PhoneNumberDirective, UppercaseFirstCharacterPipe } from './index';
@@ -43,11 +43,10 @@ import { MinusSignToParens } from './pipes/minus-parens';
     PinpadComponent,
     PayitemSelectComponent,
     ImportModalComponent,
-    PaymentModalComponent,
+    MarkPaidButtonComponent,
   ],
   entryComponents: [
     ImportModalComponent,
-    PaymentModalComponent
   ],
   exports: [
     BankSelectComponent,
@@ -63,7 +62,8 @@ import { MinusSignToParens } from './pipes/minus-parens';
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
     MinusSignToParens,
-    PinpadComponent
+    PinpadComponent,
+    MarkPaidButtonComponent
   ],
   providers: [IntlPhoneNumberPipe, CreditCardnoPipe]
 })

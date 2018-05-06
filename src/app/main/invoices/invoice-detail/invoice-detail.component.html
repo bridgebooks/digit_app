@@ -35,7 +35,8 @@
               <invoice-edit-button [invoice]="invoice"></invoice-edit-button>  
               <invoice-email-button [invoice]="invoice"></invoice-email-button>
               <invoice-print-button [invoice]="invoice"></invoice-print-button>
-              <!-- <button class="btn" [hidden]="!isPaid()" (click)="showPaymentModal()">Receive Payment</button> -->
+              <app-mark-paid-button [hidden]="isPaid()" [data]="invoice" [type]="'invoice'"
+              (onSuccess)="onPaid()"></app-mark-paid-button>
               <invoice-status-button [hidden]="invoice.status === 'Paid'" [invoice]="invoice" (statusChanged)="onStatusChanged($event)"></invoice-status-button>
             </div>
           </div>
