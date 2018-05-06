@@ -25,6 +25,7 @@
         <div class="card-header">
           <div class="row flex-items-lg-between lex-items-md-between">
             <div class="col-lg-3 col-md-5">
+                <button class="btn btn-sm btn-link">{{ slip.payrun.data.status | uppercase }}</button>
             </div>
             <div class="col-lg-6 col-md-5 slip-actions" style="text-align: right;">
               <button class="btn btn-primary" (click)="send(slip.id)" 
