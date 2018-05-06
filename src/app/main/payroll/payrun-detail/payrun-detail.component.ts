@@ -28,9 +28,9 @@ export class PayrunDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   isPaid() {
-    return ['paid', 'voided'].indexOf(this.run.status) === -1
-      ? false
-      : true;
+    return ['paid', 'voided'].indexOf(this.run.status) !== -1
+      ? true
+      : false;
   }
 
   send(id: string) {
