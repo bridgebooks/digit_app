@@ -1,30 +1,22 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { FileUploadModule } from 'ng2-file-upload';
-
-import {
-  IntlPhoneNumberPipe,
-  UppercaseFirstCharacterPipe,
-  NumericDirective,
-  CanseeDirective,
-  CanDoDirective,
-  PhoneNumberDirective,
-  MatchValidator,
-  CreditCardNumberDirective
-} from './index';
-import { BankSelectComponent } from './components/bank-select/bank-select.component';
-import { AccountSelectComponent } from './components/account-select/account-select.component';
-import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
-import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
-import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
-import { PinpadComponent } from './components/pinpad/pinpad.component';
-import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
 import { EventbusService } from '../services/index';
 import { WindowService } from '../services/window.service';
+import { AccountSelectComponent } from './components/account-select/account-select.component';
+import { BankSelectComponent } from './components/bank-select/bank-select.component';
 import { ImportModalComponent } from './components/import-modal/import-modal.component';
-import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
+import { MarkPaidButtonComponent } from './components/mark-paid-button/mark-paid-button.component';
+import { OrgbankaccountSelectComponent } from './components/orgbankaccount-select/orgbankaccount-select.component';
+import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
+import { PinpadComponent } from './components/pinpad/pinpad.component';
+import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
+import { CanDoDirective, CanseeDirective, CreditCardNumberDirective, IntlPhoneNumberPipe, MatchValidator, NumericDirective, PhoneNumberDirective, UppercaseFirstCharacterPipe } from './index';
+import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
+import { MinusSignToParens } from './pipes/minus-parens';
+
 
 @NgModule({
   imports: [
@@ -36,6 +28,7 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
   declarations: [
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
+    MinusSignToParens,
     NumericDirective,
     CanseeDirective,
     CanDoDirective,
@@ -50,11 +43,10 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     PinpadComponent,
     PayitemSelectComponent,
     ImportModalComponent,
-    PaymentModalComponent,
+    MarkPaidButtonComponent,
   ],
   entryComponents: [
     ImportModalComponent,
-    PaymentModalComponent
   ],
   exports: [
     BankSelectComponent,
@@ -69,7 +61,9 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     CreditCardNumberDirective,
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
-    PinpadComponent
+    MinusSignToParens,
+    PinpadComponent,
+    MarkPaidButtonComponent
   ],
   providers: [IntlPhoneNumberPipe, CreditCardnoPipe]
 })

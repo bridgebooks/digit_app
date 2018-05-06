@@ -72,7 +72,7 @@
               <td class="left">{{ item.thirty_day | number:"1.2-2" }}</td>
               <td class="left">{{ item.sixty_day | number:"1.2-2" }}</td>
               <td class="left">{{ item.ninety_day | number:"1.2-2" }}</td>
-              <td class="left">{{ item.total | number:"1.2-2" }}</td>
+              <td class="left">{{ item.total | number:"1.2-2" | minusSignToParens }}</td>
             </tr>
             <tr class="total">
               <td class="left">Total Receiveables</td>
@@ -80,7 +80,7 @@
               <td class="left">{{ report.thirty_day_total | number:"1.2-2" }}</td>
               <td class="left">{{ report.sixty_day_total | number:"1.2-2" }}</td>
               <td class="left">{{ report.ninety_day_total | number:"1.2-2" }}</td>
-              <td class="left">{{ report.total | number:"1.2-2" }}</td>
+              <td class="left">{{ report.total | number:"1.2-2" | minusSignToParens }}</td>
             </tr>
             <tr class="total">
               <td class="left"></td>

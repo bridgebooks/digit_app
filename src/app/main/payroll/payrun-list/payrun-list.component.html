@@ -16,7 +16,7 @@
             {{ run.start_date | amDateFormat:'D MMM YYYY' }} - 
             {{ run.end_date | amDateFormat:'D MMM YYYY' }}
           </a>  
-          <a *ngIf="run.status == 'approved'" [routerLink]="['/payroll/runs', run.id, 'view']">
+          <a *ngIf="run.status == 'approved' || run.status == 'paid'" [routerLink]="['/payroll/runs', run.id, 'view']">
             {{ run.start_date | amDateFormat:'D MMM YYYY' }} - 
             {{ run.end_date | amDateFormat:'D MMM YYYY' }}
           </a>        

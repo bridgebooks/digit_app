@@ -1,17 +1,7 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ViewContainerRef,
-  ComponentRef,
-  ComponentFactoryResolver,
-  ComponentFactory
-} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AlertService, InvoiceService } from '../../../services';
-import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -34,11 +24,7 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
     { label: 'Amount' }
   ];
 
-  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
-  paymentModalComponentRef: ComponentRef<PaymentModalComponent>;
-
   constructor(
-    private resolver: ComponentFactoryResolver,
     private router: Router,
     private route: ActivatedRoute,
     private alert: AlertService,
@@ -46,15 +32,21 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   isPaid() {
-    return this.invoice.status !== 'paid' || this.invoice.status !== 'voided';
+    if (this.invoice.status.toLowerCase() === 'paid') return true;
+    return false;
   }
 
   onStatusChanged($event) {
     this.invoice.status = $event;
   }
 
-  fetchInvoice(id: string) {
-    this.invoices.get(id, { ref: 'invoices', include: 'contact,items' })
+  onPaid() {
+    this.loading = true;
+    this.fetchInvoice(this.invoice.id, true);
+  }
+
+  fetchInvoice(id: string, skipCache: boolean = false) {
+    this.invoices.get(id, { ref: 'invoices', include: 'contact,items', skipCache })
       .subscribe(response => {
         this.loading = false;
         this.invoice = response.data;
@@ -62,17 +54,6 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
       err => {
         this.loading = false;
       });
-  }
-
-  showPaymentModal() {
-    this.modalContainer.clear();
-    const factory: ComponentFactory<PaymentModalComponent> = this.resolver.resolveComponentFactory(PaymentModalComponent);
-    this.paymentModalComponentRef = this.modalContainer.createComponent(factory);
-
-    this.paymentModalComponentRef.instance.amount = this.invoice.total;
-    this.paymentModalComponentRef.instance.invoice_type = 'sales';
-    this.paymentModalComponentRef.instance.invoice_id = this.invoice.id;
-    this.paymentModalComponentRef.instance.modal.open();
   }
 
   ngOnInit() {

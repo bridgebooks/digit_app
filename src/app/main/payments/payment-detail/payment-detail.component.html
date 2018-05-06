@@ -26,7 +26,7 @@
           </div>
           <div class="col-lg-3">
               <p class="bold">Reference</p>
-              <span>{{ payment.reference }}</span>
+              <span>{{ payment.transaction_ref }}</span>
             </div>
         </div>
         <hr>
@@ -34,21 +34,28 @@
         <table class="table">
           <thead>
             <tr>
-              <th>From</th>
+              <th *ngIf="payment.invoice_type == 'Invoice' && payment.invoice.data.type == 'acc_rec'">From</th>
+              <th *ngIf="payment.invoice_type == 'Invoice' && payment.invoice.data.type == 'acc_pay'">To</th>
+              <th *ngIf="payment.invoice_type == 'Payslip'">To</th>
               <th>Paid By</th>
-              <th>Invoice Number</th>
-              <th>Due Date</th>
+              <th *ngIf="payment.invoice_type == 'Invoice'">Invoice Number</th>
+              <th *ngIf="payment.invoice_type == 'Payslip'">Payslip Ref</th>
+              <th *ngIf="payment.invoice_type == 'Invoice'">Due Date</th>
               <th>Payment NGN</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{{ payment.invoice.data.contact.data.name }}</td>
+              <td *ngIf="payment.invoice_type == 'Invoice'">{{ payment.invoice.data.contact.data.name }}</td>
+              <td *ngIf="payment.invoice_type == 'Payslip'">{{ payment.invoice.data.employee.data.full_name }}</td>
               <td>{{ payment.full_name }}</td>
               <td>
-                <a [routerLink]="['/invoices/view', payment.invoice_id]">{{ payment.invoice.data.invoice_no }}</a>
+                <a *ngIf="payment.invoice_type == 'Invoice'" [routerLink]="['/invoices/view', payment.invoice_id]">
+                  {{ payment.invoice.data.invoice_no }}</a>
+                <a *ngIf="payment.invoice_type == 'Payslip'" [routerLink]="['/payroll/payslips', payment.invoice_id]">
+                    {{ payment.invoice.data.reference }}</a>
               </td>
-              <td>{{ payment.invoice.data.due_at | amDateFormat:'D MMM YYYY' }}</td>
+              <td *ngIf="payment.invoice_type == 'Invoice'">{{ payment.invoice.data.due_at | amDateFormat:'D MMM YYYY' }}</td>
               <td>{{ payment.amount | number:"1.2-2" }}</td>
             </tr>
           </tbody>

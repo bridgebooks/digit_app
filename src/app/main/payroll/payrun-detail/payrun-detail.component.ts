@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { Payrun } from '../../../models/data/payrun';
-import { PayrunService, AlertService } from '../../../services/index';
+import { AlertService, PayrunService } from '../../../services/index';
 
 @Component({
   selector: 'app-payrun-detail',
   templateUrl: './payrun-detail.component.html',
   styleUrls: ['./payrun-detail.component.scss']
 })
-export class PayrunDetailComponent implements OnInit {
+export class PayrunDetailComponent implements OnInit, OnDestroy {
 
   loading: boolean = true;
   sending: boolean = false;
@@ -27,6 +27,12 @@ export class PayrunDetailComponent implements OnInit {
     private payruns: PayrunService
   ) { }
 
+  isPaid() {
+    return ['paid', 'voided'].indexOf(this.run.status) !== -1
+      ? true
+      : false;
+  }
+
   send(id: string) {
     this.sending = true;
 
@@ -42,14 +48,14 @@ export class PayrunDetailComponent implements OnInit {
 
   fetchPayrun(id: string, showLoading: boolean = true) {
     this.loading = showLoading ? true : false;
-    
-    let options = {
+
+    const options = {
       include: 'payslips'
     }
 
-    let payrun$ = this.payruns.get(id, options);
+    const payrun$ = this.payruns.get(id, options);
 
-    payrun$ 
+    payrun$
       .takeUntil(this.cancel$)
       .subscribe(response => {
         this.run = response.data;
@@ -58,6 +64,10 @@ export class PayrunDetailComponent implements OnInit {
       }, () => {
         this.loading = false;
       })
+  }
+
+  onPaid() {
+    this.fetchPayrun(this.run.id, true);
   }
 
   ngOnInit() {
@@ -72,5 +82,4 @@ export class PayrunDetailComponent implements OnInit {
     this.route$.unsubscribe();
     this.cancel$.complete();
   }
-
 }
