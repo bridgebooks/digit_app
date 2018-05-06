@@ -81,7 +81,7 @@
           </tr>
           <tr class="total">
             <td class="left" style="width: 50%;">Net Assets</td>
-            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets_total - report.liabilities_total | number:"1.2-2" }}</td>
+            <td class="left" style="width: 50%;"><span class="currency-ngn"></span>{{ report.assets_total - report.liabilities_total | number:"1.2-2" | minusSignToParens }}</td>
           </tr>
         </tbody>
       </table>
