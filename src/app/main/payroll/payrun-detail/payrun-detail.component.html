@@ -25,6 +25,8 @@
                 <button class="btn btn-sm btn-link">{{ run.status | uppercase }}</button>
               </div>
               <div class="col-lg-6 col-md-5 invoice-actions" style="text-align: right;">
+                <app-mark-paid-button [hidden]="isPaid()" [data]="run" [type]="'payrun'" (onSuccess)="onPaid()">
+                </app-mark-paid-button>
                 <button class="btn btn-primary" (click)="send(run.id)" 
                 [clrLoading]="sending" [disabled]="sending">Send Payslips</button>
               </div>
