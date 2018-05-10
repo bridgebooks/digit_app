@@ -1,2 +1,2 @@
-<input type="text" name="amount" [(ngModel)]="selected.amount" 
-numeric (change)="input$.next($event.target.value)" [disabled]="disabled">
+<input type="number" name="amount" [(ngModel)]="selected.amount" 
+numeric (change)="input$.next($event.target.value)" [disabled]="disabled" min="1">
