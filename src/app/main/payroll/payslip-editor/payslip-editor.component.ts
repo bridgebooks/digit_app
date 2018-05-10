@@ -127,9 +127,9 @@ export class PayslipEditorComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     const options = {
-      basic: Number(basic.amount),
-      housing: Number(housing.amount),
-      transport: Number(transport.amount),
+      basic: basic ? Number(basic.amount) : 0,
+      housing: housing ? Number(housing.amount) : 0,
+      transport: transport ? Number(transport.amount) : 0,
       others: otherAllowances
     }
 

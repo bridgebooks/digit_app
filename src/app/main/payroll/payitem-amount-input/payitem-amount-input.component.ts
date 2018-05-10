@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
-import { PayslipService, AlertService } from '../../../services';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { AlertService, PayslipService } from '../../../services';
 
 @Component({
   selector: 'payitem-amount-input',
@@ -32,6 +32,7 @@ export class PayitemAmountInputComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.input$
+      .debounceTime(500)
       .distinctUntilChanged()
       .subscribe(value => {
         this.update(value);
