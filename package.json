@@ -40,6 +40,8 @@
     "angular4-fusioncharts": "^1.0.0",
     "body-parser": "^1.17.2",
     "card-validator": "^4.1.1",
+    "chart.js": "^2.7.2",
+    "chartjs": "^0.3.24",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
@@ -61,6 +63,7 @@
   "devDependencies": {
     "@angular/cli": "1.7.2",
     "@angular/compiler-cli": "5.2.7",
+    "@types/chart.js": "^2.7.18",
     "@types/jasmine": "2.5.53",
     "@types/node": "~8.0.17",
     "codelyzer": "~3.1.2",

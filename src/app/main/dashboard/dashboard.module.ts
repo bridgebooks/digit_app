@@ -6,6 +6,7 @@ import { SessionService, OrgService, StatsService } from '../../services';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { SalesWidgetComponent } from './sales-widget/sales-widget.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { DashboardComponent } from './dashboard.component';
     DashboardRoutingModule,
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    SalesWidgetComponent
   ],
   providers: [
     SessionService,
