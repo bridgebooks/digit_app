@@ -1,0 +1,11 @@
+<clr-dropdown>
+    <button type="button" class="btn btn-link" clrDropdownTrigger>
+        {{ selectedPeriod.label }}
+        <clr-icon shape="caret down"></clr-icon>
+    </button>
+    <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+        <button type="button" *ngFor="let period of periods" clrDropdownItem (click)="selectPeriod(period)">
+          {{ period.label }}
+        </button>
+    </clr-dropdown-menu>
+</clr-dropdown>

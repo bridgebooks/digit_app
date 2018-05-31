@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecievablesWidgetComponent } from './recievables-widget.component';
+import { PeriodSelectorComponent } from './period-selector.component';
 
-describe('RecievablesWidgetComponent', () => {
-  let component: RecievablesWidgetComponent;
-  let fixture: ComponentFixture<RecievablesWidgetComponent>;
+describe('PeriodSelectorComponent', () => {
+  let component: PeriodSelectorComponent;
+  let fixture: ComponentFixture<PeriodSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecievablesWidgetComponent ]
+      declarations: [ PeriodSelectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecievablesWidgetComponent);
+    fixture = TestBed.createComponent(PeriodSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
