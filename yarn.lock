@@ -467,10 +467,6 @@ angular2-pubsub@^4.0.3:
     ts-helpers "^1.1.2"
     zone.js "^0.7.6"
 
-angular4-fusioncharts@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/angular4-fusioncharts/-/angular4-fusioncharts-1.0.0.tgz#a5cabe5f146b2d6833180a74ce22d7fcd605e6f3"
-
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
@@ -2907,10 +2903,6 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
 function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
-
-fusioncharts@^3.12.2:
-  version "3.12.2"
-  resolved "https://registry.yarnpkg.com/fusioncharts/-/fusioncharts-3.12.2.tgz#df255ffd39929a1873135892460d5ce59b637176"
 
 gauge@~2.7.3:
   version "2.7.4"

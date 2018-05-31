@@ -1,15 +1,27 @@
 <div class="dashboard-widget card" id="sales-widget">
   <div class="card-header">
-    <div class="row flex-items-lg-between flex-items-md-between">
-      <div class="col-lg-3">Sales</div>
-      <div class="col-lg-3"></div>
-    </div>
+    <h3>Sales</h3>
   </div>
 
   <div class="card-block">
-    <div></div>
-    <div class="widget-chart-container">
-        <canvas class="widget-chart-canvas" id="sales-widget-chart" height="300" width="410"></canvas>
+    <div class="progress top loop" *ngIf="fetching">
+        <progress></progress>
+    </div>
+    <div class="card-inner">
+      <div class="row">
+        <div class="widget-total col-lg-7 col-md-7">
+          <h3 class="currency-ngn">{{ total | number:"1.2-2" }}</h3>
+          <p>{{ period.selectedPeriod.label }}</p>
+        </div>
+
+        <div class="col-lg-5 col-md-5">
+          <app-period-selector #period (periodSelected)="onQueryPeroidSelected($event)"></app-period-selector>
+        </div>
+      </div>
+
+      <div class="widget-chart-container">
+          <canvas class="widget-chart-canvas" id="sales-widget-chart" height="300" width="410"></canvas>
+      </div>
     </div>
   </div>
 </div>

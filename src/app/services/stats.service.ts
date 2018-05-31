@@ -8,7 +8,7 @@ export class StatsService {
 
   constructor(private http: HttpClient) { }
 
-  invoices(id: string, options: object) {
+  sales(id: string, options: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const url = `${this.baseUrl}/${id}/sales`;
     let params = new HttpParams();
