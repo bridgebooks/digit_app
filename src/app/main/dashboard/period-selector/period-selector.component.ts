@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Output, OnInit, EventEmitter, Input } from '@angular/core';
 import * as moment from 'moment';
 
 export interface QueryPeriod {
@@ -15,7 +15,9 @@ export interface QueryPeriod {
 })
 export class PeriodSelectorComponent implements OnInit {
 
-  public periods: QueryPeriod[] = [
+  @Input('alt') alt: boolean;
+  public periods: QueryPeriod[];
+  public regularPeriods: QueryPeriod[] = [
     {
       label: 'This Week',
       time_period: 'week'
@@ -35,6 +37,25 @@ export class PeriodSelectorComponent implements OnInit {
     {
       label: 'This Quarter',
       time_period: 'quarter'
+    }
+  ]
+
+  public altPeriods: QueryPeriod[] = [
+    {
+      label: '30 Days',
+      time_period: '30days'
+    },
+    {
+      label: 'This Month',
+      time_period: 'month'
+    },
+    {
+      label: 'This Quarter',
+      time_period: 'quarter'
+    },
+    {
+      label: 'This Year',
+      time_period: 'year'
     }
   ]
   selectedPeriod: QueryPeriod;
@@ -66,6 +87,10 @@ export class PeriodSelectorComponent implements OnInit {
         start = this.current.clone().startOf('quarter');
         end = this.current.clone().endOf('quarter');
         break;
+      case 'year':
+        start = this.current.clone().startOf('year');
+        end = this.current.clone().endOf('year');
+        break;
     }
 
     period.end = end.format('YYYY-MM-DD');
@@ -79,6 +104,7 @@ export class PeriodSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.periods = this.alt ? this.altPeriods : this.regularPeriods;
     this.selectedPeriod = this.setStartEnd(this.periods[0]);
   }
 }
