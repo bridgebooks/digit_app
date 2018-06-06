@@ -31,6 +31,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   @Input('saving') saving: boolean;
   @Input('model') model;
   @Output() onSaveInvoice = new EventEmitter<any>();
+  contactType: string;
   differ: any;
 
   showInvoiceSettingsAlert: boolean = false;
@@ -221,6 +222,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
     this.editing = changes.editing ? changes.editing.currentValue : this.editing;
     this.type = changes.type ? changes.type.currentValue : this.type;
     this.saving = changes.saving ? changes.saving.currentValue : this.saving;
+    this.contactType = this.type && this.type === 'acc_rec' ? 'customer' : 'vendor'
   }
 
   ngAfterContentInit() {

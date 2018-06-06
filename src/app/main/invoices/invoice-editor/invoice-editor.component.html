@@ -32,7 +32,7 @@
     <div class="editor-toolbar">
       <div class="row">
         <div class="col-md-3">
-          <app-contact-select (onContactSelected)="onContactSelect($event)" [selected]="model.contact"></app-contact-select>
+          <app-contact-select (onContactSelected)="onContactSelect($event)" [selected]="model.contact" [type]="contactType"></app-contact-select>
         </div>
         <div class="col-md-2">
           <my-date-picker name="raised_at" [options]="datePickerOptions" placeholder="Date" [selDate]="raisedAtDate" (dateChanged)="onRaisedAtDateChanged($event)"></my-date-picker>

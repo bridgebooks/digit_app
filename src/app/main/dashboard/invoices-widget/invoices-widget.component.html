@@ -1,18 +1,29 @@
-<div class="card">
+<div class="dashboard-widget card" id="invoices-widget">
   <div class="card-header">
-      Invoices
+    <h3>Invoices</h3>
   </div>
-  <div class="card-block clearfix">
-    <div class="spinner-container" *ngIf="loading">
-        <span class="spinner">
-            Loading...
-        </span>
+
+  <div class="card-block">
+      <div class="progress top loop" *ngIf="fetching">
+          <progress></progress>
+      </div>
+      <div class="card-inner">
+        <div class="row">
+          <div class="widget-total col-lg-7 col-md-7">
+            <h3 class="currency-ngn">{{ total | number:"1.2-2" }}</h3>
+            <p>Invoices for {{ period.selectedPeriod.label }}</p>
+          </div>
+  
+          <div class="col-lg-5 col-md-5">
+            <app-period-selector #period [alt]="true" (periodSelected)="onPeriodChange($event)"></app-period-selector>
+          </div>
+        </div>
+  
+        <div class="widget-chart-container">
+          <div class="chart">
+            <app-bar-chart [total]="total" [dataset]="dataset"></app-bar-chart>
+          </div>
+        </div>
+      </div>
     </div>
-    <fusioncharts #chartel *ngIf="!loading" [type]="'doughnut2d'" 
-    [dataFormat]="'json'" [dataSource]="chartConfig"></fusioncharts>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-sm" [ngClass]="{'btn-primary': isActiveInterval('week')}" (click)="interval$.next('week')">7 Days</button>
-    <button class="btn btn-sm" [ngClass]="{'btn-primary': isActiveInterval('month')}" (click)="interval$.next('month')">30 Days</button>
-  </div>
 </div>
