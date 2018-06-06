@@ -1,30 +1,35 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { SessionService } from '../../../services';
-import { StatsService } from '../../../services/stats.service';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PeriodSelectorComponent, QueryPeriod } from '../period-selector/period-selector.component';
+import { SessionService, StatsService } from '../../../services';
+import { NumericDictionary } from 'lodash';
 
 @Component({
-  selector: 'app-profit-loss-widget',
-  templateUrl: './profit-loss-widget.component.html',
-  styleUrls: ['./profit-loss-widget.component.scss']
+  selector: 'app-invoices-widget',
+  templateUrl: './invoices-widget.component.html',
+  styleUrls: ['./invoices-widget.component.scss']
 })
-export class ProfitLossWidgetComponent implements OnInit, AfterViewInit {
+export class InvoicesWidgetComponent implements OnInit, AfterViewInit {
 
   @ViewChild('period') periodSelect: PeriodSelectorComponent
   period: QueryPeriod;
   fetching: boolean = true;
   org: any;
   total: number = 0;
-  _total: number = 0;
   dataset = [
     {
-      title: 'Income',
+      title: 'Paid',
       value: 0,
       color: '#002538',
       size: 0
     },
     {
-      title: 'Expenses',
+      title: 'Unpaid',
+      value: 0,
+      color: '#002538',
+      size: 0
+    },
+    {
+      title: 'Overdue',
       value: 0,
       color: '#b31313',
       size: 0
@@ -35,18 +40,17 @@ export class ProfitLossWidgetComponent implements OnInit, AfterViewInit {
   fetchData(period: QueryPeriod, showLoading = true) {
     if (showLoading && !this.fetching) this.fetching = true;
     this.stats
-      .pl(this.org.id, { start: period.start, end: period.end })
+      .invoices(this.org.id, { start: period.start, end: period.end })
       .subscribe(response => {
         this.fetching = false;
-        this.total = response.data.net_profit;
-        this.dataset[0].value = response.data.income;
-        this.dataset[1].value = response.data.expenses;
-        this._total = this.dataset.reduce((a, b) => +a + +b.value, 0);
+        this.total = response.data.total;
+        this.dataset[0].value = response.data.paid;
+        this.dataset[1].value = response.data.unpaid;
+        this.dataset[1].value = response.data.overdue;
       }, error => {
         this.fetching = false;
       });
   }
-
 
   onPeriodChange($event: QueryPeriod) {
     this.period = $event;
@@ -61,4 +65,5 @@ export class ProfitLossWidgetComponent implements OnInit, AfterViewInit {
     this.period = this.periodSelect.selectedPeriod;
     this.fetchData(this.period);
   }
+
 }

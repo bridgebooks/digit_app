@@ -3,7 +3,7 @@
     <div class="label-value"><span class="currency-ngn">{{ data.value | number:"1.2-2" }}</span></div>
     <div class="label-title">{{ data.title }}</div>
   </div>
-  <div class="bar-image" [ngStyle]="{ width: getBarWidth(data) }">
-    <div class="bar-display" [ngStyle]="{ 'background-color': data.color, width: getBarWidth(data) }"></div>
+  <div class="bar-image" [ngStyle]="{ 'width': data.size }">
+    <div class="bar-display" [ngStyle]="{ 'background-color': data.color, 'width': data.size }"></div>
   </div>
 </div>
