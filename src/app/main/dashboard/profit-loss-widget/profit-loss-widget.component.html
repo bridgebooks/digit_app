@@ -1,6 +1,6 @@
 <div class="dashboard-widget card" id="sales-widget">
   <div class="card-header">
-    <h3>Sales</h3>
+    <h3>Proft and Loss</h3>
   </div>
 
   <div class="card-block">
@@ -11,16 +11,18 @@
       <div class="row">
         <div class="widget-total col-lg-7 col-md-7">
           <h3 class="currency-ngn">{{ total | number:"1.2-2" }}</h3>
-          <p>{{ period.selectedPeriod.label }}</p>
+          <p>Net Income for {{ period.selectedPeriod.label }}</p>
         </div>
 
         <div class="col-lg-5 col-md-5">
-          <app-period-selector #period [alt]="false" (periodSelected)="onQueryPeroidSelected($event)"></app-period-selector>
+          <app-period-selector #period [alt]="true" (periodSelected)="onPeriodChange($event)"></app-period-selector>
         </div>
       </div>
 
       <div class="widget-chart-container">
-          <canvas class="widget-chart-canvas" id="sales-widget-chart" height="300" width="410"></canvas>
+        <div class="chart">
+          <app-bar-chart [total]="_total" [dataset]="dataset"></app-bar-chart>
+        </div>
       </div>
     </div>
   </div>

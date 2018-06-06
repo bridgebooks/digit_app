@@ -9,6 +9,10 @@ import { DashboardComponent } from './dashboard.component';
 import { SalesWidgetComponent } from './sales-widget/sales-widget.component';
 import { PeriodSelectorComponent } from './period-selector/period-selector.component';
 import { ClarityModule } from '@clr/angular';
+import { ExpensesWidgetComponent } from './expenses-widget/expenses-widget.component';
+import { ProfitLossWidgetComponent } from './profit-loss-widget/profit-loss-widget.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { InvoicesWidgetComponent } from './invoices-widget/invoices-widget.component';
 
 @NgModule({
   imports: [
@@ -19,7 +23,11 @@ import { ClarityModule } from '@clr/angular';
   declarations: [
     DashboardComponent,
     SalesWidgetComponent,
-    PeriodSelectorComponent
+    PeriodSelectorComponent,
+    ExpensesWidgetComponent,
+    ProfitLossWidgetComponent,
+    BarChartComponent,
+    InvoicesWidgetComponent
   ],
   providers: [
     SessionService,
