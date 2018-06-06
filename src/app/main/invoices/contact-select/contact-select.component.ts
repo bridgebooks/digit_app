@@ -42,6 +42,7 @@ export class ContactSelectComponent implements OnInit, OnDestroy {
   org: any;
 
   @Input('selected') selected;
+  @Input('type') type: string;
   @Output() onContactSelected = new EventEmitter();
 
   constructor(
@@ -81,7 +82,8 @@ export class ContactSelectComponent implements OnInit, OnDestroy {
       .getContacts(this.org.id, {
         orderBy: 'created_at',
         sortedBy: 'desc',
-        perPage: 5
+        perPage: 5,
+        ...(this.type && { type: this.type })
       })
       .subscribe(response => {
         this.results = response.data
