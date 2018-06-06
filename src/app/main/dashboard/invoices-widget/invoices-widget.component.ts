@@ -46,7 +46,7 @@ export class InvoicesWidgetComponent implements OnInit, AfterViewInit {
         this.total = response.data.total;
         this.dataset[0].value = response.data.paid;
         this.dataset[1].value = response.data.unpaid;
-        this.dataset[1].value = response.data.overdue;
+        this.dataset[2].value = response.data.overdue;
       }, error => {
         this.fetching = false;
       });
