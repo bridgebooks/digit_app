@@ -19,13 +19,13 @@ export class InvoicesWidgetComponent implements OnInit, AfterViewInit {
     {
       title: 'Paid',
       value: 0,
-      color: '#002538',
+      color: '#64c2f3',
       size: 0
     },
     {
       title: 'Unpaid',
       value: 0,
-      color: '#002538',
+      color: '#46ceb0',
       size: 0
     },
     {
