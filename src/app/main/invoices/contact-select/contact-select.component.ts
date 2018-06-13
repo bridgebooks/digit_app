@@ -58,7 +58,7 @@ export class ContactSelectComponent implements OnInit, OnDestroy {
 
     this.modal.close();
     this.contactModalComponentRef.instance.model.org_id = this.org.id;
-    this.contactModalComponentRef.instance.model.type = 'customer';
+    this.contactModalComponentRef.instance.model.type = this.type;
     this.contactModalComponentRef.instance.modal.open();
 
     this.contactModalComponentRef.instance.modal.
