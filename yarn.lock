@@ -268,6 +268,10 @@
   version "7.4.12"
   resolved "https://registry.yarnpkg.com/@types/google-libphonenumber/-/google-libphonenumber-7.4.12.tgz#fe22fdc1c6571f5e9991da26938411d3d2a05d4f"
 
+"@types/intro.js@^2.4.3":
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@types/intro.js/-/intro.js-2.4.3.tgz#dabdec09604732e25a321a0040dd8ec34190dff6"
+
 "@types/jasmine@2.5.53":
   version "2.5.53"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.53.tgz#4e0cefad09df5ec48c8dd40433512f84b1568d61"
@@ -3675,6 +3679,10 @@ interpret@^1.0.0:
 intl@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
+
+intro.js@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-2.9.3.tgz#001d9a7bca66d8f4d2d0253c9b3345e9ae4320c3"
 
 invariant@^2.2.2:
   version "2.2.2"
