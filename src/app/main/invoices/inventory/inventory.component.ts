@@ -1,14 +1,16 @@
-import { ViewChild, Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { AlertService, SessionService, OrgService, ItemService } from '../../../services';
+import { ViewChild, Component, ChangeDetectorRef, OnInit, AfterViewInit } from '@angular/core';
+import { AlertService, TourService, SessionService, OrgService, ItemService } from '../../../services';
 import { Item } from '../../../models/data/item';
 import { ItemModalComponent } from '../item-modal/item-modal.component';
+import { InventoryTour } from './inventory.tour';
+import { ITourDefinition } from '../../../services/tour.service';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent implements OnInit, AfterViewInit {
 
   @ViewChild('itemModal') itemModal: ItemModalComponent;
   loading: boolean;
@@ -23,6 +25,7 @@ export class InventoryComponent implements OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
+    private tour: TourService,
     private session: SessionService,
     private alert: AlertService,
     private orgService: OrgService,
@@ -67,8 +70,15 @@ export class InventoryComponent implements OnInit {
       })
   }
 
+  startTour() {
+    this.tour.start(InventoryTour, true);
+  }
+
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
   }
 
+  ngAfterViewInit() {
+    this.tour.start(InventoryTour);
+  }
 }

@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
-
-import 'rxjs/add/operator/catch';
 
 import { OrgResponse } from '../models/responses/org';
 import { ContactsResponse } from '../models/responses/contacts';
 import { ItemsResponse } from '../models/responses/items';
 import { AccountsResponse } from '../models/responses/accounts';
 import { TaxRatesResponse } from '../models/responses/tax-rates';
-import { Org } from '../models/data/org';
 import { PayrunsResponse } from '../models/responses/payruns';
 import { PayitemsResponse } from '../models/responses/payitems';
 import { PayrunSettings } from '../models/responses/payrun-settings';
@@ -38,7 +34,7 @@ export class OrgService {
 
   constructor(private http: HttpClient) { }
 
-  create(body: object): Observable<OrgCreateResponse> {
+  create(body: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     return this.http.post<OrgCreateResponse>(this.baseUrl, body, { headers })
@@ -129,7 +125,7 @@ export class OrgService {
     return this.http.get<any>(url, { headers, params })
   }
 
-  getPayruns(id: string, options?: object): Observable<PayrunsResponse> {
+  getPayruns(id: string, options?: object) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams();
     const url = `${this.baseUrl}/${id}/payruns`;

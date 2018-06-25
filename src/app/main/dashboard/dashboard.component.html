@@ -1,5 +1,27 @@
 <div class="dashboard-wrapper">
   <div class="row">
+    <div class="col-lg-10 col-md-10">
+      <div class="alert alert-info">
+          <div class="alert-items">
+              <div class="alert-item static">
+                  <div class="alert-icon-wrapper">
+                      <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
+                  </div>
+                  <span class="alert-text">Welcome to the Bridgebooks Dashboard. Need help understanding the dashboard?, click the 'Start Tutorial' link to get
+                    quick tutorial.
+                  </span>
+                  <div class="alert-actions">
+                      <a class="alert-action" (click)="startTour(true)">Start Tutorial</a>
+                  </div>
+              </div>
+          </div>
+          <button type="button" class="close" aria-label="Close">
+              <clr-icon aria-hidden="true" shape="close"></clr-icon>
+          </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-lg-5 col-md-5">
       <app-profit-loss-widget></app-profit-loss-widget>
     </div>
