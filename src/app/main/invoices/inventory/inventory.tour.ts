@@ -7,7 +7,7 @@ export const InventoryTour: ITourDefinition = {
         {
             target: 'new-item-btn',
             title: 'Creating items',
-            content: 'text goes here',
+            content: 'Generate Invoices and keep track of your items in stock, the cost price and the selling price.',
             placement: 'bottom'
         }
     ]

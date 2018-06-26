@@ -8,25 +8,25 @@ export const DashboardTour: ITourDefinition = {
             target: 'profit-loss-widget',
             placement: 'right',
             title: 'Profit & Loss',
-            content: 'Text goes here'
+            content: 'Your Profit and Loss Overview Shows Total Income and Expenses Over a Period of Time.'
         },
         {
             target: 'invoices-widget',
             placement: 'left',
             title: 'Invoices',
-            content: 'Text goes here'
+            content: 'Understand how much of your invoices are Paid, Unpaid and Overdue'
         },
         {
             target: 'sales-widget',
             placement: 'top',
             title: 'Sales',
-            content: 'Text goes here'
+            content: 'Watch your sales growth and keep track of your Income'
         },
         {
             target: 'expenses-widget',
             placement: 'top',
             title: 'Expenses',
-            content: 'Text goes here'
+            content: 'Understand how much expenses are made and what generates the most expenses over a period.'
         }
     ]
 }
