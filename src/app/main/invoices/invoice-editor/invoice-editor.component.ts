@@ -7,16 +7,18 @@ import {
   KeyValueDiffers,
   OnInit,
   OnChanges,
+  AfterViewInit,
   AfterContentInit,
   OnDestroy,
   DoCheck
 } from '@angular/core';
 import { IMyDpOptions, IMyDate, IMyDateModel } from 'mydatepicker';
-import { InvoiceService, OrgService } from '../../../services';
+import { InvoiceService, OrgService, TourService } from '../../../services';
 import { InvoiceUtils } from '../invoice-edit/invoice-utils';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { InvoiceValidator } from './invoice-editor.validator';
+import { InvoicEditorTour } from './invoice-edit.tour';
 
 @Component({
   selector: 'app-invoice-editor',
@@ -24,7 +26,7 @@ import { InvoiceValidator } from './invoice-editor.validator';
   styleUrls: ['./invoice-editor.component.scss']
 })
 
-export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, DoCheck {
+export class InvoiceEditorComponent implements OnInit, OnChanges, AfterViewInit, AfterContentInit, OnDestroy, DoCheck {
   @Input('type') type;
   @Input('org') org;
   @Input('editing') editing: boolean;
@@ -67,6 +69,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
   invoiceSettings$: Observable<any>;
 
   constructor(
+    private tour: TourService,
     private differs: KeyValueDiffers,
     private invoices: InvoiceService,
     private orgService: OrgService) {
@@ -123,7 +126,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
       if (item.tax_rate) {
         switch (this.model.line_amount_type) {
           case 'inclusive':
-            total = total + ( item.amount - ( item.amount / ((item.tax_rate.value/100) + 1)) )
+            total = total + ( item.amount - ( item.amount / ((item.tax_rate.value / 100) + 1)) )
             break;
           case 'exclusive':
             total = total + (item.tax_rate.value / 100) * item.amount;
@@ -183,6 +186,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
     this.onSaveInvoice.emit(this.model);
   }
 
+  startTour() {
+    this.tour.start(InvoicEditorTour, true);
+  }
+
   ngOnInit() {
     if (!this.editing) {
       this.model = this.modelDefaults;
@@ -234,6 +241,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
      })
   }
 
+  ngAfterViewInit() {
+    this.tour.start(InvoicEditorTour);
+  }
+
   ngOnDestroy() {
     this.cancel$.complete();
   }
@@ -263,6 +274,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges, AfterContentIn
           this.disableBtn = false;
         }
       }, 2000);
-	  }
+    }
   }
 }

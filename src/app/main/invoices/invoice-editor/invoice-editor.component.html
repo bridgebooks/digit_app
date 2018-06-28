@@ -8,7 +8,7 @@
           New to creating sales invoices or bills.
         </span>
         <div class="alert-actions">
-            <a>Start Tutorial</a>
+            <a (click)="startTour()">Start Tutorial</a>
         </div>
     </div>
   </div>
@@ -52,12 +52,12 @@
         <div class="col-md-2">
           <my-date-picker name="raised_at" [options]="datePickerOptions" placeholder="Date" [selDate]="raisedAtDate" (dateChanged)="onRaisedAtDateChanged($event)"></my-date-picker>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2" id="due-date">
           <my-date-picker name="due_at" [options]="datePickerOptions" placeholder="Due Date" [selDate]="dueAtDate" (dateChanged)="onDueAtDateChanged($event)"></my-date-picker>
         </div>
         <div class="col-md-5">
           <span style="font-size: .8em;">Amounts are: </span>
-          <app-line-amount-type-select [selected]="model.line_amount_type" (onTypeSelect)="onLineAmountTypeSelected($event)"></app-line-amount-type-select>
+          <app-line-amount-type-select id="tax-settings" [selected]="model.line_amount_type" (onTypeSelect)="onLineAmountTypeSelected($event)"></app-line-amount-type-select>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <app-invoice-item-table [type]="type" [items]="model.items.data || model.items" (lineItemChanged)="onItemChanged($event)" (lineItemRemoved)="onItemRemoved($event)">
+      <app-invoice-item-table id="invoice-table" [type]="type" [items]="model.items.data || model.items" (lineItemChanged)="onItemChanged($event)" (lineItemRemoved)="onItemRemoved($event)">
       </app-invoice-item-table>
 
       <div class="row flex-items-md-between">
