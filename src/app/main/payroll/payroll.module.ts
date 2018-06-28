@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { MomentModule } from 'angular2-moment';
 import { MyDatePickerModule } from 'mydatepicker';
-import { AlertService, EmployeeService, OrgService, PaymentsService, PayrunService, PayslipService, SearchService, SessionService } from '../../services';
+import { AlertService, TourService, EmployeeService, OrgService, PaymentsService, PayrunService, PayslipService, SearchService, SessionService } from '../../services';
 import { SharedModule } from '../../shared/shared.module';
 import { SettingsModule } from '../settings/settings.module';
 import { EmployeeBulkactionDropdownComponent } from './employee-bulkaction-dropdown/employee-bulkaction-dropdown.component';
@@ -61,6 +61,7 @@ import { SetupModalComponent } from './setup-modal/setup-modal.component';
     PayslipComponent
   ],
   providers: [
+    TourService,
     SessionService,
     AlertService,
     SearchService,

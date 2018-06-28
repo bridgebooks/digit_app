@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, SessionService, InvoiceService } from '../../../services';
+import { AlertService, TourService, SessionService, InvoiceService } from '../../../services';
 import { InvoiceUtils } from './invoice-utils';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
@@ -25,6 +25,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private alert: AlertService,
+    private tour: TourService,
     private router: Router,
     private route: ActivatedRoute,
     private session: SessionService,
@@ -101,7 +102,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
     this.route$ = route$.subscribe(route => {
       this.editing = route.params.id ? true : false;
-      this.mode = route.qparams.type || 'acc_rec';
+      this.mode = route.params.type || 'acc_rec';
       if (this.editing) this.fetchInvoice(route.params.id)
     })
   }

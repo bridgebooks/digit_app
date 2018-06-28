@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { SharedModule } from '../../shared/shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
@@ -16,6 +15,7 @@ import { ContactSelectComponent } from './contact-select/contact-select.componen
 
 import {
   AlertService,
+  TourService,
   SearchService,
   ContactService,
   OrgService,
@@ -77,6 +77,7 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
   ],
   providers: [
     AlertService,
+    TourService,
     SearchService,
     ContactService,
     OrgService,
