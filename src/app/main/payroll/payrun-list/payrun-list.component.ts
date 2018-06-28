@@ -13,7 +13,7 @@ import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 import { Payrun } from '../../../models/data/payrun';
 import { Subscription} from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
-import { takeUntil } from 'rxjs/operators/takeUntil';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-payrun-list',

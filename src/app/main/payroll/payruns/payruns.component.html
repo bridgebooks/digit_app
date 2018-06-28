@@ -1,16 +1,22 @@
 <section>
   <div class="row flex-items-lg-between page-header">
       <div class="col-lg-4">
-          <h2>Payroll</h2>
+          <h2>
+            Payroll
+            <a (click)="startTour()" role="tooltip" aria-haspopup="true" class="tooltip tooltip-right tooltip-sm">
+                <clr-icon shape="info-standard" class="is-solid"></clr-icon>
+                <span class="tooltip-content">Get a quick tutorial</span>
+            </a>
+          </h2>
       </div>
       <div class="col-lg-4">
-          <a class="btn btn-primary" (click)="payrunModal.open()" style="margin-top: 10px;">New Pay Roll</a>
+          <a class="btn btn-primary" (click)="payrunModal.open()" style="margin-top: 10px;" id="new-payrun-btn">New Pay Roll</a>
       </div>
   </div>
 
   <div class="row">
         <div class="col-lg-12 col-md-12">
-            <nav class="subnav">
+            <nav class="subnav" id="payrun-nav">
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['/payroll/runs']" [routerLinkActive]="'active'"

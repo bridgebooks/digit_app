@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
-import { SessionService, OrgService, StatsService } from '../../services';
+import { SessionService, TourService, OrgService, StatsService } from '../../services';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -31,6 +30,7 @@ import { InvoicesWidgetComponent } from './invoices-widget/invoices-widget.compo
   ],
   providers: [
     SessionService,
+    TourService,
     OrgService,
     StatsService
   ]

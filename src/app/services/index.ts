@@ -24,3 +24,4 @@ export * from './role.service';
 export * from './plan.service';
 export * from './payments.service';
 export * from './eventbus.service';
+export * from './tour.service';

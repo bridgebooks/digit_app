@@ -1,6 +1,6 @@
-import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertService, SessionService, OrgService } from '../../../services';
+import { AlertService, TourService, SessionService, OrgService } from '../../../services';
 import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
@@ -8,13 +8,14 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/combineLatest';
+import { InvoiceListTour } from './invoice-list.tour';
 
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.scss']
 })
-export class InvoiceListComponent implements OnInit, OnDestroy {
+export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   route$: Subscription;
   cancel$: Subject<any> = new Subject();
@@ -33,6 +34,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private alert: AlertService,
+    private tour: TourService,
     private session: SessionService,
     private orgService: OrgService
   ) { }
@@ -74,6 +76,10 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
       })
   }
 
+  startTour() {
+    this.tour.start(InvoiceListTour, true);
+  }
+
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
 
@@ -88,6 +94,10 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
       this.refresh({})
 
     })
+  }
+
+  ngAfterViewInit() {
+    this.tour.start(InvoiceListTour);
   }
 
   ngOnDestroy() {
