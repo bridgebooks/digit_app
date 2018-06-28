@@ -1,4 +1,13 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Modal } from '@clr/angular';
 import { Subject } from 'rxjs/Subject';
@@ -6,6 +15,9 @@ import { PayrunSettingsData } from '../../../models/responses/payrun-settings';
 import { OrgService, PayrunService, SessionService } from '../../../services';
 import { PayrunFormComponent } from '../payrun-form/payrun-form.component';
 import { SetupModalComponent } from '../setup-modal/setup-modal.component';
+import { AfterViewInit } from '@angular/core';
+import { TourService } from '../../../services/tour.service';
+import { PayrunsTour } from './payrun-list.tour';
 
 @Component({
   selector: 'app-payruns',
@@ -13,7 +25,7 @@ import { SetupModalComponent } from '../setup-modal/setup-modal.component';
   styleUrls: ['./payruns.component.scss']
 })
 
-export class PayrunsComponent implements OnInit, OnDestroy{
+export class PayrunsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('payrunModal') payrunModal: Modal;
   @ViewChild('form') periodForm: PayrunFormComponent
@@ -29,6 +41,7 @@ export class PayrunsComponent implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     private resolver: ComponentFactoryResolver,
+    private tour: TourService,
     private orgService: OrgService,
     private session: SessionService,
     private payruns: PayrunService) { }
@@ -88,6 +101,10 @@ export class PayrunsComponent implements OnInit, OnDestroy{
       })
   }
 
+  startTour() {
+    this.tour.start(PayrunsTour, true);
+  }
+
   ngOnInit() {
     this.org = this.session.getDefaultOrg()
     this.getSettings();
@@ -99,6 +116,10 @@ export class PayrunsComponent implements OnInit, OnDestroy{
           this.cancel$.next();
         }
       })
+  }
+
+  ngAfterViewInit() {
+    this.tour.start(PayrunsTour);
   }
 
   ngOnDestroy() {
