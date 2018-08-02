@@ -9,8 +9,8 @@ import { AlertService, JwtService } from '../../../services';
   styleUrls: ['./logo-upload.component.scss']
 })
 export class LogoUploadComponent implements OnInit, OnChanges {
-  @Input('url')
-  logoUrl: string;
+  // tslint:disable-next-line:no-input-rename
+  @Input('url') logoUrl: string;
 
   @Output() logoUrlChanged = new EventEmitter();
 
@@ -23,13 +23,13 @@ export class LogoUploadComponent implements OnInit, OnChanges {
   showImageSelectModal: boolean = false;
   uploadBtnDisabled: boolean = true;
 
-  constructor(private alertService: AlertService, private jwtService: JwtService) { 
+  constructor(private alertService: AlertService, private jwtService: JwtService) {
     const uploadUrl = `${environment.apiUrl}orgs/logo`;
 
     this.uploader = new FileUploader({
       url: uploadUrl,
       autoUpload: false,
-      allowedMimeType: [ 'image/png', 'image/jpg', 'image/jpeg' ],      
+      allowedMimeType: [ 'image/png', 'image/jpg', 'image/jpeg' ],
       method: 'POST',
       maxFileSize: 1 * 1024 * 1024,
       authToken: 'Bearer ' + this.jwtService.readToken()

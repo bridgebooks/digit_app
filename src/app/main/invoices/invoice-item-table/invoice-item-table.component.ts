@@ -29,9 +29,7 @@ export class InvoiceItemTableComponent implements OnInit, OnChanges {
 
   rowItemSelected(row) {
     row.quantity = 1;
-    
     if (this.type === 'acc_rec' && row.item.sale_account) {
-
       row.account_id = row.item.sale_account.data.id;
       row.description = row.item.sale_description;
       row.unit_price = row.item.sale_unit_price;
@@ -39,7 +37,6 @@ export class InvoiceItemTableComponent implements OnInit, OnChanges {
       row.tax_rate = row.item.sale_tax ?  row.item.sale_tax.data : row.tax_rate;
       row.tax_rate_id = row.item.sale_tax ? row.item.sale_tax.data.id : row.tax_rate.id
     } else if (this.type === 'acc_pay' && row.item.purchase_account) {
-      
       row.account_id = row.item.purchase_account.data.id;
       row.description = row.item.purchase_description;
       row.unit_price = row.item.purchase_unit_price;
