@@ -41,7 +41,6 @@ export class TourService {
 
   private onTourClose(tour: TourDefinition) {
     const last_step = this.hopscotch.getCurrStepNum();
-    console.log(last_step);
     this.localStorage.set(tour.id, {
       state: 'closed',
       last_step
