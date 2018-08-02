@@ -102,7 +102,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
 
     this.route$ = route$.subscribe(route => {
       this.editing = route.params.id ? true : false;
-      this.mode = route.params.type || 'acc_rec';
+      this.mode = route.qparams.type || 'acc_rec';
       if (this.editing) this.fetchInvoice(route.params.id)
     })
   }
