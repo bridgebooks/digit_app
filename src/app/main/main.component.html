@@ -37,6 +37,7 @@
                         <a clrVerticalNavLink routerLinkActive="active" routerLink="/billing/subscription" canSee [allowed]="'org_admin'">
                             Billing
                         </a>
+                        <a clrVerticalNavLink (click)="logoutModal.open()"></a>
                     </clr-vertical-nav-group-children>
                 </clr-vertical-nav-group>
             </nav>
@@ -61,12 +62,12 @@
                 </div>
             </nav>
 
-            <div class="logout">
+            <!--<div class="logout">
                 <a (click)="logoutModal.open()">
                     <clr-icon shape="logout"></clr-icon>                        
                     Logout
                 </a>
-            </div>
+            </div>-->
         </clr-vertical-nav>
 
         <clr-modal #logoutModal [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
