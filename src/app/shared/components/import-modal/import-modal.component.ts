@@ -51,6 +51,7 @@ export class ImportModalComponent implements OnInit {
         break;
       case 'employees':
         this.title = 'Import Employees'
+        this.templateFile = 'assets/import-templates/employees.csv'
         break;
     }
   }
