@@ -1,4 +1,14 @@
-import { ViewChild, ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  ViewChild,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewContainerRef,
+  ComponentRef,
+  ComponentFactoryResolver,
+  ComponentFactory
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService, AlertService, OrgService, EmployeeService } from '../../../services';
 import { Employee } from '../../../models/data/employee';
@@ -7,9 +17,9 @@ import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { ImportModalComponent } from '../../../shared/components/import-modal/import-modal.component';
 import 'rxjs/add/observable/concat';
 import 'rxjs/add/operator/takeUntil';
-
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -20,7 +30,8 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   @ViewChild('deleteModal') deleteModal: Modal;
   @ViewChild('archiveModal') archiveModal: Modal;
   @ViewChild('restoreModal') restoreModal: Modal;
-
+  @ViewChild('modalcontainer', { read: ViewContainerRef }) modalContainer;
+  importModalComponentRef: ComponentRef<ImportModalComponent>;
   route$: Subscription;
   modals$: Subscription;
   cancel$: Subject<any> = new Subject();
@@ -39,6 +50,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   enableBulkOptions: boolean = false;
 
   constructor(
+    private resolver: ComponentFactoryResolver,
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private alerts: AlertService,
@@ -144,7 +156,21 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   terminate(selection: Employee[]) {
+  }
 
+  openImportModal() {
+    this.modalContainer.clear();
+    const factory: ComponentFactory<ImportModalComponent> = this.resolver.resolveComponentFactory(ImportModalComponent);
+    this.importModalComponentRef = this.modalContainer.createComponent(factory);
+
+    const importModal = this.importModalComponentRef.instance;
+    importModal.setMode('employees');
+    importModal.uploadComplete.subscribe(complete => {
+      this.refresh({});
+      importModal.modal.close();
+      this.importModalComponentRef.destroy();
+    })
+    importModal.modal.open();
   }
 
   refresh(state: ClrDatagridStateInterface) {

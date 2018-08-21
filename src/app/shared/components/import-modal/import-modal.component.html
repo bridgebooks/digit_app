@@ -9,6 +9,14 @@
           Download Template File
         </a>
     </div>
+
+    <div class="instructions" *ngIf="mode === 'employees'">
+      <p>Download our contacts CSV (Comma Separated Values) template file. 
+        This file has the correct column headings Bridgebooks needs to import your employee data.</p>
+        <a class="btn btn-success" [href]="templateFile" target="_blank">
+          Download Template File
+        </a>
+    </div>
     <hr>
     <div class="instructions">
       <clr-alert *ngIf="uploadErrorMessage" [clrAlertType]="'alert-danger'">

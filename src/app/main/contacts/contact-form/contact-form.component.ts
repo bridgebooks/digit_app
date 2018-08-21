@@ -35,7 +35,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   onBankChange($event) {
     this.model.bank_id = $event;
-    (this.form.controls['bank_id'] as FormControl).markAsDirty()    
+    (this.form.controls['bank_id'] as FormControl).markAsDirty()
   }
 
   getContact(id: string) {
