@@ -5,6 +5,7 @@
         </div>
         <div class="col-lg-4">
             <a class="btn btn-primary" routerLink="/payroll/employees/edit">Add Employee</a>
+            <a class="btn btn-primary" (click)="openImportModal()">Import Employees</a>
         </div>
     </div>
 
@@ -117,4 +118,6 @@
                 </clr-modal>
         </div>
     </div>
+
+    <template #modalcontainer></template>
 </section>
