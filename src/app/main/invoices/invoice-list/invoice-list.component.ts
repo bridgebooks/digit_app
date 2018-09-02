@@ -42,7 +42,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   setListType(type: string) {
     if (!type) return 'acc_rec';
 
-    return type === 'bills' ? 'acc_pay' : 'acc_rec';
+    return type === 'expenses' ? 'acc_pay' : 'acc_rec';
   }
 
   refresh(state: ClrDatagridStateInterface) {
