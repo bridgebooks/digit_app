@@ -2,7 +2,7 @@
   <div class="card-header">
     <div class="row flex-items-lg-between flex-items-md-between page-header">
       <div class="col-lg-4 col-md-4">
-          {{ type === 'acc_rec' ? 'Invoice' : 'Bills' }}
+          {{ type === 'acc_rec' ? 'Invoice' : 'Expenses' }}
       </div>
       <div class="col-lg-4 col-md-4 total {{ type }}">
         <p>{{ type === 'acc_rec' ? 'They owe' : 'We owe' }}: <span class="currency-ngn">
@@ -13,7 +13,7 @@
   </div>
   <div class="card-block" style="padding: 0;">
     <clr-datagrid class="datagrid-nomargin" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
-      <clr-dg-placeholder>Awesome! you don't have any outstanding {{ type === 'acc_rec' ? 'invoices' : 'bills' }}!</clr-dg-placeholder>
+      <clr-dg-placeholder>Awesome! you don't have any outstanding {{ type === 'acc_rec' ? 'invoices' : 'expenses' }}!</clr-dg-placeholder>
       
       <clr-dg-column [clrDgField]="'status'">Status</clr-dg-column>
       <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>

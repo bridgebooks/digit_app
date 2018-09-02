@@ -11,14 +11,14 @@
             <a *ngSwitchCase="'acc_rec'" routerLink="/invoices/sales" [queryParams]="{status: 'all'}">
               <clr-icon shape="caret" dir="left"></clr-icon> Invoices
             </a>
-            <a *ngSwitchCase="'acc_pay'" routerLink="/invoices/bills" [queryParams]="{status: 'all'}">
-              <clr-icon shape="caret" dir="left"></clr-icon> Bills
+            <a *ngSwitchCase="'acc_pay'" routerLink="/invoices/expenses" [queryParams]="{status: 'all'}">
+              <clr-icon shape="caret" dir="left"></clr-icon> Expenses
             </a>
         </div>
 
         <div [ngSwitch]="invoice.type">
           <h2 *ngSwitchCase="'acc_rec'">Invoice {{ invoice.invoice_no }}</h2>
-          <h2 *ngSwitchCase="'acc_pay'">Bill {{ invoice.invoice_no }}</h2>
+          <h2 *ngSwitchCase="'acc_pay'">Expenses {{ invoice.invoice_no }}</h2>
         </div>
     </div>
     <div class="col-md-4"></div>

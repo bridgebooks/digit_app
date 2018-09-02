@@ -65,7 +65,7 @@ export class InvoiceEditComponent implements OnInit, OnDestroy {
           this.alert.success('Invoice', 'Invoice successfully created', { timeOut: 3000 })
           this.mode === 'acc_rec'
             ? this.router.navigate(['/invoices', 'sales'], { queryParams: { status: 'all' } })
-            : this.router.navigate(['/invoices', 'bills'], { queryParams: { status: 'all' } })
+            : this.router.navigate(['/invoices', 'expenses'], { queryParams: { status: 'all' } })
         },
         err => {
           this.saving = false;

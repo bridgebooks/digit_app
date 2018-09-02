@@ -19,8 +19,8 @@ export module MainNavigation {
                     }
                 },
                 {
-                    label: 'Bills',
-                    path: '/invoices/bills',
+                    label: 'Expenses',
+                    path: '/invoices/expenses',
                     queryParams: {
                         status: 'all',
                     }
@@ -30,7 +30,7 @@ export module MainNavigation {
                     path: '/invoices/items',
                     queryParams: {}
                 }
-            ] 
+            ]
         },
         {
             label: 'Contacts',
@@ -47,7 +47,7 @@ export module MainNavigation {
                     path: '/contacts/vendor',
                     queryParams: {}
                 },
-            ] 
+            ]
         },
         {
             label: 'Payroll',
@@ -77,4 +77,4 @@ export module MainNavigation {
             children: null
         },
     ]
-}    
+}

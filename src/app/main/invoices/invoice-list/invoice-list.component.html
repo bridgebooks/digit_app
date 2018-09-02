@@ -7,7 +7,7 @@
                     <span class="tooltip-content">Get a quick tutorial</span>
                 </a>
             </h2>
-            <h2 *ngSwitchCase="'acc_pay'">Bills 
+            <h2 *ngSwitchCase="'acc_pay'">Expenses
                 <a (click)="startTour()" role="tooltip" aria-haspopup="true" class="tooltip tooltip-right tooltip-sm">
                     <clr-icon shape="info-standard" class="is-solid"></clr-icon>
                     <span class="tooltip-content">Get a quick tutorial</span>
@@ -18,7 +18,7 @@
             <a class="btn btn-primary" *ngSwitchCase="'acc_rec'" routerLink="/invoices/edit" [queryParams]="{type: 'acc_rec'}"
              style="margin-top: 12px;">New Invoice</a>
              <a class="btn btn-primary" *ngSwitchCase="'acc_pay'" routerLink="/invoices/edit" [queryParams]="{type: 'acc_pay'}"
-             style="margin-top: 12px;">New Bill</a>
+             style="margin-top: 12px;">New Expense</a>
         </div>
     </div>
   
@@ -63,7 +63,7 @@
                 
                 <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
                 <clr-dg-column [clrDgField]="'reference'">Ref</clr-dg-column>
-                <clr-dg-column [clrDgField]="'contact|name'">To</clr-dg-column>
+                <clr-dg-column [clrDgField]="'contacts|name'">To</clr-dg-column>
                 <clr-dg-column [clrDgField]="'user_id'">Created By</clr-dg-column>
                 <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
                 <clr-dg-column [clrDgField]="'due_at'">Due Date</clr-dg-column>
