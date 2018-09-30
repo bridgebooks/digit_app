@@ -79,6 +79,6 @@ export class InventoryComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.tour.start(InventoryTour);
+    // this.tour.start(InventoryTour);
   }
 }

@@ -19,6 +19,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.startTour()
+    // this.startTour()
   }
 }
