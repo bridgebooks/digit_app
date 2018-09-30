@@ -1,7 +1,6 @@
 import { Directive, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS} from '@angular/forms';
 import { URLValidator } from './url.validator';
-
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[url]',

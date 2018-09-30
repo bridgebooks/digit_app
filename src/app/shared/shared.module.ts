@@ -13,6 +13,7 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
 import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
 import { PinpadComponent } from './components/pinpad/pinpad.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
+import { CountrySelectComponent } from './components/country-select/country-select.component';
 import {
   CanDoDirective,
   CanseeDirective,
@@ -27,13 +28,12 @@ import {
 import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
 import { MinusSignToParens } from './pipes/minus-parens';
 
-
 @NgModule({
   imports: [
     FormsModule,
     CommonModule,
     ClarityModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   declarations: [
     IntlPhoneNumberPipe,
@@ -55,6 +55,7 @@ import { MinusSignToParens } from './pipes/minus-parens';
     PayitemSelectComponent,
     ImportModalComponent,
     MarkPaidButtonComponent,
+    CountrySelectComponent,
   ],
   entryComponents: [
     ImportModalComponent,
@@ -65,6 +66,7 @@ import { MinusSignToParens } from './pipes/minus-parens';
     TaxrateSelectComponent,
     OrgbankaccountSelectComponent,
     PayitemSelectComponent,
+    CountrySelectComponent,
     NumericDirective,
     CanseeDirective,
     CanDoDirective,
