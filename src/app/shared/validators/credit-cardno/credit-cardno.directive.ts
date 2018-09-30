@@ -2,8 +2,6 @@ import { Directive, Input, HostListener, ElementRef, Output, EventEmitter } from
 import { Validator, AbstractControl, Validators, NG_VALIDATORS} from '@angular/forms';
 import { CreditCardNumberValidator } from './credit-cardno.validator';
 import { CreditCardnoPipe } from '../../pipes/credit-cardno.pipe';
-
-
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[cc-no]',
@@ -36,7 +34,7 @@ export class CreditCardNumberDirective implements Validator {
 
     @HostListener('blur', ['$event.target.value'])
     onBlur(value) {
-        this.el.value = this.creditCardNumberPipe.transform(value);                
+        this.el.value = this.creditCardNumberPipe.transform(value);
     }
 
     validate(control: AbstractControl): { [key: string]: any } {

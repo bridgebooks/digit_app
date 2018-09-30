@@ -86,9 +86,12 @@
   
                   <div class="form-group">
                     <label for="">Website</label>
-                    <input type="url" name="website" 
+                    <input type="text" name="website" 
                     placeholder="Organization website (http(s)://www.mycompany.com)" size="45"
-                    [(ngModel)]="data.website">
+                    [(ngModel)]="data.website" #website="ngModel" url>
+                    <div class="input__errors" [hidden]="website.valid || website.pristine">
+                      <span class="input__errors_error" *ngIf="website.invalid">Enter a valid url</span>
+                    </div>
                   </div>
                 </section>
               </div>

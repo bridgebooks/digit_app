@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { 
-    HttpEvent, 
-    HttpInterceptor, 
-    HttpHandler, 
-    HttpRequest, 
-    HttpErrorResponse 
+import {
+    HttpEvent,
+    HttpInterceptor,
+    HttpHandler,
+    HttpRequest,
+    HttpErrorResponse
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { SessionService, AlertService, EventbusService } from '../../services';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -36,6 +36,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         if (response.status === 426) {
             this.eventbus.broadcast('billing:error', { message: response.error.message })
+        }
+
+        if (response.status === 422) {
+            this.alert.error('Error', 'Please check that your input is valid', {
+                timeout: 5000
+            })
         }
 
         if (response.status === 401) {

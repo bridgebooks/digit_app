@@ -13,7 +13,17 @@ import { OrgbankaccountSelectComponent } from './components/orgbankaccount-selec
 import { PayitemSelectComponent } from './components/payitem-select/payitem-select.component';
 import { PinpadComponent } from './components/pinpad/pinpad.component';
 import { TaxrateSelectComponent } from './components/taxrate-select/taxrate-select.component';
-import { CanDoDirective, CanseeDirective, CreditCardNumberDirective, IntlPhoneNumberPipe, MatchValidator, NumericDirective, PhoneNumberDirective, UppercaseFirstCharacterPipe } from './index';
+import {
+  CanDoDirective,
+  CanseeDirective,
+  CreditCardNumberDirective,
+  IntlPhoneNumberPipe,
+  MatchValidator,
+  NumericDirective,
+  PhoneNumberDirective,
+  URLDirective,
+  UppercaseFirstCharacterPipe
+} from './index';
 import { CreditCardnoPipe } from './pipes/credit-cardno.pipe';
 import { MinusSignToParens } from './pipes/minus-parens';
 
@@ -34,6 +44,7 @@ import { MinusSignToParens } from './pipes/minus-parens';
     CanDoDirective,
     MatchValidator,
     PhoneNumberDirective,
+    URLDirective,
     BankSelectComponent,
     AccountSelectComponent,
     TaxrateSelectComponent,
@@ -58,6 +69,7 @@ import { MinusSignToParens } from './pipes/minus-parens';
     CanseeDirective,
     CanDoDirective,
     PhoneNumberDirective,
+    URLDirective,
     CreditCardNumberDirective,
     IntlPhoneNumberPipe,
     UppercaseFirstCharacterPipe,
