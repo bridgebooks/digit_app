@@ -30,7 +30,7 @@
 
                   <div class="form-group">
                     <label for="">Business Registration Number</label>
-                    <input type="text" name="business_reg_no" placeholder="Official registration number to appear on your ducuments" 
+                    <input type="text" name="business_reg_no" placeholder="Official registration number to appear on your documents" 
                     size="60" [(ngModel)]="data.business_reg_no">
                   </div>
 
@@ -86,7 +86,9 @@
   
                   <div class="form-group">
                     <label for="">Website</label>
-                    <input type="url" name="website" placeholder="Organization website" size="45" [(ngModel)]="data.website">
+                    <input type="url" name="website" 
+                    placeholder="Organization website (http(s)://www.mycompany.com)" size="45"
+                    [(ngModel)]="data.website">
                   </div>
                 </section>
               </div>
