@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Org } from '../../../models/data/org';
 import { ObjectUtils } from '../../../shared';
 import { AlertService, JwtService, OrgService } from '../../../services';
