@@ -17,6 +17,8 @@ export const CountrySelectComponentValueAccessor: any = {
 export class CountrySelectComponent implements OnInit, ControlValueAccessor {
   countries = COUNTRIES
   private _selectValue: any = '';
+  private _inputValue;
+  private hasValue;
   private _onTouchedCallback: () => {};
   private _onChangeCallback: (_: any) => {};
 
