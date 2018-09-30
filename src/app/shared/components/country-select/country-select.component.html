@@ -1,0 +1,5 @@
+<div class="select">
+  <select [(ngModel)]="selectValue">
+    <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+  </select>
+</div>

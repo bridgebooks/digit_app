@@ -5,7 +5,7 @@ export function PhoneNumberValidator(): ValidatorFn {
     const phoneNumberUtil = PhoneNumberUtil.getInstance();
 
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-        if(!control.value) {
+        if (!control.value) {
             return null;
         } else {
             try {

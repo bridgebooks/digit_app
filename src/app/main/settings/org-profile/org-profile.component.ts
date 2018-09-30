@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Org } from '../../../models/data/org';
 import { ObjectUtils } from '../../../shared';
 import { AlertService, JwtService, OrgService } from '../../../services';
@@ -49,15 +48,16 @@ export class OrgProfileComponent implements OnInit, OnDestroy {
 
   onLogoUrlChanged(url) {
     this.data.logo_url = url;
-  } 
+  }
 
   onSubmit() {
-    const data = ObjectUtils.getDirtyValues(this.form)    
+    const data = ObjectUtils.getDirtyValues(this.form);
     this.processing = true;
 
     if (this.data.logo_url) data['logo_url'] = this.data.logo_url;
 
-    this.orgService.update(this.org.id, data)
+    this.orgService
+      .update(this.org.id, data)
       .subscribe(response => {
         this.processing = false;
         this.data = response.data;

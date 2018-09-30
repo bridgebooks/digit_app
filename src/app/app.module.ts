@@ -10,7 +10,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { HttpCacheInterceptor, HttpErrorInterceptor, JwtInterceptor } from './shared';
+import { HttpErrorInterceptor, JwtInterceptor } from './shared';
 import { JwtHelper } from './shared/utils/jwt';
 import { AlertService, SessionService, JwtService, HttpCacheService, EventbusService } from './services';
 
@@ -37,7 +37,7 @@ import { SharedModule } from './shared/shared.module';
   ],
   providers: [
     AlertService,
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },    
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     Title,

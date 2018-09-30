@@ -97,7 +97,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.tour.start(InvoiceListTour);
+    // this.tour.start(InvoiceListTour);
   }
 
   ngOnDestroy() {

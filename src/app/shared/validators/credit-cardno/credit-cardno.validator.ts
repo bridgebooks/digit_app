@@ -5,7 +5,7 @@ export function CreditCardNumberValidator(): ValidatorFn {
     const cardValidator = number
 
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-        if(!control.value) {
+        if (!control.value) {
             return null;
         } else {
             const isValid = cardValidator(control.value).isValid

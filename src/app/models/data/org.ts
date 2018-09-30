@@ -14,4 +14,8 @@ export interface Org {
     postal_zip?: string;
     country?: string;
     industry?: Industry
+    website?: string;
+    email?: string;
+    phone?: string;
+    description?: string;
 }

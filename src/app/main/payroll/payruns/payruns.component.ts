@@ -119,7 +119,7 @@ export class PayrunsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.tour.start(PayrunsTour);
+    // this.tour.start(PayrunsTour);
   }
 
   ngOnDestroy() {

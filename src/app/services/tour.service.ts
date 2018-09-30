@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import * as Hopscotch from 'hopscotch';
 import { Subject } from 'rxjs/Subject';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { startsWith } from 'lodash';
 
 export interface ITourDefinition extends TourDefinition {
@@ -32,7 +32,7 @@ export class TourService {
       const tour = this.hopscotch.getCurrTour();
       if (event instanceof NavigationEnd) {
         if (tour) {
-          if (event.url.indexOf(tour.url) !== -1)
+          if (event.url !== tour.url)
             this.hopscotch.endTour(false);
         }
       }
@@ -75,6 +75,8 @@ export class TourService {
     if (canShow && !force) {
       this.hopscotch.startTour(tourDef, stepNumber);
     } else if (!canShow && force) {
+      this.hopscotch.startTour(tourDef, stepNumber);
+    } else if (canShow && force) {
       this.hopscotch.startTour(tourDef, stepNumber);
     }
     this.currentTour = this.hopscotch.getCurrTour();
