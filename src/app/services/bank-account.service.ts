@@ -8,7 +8,7 @@ import { BankAccountResponse } from '../models/responses/bank-account';
 export class BankAccountService {
 
   private baseUrl: string = environment.apiUrl + 'orgs';
-  
+
   constructor(private http: HttpClient) { }
 
   all(org_id: string, options?: object) {

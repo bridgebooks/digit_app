@@ -1,0 +1,49 @@
+<div id="org-form-container">
+  <form #form="ngForm" novalidate>
+      <section class="form-block" *ngIf="!saving">
+        <div class="form-group">
+          <label for="">Logo</label>
+          <app-logo-upload style="width: 100%;" [url]="model.logo_url" (logoUrlChanged)="onLogoUrlChanged($event)"></app-logo-upload>
+          <input type="hidden" name="logo_url" [(ngModel)]="model.logo_url">                      
+        </div>
+        <div class="form-group">
+            <label class="required" for="name">Business name</label>
+            <input type="text" id="name" name="name" size="45" [(ngModel)]="model.name" required>
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="name">Industry</label>
+            <app-industry-select name="industry_id" [(ngModel)]="model.industry_id" required></app-industry-select>
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="name">Address Line 1</label>
+            <input type="text" id="address_line" name="address_line_1" size="45" [(ngModel)]="model.address_line_1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Address Line 2</label>
+            <input type="text" id="address_line2" name="address_line_2" size="45" [(ngModel)]="model.address_line_2">
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="name">City/Town</label>
+            <input type="text" id="city_town" name="city_town" size="45" [(ngModel)]="model.city_town" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Postal Code/Zip</label>
+            <input type="text" id="postal_zip" name="postal_zip" size="45" [(ngModel)]="model.postal_zip">
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="name">Country</label>
+            <app-country-select name="country" [(ngModel)]="model.country" required></app-country-select>
+        </div>
+      </section>
+  </form>
+
+  <span class="spinner spinner-lg" *ngIf="saving">
+      Loading...
+  </span>
+</div>

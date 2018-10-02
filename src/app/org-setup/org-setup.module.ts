@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 
 import { JwtService, SessionService, IndustryService, OrgService } from '../services';
 import { OrgSetupRoutingModule } from './org-setup-routing.module';
 import { OrgSetupComponent } from './org-setup.component';
+import { OrgBasicComponent } from './org-basic/org-basic.component';
+import { SharedModule } from '../shared/shared.module';
+import { BankingComponent } from './banking/banking.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ClarityModule,
+    SharedModule,
     OrgSetupRoutingModule,
   ],
-  declarations: [OrgSetupComponent],
+  declarations: [OrgSetupComponent, OrgBasicComponent, BankingComponent],
   providers: [SessionService, JwtService, IndustryService, OrgService]
 })
 

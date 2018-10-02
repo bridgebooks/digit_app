@@ -1,0 +1,8 @@
+<div class="select">
+    <select [(ngModel)]="selectValue" *ngIf="(industries$ | async) as industries; else loading;">
+      <option *ngFor="let industry of industries" [value]="industry.id">{{ industry.name }}</option>
+      <ng-template #loading>
+        <option>Loading</option>
+      </ng-template>
+    </select>
+  </div>
