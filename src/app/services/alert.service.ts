@@ -13,7 +13,7 @@ export class AlertService {
   success(title: string, content: string, options: any) {
     return this._notificationService.success(title, content, options);
   }
-  
+
   error(title: string, content: string, options: any) {
     return this._notificationService.error(title, content, options);
   }

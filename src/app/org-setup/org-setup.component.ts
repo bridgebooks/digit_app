@@ -1,86 +1,78 @@
-import { Component, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtService, SessionService,IndustryService, OrgService,  } from '../services';
 import { OrgSetupModel } from '../models/forms/org-setup';
 
 
 import '@clr/icons/shapes/core-shapes';
-
-enum BtnStatus {
-  DEFAULT = <any> 'Next',
-  PROCESSING = <any> 'Please wait..'
-}
+import { ClrWizard } from '@clr/angular';
+import { Observable } from 'rxjs/Observable';
+import { OrgBasicComponent } from './org-basic/org-basic.component';
+import { BankingComponent } from './banking/banking.component';
+import { AccountingComponent } from './accounting/accounting.component';
 
 @Component({
   selector: 'app-org-setup',
   templateUrl: './org-setup.component.html',
   styleUrls: ['./org-setup.component.scss']
 })
-export class OrgSetupComponent implements OnInit, OnChanges{
+export class OrgSetupComponent implements OnInit, OnChanges, OnDestroy {
+  openWizard = false;
+  wizardCloseable = false;
+  @ViewChild('wizard') wizard: ClrWizard
+  @ViewChild('orgform') orgform: OrgBasicComponent;
+  @ViewChild('bankingform') bankingform: BankingComponent;
+  @ViewChild('accountingform') accountingform: AccountingComponent;
+  processing = false;
+  orgStepComplete = false;
+  bankingStepComplete = false;
+  accountingStepComplete = false;
 
-  @ViewChild('orgForm') form: FormData;
-
-  btnStatus: any = BtnStatus.DEFAULT;
-  btnDisabled: Boolean = false;
-  processing: Boolean = false;
-  industries: Array<any> = [];
-
-  model: OrgSetupModel = {
-    name: null
-  }
-
-  constructor(
-    public router: Router, 
-    private sessionService: SessionService,
-    private jwtService: JwtService,
-    private industryService: IndustryService, 
-    private orgService: OrgService) { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
-    this.fetchIndustries()
+    this.orgform.saved.subscribe(done => {
+      if (done) {
+        this.orgStepComplete = true;
+        this.wizard.next();
+      }
+    });
+
+    this.orgform.orgCreated.subscribe(org => {
+      this.accountingform.org$.next(org);
+      this.bankingform.org$.next(org);
+    });
+
+    this.bankingform.saved.subscribe(done => {
+      if (done) {
+        this.bankingStepComplete = true;
+        this.wizard.next();
+      }
+    });
+
+    this.accountingform.saved.subscribe(done => {
+      if (done) {
+        this.accountingStepComplete = true;
+        this.wizard.forceFinish();
+        this.router.navigate(['/dashboard']);
+      }
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
   }
 
-  onRequestDone() {
-    this.processing = false;
-    this.btnStatus = BtnStatus.DEFAULT
-    this.btnDisabled = false;
+  ngOnDestroy() {
+    this.bankingform.saved.unsubscribe();
+    this.orgform.saved.unsubscribe();
   }
 
-  fetchIndustries() {
-    this.industryService
-      .all()
-      .subscribe(response => {
-        this.industries = response.data;
-      }, error => {
-        console.log(error)
-      })
-  }
-
-  onSubmit() {
-    this.processing = true;
-    this.btnStatus = BtnStatus.PROCESSING;
-
-    this.orgService
-      .create(this.model)
-      .subscribe(response => {
-        this.onRequestDone();
-        //save user
-        this.sessionService.addUser(response.data.user);
-        // save new token
-        this.jwtService.saveToken(response.data.token);
-        // read token
-        const token = this.jwtService.getToken();
-        // add org
-        this.sessionService.addDefaultOrg(token.orgs[0]);
-        // redirect to dashboard
-        this.router.navigate(['/dashboard'])
-      },
-      error => {
-        this.onRequestDone();
-        console.log(error);
-      })
+  doCustomClick($event) {
+    if ($event === 'create-org') {
+      this.orgform.save();
+    } else if ($event === 'create-bank-account') {
+      this.bankingform.save();
+    } else if ($event === 'save-settings') {
+      this.accountingform.save();
+    }
   }
 }

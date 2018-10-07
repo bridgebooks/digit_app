@@ -6,12 +6,12 @@ import { ClarityModule } from '@clr/angular';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 
-import { 
-  AlertService, 
-  UserService, 
-  SessionService, 
-  OrgService, 
-  AccountsService, 
+import {
+  AlertService,
+  UserService,
+  SessionService,
+  OrgService,
+  AccountsService,
   TaxRateService,
   BankAccountService,
   RoleService,
@@ -25,7 +25,6 @@ import { AccountComponent } from './account/account.component';
 import { EmailChangeComponent } from './email-change/email-change.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
-import { LogoUploadComponent } from './logo-upload/logo-upload.component';
 import { ChartAccountsComponent } from './chart-accounts/chart-accounts.component';
 import { AccountBulkActionDropdownComponent } from './account-bulk-action-dropdown/account-bulk-action-dropdown.component';
 import { AccountModalButtonComponent } from './account-modal-button/account-modal-button.component';
@@ -59,11 +58,10 @@ import { AccountingComponent } from './accounting/accounting.component';
   declarations: [
     SettingsComponent,
     EmailChangeComponent,
-    ProfileComponent, 
-    AccountComponent, 
-    PasswordChangeComponent, 
+    ProfileComponent,
+    AccountComponent,
+    PasswordChangeComponent,
     OrgProfileComponent,
-    LogoUploadComponent,
     ChartAccountsComponent,
     AccountBulkActionDropdownComponent,
     AccountModalButtonComponent,
@@ -85,19 +83,19 @@ import { AccountingComponent } from './accounting/accounting.component';
     PayitemFormModalComponent,
     AccountingComponent
   ],
-  providers: [ 
-    AlertService, 
-    UserService, 
-    OrgService, 
-    SessionService, 
-    AccountsService, 
-    TaxRateService, 
-    BankAccountService, 
-    RoleService, 
-    PayitemService 
+  providers: [
+    AlertService,
+    UserService,
+    OrgService,
+    SessionService,
+    AccountsService,
+    TaxRateService,
+    BankAccountService,
+    RoleService,
+    PayitemService
   ],
   exports: [
-    PayitemFormModalComponent
+    PayitemFormModalComponent,
   ]
 })
 

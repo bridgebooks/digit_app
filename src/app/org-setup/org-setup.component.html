@@ -2,73 +2,63 @@
     <header class="header header-6">
         <div class="branding">
             <a href="..." class="brand nav-link">
-                <img src="assets/img/logo-white.png" alt="ZenBooks">
+                <img src="assets/img/logo-white.png" alt="Bridebooks">
             </a>
         </div>
     </header>
     <div class="content-container">
         <div class="content-area">
-            <div class="setup-wrapper">
-                <div class="row flex-items-xs-center flex-xs-middle">
-                    <div class="col-lg-7 col-md-7 col-xs-12">
-                        <div class="card">
-                            <form novalidate #orgForm="ngForm" (ngSubmit)="onSubmit()">
-                                <div class="card-block">
-                                        <div class="card-title">
-                                            Setup your organization
-                                        </div>
-                                        <section class="form-block">
-                                            <div class="form-group">
-                                                <label class="required" for="name">Organization's name</label>
-                                                <input type="text" id="name" name="name" size="45" [(ngModel)]="model.name" required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">Industry</label>
-                                                <div class="select">
-                                                    <select id="industry_id" name="industry_id" [(ngModel)]="model.industry_id">
-                                                        <option>Select an industry</option>
-                                                        <option *ngFor="let industry of industries" [value]="industry.id">{{ industry.name }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">Address Line 1</label>
-                                                <input type="text" id="address_line" name="address_line_1" size="45" [(ngModel)]="model.address_line_1" required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">Address Line 2</label>
-                                                <input type="text" id="address_line2" name="address_line_2" size="45" [(ngModel)]="model.address_line_2">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">City/Town</label>
-                                                <input type="text" id="city_town" name="city_town" size="45" [(ngModel)]="model.city_town" required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">Postal Code/Zip</label>
-                                                <input type="text" id="postal_zip" name="postal_zip" size="45" [(ngModel)]="model.postal_zip">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name">Country</label>
-                                                <input type="text" id="country" name="country" size="45" [(ngModel)]="model.country" required>
-                                            </div>
-                                        </section>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary" type="submit" [clrLoading]="processing" 
-                                    [disabled]="orgForm.form.invalid" >{{btnStatus}} <clr-icon shape="caret right"></clr-icon>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+            <div class="onboarding-container">
+                <div class="onboarding-container-bg">
+                    <img src="assets/img/onboarding2.svg" alt="">
+                </div>
+                <div class="onboarding-textbox">
+                    <h3>Welcome to Bridgebooks</h3>
+                    <p>Let's get you setup for success</p>
+                    <button class="btn btn-primary" (click)="openWizard = true;">Get Started</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <clr-wizard #wizard [(clrWizardOpen)]="openWizard" [clrWizardClosable]="wizardCloseable">
+        <clr-wizard-title>Setup</clr-wizard-title>
+
+        <clr-wizard-button [type]="'previous'">Default</clr-wizard-button>
+        <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+        <clr-wizard-button [type]="'finish'">Default</clr-wizard-button>
+
+        <clr-wizard-page [clrWizardPageNextDisabled]="orgform.form.invalid" (clrWizardPageCustomButton)="doCustomClick($event)">
+            <ng-template clrPageTitle>Let's get some basics setup</ng-template>
+            <ng-template clrPageNavTitle>Welcome</ng-template>
+
+            <app-org-basic #orgform></app-org-basic>
+
+            <ng-template clrPageButtons>
+                <clr-wizard-button [type]="'create-org'">Next</clr-wizard-button>
+            </ng-template>
+        </clr-wizard-page>
+
+        <clr-wizard-page [clrWizardPageNextDisabled]="bankingform.form.invalid" (clrWizardPageCustomButton)="doCustomClick($event)">
+            <ng-template clrPageTitle>Lets add a bank account</ng-template>
+            <ng-template clrPageNavTitle>Banking</ng-template>
+
+            <app-banking #bankingform></app-banking>
+
+            <ng-template clrPageButtons>
+                <clr-wizard-button [type]="'create-bank-account'">Next</clr-wizard-button>
+            </ng-template>
+        </clr-wizard-page>
+
+        <clr-wizard-page (clrWizardPageCustomButton)="doCustomClick($event)">
+            <ng-template clrPageTitle></ng-template>
+            <ng-template clrPageNavTitle>Accounting</ng-template>
+
+            <app-accounting #accountingform></app-accounting>
+
+            <ng-template clrPageButtons>
+                <clr-wizard-button [type]="'save-settings'">Finish</clr-wizard-button>
+            </ng-template>
+        </clr-wizard-page>
+    </clr-wizard>
 </clr-main-container>

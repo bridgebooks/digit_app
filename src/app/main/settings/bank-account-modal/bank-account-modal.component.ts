@@ -1,7 +1,6 @@
 import { ViewChild, Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { AlertService, BankAccountService } from '../../../services';
-import { BankAccount } from '../../../models/data/bank-account';
 
 @Component({
   selector: 'app-bank-account-modal',
@@ -23,7 +22,8 @@ export class BankAccountModalComponent implements OnInit {
     account_number: null,
     bank_id: null,
     name: null,
-    notes: null
+    notes: null,
+    is_default: 0
   };
 
   constructor(private alert: AlertService, private accounts: BankAccountService) { }
@@ -34,7 +34,7 @@ export class BankAccountModalComponent implements OnInit {
 
   save() {
     this.processing = true;
-    
+
     this.accounts.create(this.org.id, this.model)
       .subscribe(response => {
         this.processing = false;
@@ -48,8 +48,5 @@ export class BankAccountModalComponent implements OnInit {
 
   ngOnInit() {
     this.model.org_id = this.org.id;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
   }
 }

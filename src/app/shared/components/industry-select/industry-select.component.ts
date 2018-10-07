@@ -1,30 +1,30 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BankService } from '../../../services';
+import { IndustryService } from '../../../services';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/operators/map';
 
-export const BankSelectComponentValueAccessor: any = {
+export const IndustrySelectComponentValueAccessor: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => BankSelectComponent),
+  useExisting: forwardRef(() => IndustrySelectComponent),
   multi: true
 };
 
 @Component({
-  selector: 'app-bank-select',
-  templateUrl: './bank-select.component.html',
-  styleUrls: ['./bank-select.component.scss'],
-  providers: [BankSelectComponentValueAccessor]
+  selector: 'app-industry-select',
+  templateUrl: './industry-select.component.html',
+  styleUrls: ['./industry-select.component.scss'],
+  providers: [IndustrySelectComponentValueAccessor]
 })
-export class BankSelectComponent implements OnInit, ControlValueAccessor {
-  banks$: Observable<any[]>;
+export class IndustrySelectComponent implements OnInit, ControlValueAccessor {
+  industries$: Observable<any[]>;
   private _selectValue: any = '';
   private _inputValue;
   private hasValue;
   private _onTouchedCallback: () => {};
   private _onChangeCallback: (_: any) => {};
 
-  constructor(private banks: BankService) {
+  constructor(private industries: IndustryService) {
   }
 
   get selectValue(): any {
@@ -57,7 +57,7 @@ export class BankSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.banks$ = this.banks.all().map(response => response.data);
+    this.industries$ = this.industries.all().map(response => response.data);
   }
 
 }
