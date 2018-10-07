@@ -34,7 +34,7 @@ export class BankAccountModalComponent implements OnInit {
 
   save() {
     this.processing = true;
-    
+
     this.accounts.create(this.org.id, this.model)
       .subscribe(response => {
         this.processing = false;
@@ -48,8 +48,5 @@ export class BankAccountModalComponent implements OnInit {
 
   ngOnInit() {
     this.model.org_id = this.org.id;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
   }
 }
