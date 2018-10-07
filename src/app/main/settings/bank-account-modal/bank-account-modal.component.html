@@ -37,7 +37,14 @@
 
           <div class="form-group">
             <label for="bank_id" class="required">Bank</label>
-            <bank-select [selected]="model.bank_id" (onBankSelected)="bankSelected($event)"></bank-select>
+            <app-bank-select name="bank_id" [(ngModel)]="model.bank_id" required></app-bank-select>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" name="is_default" id="is_default" value="1" [(ngModel)]="model.is_default">
+                <label for="is_default">Use as default account</label>
+            </div>
           </div>
 
           <div class="form-group">

@@ -37,7 +37,7 @@
 
           <div class="form-group">
             <label for="bank_id" class="required">Bank</label>
-            <bank-select [selected]="account.bank_id" (onBankSelected)="bankSelected($event)"></bank-select>
+            <app-bank-select name="bank_id" [(ngModel)]="account.bank_id" required></app-bank-select>
           </div>
 
           <div class="form-group">

@@ -9,6 +9,7 @@ import { OrgSetupComponent } from './org-setup.component';
 import { OrgBasicComponent } from './org-basic/org-basic.component';
 import { SharedModule } from '../shared/shared.module';
 import { BankingComponent } from './banking/banking.component';
+import { AccountingComponent } from './accounting/accounting.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { BankingComponent } from './banking/banking.component';
     SharedModule,
     OrgSetupRoutingModule,
   ],
-  declarations: [OrgSetupComponent, OrgBasicComponent, BankingComponent],
+  declarations: [OrgSetupComponent, OrgBasicComponent, BankingComponent, AccountingComponent],
   providers: [SessionService, JwtService, IndustryService, OrgService]
 })
 

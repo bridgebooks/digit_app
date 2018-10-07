@@ -28,7 +28,7 @@
         <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
         <clr-wizard-button [type]="'finish'">Default</clr-wizard-button>
 
-        <!-- <clr-wizard-page [clrWizardPageNextDisabled]="orgform.form.invalid" (clrWizardPageCustomButton)="doCustomClick($event)">
+        <clr-wizard-page [clrWizardPageNextDisabled]="orgform.form.invalid" (clrWizardPageCustomButton)="doCustomClick($event)">
             <ng-template clrPageTitle>Let's get some basics setup</ng-template>
             <ng-template clrPageNavTitle>Welcome</ng-template>
 
@@ -37,16 +37,27 @@
             <ng-template clrPageButtons>
                 <clr-wizard-button [type]="'create-org'">Next</clr-wizard-button>
             </ng-template>
-        </clr-wizard-page> -->
+        </clr-wizard-page>
 
-        <clr-wizard-page>
+        <clr-wizard-page [clrWizardPageNextDisabled]="bankingform.form.invalid" (clrWizardPageCustomButton)="doCustomClick($event)">
             <ng-template clrPageTitle>Lets add a bank account</ng-template>
             <ng-template clrPageNavTitle>Banking</ng-template>
 
-            <app-banking></app-banking>
+            <app-banking #bankingform></app-banking>
 
             <ng-template clrPageButtons>
                 <clr-wizard-button [type]="'create-bank-account'">Next</clr-wizard-button>
+            </ng-template>
+        </clr-wizard-page>
+
+        <clr-wizard-page (clrWizardPageCustomButton)="doCustomClick($event)">
+            <ng-template clrPageTitle></ng-template>
+            <ng-template clrPageNavTitle>Accounting</ng-template>
+
+            <app-accounting #accountingform></app-accounting>
+
+            <ng-template clrPageButtons>
+                <clr-wizard-button [type]="'save-settings'">Finish</clr-wizard-button>
             </ng-template>
         </clr-wizard-page>
     </clr-wizard>

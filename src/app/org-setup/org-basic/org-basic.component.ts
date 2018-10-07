@@ -13,8 +13,8 @@ export class OrgBasicComponent implements OnInit {
   model: OrgSetupModel = {
     name: null
   }
-  @Output() processing: EventEmitter<boolean> = new EventEmitter();
   @Output() saved: EventEmitter<boolean> = new EventEmitter();
+  @Output() orgCreated: EventEmitter<any> = new EventEmitter();
   constructor(
     private orgService: OrgService,
     private session: SessionService,
@@ -26,7 +26,6 @@ export class OrgBasicComponent implements OnInit {
   }
 
   save() {
-    this.processing.emit(true);
     this.saving = true;
     this.orgService.create(this.model)
       .subscribe(response => {
@@ -38,11 +37,13 @@ export class OrgBasicComponent implements OnInit {
         const token = this.jwtService.getToken();
         // add org
         this.session.addDefaultOrg(token.orgs[0]);
+        this.orgCreated.emit(token.orgs[0]);
 
-        this.processing.emit(true);
         this.saved.emit(true);
-        this.saving = true;
-      }, error => {});
+        this.saving = false;
+      }, error => {
+        this.saving = false;
+      });
   }
 
   ngOnInit() {

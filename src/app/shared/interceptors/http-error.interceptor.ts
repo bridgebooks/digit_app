@@ -7,11 +7,11 @@ import {
     HttpErrorResponse
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 import { SessionService, AlertService, EventbusService } from '../../services';
 import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -23,7 +23,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         private alert: AlertService) {
         }
 
-    private handleError(response: HttpErrorResponse) {
+    private handleError(response: HttpErrorResponse, caught$: Observable<any>) {
         if ([400, 403].indexOf(response.status) !== -1 && response.error.message) {
             this.alert.error('Error', response.error.message, {
                 timeOut: 5000
@@ -39,8 +39,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         if (response.status === 422) {
-            this.alert.error('Error', 'Please check that your input is valid', {
-                timeout: 5000
+            this.alert.error('Error', 'Please check that you have entered the required information correctly', {
+                timeOut: 5000
             })
         }
 
@@ -53,16 +53,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (response.status === 500) {
             this.alert.error('Error', 'An error occured on the server. We working to fix it, please try again later', { timeOut: 3000 });
         }
+
+        return ErrorObservable.create(response);
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.method !== 'OPTIONS') {
             return next.handle(req)
-                .map(event => { return event; })
-                .catch(err => {
-                    this.handleError(err);
-                    return Observable.throw(err);
-                })
+                .pipe(
+                    map(event => { return event; }),
+                    catchError((err, caught$) => {
+                        return this.handleError(err, caught$);
+                    })
+                )
         }
 
         return next.handle(req);

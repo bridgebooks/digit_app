@@ -30,6 +30,11 @@ app-header {
         content: "\0020A6";
     }
 }
+
+.simple-notification-wrapper {
+    z-index: 1100 !important;
+}
+
 .clr-vertical-nav {
     .nav-group-content:hover, .nav-group-content.active {
         background-color: map-get($colors, 'secondary') !important;
