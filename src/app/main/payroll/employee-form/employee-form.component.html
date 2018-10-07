@@ -125,8 +125,7 @@
               <section class="form-block">
                   <div class="form-group">
                     <label for="">Bank</label>
-                    <bank-select [selected]="model.bank_id" (onBankSelected)="onBankChange($event)"></bank-select>
-                    <input type="hidden" name="bank_id" [(ngModel)]="model.bank_id">
+                    <app-bank-select name="bank_id" [(ngModel)]="model.bank_id"></app-bank-select>
                   </div>
 
                 <div class="form-group">

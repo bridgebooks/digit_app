@@ -18,6 +18,7 @@ export const IndustrySelectComponentValueAccessor: any = {
 })
 export class IndustrySelectComponent implements OnInit, ControlValueAccessor {
   industries$: Observable<any[]>;
+  loading;
   private _selectValue: any = '';
   private _inputValue;
   private hasValue;

@@ -18,6 +18,7 @@ export const BankSelectComponentValueAccessor: any = {
 })
 export class BankSelectComponent implements OnInit, ControlValueAccessor {
   banks$: Observable<any[]>;
+  loading;
   private _selectValue: any = '';
   private _inputValue;
   private hasValue;
