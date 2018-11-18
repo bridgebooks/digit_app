@@ -1,5 +1,5 @@
 import { ViewChild, Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { environment } from '../../environments/environment';
 import { MainNavigation } from './main.navigation';
@@ -13,9 +13,7 @@ import '@clr/icons/shapes/commerce-shapes';
 import '@clr/icons/shapes/technology-shapes';
 import { Modal } from '@clr/angular';
 import { Subject } from 'rxjs/Subject';
-import { PubSubService } from 'angular2-pubsub';
-import { WindowService, GlobalEventbusEvent } from '../services/window.service';
-import { Observable } from 'rxjs/Observable';
+import { WindowService } from '../services/window.service';
 
 @Component({
     selector: 'app-main',
