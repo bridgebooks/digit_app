@@ -58,6 +58,9 @@
         </div>
 
         <div class="col-lg-12 col-md-12">
+            
+            <date-filter-toolbar #datefilter></date-filter-toolbar>
+
             <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
                 <clr-dg-placeholder>No items to display!</clr-dg-placeholder>
                 

@@ -38,7 +38,8 @@ import { InvoiceStatusButtonComponent } from './invoice-status-button/invoice-st
 import { InvoicePrintButtonComponent } from './invoice-print-button/invoice-print-button.component';
 import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-button.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
-import { ColumnFilterComponent } from './invoice-list/column-filter/column-filter.component';
+import { DateFilterToolbarComponent } from './invoice-list/date-filter-toolbar/date-filter-toolbar.component';
+import { DateFilterService } from './invoice-list/date-filter.service';
 
 @NgModule({
   imports: [
@@ -75,7 +76,7 @@ import { ColumnFilterComponent } from './invoice-list/column-filter/column-filte
     InvoicePrintButtonComponent,
     InvoiceEditButtonComponent,
     ContactModalComponent,
-    ColumnFilterComponent
+    DateFilterToolbarComponent
   ],
   providers: [
     AlertService,
@@ -86,7 +87,8 @@ import { ColumnFilterComponent } from './invoice-list/column-filter/column-filte
     ItemService,
     InvoiceService,
     PaymentsService,
-    DateFormatPipe
+    DateFormatPipe,
+    DateFilterService
   ]
 })
 export class InvoicesModule { }
