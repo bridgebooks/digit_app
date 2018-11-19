@@ -106,8 +106,6 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.datefilter.selected
       .subscribe(option => {
-        const format = 'YYYY-MM-DD';
-        console.log(option);
         this.start_date = option.to.toISOString();
         this.end_date = option.from.toISOString();
         this.loading = true;

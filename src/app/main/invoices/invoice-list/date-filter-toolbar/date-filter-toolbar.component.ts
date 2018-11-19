@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { DateFilterService } from '../date-filter.service';
 import * as moment from 'moment';
 import { ClrModal } from '@clr/angular';
 
@@ -42,7 +41,7 @@ export class DateFilterToolbarComponent implements OnInit {
       from: moment().subtract(30, 'd').startOf('d')
     }
   ]
-  constructor(private dateFilterService: DateFilterService) { }
+  constructor() { }
 
   optionSelected(option) {
     this.options = this.options.map(o => {
