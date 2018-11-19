@@ -58,18 +58,21 @@
         </div>
 
         <div class="col-lg-12 col-md-12">
+            
+            <date-filter-toolbar #datefilter></date-filter-toolbar>
+
             <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
                 <clr-dg-placeholder>No items to display!</clr-dg-placeholder>
                 
-                <clr-dg-column [clrDgField]="'invoice_no'">Number</clr-dg-column>
-                <clr-dg-column [clrDgField]="'reference'">Ref</clr-dg-column>
-                <clr-dg-column [clrDgField]="'contact_id'">To</clr-dg-column>
-                <clr-dg-column [clrDgField]="'user_id'">Created By</clr-dg-column>
-                <clr-dg-column [clrDgField]="'raised_at'">Date</clr-dg-column>
-                <clr-dg-column [clrDgField]="'due_at'">Due Date</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'invoice_no'">Number</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'reference'">Ref</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'contact_id'">To</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'user_id'">Created By</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'raised_at'">Date</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'due_at'">Due Date</clr-dg-column>
                 <clr-dg-column>Overdue</clr-dg-column>
-                <clr-dg-column [clrDgField]="'total'">Total</clr-dg-column>
-                <clr-dg-column [clrDgField]="'status'" *ngIf="status == 'all'">Status</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'total'">Total</clr-dg-column>
+                <clr-dg-column [clrDgSortBy]="'status'" *ngIf="status == 'all'">Status</clr-dg-column>
                 
                 <clr-dg-row *ngFor="let invoice of invoices">
                     <clr-dg-cell>

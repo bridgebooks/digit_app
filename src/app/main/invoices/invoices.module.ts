@@ -38,6 +38,7 @@ import { InvoiceStatusButtonComponent } from './invoice-status-button/invoice-st
 import { InvoicePrintButtonComponent } from './invoice-print-button/invoice-print-button.component';
 import { InvoiceEditButtonComponent } from './invoice-edit-button/invoice-edit-button.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
+import { DateFilterToolbarComponent } from './invoice-list/date-filter-toolbar/date-filter-toolbar.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
     InvoiceStatusButtonComponent,
     InvoicePrintButtonComponent,
     InvoiceEditButtonComponent,
-    ContactModalComponent
+    ContactModalComponent,
+    DateFilterToolbarComponent
   ],
   providers: [
     AlertService,

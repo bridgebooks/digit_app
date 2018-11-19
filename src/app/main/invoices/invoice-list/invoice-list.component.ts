@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, AfterContentChecked, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService, TourService, SessionService, OrgService } from '../../../services';
 import { ClrDatagridStateInterface } from '@clr/angular/data/datagrid';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/combineLatest';
 import { InvoiceListTour } from './invoice-list.tour';
+import { DateFilterToolbarComponent } from './date-filter-toolbar/date-filter-toolbar.component';
 
 @Component({
   selector: 'app-invoice-list',
@@ -17,11 +18,14 @@ import { InvoiceListTour } from './invoice-list.tour';
 })
 export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild('datefilter') datefilter: DateFilterToolbarComponent;
   route$: Subscription;
   cancel$: Subject<any> = new Subject();
 
   org: any;
   type: string;
+  start_date: string;
+  end_date: string;
   invoiceType: string;
   status: string;
   invoices: any[] = [];
@@ -55,11 +59,13 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
       type: this.type,
       page: this.currentPage,
       perPage: this.perPage,
-      include: 'contact,user'
+      include: 'contact,user',
+      ...(this.start_date && { start_date: this.start_date }),
+      ...(this.end_date && { end_date: this.end_date }),
+      ...(this.status && { status: this.status }),
+      ...(state.sort.by && { orderBy: state.sort.by }),
+      ...(!!state.sort.reverse && { sortedBy: state.sort.reverse ? 'desc' : 'asc' })
     }
-    if (this.status) options['status'] = this.status;
-    options['orderBy'] = state.sort.by;
-    options['sortedBy'] = state.sort.reverse ? 'desc' : 'asc';
 
     this.orgService
       .getInvoices(this.org.id, options)
@@ -83,8 +89,12 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.org = this.session.getDefaultOrg();
 
-    const route$ = Observable.combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }));
-    this.route$ = route$.subscribe(route => {
+    const observe$ = Observable.combineLatest(
+      this.route.params, this.route.queryParams,
+      (params, qparams) => ({ params, qparams })
+    );
+
+    this.route$ = observe$.subscribe(route => {
       this.status = route.qparams.status || 'all';
       this.type = this.setListType(route.params.type);
       this.invoiceType = route.params.type
@@ -92,8 +102,16 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loading = true;
       this.cancel$.next();
       this.refresh({})
+    });
 
-    })
+    this.datefilter.selected
+      .subscribe(option => {
+        this.start_date = option.to.toISOString();
+        this.end_date = option.from.toISOString();
+        this.loading = true;
+        this.cancel$.next();
+        this.refresh({})
+      });
   }
 
   ngAfterViewInit() {
