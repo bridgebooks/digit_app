@@ -131,13 +131,12 @@
       </button>
       <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
           <button type="button" 
-          clrDropdownItem canSee canDo (click)="save('draft')" 
-          [allowed]="'adviser,invoices'" [action]="'invoices:draft'" [actionable]="model">
+          clrDropdownItem canDo (click)="save('draft')" 
+          [action]="'invoices:draft'" [actionable]="model">
           Save as draft
           </button>
           <button type="button" 
-          clrDropdownItem (click)="save('submitted')" canSee canDo 
-          [allowed]="'adviser,invoices'"
+          clrDropdownItem (click)="save('submitted')" canDo 
           [action]="'invoices:draft'" 
           [actionable]="model">
           Save &amp; submit for approval
@@ -147,10 +146,11 @@
 
     <button *ngIf="!editing" type="button" class="btn btn-success" (click)="save('authorized')"
      [clrLoading]="saving" [disabled]="saving || disableBtn"
-     canSee [allowed]="'adviser'">
+     canDo [action]="'invoices:authorize'" [actionable]="model">
      Save and Authorize</button>
 
-    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving || disableBtn" (click)="save(model.status)">Update</button>
+    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving || disableBtn" (click)="save(model.status)"
+    canDo [action]="'invoices:edit'" [actionable]="model">Update</button>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>
 </div>
