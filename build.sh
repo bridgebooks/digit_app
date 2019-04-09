@@ -1,7 +1,7 @@
 #!/bin/bash
 # Deployment script
 
-git pull
+git pull origin dev
 
 yarn install
 
