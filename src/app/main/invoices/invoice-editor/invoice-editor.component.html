@@ -130,8 +130,18 @@
           <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
-          <button type="button" clrDropdownItem canSee (click)="save('draft')" canSee [allowed]="'adviser,invoices'">Save as draft</button>
-          <button type="button" clrDropdownItem (click)="save('submitted')" canSee [allowed]="'adviser,invoices'">Save &amp; submit for approval</button>
+          <button type="button" 
+          clrDropdownItem canSee canDo (click)="save('draft')" 
+          [allowed]="'adviser,invoices'" [action]="'invoices:draft'" [actionable]="model">
+          Save as draft
+          </button>
+          <button type="button" 
+          clrDropdownItem (click)="save('submitted')" canSee canDo 
+          [allowed]="'adviser,invoices'"
+          [action]="'invoices:draft'" 
+          [actionable]="model">
+          Save &amp; submit for approval
+          </button>
       </clr-dropdown-menu>
     </clr-dropdown>
 
