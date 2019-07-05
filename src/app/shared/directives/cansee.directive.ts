@@ -9,13 +9,12 @@ import { intersection } from 'lodash';
 export class CanseeDirective implements OnInit {
 
     @Input('allowed') allowed: string;
-    
+
     constructor(private el: ElementRef, private renderer: Renderer, private jwtService: JwtService) {
     }
 
     ngOnInit() {
-        if (!this.canSee()) 
-            this.renderer.setElementStyle(this.el.nativeElement, 'display', 'none');
+        if (!this.canSee()) this.renderer.setElementStyle(this.el.nativeElement, 'display', 'none');
     }
 
     private getUserRolesACL(): string[] {

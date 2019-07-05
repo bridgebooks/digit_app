@@ -130,17 +130,27 @@
           <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="top-left" *clrIfOpen>
-          <button type="button" clrDropdownItem canSee (click)="save('draft')" canSee [allowed]="'adviser,invoices'">Save as draft</button>
-          <button type="button" clrDropdownItem (click)="save('submitted')" canSee [allowed]="'adviser,invoices'">Save &amp; submit for approval</button>
+          <button type="button" 
+          clrDropdownItem canDo (click)="save('draft')" 
+          [action]="'invoices:draft'" [actionable]="model">
+          Save as draft
+          </button>
+          <button type="button" 
+          clrDropdownItem (click)="save('submitted')" canDo 
+          [action]="'invoices:draft'" 
+          [actionable]="model">
+          Save &amp; submit for approval
+          </button>
       </clr-dropdown-menu>
     </clr-dropdown>
 
     <button *ngIf="!editing" type="button" class="btn btn-success" (click)="save('authorized')"
      [clrLoading]="saving" [disabled]="saving || disableBtn"
-     canSee [allowed]="'adviser'">
+     canDo [action]="'invoices:authorize'" [actionable]="model">
      Save and Authorize</button>
 
-    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving || disableBtn" (click)="save(model.status)">Update</button>
+    <button *ngIf="editing" type="button" class="btn btn-success" [clrLoading]="saving" [disabled]="saving || disableBtn" (click)="save(model.status)"
+    canDo [action]="'invoices:edit'" [actionable]="model">Update</button>
     <button type="button" class="btn btn-outline-primary">Cancel</button>
   </div>
 </div>
