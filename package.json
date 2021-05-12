@@ -39,7 +39,7 @@
     "angular2-pubsub": "^4.0.3",
     "body-parser": "^1.17.2",
     "card-validator": "^4.1.1",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "chartjs": "^0.3.24",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
