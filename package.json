@@ -47,7 +47,7 @@
     "express": "^4.15.3",
     "google-libphonenumber": "^3.0.0",
     "hopscotch": "^0.3.1",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "intl": "^1.2.5",
     "lodash": "^4.17.4",
     "mutationobserver-shim": "0.3.2",
